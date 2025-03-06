@@ -1,0 +1,5 @@
+pdks/*
+sim_build/*
+mapped/*
+*.vcd
+*.log
