@@ -7,7 +7,7 @@ module single_port_sync_ram
   ( 	
 	input clk,
    	input [ADDR_WIDTH-1:0]	addr,
-	inout [DATA_WIDTH-1:0]	data,
+	input [DATA_WIDTH-1:0]	data,
    	input cs,
    	input we,
    	input oe
