@@ -6,8 +6,8 @@ module single_port_sync_ram
 
   ( 	
 	input clk,
-   	input [ADDR_WIDTH-1:0]	addr,
-	input [DATA_WIDTH-1:0]	data,
+   	input [ADDR_WIDTH-1:0]	mem_addr,
+	input [DATA_WIDTH-1:0]	mem_data,
    	input cs,
    	input we,
    	input oe
@@ -18,13 +18,14 @@ module single_port_sync_ram
 
   always @ (posedge clk) begin
     if (cs & we)
-      mem[addr] <= data;
+      mem[mem_addr] <= mem_data;
   end
 
   always @ (posedge clk) begin
     if (cs & !we)
-    	tmp_data <= mem[addr];
+    	tmp_data <= mem[mem_addr];
   end
 
   assign data = cs & oe & !wr ? tmp_data : 'hz;
 endmodule
+
