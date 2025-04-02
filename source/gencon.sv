@@ -29,8 +29,8 @@ module gencon (
         .nRST(reset),  // Reset signal (active low)
         .INn1(ALU_in1),
         .INn2(ALU_in2),
-        .sub(1'b0),       // No subtraction, only addition
-        .start(start_calc),
+        .sub(1'b0),       // Need to change so this either is 1 for subtraction or 0 for adding and how to tell from input controler
+        .start(start_calc), // 
         
         .out(ALU_out),
         .finish(ALU_finish)
@@ -103,12 +103,15 @@ module gencon (
         endcase
     end
     
+    /*
     // Memory & ALU Interaction
     always_ff @(posedge clk) begin
         case (current_state)
             GET_FIRST_NUM: begin
                 if (keypad_input != 4'b0000) begin
-                    operand1 <= operand1 * 10 + keypad_input; // Append digit
+                    // HEY send to multiplier with 10 put back in memory
+                    //operand1 <= operand1 * 10 + keypad_input; // Append digit
+                    operand2 <= keypad_input;
                     mem_addr <= 4'b0;  // Store in memory at address 00
                     mem_data <= operand1;
                     we <= 1;
@@ -117,7 +120,8 @@ module gencon (
     
             GET_SECOND_NUM: begin
                 if (keypad_input != 4'b0000) begin
-                    operand2 <= operand2 * 10 + keypad_input; // Append digit
+                    //operand2 <= operand2 * 10 + keypad_input; // Append digit
+                    operand2 <= keypad_input;
                     mem_addr <= 4'b1;  // Store in memory at address 01
                     mem_data <= operand2;
                     we <= 1;
@@ -142,6 +146,35 @@ module gencon (
             default: begin
                 we <= 0;
                 complete <= 0;
+            end
+        endcase
+    end
+    */
+
+    always_ff @(posedge clk) begin
+        case (current_state)
+            GET_FIRST_NUM: begin
+                $display("State: %s", "First Num");
+            end
+
+            GET_SECOND_NUM: begin
+                $display("State: %s", "Second Num");
+            end
+
+            SEND_TO_ALU: begin
+                $display("State: %s", "Send to ALU");
+            end
+
+            WAIT_ALU: begin
+                $display("State: %s", "Wait ALU");
+            end
+
+            SHOW_RESULT: begin
+                $display("State: %s", "Show Result");
+            end
+
+            default: begin
+                $display("State: %s", "Default");
             end
         endcase
     end

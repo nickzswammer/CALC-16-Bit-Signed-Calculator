@@ -138,6 +138,66 @@ VL_ATTR_COLD void Vgencon___024root___eval_initial(Vgencon___024root* vlSelf) {
         = vlSelfRef.gencon__DOT__add_calc__DOT__main__DOT____Vcellout__a0____pinNumber2;
     vlSelfRef.__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__1__KET____DOT__thingy____pinNumber4__1 
         = vlSelfRef.gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__1__KET____DOT__thingy____pinNumber4;
+    vlSelfRef.__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__14__KET____DOT__thingy____pinNumber2__2 
+        = vlSelfRef.gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__14__KET____DOT__thingy____pinNumber2;
+    vlSelfRef.__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__complement__DOT____Vcellout__a0____pinNumber1__2 
+        = vlSelfRef.gencon__DOT__add_calc__DOT__complement__DOT____Vcellout__a0____pinNumber1;
+    vlSelfRef.__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__13__KET____DOT__thingy____pinNumber2__2 
+        = vlSelfRef.gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__13__KET____DOT__thingy____pinNumber2;
+    vlSelfRef.__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__14__KET____DOT__thingy____pinNumber4__2 
+        = vlSelfRef.gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__14__KET____DOT__thingy____pinNumber4;
+    vlSelfRef.__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__12__KET____DOT__thingy____pinNumber2__2 
+        = vlSelfRef.gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__12__KET____DOT__thingy____pinNumber2;
+    vlSelfRef.__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__13__KET____DOT__thingy____pinNumber4__2 
+        = vlSelfRef.gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__13__KET____DOT__thingy____pinNumber4;
+    vlSelfRef.__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__11__KET____DOT__thingy____pinNumber2__2 
+        = vlSelfRef.gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__11__KET____DOT__thingy____pinNumber2;
+    vlSelfRef.__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__12__KET____DOT__thingy____pinNumber4__2 
+        = vlSelfRef.gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__12__KET____DOT__thingy____pinNumber4;
+    vlSelfRef.__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__10__KET____DOT__thingy____pinNumber2__2 
+        = vlSelfRef.gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__10__KET____DOT__thingy____pinNumber2;
+    vlSelfRef.__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__11__KET____DOT__thingy____pinNumber4__2 
+        = vlSelfRef.gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__11__KET____DOT__thingy____pinNumber4;
+    vlSelfRef.__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__9__KET____DOT__thingy____pinNumber2__2 
+        = vlSelfRef.gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__9__KET____DOT__thingy____pinNumber2;
+    vlSelfRef.__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__10__KET____DOT__thingy____pinNumber4__2 
+        = vlSelfRef.gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__10__KET____DOT__thingy____pinNumber4;
+    vlSelfRef.__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__8__KET____DOT__thingy____pinNumber2__2 
+        = vlSelfRef.gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__8__KET____DOT__thingy____pinNumber2;
+    vlSelfRef.__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__9__KET____DOT__thingy____pinNumber4__2 
+        = vlSelfRef.gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__9__KET____DOT__thingy____pinNumber4;
+    vlSelfRef.__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__7__KET____DOT__thingy____pinNumber2__2 
+        = vlSelfRef.gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__7__KET____DOT__thingy____pinNumber2;
+    vlSelfRef.__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__8__KET____DOT__thingy____pinNumber4__2 
+        = vlSelfRef.gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__8__KET____DOT__thingy____pinNumber4;
+    vlSelfRef.__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__6__KET____DOT__thingy____pinNumber2__2 
+        = vlSelfRef.gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__6__KET____DOT__thingy____pinNumber2;
+    vlSelfRef.__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__7__KET____DOT__thingy____pinNumber4__2 
+        = vlSelfRef.gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__7__KET____DOT__thingy____pinNumber4;
+    vlSelfRef.__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__5__KET____DOT__thingy____pinNumber2__2 
+        = vlSelfRef.gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__5__KET____DOT__thingy____pinNumber2;
+    vlSelfRef.__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__6__KET____DOT__thingy____pinNumber4__2 
+        = vlSelfRef.gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__6__KET____DOT__thingy____pinNumber4;
+    vlSelfRef.__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__4__KET____DOT__thingy____pinNumber2__2 
+        = vlSelfRef.gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__4__KET____DOT__thingy____pinNumber2;
+    vlSelfRef.__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__5__KET____DOT__thingy____pinNumber4__2 
+        = vlSelfRef.gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__5__KET____DOT__thingy____pinNumber4;
+    vlSelfRef.__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__3__KET____DOT__thingy____pinNumber2__2 
+        = vlSelfRef.gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__3__KET____DOT__thingy____pinNumber2;
+    vlSelfRef.__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__4__KET____DOT__thingy____pinNumber4__2 
+        = vlSelfRef.gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__4__KET____DOT__thingy____pinNumber4;
+    vlSelfRef.__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__2__KET____DOT__thingy____pinNumber2__2 
+        = vlSelfRef.gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__2__KET____DOT__thingy____pinNumber2;
+    vlSelfRef.__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__3__KET____DOT__thingy____pinNumber4__2 
+        = vlSelfRef.gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__3__KET____DOT__thingy____pinNumber4;
+    vlSelfRef.__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__1__KET____DOT__thingy____pinNumber2__2 
+        = vlSelfRef.gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__1__KET____DOT__thingy____pinNumber2;
+    vlSelfRef.__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__2__KET____DOT__thingy____pinNumber4__2 
+        = vlSelfRef.gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__2__KET____DOT__thingy____pinNumber4;
+    vlSelfRef.__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellout__a0____pinNumber2__2 
+        = vlSelfRef.gencon__DOT__add_calc__DOT__main__DOT____Vcellout__a0____pinNumber2;
+    vlSelfRef.__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__1__KET____DOT__thingy____pinNumber4__2 
+        = vlSelfRef.gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__1__KET____DOT__thingy____pinNumber4;
     vlSelfRef.__Vtrigprevexpr___TOP__clk__0 = vlSelfRef.clk;
     vlSelfRef.__Vtrigprevexpr___TOP__reset__0 = vlSelfRef.reset;
 }
@@ -247,34 +307,34 @@ VL_ATTR_COLD void Vgencon___024root___dump_triggers__stl(Vgencon___024root* vlSe
 #endif  // VL_DEBUG
 
 VL_ATTR_COLD void Vgencon___024root___stl_sequent__TOP__0(Vgencon___024root* vlSelf);
-void Vgencon___024root___act_sequent__TOP__0(Vgencon___024root* vlSelf);
-void Vgencon___024root___act_sequent__TOP__1(Vgencon___024root* vlSelf);
-void Vgencon___024root___act_sequent__TOP__2(Vgencon___024root* vlSelf);
-void Vgencon___024root___act_sequent__TOP__3(Vgencon___024root* vlSelf);
-void Vgencon___024root___act_sequent__TOP__4(Vgencon___024root* vlSelf);
-void Vgencon___024root___act_sequent__TOP__5(Vgencon___024root* vlSelf);
-void Vgencon___024root___act_sequent__TOP__6(Vgencon___024root* vlSelf);
-void Vgencon___024root___act_sequent__TOP__7(Vgencon___024root* vlSelf);
-void Vgencon___024root___act_sequent__TOP__8(Vgencon___024root* vlSelf);
-void Vgencon___024root___act_sequent__TOP__9(Vgencon___024root* vlSelf);
-void Vgencon___024root___act_sequent__TOP__10(Vgencon___024root* vlSelf);
-void Vgencon___024root___act_sequent__TOP__11(Vgencon___024root* vlSelf);
-void Vgencon___024root___act_sequent__TOP__12(Vgencon___024root* vlSelf);
-void Vgencon___024root___act_sequent__TOP__13(Vgencon___024root* vlSelf);
-void Vgencon___024root___act_comb__TOP__0(Vgencon___024root* vlSelf);
-void Vgencon___024root___act_comb__TOP__1(Vgencon___024root* vlSelf);
-void Vgencon___024root___act_comb__TOP__2(Vgencon___024root* vlSelf);
-void Vgencon___024root___act_comb__TOP__3(Vgencon___024root* vlSelf);
-void Vgencon___024root___act_comb__TOP__4(Vgencon___024root* vlSelf);
-void Vgencon___024root___act_comb__TOP__5(Vgencon___024root* vlSelf);
-void Vgencon___024root___act_comb__TOP__6(Vgencon___024root* vlSelf);
-void Vgencon___024root___act_comb__TOP__7(Vgencon___024root* vlSelf);
-void Vgencon___024root___act_comb__TOP__8(Vgencon___024root* vlSelf);
-void Vgencon___024root___act_comb__TOP__9(Vgencon___024root* vlSelf);
-void Vgencon___024root___act_comb__TOP__10(Vgencon___024root* vlSelf);
-void Vgencon___024root___act_comb__TOP__11(Vgencon___024root* vlSelf);
-void Vgencon___024root___act_comb__TOP__12(Vgencon___024root* vlSelf);
-void Vgencon___024root___act_comb__TOP__13(Vgencon___024root* vlSelf);
+void Vgencon___024root___ico_comb__TOP__0(Vgencon___024root* vlSelf);
+void Vgencon___024root___ico_comb__TOP__1(Vgencon___024root* vlSelf);
+void Vgencon___024root___ico_comb__TOP__2(Vgencon___024root* vlSelf);
+void Vgencon___024root___ico_comb__TOP__3(Vgencon___024root* vlSelf);
+void Vgencon___024root___ico_comb__TOP__4(Vgencon___024root* vlSelf);
+void Vgencon___024root___ico_comb__TOP__5(Vgencon___024root* vlSelf);
+void Vgencon___024root___ico_comb__TOP__6(Vgencon___024root* vlSelf);
+void Vgencon___024root___ico_comb__TOP__7(Vgencon___024root* vlSelf);
+void Vgencon___024root___ico_comb__TOP__8(Vgencon___024root* vlSelf);
+void Vgencon___024root___ico_comb__TOP__9(Vgencon___024root* vlSelf);
+void Vgencon___024root___ico_comb__TOP__10(Vgencon___024root* vlSelf);
+void Vgencon___024root___ico_comb__TOP__11(Vgencon___024root* vlSelf);
+void Vgencon___024root___ico_comb__TOP__12(Vgencon___024root* vlSelf);
+void Vgencon___024root___ico_comb__TOP__13(Vgencon___024root* vlSelf);
+void Vgencon___024root___ico_comb__TOP__14(Vgencon___024root* vlSelf);
+void Vgencon___024root___ico_comb__TOP__15(Vgencon___024root* vlSelf);
+void Vgencon___024root___ico_comb__TOP__16(Vgencon___024root* vlSelf);
+void Vgencon___024root___ico_comb__TOP__17(Vgencon___024root* vlSelf);
+void Vgencon___024root___ico_comb__TOP__18(Vgencon___024root* vlSelf);
+void Vgencon___024root___ico_comb__TOP__19(Vgencon___024root* vlSelf);
+void Vgencon___024root___ico_comb__TOP__20(Vgencon___024root* vlSelf);
+void Vgencon___024root___ico_comb__TOP__21(Vgencon___024root* vlSelf);
+void Vgencon___024root___ico_comb__TOP__22(Vgencon___024root* vlSelf);
+void Vgencon___024root___ico_comb__TOP__23(Vgencon___024root* vlSelf);
+void Vgencon___024root___ico_comb__TOP__24(Vgencon___024root* vlSelf);
+void Vgencon___024root___ico_comb__TOP__25(Vgencon___024root* vlSelf);
+void Vgencon___024root___ico_comb__TOP__26(Vgencon___024root* vlSelf);
+void Vgencon___024root___ico_comb__TOP__27(Vgencon___024root* vlSelf);
 
 VL_ATTR_COLD void Vgencon___024root___eval_stl(Vgencon___024root* vlSelf) {
     (void)vlSelf;  // Prevent unused variable warning
@@ -286,93 +346,93 @@ VL_ATTR_COLD void Vgencon___024root___eval_stl(Vgencon___024root* vlSelf) {
         Vgencon___024root___stl_sequent__TOP__0(vlSelf);
     }
     if ((9ULL & vlSelfRef.__VstlTriggered.word(0U))) {
-        Vgencon___024root___act_sequent__TOP__0(vlSelf);
+        Vgencon___024root___ico_comb__TOP__0(vlSelf);
     }
     if ((0x11ULL & vlSelfRef.__VstlTriggered.word(0U))) {
-        Vgencon___024root___act_sequent__TOP__1(vlSelf);
+        Vgencon___024root___ico_comb__TOP__1(vlSelf);
     }
     if ((0x21ULL & vlSelfRef.__VstlTriggered.word(0U))) {
-        Vgencon___024root___act_sequent__TOP__2(vlSelf);
+        Vgencon___024root___ico_comb__TOP__2(vlSelf);
     }
     if ((0x41ULL & vlSelfRef.__VstlTriggered.word(0U))) {
-        Vgencon___024root___act_sequent__TOP__3(vlSelf);
+        Vgencon___024root___ico_comb__TOP__3(vlSelf);
     }
     if ((0x81ULL & vlSelfRef.__VstlTriggered.word(0U))) {
-        Vgencon___024root___act_sequent__TOP__4(vlSelf);
+        Vgencon___024root___ico_comb__TOP__4(vlSelf);
     }
     if ((0x101ULL & vlSelfRef.__VstlTriggered.word(0U))) {
-        Vgencon___024root___act_sequent__TOP__5(vlSelf);
+        Vgencon___024root___ico_comb__TOP__5(vlSelf);
     }
     if ((0x201ULL & vlSelfRef.__VstlTriggered.word(0U))) {
-        Vgencon___024root___act_sequent__TOP__6(vlSelf);
+        Vgencon___024root___ico_comb__TOP__6(vlSelf);
     }
     if ((0x401ULL & vlSelfRef.__VstlTriggered.word(0U))) {
-        Vgencon___024root___act_sequent__TOP__7(vlSelf);
+        Vgencon___024root___ico_comb__TOP__7(vlSelf);
     }
     if ((0x801ULL & vlSelfRef.__VstlTriggered.word(0U))) {
-        Vgencon___024root___act_sequent__TOP__8(vlSelf);
+        Vgencon___024root___ico_comb__TOP__8(vlSelf);
     }
     if ((0x1001ULL & vlSelfRef.__VstlTriggered.word(0U))) {
-        Vgencon___024root___act_sequent__TOP__9(vlSelf);
+        Vgencon___024root___ico_comb__TOP__9(vlSelf);
     }
     if ((0x2001ULL & vlSelfRef.__VstlTriggered.word(0U))) {
-        Vgencon___024root___act_sequent__TOP__10(vlSelf);
+        Vgencon___024root___ico_comb__TOP__10(vlSelf);
     }
     if ((0x4001ULL & vlSelfRef.__VstlTriggered.word(0U))) {
-        Vgencon___024root___act_sequent__TOP__11(vlSelf);
+        Vgencon___024root___ico_comb__TOP__11(vlSelf);
     }
     if ((0x8001ULL & vlSelfRef.__VstlTriggered.word(0U))) {
-        Vgencon___024root___act_sequent__TOP__12(vlSelf);
+        Vgencon___024root___ico_comb__TOP__12(vlSelf);
     }
     if ((0x10001ULL & vlSelfRef.__VstlTriggered.word(0U))) {
-        Vgencon___024root___act_sequent__TOP__13(vlSelf);
+        Vgencon___024root___ico_comb__TOP__13(vlSelf);
     }
     if ((0x10005ULL & vlSelfRef.__VstlTriggered.word(0U))) {
-        Vgencon___024root___act_comb__TOP__0(vlSelf);
+        Vgencon___024root___ico_comb__TOP__14(vlSelf);
     }
     if ((0x18005ULL & vlSelfRef.__VstlTriggered.word(0U))) {
-        Vgencon___024root___act_comb__TOP__1(vlSelf);
+        Vgencon___024root___ico_comb__TOP__15(vlSelf);
     }
     if ((0x1c005ULL & vlSelfRef.__VstlTriggered.word(0U))) {
-        Vgencon___024root___act_comb__TOP__2(vlSelf);
+        Vgencon___024root___ico_comb__TOP__16(vlSelf);
     }
     if ((0x1e005ULL & vlSelfRef.__VstlTriggered.word(0U))) {
-        Vgencon___024root___act_comb__TOP__3(vlSelf);
+        Vgencon___024root___ico_comb__TOP__17(vlSelf);
     }
     if ((0x1f005ULL & vlSelfRef.__VstlTriggered.word(0U))) {
-        Vgencon___024root___act_comb__TOP__4(vlSelf);
+        Vgencon___024root___ico_comb__TOP__18(vlSelf);
     }
     if ((0x1f805ULL & vlSelfRef.__VstlTriggered.word(0U))) {
-        Vgencon___024root___act_comb__TOP__5(vlSelf);
+        Vgencon___024root___ico_comb__TOP__19(vlSelf);
     }
     if ((0x1fc05ULL & vlSelfRef.__VstlTriggered.word(0U))) {
-        Vgencon___024root___act_comb__TOP__6(vlSelf);
+        Vgencon___024root___ico_comb__TOP__20(vlSelf);
     }
     if ((0x1fe05ULL & vlSelfRef.__VstlTriggered.word(0U))) {
-        Vgencon___024root___act_comb__TOP__7(vlSelf);
+        Vgencon___024root___ico_comb__TOP__21(vlSelf);
     }
     if ((0x1ff05ULL & vlSelfRef.__VstlTriggered.word(0U))) {
-        Vgencon___024root___act_comb__TOP__8(vlSelf);
+        Vgencon___024root___ico_comb__TOP__22(vlSelf);
     }
     if ((0x1ff85ULL & vlSelfRef.__VstlTriggered.word(0U))) {
-        Vgencon___024root___act_comb__TOP__9(vlSelf);
+        Vgencon___024root___ico_comb__TOP__23(vlSelf);
     }
     if ((0x1ffc5ULL & vlSelfRef.__VstlTriggered.word(0U))) {
-        Vgencon___024root___act_comb__TOP__10(vlSelf);
+        Vgencon___024root___ico_comb__TOP__24(vlSelf);
     }
     if ((0x1ffe5ULL & vlSelfRef.__VstlTriggered.word(0U))) {
-        Vgencon___024root___act_comb__TOP__11(vlSelf);
+        Vgencon___024root___ico_comb__TOP__25(vlSelf);
     }
     if ((0x1fff5ULL & vlSelfRef.__VstlTriggered.word(0U))) {
-        Vgencon___024root___act_comb__TOP__12(vlSelf);
+        Vgencon___024root___ico_comb__TOP__26(vlSelf);
     }
     if ((0x1ffffULL & vlSelfRef.__VstlTriggered.word(0U))) {
-        Vgencon___024root___act_comb__TOP__13(vlSelf);
+        Vgencon___024root___ico_comb__TOP__27(vlSelf);
     }
 }
 
 extern const VlUnpacked<CData/*2:0*/, 16> Vgencon__ConstPool__TABLE_heec4b55b_0;
-extern const VlUnpacked<CData/*2:0*/, 64> Vgencon__ConstPool__TABLE_hd3087ef2_0;
+extern const VlUnpacked<CData/*2:0*/, 1024> Vgencon__ConstPool__TABLE_hbe671d44_0;
 
 VL_ATTR_COLD void Vgencon___024root___stl_sequent__TOP__0(Vgencon___024root* vlSelf) {
     (void)vlSelf;  // Prevent unused variable warning
@@ -380,7 +440,7 @@ VL_ATTR_COLD void Vgencon___024root___stl_sequent__TOP__0(Vgencon___024root* vlS
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vgencon___024root___stl_sequent__TOP__0\n"); );
     auto &vlSelfRef = std::ref(*vlSelf).get();
     // Init
-    CData/*5:0*/ __Vtableidx1;
+    SData/*9:0*/ __Vtableidx1;
     __Vtableidx1 = 0;
     CData/*3:0*/ __Vtableidx2;
     __Vtableidx2 = 0;
@@ -389,6 +449,8 @@ VL_ATTR_COLD void Vgencon___024root___stl_sequent__TOP__0(Vgencon___024root* vlS
                      << 3U) | (IData)(vlSelfRef.gencon__DOT__add_calc__DOT__state));
     vlSelfRef.gencon__DOT__add_calc__DOT__next = Vgencon__ConstPool__TABLE_heec4b55b_0
         [__Vtableidx2];
+    vlSelfRef.gencon__DOT__mem__DOT____VdfgRegularize_h192772c8_0_0 
+        = ((~ (IData)(vlSelfRef.we)) & (IData)(vlSelfRef.oe));
     vlSelfRef.ALU_finish = 0U;
     if ((1U != (IData)(vlSelfRef.gencon__DOT__add_calc__DOT__state))) {
         if ((2U != (IData)(vlSelfRef.gencon__DOT__add_calc__DOT__state))) {
@@ -416,13 +478,24 @@ VL_ATTR_COLD void Vgencon___024root___stl_sequent__TOP__0(Vgencon___024root* vlS
                 = (0x7fffU & (IData)(vlSelfRef.ALU_in1));
         }
     }
-    __Vtableidx1 = ((((~ (IData)(vlSelfRef.gencon__DOT__prev_operator)) 
-                      & (IData)(vlSelfRef.operator_input)) 
-                     << 5U) | ((((~ (IData)(vlSelfRef.gencon__DOT__prev_equal)) 
-                                 & (IData)(vlSelfRef.equal_input)) 
-                                << 4U) | (((IData)(vlSelfRef.ALU_finish) 
-                                           << 3U) | (IData)(vlSelfRef.gencon__DOT__current_state))));
-    vlSelfRef.gencon__DOT__next_state = Vgencon__ConstPool__TABLE_hd3087ef2_0
+    vlSelfRef.data = (((IData)(vlSelfRef.gencon__DOT__mem__DOT____VdfgRegularize_h192772c8_0_0)
+                        ? 0xffffU : 0U) & (((IData)(vlSelfRef.gencon__DOT__mem__DOT____VdfgRegularize_h192772c8_0_0)
+                                             ? 0xffffU
+                                             : 0U) 
+                                           & (((IData)(vlSelfRef.gencon__DOT__mem__DOT____VdfgRegularize_h192772c8_0_0)
+                                                ? (IData)(vlSelfRef.gencon__DOT__mem__DOT__tmp_data)
+                                                : 0U) 
+                                              & ((IData)(vlSelfRef.gencon__DOT__mem__DOT____VdfgRegularize_h192772c8_0_0)
+                                                  ? 0xffffU
+                                                  : 0U))));
+    __Vtableidx1 = (((IData)(vlSelfRef.operator_input) 
+                     << 9U) | (((IData)(vlSelfRef.equal_input) 
+                                << 8U) | (((IData)(vlSelfRef.keypad_input) 
+                                           << 4U) | 
+                                          (((IData)(vlSelfRef.ALU_finish) 
+                                            << 3U) 
+                                           | (IData)(vlSelfRef.gencon__DOT__current_state)))));
+    vlSelfRef.gencon__DOT__next_state = Vgencon__ConstPool__TABLE_hbe671d44_0
         [__Vtableidx1];
 }
 
@@ -456,6 +529,54 @@ VL_ATTR_COLD void Vgencon___024root___dump_triggers__ico(Vgencon___024root* vlSe
     }
     if ((1ULL & vlSelfRef.__VicoTriggered.word(0U))) {
         VL_DBG_MSGF("         'ico' region trigger index 0 is active: Internal 'ico' trigger - first iteration\n");
+    }
+    if ((2ULL & vlSelfRef.__VicoTriggered.word(0U))) {
+        VL_DBG_MSGF("         'ico' region trigger index 1 is active: @([hybrid] gencon.add_calc.main.__Vcellout__genblk1[14].thingy____pinNumber2 or [hybrid] gencon.add_calc.complement.__Vcellout__a0____pinNumber1)\n");
+    }
+    if ((4ULL & vlSelfRef.__VicoTriggered.word(0U))) {
+        VL_DBG_MSGF("         'ico' region trigger index 2 is active: @([hybrid] gencon.add_calc.complement.__Vcellout__a0____pinNumber1)\n");
+    }
+    if ((8ULL & vlSelfRef.__VicoTriggered.word(0U))) {
+        VL_DBG_MSGF("         'ico' region trigger index 3 is active: @([hybrid] gencon.add_calc.main.__Vcellout__genblk1[13].thingy____pinNumber2 or [hybrid] gencon.add_calc.main.__Vcellinp__genblk1[14].thingy____pinNumber4)\n");
+    }
+    if ((0x10ULL & vlSelfRef.__VicoTriggered.word(0U))) {
+        VL_DBG_MSGF("         'ico' region trigger index 4 is active: @([hybrid] gencon.add_calc.main.__Vcellout__genblk1[12].thingy____pinNumber2 or [hybrid] gencon.add_calc.main.__Vcellinp__genblk1[13].thingy____pinNumber4)\n");
+    }
+    if ((0x20ULL & vlSelfRef.__VicoTriggered.word(0U))) {
+        VL_DBG_MSGF("         'ico' region trigger index 5 is active: @([hybrid] gencon.add_calc.main.__Vcellout__genblk1[11].thingy____pinNumber2 or [hybrid] gencon.add_calc.main.__Vcellinp__genblk1[12].thingy____pinNumber4)\n");
+    }
+    if ((0x40ULL & vlSelfRef.__VicoTriggered.word(0U))) {
+        VL_DBG_MSGF("         'ico' region trigger index 6 is active: @([hybrid] gencon.add_calc.main.__Vcellout__genblk1[10].thingy____pinNumber2 or [hybrid] gencon.add_calc.main.__Vcellinp__genblk1[11].thingy____pinNumber4)\n");
+    }
+    if ((0x80ULL & vlSelfRef.__VicoTriggered.word(0U))) {
+        VL_DBG_MSGF("         'ico' region trigger index 7 is active: @([hybrid] gencon.add_calc.main.__Vcellout__genblk1[9].thingy____pinNumber2 or [hybrid] gencon.add_calc.main.__Vcellinp__genblk1[10].thingy____pinNumber4)\n");
+    }
+    if ((0x100ULL & vlSelfRef.__VicoTriggered.word(0U))) {
+        VL_DBG_MSGF("         'ico' region trigger index 8 is active: @([hybrid] gencon.add_calc.main.__Vcellout__genblk1[8].thingy____pinNumber2 or [hybrid] gencon.add_calc.main.__Vcellinp__genblk1[9].thingy____pinNumber4)\n");
+    }
+    if ((0x200ULL & vlSelfRef.__VicoTriggered.word(0U))) {
+        VL_DBG_MSGF("         'ico' region trigger index 9 is active: @([hybrid] gencon.add_calc.main.__Vcellout__genblk1[7].thingy____pinNumber2 or [hybrid] gencon.add_calc.main.__Vcellinp__genblk1[8].thingy____pinNumber4)\n");
+    }
+    if ((0x400ULL & vlSelfRef.__VicoTriggered.word(0U))) {
+        VL_DBG_MSGF("         'ico' region trigger index 10 is active: @([hybrid] gencon.add_calc.main.__Vcellout__genblk1[6].thingy____pinNumber2 or [hybrid] gencon.add_calc.main.__Vcellinp__genblk1[7].thingy____pinNumber4)\n");
+    }
+    if ((0x800ULL & vlSelfRef.__VicoTriggered.word(0U))) {
+        VL_DBG_MSGF("         'ico' region trigger index 11 is active: @([hybrid] gencon.add_calc.main.__Vcellout__genblk1[5].thingy____pinNumber2 or [hybrid] gencon.add_calc.main.__Vcellinp__genblk1[6].thingy____pinNumber4)\n");
+    }
+    if ((0x1000ULL & vlSelfRef.__VicoTriggered.word(0U))) {
+        VL_DBG_MSGF("         'ico' region trigger index 12 is active: @([hybrid] gencon.add_calc.main.__Vcellout__genblk1[4].thingy____pinNumber2 or [hybrid] gencon.add_calc.main.__Vcellinp__genblk1[5].thingy____pinNumber4)\n");
+    }
+    if ((0x2000ULL & vlSelfRef.__VicoTriggered.word(0U))) {
+        VL_DBG_MSGF("         'ico' region trigger index 13 is active: @([hybrid] gencon.add_calc.main.__Vcellout__genblk1[3].thingy____pinNumber2 or [hybrid] gencon.add_calc.main.__Vcellinp__genblk1[4].thingy____pinNumber4)\n");
+    }
+    if ((0x4000ULL & vlSelfRef.__VicoTriggered.word(0U))) {
+        VL_DBG_MSGF("         'ico' region trigger index 14 is active: @([hybrid] gencon.add_calc.main.__Vcellout__genblk1[2].thingy____pinNumber2 or [hybrid] gencon.add_calc.main.__Vcellinp__genblk1[3].thingy____pinNumber4)\n");
+    }
+    if ((0x8000ULL & vlSelfRef.__VicoTriggered.word(0U))) {
+        VL_DBG_MSGF("         'ico' region trigger index 15 is active: @([hybrid] gencon.add_calc.main.__Vcellout__genblk1[1].thingy____pinNumber2 or [hybrid] gencon.add_calc.main.__Vcellinp__genblk1[2].thingy____pinNumber4)\n");
+    }
+    if ((0x10000ULL & vlSelfRef.__VicoTriggered.word(0U))) {
+        VL_DBG_MSGF("         'ico' region trigger index 16 is active: @([hybrid] gencon.add_calc.main.__Vcellout__a0____pinNumber2 or [hybrid] gencon.add_calc.main.__Vcellinp__genblk1[1].thingy____pinNumber4)\n");
     }
 }
 #endif  // VL_DEBUG
@@ -521,6 +642,12 @@ VL_ATTR_COLD void Vgencon___024root___dump_triggers__act(Vgencon___024root* vlSe
     if ((0x10000ULL & vlSelfRef.__VactTriggered.word(0U))) {
         VL_DBG_MSGF("         'act' region trigger index 16 is active: @(posedge clk or posedge reset)\n");
     }
+    if ((0x20000ULL & vlSelfRef.__VactTriggered.word(0U))) {
+        VL_DBG_MSGF("         'act' region trigger index 17 is active: @(posedge clk)\n");
+    }
+    if ((0x40000ULL & vlSelfRef.__VactTriggered.word(0U))) {
+        VL_DBG_MSGF("         'act' region trigger index 18 is active: @(posedge clk or negedge reset)\n");
+    }
 }
 #endif  // VL_DEBUG
 
@@ -585,6 +712,12 @@ VL_ATTR_COLD void Vgencon___024root___dump_triggers__nba(Vgencon___024root* vlSe
     if ((0x10000ULL & vlSelfRef.__VnbaTriggered.word(0U))) {
         VL_DBG_MSGF("         'nba' region trigger index 16 is active: @(posedge clk or posedge reset)\n");
     }
+    if ((0x20000ULL & vlSelfRef.__VnbaTriggered.word(0U))) {
+        VL_DBG_MSGF("         'nba' region trigger index 17 is active: @(posedge clk)\n");
+    }
+    if ((0x40000ULL & vlSelfRef.__VnbaTriggered.word(0U))) {
+        VL_DBG_MSGF("         'nba' region trigger index 18 is active: @(posedge clk or negedge reset)\n");
+    }
 }
 #endif  // VL_DEBUG
 
@@ -610,13 +743,9 @@ VL_ATTR_COLD void Vgencon___024root___ctor_var_reset(Vgencon___024root* vlSelf) 
     vlSelf->oe = VL_RAND_RESET_I(1);
     vlSelf->mem_addr = VL_RAND_RESET_I(4);
     vlSelf->mem_data = VL_RAND_RESET_I(16);
-    vlSelf->__pinNumber17 = VL_RAND_RESET_I(1);
+    vlSelf->data = VL_RAND_RESET_I(16);
     vlSelf->gencon__DOT__current_state = VL_RAND_RESET_I(3);
     vlSelf->gencon__DOT__next_state = VL_RAND_RESET_I(3);
-    vlSelf->gencon__DOT__operand1 = VL_RAND_RESET_I(16);
-    vlSelf->gencon__DOT__operand2 = VL_RAND_RESET_I(16);
-    vlSelf->gencon__DOT__prev_operator = VL_RAND_RESET_I(1);
-    vlSelf->gencon__DOT__prev_equal = VL_RAND_RESET_I(1);
     vlSelf->gencon__DOT__add_calc__DOT__state = VL_RAND_RESET_I(3);
     vlSelf->gencon__DOT__add_calc__DOT__next = VL_RAND_RESET_I(3);
     vlSelf->gencon__DOT__add_calc__DOT__n1 = VL_RAND_RESET_I(15);
@@ -680,6 +809,11 @@ VL_ATTR_COLD void Vgencon___024root___ctor_var_reset(Vgencon___024root* vlSelf) 
     vlSelf->gencon__DOT__add_calc__DOT__complement__DOT____Vcellout__genblk1__BRA__11__KET____DOT__thingy____pinNumber2 = VL_RAND_RESET_I(1);
     vlSelf->gencon__DOT__add_calc__DOT__complement__DOT____Vcellout__genblk1__BRA__12__KET____DOT__thingy____pinNumber2 = VL_RAND_RESET_I(1);
     vlSelf->gencon__DOT__add_calc__DOT__complement__DOT____Vcellout__genblk1__BRA__13__KET____DOT__thingy____pinNumber2 = VL_RAND_RESET_I(1);
+    vlSelf->gencon__DOT__mem__DOT__tmp_data = VL_RAND_RESET_I(16);
+    for (int __Vi0 = 0; __Vi0 < 16; ++__Vi0) {
+        vlSelf->gencon__DOT__mem__DOT__mem[__Vi0] = VL_RAND_RESET_I(16);
+    }
+    vlSelf->gencon__DOT__mem__DOT____VdfgRegularize_h192772c8_0_0 = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__14__KET____DOT__thingy____pinNumber2__0 = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__complement__DOT____Vcellout__a0____pinNumber1__0 = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__13__KET____DOT__thingy____pinNumber2__0 = VL_RAND_RESET_I(1);
@@ -741,6 +875,37 @@ VL_ATTR_COLD void Vgencon___024root___ctor_var_reset(Vgencon___024root* vlSelf) 
     vlSelf->__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__2__KET____DOT__thingy____pinNumber4__1 = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellout__a0____pinNumber2__1 = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__1__KET____DOT__thingy____pinNumber4__1 = VL_RAND_RESET_I(1);
+    vlSelf->__VicoDidInit = 0;
+    vlSelf->__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__14__KET____DOT__thingy____pinNumber2__2 = VL_RAND_RESET_I(1);
+    vlSelf->__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__complement__DOT____Vcellout__a0____pinNumber1__2 = VL_RAND_RESET_I(1);
+    vlSelf->__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__13__KET____DOT__thingy____pinNumber2__2 = VL_RAND_RESET_I(1);
+    vlSelf->__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__14__KET____DOT__thingy____pinNumber4__2 = VL_RAND_RESET_I(1);
+    vlSelf->__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__12__KET____DOT__thingy____pinNumber2__2 = VL_RAND_RESET_I(1);
+    vlSelf->__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__13__KET____DOT__thingy____pinNumber4__2 = VL_RAND_RESET_I(1);
+    vlSelf->__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__11__KET____DOT__thingy____pinNumber2__2 = VL_RAND_RESET_I(1);
+    vlSelf->__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__12__KET____DOT__thingy____pinNumber4__2 = VL_RAND_RESET_I(1);
+    vlSelf->__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__10__KET____DOT__thingy____pinNumber2__2 = VL_RAND_RESET_I(1);
+    vlSelf->__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__11__KET____DOT__thingy____pinNumber4__2 = VL_RAND_RESET_I(1);
+    vlSelf->__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__9__KET____DOT__thingy____pinNumber2__2 = VL_RAND_RESET_I(1);
+    vlSelf->__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__10__KET____DOT__thingy____pinNumber4__2 = VL_RAND_RESET_I(1);
+    vlSelf->__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__8__KET____DOT__thingy____pinNumber2__2 = VL_RAND_RESET_I(1);
+    vlSelf->__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__9__KET____DOT__thingy____pinNumber4__2 = VL_RAND_RESET_I(1);
+    vlSelf->__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__7__KET____DOT__thingy____pinNumber2__2 = VL_RAND_RESET_I(1);
+    vlSelf->__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__8__KET____DOT__thingy____pinNumber4__2 = VL_RAND_RESET_I(1);
+    vlSelf->__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__6__KET____DOT__thingy____pinNumber2__2 = VL_RAND_RESET_I(1);
+    vlSelf->__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__7__KET____DOT__thingy____pinNumber4__2 = VL_RAND_RESET_I(1);
+    vlSelf->__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__5__KET____DOT__thingy____pinNumber2__2 = VL_RAND_RESET_I(1);
+    vlSelf->__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__6__KET____DOT__thingy____pinNumber4__2 = VL_RAND_RESET_I(1);
+    vlSelf->__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__4__KET____DOT__thingy____pinNumber2__2 = VL_RAND_RESET_I(1);
+    vlSelf->__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__5__KET____DOT__thingy____pinNumber4__2 = VL_RAND_RESET_I(1);
+    vlSelf->__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__3__KET____DOT__thingy____pinNumber2__2 = VL_RAND_RESET_I(1);
+    vlSelf->__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__4__KET____DOT__thingy____pinNumber4__2 = VL_RAND_RESET_I(1);
+    vlSelf->__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__2__KET____DOT__thingy____pinNumber2__2 = VL_RAND_RESET_I(1);
+    vlSelf->__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__3__KET____DOT__thingy____pinNumber4__2 = VL_RAND_RESET_I(1);
+    vlSelf->__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellout__genblk1__BRA__1__KET____DOT__thingy____pinNumber2__2 = VL_RAND_RESET_I(1);
+    vlSelf->__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__2__KET____DOT__thingy____pinNumber4__2 = VL_RAND_RESET_I(1);
+    vlSelf->__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellout__a0____pinNumber2__2 = VL_RAND_RESET_I(1);
+    vlSelf->__Vtrigprevexpr___TOP__gencon__DOT__add_calc__DOT__main__DOT____Vcellinp__genblk1__BRA__1__KET____DOT__thingy____pinNumber4__2 = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigprevexpr___TOP__clk__0 = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigprevexpr___TOP__reset__0 = VL_RAND_RESET_I(1);
     vlSelf->__VactDidInit = 0;

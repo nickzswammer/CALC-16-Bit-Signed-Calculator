@@ -26,6 +26,7 @@ VM_CLASSES_FAST += \
 	Vgencon \
 	Vgencon___024root__DepSet_h9518b86a__0 \
 	Vgencon___024root__DepSet_h58375ede__0 \
+	Vgencon__main \
 
 # Generated module classes, non-fast-path, compile with low/medium optimization
 VM_CLASSES_SLOW += \

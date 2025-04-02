@@ -37,6 +37,7 @@ VM_PREFIX = Vgencon
 VM_MODPREFIX = Vgencon
 # User CFLAGS (from -CFLAGS on Verilator command line)
 VM_USER_CFLAGS = \
+	-DVL_TIME_CONTEXT \
 
 # User LDLIBS (from -LDFLAGS on Verilator command line)
 VM_USER_LDLIBS = \
