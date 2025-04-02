@@ -5,16 +5,17 @@ module single_port_sync_ram
     )
 
   ( 	
-	input clk,
-   	input [ADDR_WIDTH-1:0]	mem_addr,
-	input [DATA_WIDTH-1:0]	mem_data,
-   	input cs,
-   	input we,
-   	input oe
+    input clk,
+    input [ADDR_WIDTH-1:0] mem_addr,
+    input [DATA_WIDTH-1:0] mem_data,
+    output [DATA_WIDTH-1:0] data,
+    input cs,
+    input we,
+    input oe
   );
 
   reg [DATA_WIDTH-1:0] 	tmp_data;
-  reg [DATA_WIDTH-1:0] 	mem [DEPTH];
+  reg [DATA_WIDTH-1:0] 	mem [0:DEPTH-1];
 
   always @ (posedge clk) begin
     if (cs & we)
@@ -26,6 +27,6 @@ module single_port_sync_ram
     	tmp_data <= mem[mem_addr];
   end
 
-  assign data = cs & oe & !wr ? tmp_data : 'hz;
+  assign data = cs & oe & !we ? tmp_data : 'hz;
 endmodule
 
