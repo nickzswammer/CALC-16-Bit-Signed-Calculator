@@ -18,8 +18,10 @@ module gencon (
     input logic cs,                     // Chip select for memory
     input logic we,                     // Write enable
     input logic oe,                     // Output enable
-    output logic [1:0] mem_addr,        // Memory address (2 bits: 00, 01, 10)
-    inout logic [15:0] mem_data         // Memory data bus
+    input logic [1:0] mem_addr,         // Memory address (2 bits: 00, 01, 10)
+    input logic [15:0] mem_data,        // Data bus to update memory
+    output logic [15:0] data             // Read Data
+
 );
 
 addition alu (
@@ -38,6 +40,7 @@ memory mem (
     .clk(clk),
     .mem_addr(mem_addr),
     .mem_data(mem_data),
+    .data(data),
     .cs(cs),
     .we(we),
     .oe(oe)
