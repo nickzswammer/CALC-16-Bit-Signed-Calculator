@@ -1,32 +1,26 @@
 module memory
-  # (parameter ADDR_WIDTH = 4,
-     parameter DATA_WIDTH = 32,
-     parameter DEPTH = 16
-    )
-
   ( 	
     input clk,
-    input [ADDR_WIDTH-1:0] mem_addr,
-    input [DATA_WIDTH-1:0] mem_data,
-    output [DATA_WIDTH-1:0] data,
-    input cs,
+    input [1:0] mem_addr,
+    input [15:0] mem_data,
+    output [15:0] data,
     input we,
     input oe
   );
 
-  reg [DATA_WIDTH-1:0] 	tmp_data;
-  reg [DATA_WIDTH-1:0] 	mem [0:DEPTH-1];
+  reg [31:0] 	tmp_data;
+  reg [31:0] 	mem [0:15];
 
   always @ (posedge clk) begin
-    if (cs & we)
+    if (we)
       mem[mem_addr] <= mem_data;
   end
 
   always @ (posedge clk) begin
-    if (cs & !we)
+    if (!we)
     	tmp_data <= mem[mem_addr];
   end
 
-  assign data = cs & oe & !we ? tmp_data : 'hz;
+  assign data = oe & !we ? tmp_data : 'hz;
 endmodule
 
