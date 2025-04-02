@@ -6,12 +6,28 @@ module gencon (
     input logic equal_input,            // Equal input to trigger calculation
     output logic complete,              // Completion signal (calculation done)
     output logic [15:0] display_output, // Output to display
-    output logic mem_read,              // Memory read signal
-    output logic mem_write,             // Memory write signal
-    output logic [15:0] mem_addr,       // Memory address (which location to access)
-    output logic [15:0] mem_data_in,    // Data to write to memory
-    input logic [15:0] mem_data_out     // Data read from memory
+    input cs,				// chip select (do we even need?) cuz we only have one memory module
+    input we,				// write enable
+    input oe,                           // output enable
+    input [3:0] mem_addr,               // address of memory location
+    input [31:0] mem_data,              // data list in memory
+    output [31:0] data                  // current data
 );
+    
+    // Instantiate the Memory module
+    memory #(
+        .ADDR_WIDTH(4),    // Adjust if needed
+        .DATA_WIDTH(32),   // Adjust if needed
+        .DEPTH(16)         // Adjust if needed
+    ) memory_inst (
+        .clk(clk),
+        .mem_addr(mem_addr),
+        .mem_data(mem_data),
+        .cs(cs),
+        .we(we),
+        .oe(oe),
+        .data(data)
+    );
 
 
     // State definitions
