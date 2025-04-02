@@ -20,7 +20,15 @@ module gencon (
     input logic oe,                     // Output enable
     input logic [3:0] mem_addr,         // Memory address (2 bits: 00, 01, 10)
     input logic [15:0] mem_data,        // Data bus to update memory
-    output logic [15:0] data             // Read Data
+    output logic [15:0] data,             // Read Data
+    
+    // Multiply
+    input logic [15:0] mul_in1,        // Operand 1 to multi
+    input logic [15:0] mul_in2,        // Operand 2 to multi
+    input logic start_mul,            // Start ALU calculation signal
+
+    output logic [15:0] mul_out,         // Result from multi
+    output logic mul_finish,             // multi finish signal
 
 );
 
@@ -34,6 +42,17 @@ module gencon (
         
         .out(ALU_out),
         .finish(ALU_finish)
+    );
+
+    multiply mul_calc(
+        .clk(clk),
+        .nRST(reset),  // Reset signal (active low)
+        .INn1(mul_in1),
+        .INn2(mul_in2),
+        .start(start_mul), // 
+        
+        .out(mul_out),
+        .finish(mul_finish)
     );
     
     memory mem (
@@ -103,15 +122,15 @@ module gencon (
         endcase
     end
     
-    /*
+    
     // Memory & ALU Interaction
     always_ff @(posedge clk) begin
         case (current_state)
             GET_FIRST_NUM: begin
                 if (keypad_input != 4'b0000) begin
                     // HEY send to multiplier with 10 put back in memory
-                    //operand1 <= operand1 * 10 + keypad_input; // Append digit
-                    operand2 <= keypad_input;
+                    operand1 <= (operand1 << 3) + (operand1 << 1) + keypad_input; // Append digit
+                    
                     mem_addr <= 4'b0;  // Store in memory at address 00
                     mem_data <= operand1;
                     we <= 1;
@@ -121,7 +140,7 @@ module gencon (
             GET_SECOND_NUM: begin
                 if (keypad_input != 4'b0000) begin
                     //operand2 <= operand2 * 10 + keypad_input; // Append digit
-                    operand2 <= keypad_input;
+                    operand2 <= (operand2 << 3) + (operand2 << 1) + keypad_input;
                     mem_addr <= 4'b1;  // Store in memory at address 01
                     mem_data <= operand2;
                     we <= 1;
@@ -149,7 +168,7 @@ module gencon (
             end
         endcase
     end
-    */
+    
 
     always_ff @(posedge clk) begin
         case (current_state)
