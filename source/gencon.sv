@@ -17,13 +17,13 @@ module gencon (
     // Memory Control
     input logic we,                     // Write enable
     input logic oe,                     // Output enable
-    input logic [1:0] mem_addr,         // Memory address (2 bits: 00, 01, 10)
+    input logic [3:0] mem_addr,         // Memory address (2 bits: 00, 01, 10)
     input logic [15:0] mem_data,        // Data bus to update memory
     output logic [15:0] data             // Read Data
 
 );
 
-    addition alu (
+    addition add_calc(
         .clk(clk),
         .nRST(reset),  // Reset signal (active low)
         .INn1(ALU_in1),
