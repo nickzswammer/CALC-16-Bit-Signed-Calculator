@@ -15,7 +15,6 @@ module gencon (
     input logic ALU_finish,             // ALU finish signal
     
     // Memory Control
-    input logic cs,                     // Chip select for memory
     input logic we,                     // Write enable
     input logic oe,                     // Output enable
     input logic [1:0] mem_addr,         // Memory address (2 bits: 00, 01, 10)
@@ -41,7 +40,6 @@ module gencon (
         .mem_addr(mem_addr),
         .mem_data(mem_data),
         .data(data),
-        .cs(cs),
         .we(we),
         .oe(oe)
     );
