@@ -1,15 +1,15 @@
 module memory
   ( 	
     input clk,
-    input [1:0] mem_addr,
+    input [3:0] mem_addr,
     input [15:0] mem_data,
     output [15:0] data,
     input we,
     input oe
   );
 
-  reg [31:0] 	tmp_data;
-  reg [31:0] 	mem [0:15];
+  reg [15:0] tmp_data;
+  reg [15:0] mem [0:15];
 
   always @ (posedge clk) begin
     if (we)
@@ -21,6 +21,6 @@ module memory
     	tmp_data <= mem[mem_addr];
   end
 
-  assign data = oe & !we ? tmp_data : 'hz;
+  assign data = oe & !we ? tmp_data : 16'hz;
 endmodule
 
