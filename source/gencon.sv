@@ -34,6 +34,15 @@ addition alu (
     .finish(ALU_finish)
 );
 
+memory mem (
+    .clk(clk),
+    .mem_addr(mem_addr),
+    .mem_data(mem_data),
+    .cs(cs),
+    .we(we),
+    .oe(oe)
+);
+
 
     // State Definitions
     typedef enum logic [2:0] {
