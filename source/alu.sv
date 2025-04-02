@@ -31,7 +31,7 @@ module adder15(
 	assign cOut = carry[14];
 	
 
-endmodule;
+endmodule
 
 module addition
 (
@@ -153,3 +153,4 @@ module addition
 				finish = 1'b0;
         endcase
     end
+endmodule
