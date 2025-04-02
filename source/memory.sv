@@ -1,4 +1,4 @@
-module single_port_sync_ram
+module memory
   # (parameter ADDR_WIDTH = 4,
      parameter DATA_WIDTH = 32,
      parameter DEPTH = 16

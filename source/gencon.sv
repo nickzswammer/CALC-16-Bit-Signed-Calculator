@@ -13,6 +13,7 @@ module gencon (
     input logic [15:0] mem_data_out     // Data read from memory
 );
 
+
     // State definitions
     typedef enum logic [1:0] {
         GETTING_FIRST_NUMBER = 2'b00,  // State 1: Getting the first number
