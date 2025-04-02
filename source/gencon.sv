@@ -8,11 +8,12 @@ module gencon (
     output logic [15:0] display_output, // 16-bit output to display result
     
     // ALU Interface
-    output logic [15:0] ALU_in1,        // Operand 1 to ALU
-    output logic [15:0] ALU_in2,        // Operand 2 to ALU
-    output logic start_calc,            // Start ALU calculation signal
-    input logic [15:0] ALU_out,         // Result from ALU
-    input logic ALU_finish,             // ALU finish signal
+    input logic [15:0] ALU_in1,        // Operand 1 to ALU
+    input logic [15:0] ALU_in2,        // Operand 2 to ALU
+    input logic start_calc,            // Start ALU calculation signal
+
+    output logic [15:0] ALU_out,         // Result from ALU
+    output logic ALU_finish,             // ALU finish signal
     
     // Memory Control
     input logic we,                     // Write enable
@@ -108,7 +109,7 @@ module gencon (
             GET_FIRST_NUM: begin
                 if (keypad_input != 4'b0000) begin
                     operand1 <= operand1 * 10 + keypad_input; // Append digit
-                    mem_addr <= 2'b00;  // Store in memory at address 00
+                    mem_addr <= 4'b0;  // Store in memory at address 00
                     mem_data <= operand1;
                     we <= 1;
                 end
@@ -117,7 +118,7 @@ module gencon (
             GET_SECOND_NUM: begin
                 if (keypad_input != 4'b0000) begin
                     operand2 <= operand2 * 10 + keypad_input; // Append digit
-                    mem_addr <= 2'b01;  // Store in memory at address 01
+                    mem_addr <= 4'b1;  // Store in memory at address 01
                     mem_data <= operand2;
                     we <= 1;
                 end
