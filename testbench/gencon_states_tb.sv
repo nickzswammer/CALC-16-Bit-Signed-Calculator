@@ -16,10 +16,10 @@ module gencon (
     output logic ALU_finish,             // ALU finish signal
     
     // Memory Control
-    output logic we,                     // Write enable
-    output logic oe,                     // Output enable
-    output logic [3:0] mem_addr,         // Memory address (2 bits: 00, 01, 10)
-    output logic [15:0] mem_data,        // Data bus to update memory
+    input logic we,                     // Write enable
+    input logic oe,                     // Output enable
+    input logic [3:0] mem_addr,         // Memory address (2 bits: 00, 01, 10)
+    input logic [15:0] mem_data,        // Data bus to update memory
     output logic [15:0] data,             // Read Data
     
     // Multiply
@@ -28,7 +28,7 @@ module gencon (
     input logic start_mul,            // Start ALU calculation signal
 
     output logic [15:0] mul_out,         // Result from multi
-    output logic mul_finish             // multi finish signal
+    output logic mul_finish,             // multi finish signal
 
 );
 

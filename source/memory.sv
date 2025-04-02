@@ -1,8 +1,8 @@
 module memory
   ( 	
     input clk,
-    input [3:0] mem_addr,
-    input [15:0] mem_data,
+    input logic [3:0] mem_addr,
+    input logic [15:0] mem_data,
     output [15:0] data,
     input we,
     input oe
