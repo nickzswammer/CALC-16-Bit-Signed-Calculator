@@ -34,17 +34,17 @@ class alignas(VL_CACHE_LINE_BYTES) Vgencon VL_NOT_FINAL : public VerilatedModel 
     VL_IN8(&operator_input,0,0);
     VL_IN8(&equal_input,0,0);
     VL_OUT8(&complete,0,0);
-    VL_OUT8(&start_calc,0,0);
+    VL_IN8(&start_calc,0,0);
     VL_OUT8(&ALU_finish,0,0);
-    VL_OUT8(&we,0,0);
-    VL_OUT8(&oe,0,0);
-    VL_OUT8(&mem_addr,3,0);
-    VL_IN8(&__pinNumber17,0,0);
+    VL_IN8(&we,0,0);
+    VL_IN8(&oe,0,0);
+    VL_IN8(&mem_addr,3,0);
     VL_OUT16(&display_output,15,0);
-    VL_OUT16(&ALU_in1,15,0);
-    VL_OUT16(&ALU_in2,15,0);
+    VL_IN16(&ALU_in1,15,0);
+    VL_IN16(&ALU_in2,15,0);
     VL_OUT16(&ALU_out,15,0);
-    VL_OUT16(&mem_data,15,0);
+    VL_IN16(&mem_data,15,0);
+    VL_OUT16(&data,15,0);
 
     // CELLS
     // Public to allow access to /* verilator public */ items.

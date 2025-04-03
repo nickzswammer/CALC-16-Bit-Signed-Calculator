@@ -20,12 +20,12 @@ Vgencon::Vgencon(VerilatedContext* _vcontextp__, const char* _vcname__)
     , we{vlSymsp->TOP.we}
     , oe{vlSymsp->TOP.oe}
     , mem_addr{vlSymsp->TOP.mem_addr}
-    , __pinNumber17{vlSymsp->TOP.__pinNumber17}
     , display_output{vlSymsp->TOP.display_output}
     , ALU_in1{vlSymsp->TOP.ALU_in1}
     , ALU_in2{vlSymsp->TOP.ALU_in2}
     , ALU_out{vlSymsp->TOP.ALU_out}
     , mem_data{vlSymsp->TOP.mem_data}
+    , data{vlSymsp->TOP.data}
     , rootp{&(vlSymsp->TOP)}
 {
     // Register model with the context
