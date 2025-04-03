@@ -1,4 +1,4 @@
-module KeyPadScanner (
+module read (
     input logic Reset,        
     input logic Clock,          
     input logic [3:0] RowIn,    // input from keypad rows - input all 1?
@@ -26,7 +26,7 @@ state_t State;
 logic [2:0] Counter;        // Counter for debouncing or timing purposes
 logic [15:0] Data;          // row data from all columns
 logic [3:0] Col;            //control active column
-logic [3:0] Sum;            //inverted Data bits to detect key presses
+logic Sum;            //inverted Data bits to detect key presses
 logic ZeroChecker;          //no-key-pressed condition
 logic waitbit;              // timing for column scans
 
@@ -103,16 +103,17 @@ always_ff @(posedge Clock or negedge Reset) begin
             end
             CALCULATE: begin
                 // num 0s in data
-                Sum <= ~Data[0] + ~Data[1] + ~Data[2] + ~Data[3] +
-                       ~Data[4] + ~Data[5] + ~Data[6] + ~Data[7] +
-                       ~Data[8] + ~Data[9] + ~Data[10] + ~Data[11] +
-                       ~Data[12] + ~Data[13] + ~Data[14] + ~Data[15];
+		 Sum <= !(Data[0] ^ Data[1] ^ Data[2] ^ Data[3] ^
+      	 	Data[4] ^ Data[5] ^ Data[6] ^ Data[7] ^
+     		  Data[8] ^ Data[9] ^ Data[10] ^ Data[11] ^
+      		 Data[12] ^ Data[13] ^ Data[14] ^ Data[15]);
+		
                 State <= ANALYZE;                   
             end
             ANALYZE: begin
                 if (ZeroChecker == 1'b1) begin //if the previous check had no key pressed
                     
-                    if (Sum == 4'b0001) begin // if only one key was pressed 
+                    if (Sum) begin // if only one key was pressed 
                         
                         Counter <= Counter + 1'b1;  // debouncing
                         if (Counter == 3'b100) begin
@@ -142,18 +143,14 @@ always_ff @(posedge Clock or negedge Reset) begin
                             ZeroChecker <= 0;           
                         end
                     end
-                    else if (Sum == 4'b0000) begin
-                        // No keys pressed
-                        Counter <= 0;
-                        State <= SCAN;                  
-                    end
+                    
                     else begin // multiple keys pressed  so restart the state machinee                       
                         ZeroChecker <= 1'b0;
                         Counter <= 0;
                         State <= SCAN;
                     end
                 end
-                else if (Sum == 4'b0000) begin // no button press
+                else if (!Sum) begin // no button press
                     
                     ZeroChecker <= 1'b1;           
                     State <= SCAN;
