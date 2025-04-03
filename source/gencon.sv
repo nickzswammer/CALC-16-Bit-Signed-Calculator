@@ -8,9 +8,9 @@ module gencon (
     output logic [15:0] display_output, // 16-bit output to display result
     
     // ALU Interface
-    input logic [15:0] ALU_in1,        // Operand 1 to ALU
-    input logic [15:0] ALU_in2,        // Operand 2 to ALU
-    input logic start_calc,            // Start ALU calculation signal
+    output logic [15:0] ALU_in1,        // Operand 1 to ALU
+    output logic [15:0] ALU_in2,        // Operand 2 to ALU
+    output logic start_calc,            // Start ALU calculation signal
 
     output logic [15:0] ALU_out,         // Result from ALU
     output logic ALU_finish,             // ALU finish signal
@@ -88,6 +88,7 @@ module gencon (
     
     // FSM: State Logic
     always_comb begin
+	next_state = GET_FIRST_NUM; 
         case (current_state)
             GET_FIRST_NUM:
                 if (keypad_input != 4'b0000) 
@@ -122,14 +123,16 @@ module gencon (
         endcase
     end
     
-    
+    // Comment out to test state functionality
+
+    /* 
     // Memory & ALU Interaction
     always_ff @(posedge clk) begin
         case (current_state)
             GET_FIRST_NUM: begin
                 if (keypad_input != 4'b0000) begin
                     // HEY send to multiplier with 10 put back in memory
-                    operand1 <= (operand1 << 3) + (operand1 << 1) + keypad_input; // Append digit
+                    operand1 <= (operand1 << 3) + (operand1 << 1) + {12'd0, keypad_input}; // Append digit
                     
                     mem_addr <= 4'b0;  // Store in memory at address 00
                     mem_data <= operand1;
@@ -139,8 +142,8 @@ module gencon (
     
             GET_SECOND_NUM: begin
                 if (keypad_input != 4'b0000) begin
-                    //operand2 <= operand2 * 10 + keypad_input; // Append digit
-                    operand2 <= (operand2 << 3) + (operand2 << 1) + keypad_input;
+                    //operand2 <= operand2 * 10 + {12'd0, keypad_input}; // Append digit
+                    operand2 <= (operand2 << 3) + (operand2 << 1) + {12'd0, keypad_input};
                     mem_addr <= 4'b1;  // Store in memory at address 01
                     mem_data <= operand2;
                     we <= 1;
@@ -168,7 +171,7 @@ module gencon (
             end
         endcase
     end
-    
+    */
 
     always_ff @(posedge clk) begin
         case (current_state)
