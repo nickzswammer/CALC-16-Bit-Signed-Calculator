@@ -2,24 +2,26 @@ module gencon (
     input logic clk,                    // System clock
     input logic reset,                  // Reset signal
     input logic [3:0] keypad_input,     // 4-bit Keypad input (single digit)
-    input logic operator_input,         // Operator input (ignored since only addition)
+    input logic operator_input,         // FLAG: Operator input (Add, sub, mult)
+    
     input logic equal_input,            // Equal input to trigger addition
     output logic complete,              // Calculation completion flag
     output logic [15:0] display_output, // 16-bit output to display result
     
     // ALU Interface
-    output logic [15:0] ALU_in1,        // Operand 1 to ALU
-    output logic [15:0] ALU_in2,        // Operand 2 to ALU
-    output logic start_calc,            // Start ALU calculation signal
+    
+    input logic [15:0] ALU_in1,        // Operand 1 to ALU
+    input logic [15:0] ALU_in2,        // Operand 2 to ALU
+    input logic start_calc,            // Start ALU calculation signal
 
     output logic [15:0] ALU_out,         // Result from ALU
     output logic ALU_finish,             // ALU finish signal
     
     // Memory Control
-    output logic we,                     // Write enable
-    output logic oe,                     // Output enable
-    output logic [3:0] mem_addr,         // Memory address (2 bits: 00, 01, 10)
-    output logic [15:0] mem_data,        // Data bus to update memory
+    input logic we,                     // Write enable
+    input logic oe,                     // Output enable
+    input logic [3:0] mem_addr,         // Memory address (2 bits: 00, 01, 10)
+    input logic [15:0] mem_data,        // Data bus to update memory
     output logic [15:0] data,             // Read Data
     
     // Multiply
@@ -127,7 +129,7 @@ module gencon (
 
     /* 
     // Memory & ALU Interaction
-    always_ff @(posedge clk) begin
+    always_comb begin
         case (current_state)
             GET_FIRST_NUM: begin
                 if (keypad_input != 4'b0000) begin

@@ -2,7 +2,8 @@ module gencon1 (
     input logic clk,                    // System clock
     input logic reset,                  // Reset signal
     input logic [3:0] keypad_input,     // 4-bit Keypad input (single digit)
-    input logic operator_input,         // Operator input (ignored since only addition)
+    input logic operator_input,         // FLAG: Operator Input which has to be (Add Mult/ Sub)
+
     input logic equal_input,            // Equal input to trigger addition
     output logic complete,              // Calculation completion flag
     output logic [15:0] display_output, // 16-bit output to display result
@@ -102,55 +103,9 @@ module gencon1 (
                 next_state = GET_FIRST_NUM;
         endcase
     end
-    
-    /*
-    // Memory & ALU Interaction
-    always_ff @(posedge clk) begin
-        case (current_state)
-            GET_FIRST_NUM: begin
-                if (keypad_input != 4'b0000) begin
-                    // HEY send to multiplier with 10 put back in memory
-                    //operand1 <= operand1 * 10 + keypad_input; // Append digit
-                    operand2 <= keypad_input;
-                    mem_addr <= 4'b0;  // Store in memory at address 00
-                    mem_data <= operand1;
-                    we <= 1;
-                end
-            end
-    
-            GET_SECOND_NUM: begin
-                if (keypad_input != 4'b0000) begin
-                    //operand2 <= operand2 * 10 + keypad_input; // Append digit
-                    operand2 <= keypad_input;
-                    mem_addr <= 4'b1;  // Store in memory at address 01
-                    mem_data <= operand2;
-                    we <= 1;
-                end
-            end
-        
-            SEND_TO_ALU: begin
-                ALU_in1 <= operand1; // Send operands to ALU
-                ALU_in2 <= operand2;
-                start_calc <= 1; // Trigger ALU computation
-            end
-        
-            WAIT_ALU: begin
-                start_calc <= 0; // Stop ALU start signal
-            end
-        
-            SHOW_RESULT: begin
-                complete <= 1;  // Indicate calculation done
-                display_output <= ALU_out;  // Store ALU result in display
-            end
-        
-            default: begin
-                we <= 0;
-                complete <= 0;
-            end
-        endcase
-    end
-    */
-
+   
+    // MEMORY AND ALU INTERACTIONS WOULD GO HERE
+ 
     always_ff @(posedge clk) begin
         case (current_state)
             GET_FIRST_NUM: begin
