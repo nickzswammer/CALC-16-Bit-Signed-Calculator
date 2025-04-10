@@ -127,7 +127,7 @@ module gencon (
     
     // Comment out to test state functionality
 
-    /* 
+    
     // Memory & ALU Interaction
     always_comb begin
         case (current_state)
@@ -173,7 +173,7 @@ module gencon (
             end
         endcase
     end
-    */
+    
 
     always_ff @(posedge clk) begin
         case (current_state)
