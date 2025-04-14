@@ -90,10 +90,12 @@ module gencon (
             GET_FIRST_NUM:
 
                 if (keypad_input == 4'b0000 && (operator_input == 3'b001 || operator_input == 3'b010 || operator_input == 3'b100)) begin
-                        next_state = GET_SECOND_NUM;
-                
+                    $display("TRANSISTION STATE NEVER HAPPNEING LOL");
+                    next_state = GET_SECOND_NUM;
                 end 
-                else begin                      
+                else begin                     
+                    $display("ELSE STATEMENT BRUH");
+
                     next_state = GET_FIRST_NUM;
                 end
             GET_SECOND_NUM:
@@ -127,7 +129,7 @@ module gencon (
     always_ff @(posedge clk or posedge nRST) begin
         case (current_state)
             GET_FIRST_NUM: begin
-                $display("GETTING FIRST NUMBER");
+                //$display("GETTING FIRST NUMBER");
                 if (keypad_input != 4'b0000) begin
                     operand1 <= (operand1 << 3) + (operand1 << 1) + {12'd0, keypad_input};
                 end
