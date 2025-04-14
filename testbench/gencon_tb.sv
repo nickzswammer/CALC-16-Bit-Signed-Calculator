@@ -79,6 +79,40 @@ module gencon_tb;
 
         // Finish simulation
         #50;
+
+                // Reset sequence
+        nRST = 0;
+        keypad_input = 0;
+        operator_input = 3'b000;
+        equal_input = 0;
+        #20;
+        nRST = 1;
+
+        // Input operand1 = 1 2
+        press_digit(1);
+        press_digit(1);
+
+        // Operator = Add (3'b001)
+        // Operator = Subtract (3'b010)
+        // Operator = Add (3'b100)
+        operator_input = 3'b001;
+        #20;
+
+        // Input operand2 = 3 4
+        press_digit(1);
+        press_digit(0);
+
+        // Equal pressed
+        equal_input = 1;
+        #10;
+        equal_input = 0;
+
+        // Wait for completion
+        wait (complete);
+        $display("Result: %d", display_output);
+
+        // Finish simulation
+        #50;
         $finish;
     end
 
