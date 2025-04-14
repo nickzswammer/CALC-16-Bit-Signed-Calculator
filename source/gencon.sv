@@ -66,7 +66,7 @@ module gencon (
         SHOW_RESULT   = 3'b100   // Displaying result
     } state_t;
     
-    state_t current_state, next_state;
+    state_t current_state, next_state, last_state;
     
     // Internal Registers
     logic [15:0] operand1, operand2;
@@ -75,8 +75,12 @@ module gencon (
     always_ff @(posedge clk or posedge nRST) begin
         if (nRST)
             current_state <= GET_FIRST_NUM;
+            last_state <= GET_FIRST_NUM;
+
         else
             current_state <= next_state;
+            last_state <= GET_FIRST_NUM;
+
     end
     
     // FSM: State Logic
@@ -154,10 +158,14 @@ module gencon (
         endcase
     end
 
-    // debug
+    
     always_ff @(posedge clk) begin
-        $display("State: %0d, operand1: %d, operand2: %d, keypad_input: %d, equal: %b, complete: %b", current_state, operand1, operand2, keypad_input, equal_input, complete);
+        if (current_state != last_state) begin
+            $display("STATE CHANGE: %0t ns: %0d -> %0d", $time, last_state, current_state);
+        end
+        last_state <= current_state;
     end
+
     
 endmodule
 
