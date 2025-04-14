@@ -1,6 +1,3 @@
-
-`timescale 1ns / 1ps
-
 module gencon_tb;
 
     // Inputs
