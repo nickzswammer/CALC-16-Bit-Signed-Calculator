@@ -137,7 +137,7 @@ module gencon (
             end
     
             GET_SECOND_NUM: begin
-                if (keypad_input != 4'b0000) begin
+                if (keypad_input != 4'b0000 && prev_keypad_input  == 4'b0000) begin
                     operand2 <= (operand2 << 3) + (operand2 << 1) + {12'd0, keypad_input};
                 end
             end
