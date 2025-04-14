@@ -29,6 +29,9 @@ module gencon (
     logic [15:0] mult_out;
     logic mult_finish;
 
+    // keypad check
+    logic [3:0] prev_keypad_input;
+
 
     addition add_calc(
         .clk(clk),
@@ -77,6 +80,7 @@ module gencon (
         if (!nRST) begin
             current_state <= GET_FIRST_NUM;
             last_state <= GET_FIRST_NUM;
+            prev_keypad_input <= 0;
         end
 
         else begin
@@ -127,7 +131,7 @@ module gencon (
     always_ff @(posedge clk or posedge nRST) begin
         case (current_state) 
             GET_FIRST_NUM: begin
-                if (keypad_input != 4'b0000) begin
+                if (keypad_input != 4'b0000 && prev_keypad_input  == 4'b0000) begin
                     operand1 <= (operand1 << 3) + (operand1 << 1) + {12'd0, keypad_input};
                 end
             end
@@ -179,6 +183,7 @@ module gencon (
                 complete <= 0;
             end
         endcase
+        prev_keypad_input <= keypad_input;
     end 
 endmodule
 
