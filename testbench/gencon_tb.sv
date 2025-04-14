@@ -80,6 +80,31 @@ module gencon_tb;
         // Finish simulation
         #50;
 
+        // Reset sequence
+        reset_dut();
+
+        press_digit(1);
+        press_digit(5);
+
+        //operator_input = 3'b001; // addition
+        operator_input = 3'b010; // subtraction
+        //operator_input = 3'b100; // multiplication
+        #20;
+
+        press_digit(7);
+
+        // Equal pressed
+        equal_input = 1;
+        #10;
+        equal_input = 0;
+
+        // Wait for completion
+        wait (complete);
+        $display("Result: %0d", display_output);
+
+        // Finish simulation
+        #50;
+
         $finish;
     end
 
