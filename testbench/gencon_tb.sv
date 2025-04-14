@@ -63,7 +63,7 @@ module gencon_tb;
         #20;
 
         press_digit(1);
-        press_digit(2);
+        press_digit(3);
 
         // Equal pressed
         equal_input = 1;
