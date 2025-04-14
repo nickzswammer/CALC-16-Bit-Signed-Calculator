@@ -52,7 +52,7 @@ module gencon_tb;
 
         // Input operand1 = 1 2
         press_digit(1);
-        press_digit(2);
+        press_digit(0);
 
         // Operator = Add (3'b001)
         operator_input = 3'b001;
