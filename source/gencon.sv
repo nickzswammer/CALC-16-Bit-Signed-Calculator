@@ -85,7 +85,7 @@ module gencon (
             GET_FIRST_NUM:
                 if (keypad_input != 4'b0000) 
                     next_state = GET_FIRST_NUM;
-                else if (operator_input)     
+                else if (operator_input != 3'b000)
                     next_state = GET_SECOND_NUM;
                 else                         
                     next_state = GET_FIRST_NUM;
@@ -93,7 +93,7 @@ module gencon (
             GET_SECOND_NUM:
                 if (keypad_input != 4'b0000)
                     next_state = GET_SECOND_NUM;
-                else if (equal_input)
+            else if (equal_input)
                     next_state = SEND_TO_ALU;
                 else
                     next_state = GET_SECOND_NUM;
