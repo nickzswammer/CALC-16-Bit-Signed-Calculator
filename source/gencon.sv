@@ -113,8 +113,7 @@ module gencon (
                 else
                     next_state = WAIT_ALU;
                 
-            SHOW_RESULT_ALU:
-            SHOW_RESULT_MULT:
+            SHOW_RESULT_ALU, SHOW_RESULT_MULT:
                 next_state = GET_FIRST_NUM; // Reset after showing result
             
             default:
