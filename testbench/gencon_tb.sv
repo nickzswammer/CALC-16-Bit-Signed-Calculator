@@ -37,14 +37,6 @@ module gencon_tb;
         end
     endtask
 
-    // Simulate ALU finish behavior
-    assign dut.ALU_finish = dut.start_ALU;
-    assign dut.ALU_out = dut.ALU_in1 + (dut.addOrSub ? -dut.ALU_in2 : dut.ALU_in2);
-
-    // Simulate Multiplier finish behavior
-    assign dut.mult_finish = dut.start_mult;
-    assign dut.mult_out = dut.mult_in1 * dut.mult_in2;
-
     initial begin
         // Reset sequence
         nRST = 0;
