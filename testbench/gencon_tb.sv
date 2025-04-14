@@ -7,7 +7,7 @@ module gencon_tb;
     logic [2:0] operator_input;
     logic equal_input;
     logic complete;
-    logic [15:0] display_output;
+    logic signed [15:0] display_output;
     logic read_input;
 
     // Clock generation
@@ -72,7 +72,7 @@ module gencon_tb;
 
         // Wait for completion
         wait (complete);
-        $display("Result: %d", display_output);
+        $display("Result: %0d", display_output);
 
         // Finish simulation
         #50;
