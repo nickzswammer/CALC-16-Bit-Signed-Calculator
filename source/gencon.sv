@@ -154,6 +154,10 @@ module gencon (
         
             SEND_TO_ALU: begin
                 // operator logic
+
+		$display("operand1 = %0d (0x%h)", operand1, operand1);
+		$display("operand2 = %0d (0x%h)", operand2, operand2);
+
 		$display("Operand 1: %d", operand1);
 		$display("Operand 2: %d", operand2);
                 if (operator_input == 3'b001) begin // addition
