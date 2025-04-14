@@ -63,7 +63,8 @@ module gencon (
         GET_SECOND_NUM = 3'b001, // Getting the second operand
         SEND_TO_ALU   = 3'b010,  // Send operands to ALU
         WAIT_ALU      = 3'b011,  // Wait for ALU to finish
-        SHOW_RESULT   = 3'b100   // Displaying result
+        SHOW_RESULT_ALU   = 3'b100,   // Displaying result from ALU
+        SHOW_RESULT_MULT   = 3'b101,   // Displaying result from ALU
     } state_t;
     
     state_t current_state, next_state, last_state;
