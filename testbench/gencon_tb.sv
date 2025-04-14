@@ -43,11 +43,11 @@ module gencon_tb;
             keypad_input = 0;
             operator_input = 3'b000;
             equal_input = 0;
-            n_rst = 1'b0;
+            nRST = 1'b0;
             @(posedge clk);
             @(posedge clk);
             @(negedge clk);
-            n_rst = 1'b1;
+            nRST = 1'b1;
             @(negedge clk);
             @(negedge clk);
         end
