@@ -8,6 +8,7 @@ module gencon_tb;
     logic equal_input;
     logic complete;
     logic [15:0] display_output;
+    logic read_input;
 
     // Clock generation
     always #5 clk = ~clk; // 100 MHz clock
@@ -17,6 +18,7 @@ module gencon_tb;
         .clk(clk),
         .nRST(nRST),
         .keypad_input(keypad_input),
+        .read_input(read_input),
         .operator_input(operator_input),
         .equal_input(equal_input),
         .complete(complete),
@@ -28,7 +30,9 @@ module gencon_tb;
         begin
             keypad_input = digit;
             #10;
-            keypad_input = 0;
+            read_input = 1;
+            #10;
+            read_input = 0;
             #10;
         end
     endtask
