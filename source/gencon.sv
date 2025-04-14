@@ -86,7 +86,6 @@ module gencon (
             operand1 <= 0;
             operand2 <= 0;
             complete <= 0;
-            display_output <= 0;
 
         end
 
