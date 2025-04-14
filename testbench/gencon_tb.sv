@@ -39,18 +39,19 @@ module gencon_tb;
 
     // Reset Task
     task reset_dut;
-    begin
-        keypad_input = 0;
-        operator_input = 3'b000;
-        equal_input = 0;
-        n_rst = 1'b0;
-        @(posedge clk);
-        @(posedge clk);
-        @(negedge clk);
-        n_rst = 1'b1;
-        @(negedge clk);
-        @(negedge clk);
-    end
+        begin
+            keypad_input = 0;
+            operator_input = 3'b000;
+            equal_input = 0;
+            n_rst = 1'b0;
+            @(posedge clk);
+            @(posedge clk);
+            @(negedge clk);
+            n_rst = 1'b1;
+            @(negedge clk);
+            @(negedge clk);
+        end
+    endtask
 
     initial begin
         // Reset sequence
