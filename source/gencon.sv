@@ -92,7 +92,7 @@ module gencon (
     always_comb begin
         case (current_state)
             GET_FIRST_NUM:
-                if (keypad_input == 4'b0000 && (operator_input == 3'b001 || operator_input == 3'b010 || operator_input == 3'b100)) begin
+                if ((operator_input == 3'b001 || operator_input == 3'b010 || operator_input == 3'b100)) begin
                     next_state = GET_SECOND_NUM;
                 end 
                 else begin                     
@@ -100,9 +100,7 @@ module gencon (
                 end
             
             GET_SECOND_NUM:
-                if (keypad_input != 4'b0000)
-                    next_state = GET_SECOND_NUM;
-            else if (equal_input)
+                if (equal_input)
                     next_state = SEND_TO_ALU;
                 else
                     next_state = GET_SECOND_NUM;
