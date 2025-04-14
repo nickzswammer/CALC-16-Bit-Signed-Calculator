@@ -11,7 +11,7 @@ module gencon_tb;
     logic read_input;
 
     // Clock generation
-    always #5 clk = ~clk; // 100 MHz clock
+    always #5 clk = ~clk; // every 5 time units, flip clock signal
 
     // Instantiate DUT
     gencon dut (
