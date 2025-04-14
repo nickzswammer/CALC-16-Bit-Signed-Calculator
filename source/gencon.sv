@@ -155,6 +155,8 @@ module gencon (
         
             SEND_TO_ALU: begin
                 // operator logic
+		$display("Operand 1: %d", operand1);
+		$display("Operand 2: %d", operand2);
                 if (operator_input == 3'b001) begin // addition
                     ALU_in1 <= operand1; // Send operands to ALU
                     ALU_in2 <= operand2;

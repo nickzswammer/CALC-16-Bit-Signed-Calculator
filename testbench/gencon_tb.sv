@@ -14,8 +14,10 @@ module gencon_tb;
     int test_number;
     int num_passed;
 
-    integer digit;
-    integer temp;
+    int digit; // curr digit to be passed in to the press task
+    int temp; // temp for getting MSB
+    int num_digits; // for getting MSB
+    int divisor; // for the getting MSB
     
     // Clock generation
     always #5 clk = ~clk; // every 5 time units, flip clock signal
@@ -74,37 +76,76 @@ module gencon_tb;
             // extract digits press for first number
     
             temp = num_1;
+	    num_digits = 0;
+
             while (temp > 0) begin
-                digit = temp % 10;
-		
-                press_digit(digit[3:0]);
                 temp = temp / 10;
-            end
+            	num_digits += 1;
+	    end
+
+    	    divisor = 1;
+
+    	    for (int i = 1; i < num_digits; i++) begin
+                divisor *= 10;
+    	    end
+
+    	    temp = num_1;
+
+    	    while (divisor > 0) begin
+        	digit = temp / divisor;
+		press_digit(digit[3:0]);
+        	temp = temp % divisor;
+                divisor = divisor / 10;
+    	    end
     
             // get operator 
             operator_input = operation;
             #20;
     
             // second number digit press
+   
+
             temp = num_2;
+	    num_digits = 0;
+
             while (temp > 0) begin
-                digit = temp % 10;
-                press_digit(digit[3:0]);
                 temp = temp / 10;
-            end
-    
+            	num_digits += 1;
+	    end
+
+    	    divisor = 1;
+
+    	    for (int i = 1; i < num_digits; i++) begin
+                divisor *= 10;
+    	    end
+
+    	    temp = num_2;
+
+    	    while (divisor > 0) begin
+        	digit = temp / divisor;
+		press_digit(digit[3:0]);
+        	temp = temp % divisor;
+                divisor = divisor / 10;
+	    end
+
+ 
             // equal press
             equal_input = 1;
 		
             // Wait for completion
             wait (complete);
-            $display("Result: %0d", display_output);
+	     
+	    $display("\n==========================================\n");
+	    $display("Operands: %d, %d\n", num_1, num_2);        
+	    $display("Result: %0d\n", display_output);
+	
             
             if(expected_out[15:0] != display_output) begin
                 $display("[Time %0t]: Expected %d, got %d\n", $time, expected_out, display_output);
             end else begin
                 num_passed += 1;
             end
+	    $display("==========================================\n");
     
             #50;
         end
@@ -118,16 +159,17 @@ module gencon_tb;
         num_passed = 0;
 
         apply_inputs(1, 3'b001, 1, 2);
-	    apply_inputs(12, 3'b001, 31, 43);
-	    apply_inputs(98, 3'b001, 101, 199); 
-	    apply_inputs(4, 3'b010, 1, 3);
-	    apply_inputs(59, 3'b010, 41, 18);
-	    apply_inputs(2, 3'b010, 9, -7);
-	    apply_inputs(1, 3'b100, 1, 1);
-	    apply_inputs(51, 3'b100, 2, 102);
-	    apply_inputs(11, 3'b100, 12, 132);
+	apply_inputs(12, 3'b001, 31, 43);
+	apply_inputs(98, 3'b001, 101, 199); 
+	apply_inputs(4, 3'b010, 1, 3);
+	apply_inputs(59, 3'b010, 41, 18);
+	apply_inputs(2, 3'b010, 9, -7);
+	apply_inputs(1, 3'b100, 1, 1);
+	apply_inputs(51, 3'b100, 2, 102);
+	apply_inputs(11, 3'b100, 12, 132);
 
-        $display("Passed %0d/%0d tests.", num_passed, test_number);
+        $display("Passed %0d/%0d tests.\n", num_passed, test_number);
+	$display("==========================================\n");
 
         $finish;
     end
