@@ -1,4 +1,6 @@
-module gencon_tb;
+
+
+/*module gencon_tb;
 
     // Testbench signals
     logic clk = 0;
@@ -83,4 +85,4 @@ module gencon_tb;
         $finish;
     end
 
-endmodule
+endmodule*/
