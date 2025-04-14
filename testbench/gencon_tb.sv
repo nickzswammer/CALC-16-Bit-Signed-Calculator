@@ -42,6 +42,10 @@ module gencon_tb;
     assign dut.mult_out = dut.mult_in1 * dut.mult_in2;
 
     initial begin
+        $monitor("Time=%0t | State=%0d | keypad=%b | op=%b | equal=%b | start_ALU=%b | ALU_finish=%b | complete=%b | output=%d", 
+                 $time, dut.current_state, keypad_input, operator_input, equal_input, 
+                 dut.start_ALU, dut.ALU_finish, complete, display_output);
+        
         // Reset sequence
         nRST = 0;
         keypad_input = 0;
