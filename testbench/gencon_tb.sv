@@ -68,9 +68,7 @@ module gencon_tb;
             test_number += 1;
             reset_dut();
     
-            int temp;
-            int digit;
-    
+            integer temp, digit;    
             // extract digits press for first number
     
             temp = num_1;
