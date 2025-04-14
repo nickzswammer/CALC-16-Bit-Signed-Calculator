@@ -118,9 +118,14 @@ module gencon_tb;
         num_passed = 0;
 
         apply_inputs(1, 3'b001, 1, 2);
-        apply_inputs(1, 3'b001, 1, 2);
-        apply_inputs(1, 3'b001, 1, 2);
-        apply_inputs(1, 3'b001, 1, 2);
+	    apply_inputs(12, 3'b001, 31, 43);
+	    apply_inputs(98, 3'b001, 101, 199); 
+	    apply_inputs(4, 3'b010, 1, 3);
+	    apply_inputs(59, 3'b010, 41, 18);
+	    apply_inputs(2, 3'b010, 9, -7);
+	    apply_inputs(1, 3'b100, 1, 1);
+	    apply_inputs(51, 3'b100, 2, 102);
+	    apply_inputs(11, 3'b100, 12, 132);
 
         $display("Passed %0d/%0d tests.", num_passed, test_number);
 
