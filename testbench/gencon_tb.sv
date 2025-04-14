@@ -164,6 +164,7 @@ module gencon_tb;
 	apply_inputs(4, 3'b010, 1, 3);
 	apply_inputs(59, 3'b010, 41, 18);
 	apply_inputs(2, 3'b010, 9, -7);
+	apply_inputs(1, 3'b010, 2, -1);
 	apply_inputs(1, 3'b100, 1, 1);
 	apply_inputs(51, 3'b100, 2, 102);
 	apply_inputs(11, 3'b100, 12, 132);
