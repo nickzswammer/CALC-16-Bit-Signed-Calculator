@@ -1,49 +1,60 @@
 module gencon1 (
-    input logic clk,                    // System clock
-    input logic reset,                  // Reset signal
-    input logic [3:0] keypad_input,     // 4-bit Keypad input (single digit)
-    input logic operator_input,         // FLAG: Operator Input which has to be (Add Mult/ Sub)
+    input logic clk,                
+    input logic nRST,    
 
+    // Operand, Operator, and Result Input
+    input logic [3:0] keypad_input,     // 4-bit Keypad input (single digit)
+    input logic [2:0] operator_input,         // Operator Input [00 (add), 01 (subtract), 11 (multiplication)
     input logic equal_input,            // Equal input to trigger addition
+
     output logic complete,              // Calculation completion flag
     output logic [15:0] display_output, // 16-bit output to display result
-    
-    // ALU Interface
-    input logic [15:0] ALU_in1,        // Operand 1 to ALU
-    input logic [15:0] ALU_in2,        // Operand 2 to ALU
-    input logic start_calc,            // Start ALU calculation signal
-
-    output logic [15:0] ALU_out,         // Result from ALU
-    output logic ALU_finish,             // ALU finish signal
-    
-    // Memory Control
-    input logic we,                     // Write enable
-    input logic oe,                     // Output enable
-    input logic [3:0] mem_addr,         // Memory address (2 bits: 00, 01, 10)
-    input logic [15:0] mem_data,        // Data bus to update memory
-    output logic [15:0] data             // Read Data
 
 );
+    // Signals to Send to ALU (ONLY ADDITION AND SUBTRACTION)
+    logic [15:0] ALU_in1,        // Operand 1 to ALU
+    logic [15:0] ALU_in2,        // Operand 2 to ALU
+    logic addOrSub; // 0 for add, 1 for subtraction
+    logic start_ALU,            // Start ALU calculation signal
+    
+    // Signals Recieved from ALU
+    logic ALU_finish,             // ALU finish signal
+    logic [15:0] ALU_out,         // Result from ALU
+
+    // Signals to Send to Multiplier
+    logic [15:0] mult_in1,        // Operand 1 to mult
+    logic [15:0] mult_in2,        // Operand 2 to mult
+    logic start_mult,            // Start mult calculation signal
+    
+    logic [15:0] mult_out;
+    logic mult_finish;
+
 
     addition add_calc(
         .clk(clk),
-        .nRST(reset),  // Reset signal (active low)
+        .nRST(nRST),  // Reset signal (active low)
+
         .INn1(ALU_in1),
         .INn2(ALU_in2),
-        .sub(1'b0),       // Need to change so this either is 1 for subtraction or 0 for adding and how to tell from input controler
-        .start(start_calc), // 
+        .sub(addOrSub),
+        
+        .start(start_ALU) // to tell ALU to start
         
         .out(ALU_out),
         .finish(ALU_finish)
     );
-    
-    memory mem (
+
+    multiply mult_calc(
         .clk(clk),
-        .mem_addr(mem_addr),
-        .mem_data(mem_data),
-        .data(data),
-        .we(we),
-        .oe(oe)
+        .nRST(nRST),
+
+        .INn1(mult_in1),
+        .INn2(mult_in2),
+        
+        .start(start_mult) // to tell mult to start
+        
+        .out(mult_out),
+        .finish(mult_finish)
     );
     
     // State Definitions
@@ -61,8 +72,8 @@ module gencon1 (
     logic [15:0] operand1, operand2;
     
     // FSM: State Transitions
-    always_ff @(posedge clk or posedge reset) begin
-        if (reset)
+    always_ff @(posedge clk or posedge ) begin
+        if ()
             current_state <= GET_FIRST_NUM;
         else
             current_state <= next_state;
@@ -106,30 +117,40 @@ module gencon1 (
    
     // MEMORY AND ALU INTERACTIONS WOULD GO HERE
  
-    always_ff @(posedge clk) begin
+  // Memory & ALU Interaction
+    always_ff @(posedge clk or posedge nRST) begin
         case (current_state)
             GET_FIRST_NUM: begin
-                $display("State: %s", "First Num");
+                if (keypad_input != 4'b0000) begin
+                    operand1 <= (operand1 << 3) + (operand1 << 1) + {12'd0, keypad_input}; // Append digit
+                end
             end
-
+    
             GET_SECOND_NUM: begin
-                $display("State: %s", "Second Num");
+                if (keypad_input != 4'b0000) begin
+                    //operand2 <= operand2 * 10 + {12'd0, keypad_input}; // Append digit
+                    operand2 <= (operand2 << 3) + (operand2 << 1) + {12'd0, keypad_input};
+                end
             end
-
+        
             SEND_TO_ALU: begin
-                $display("State: %s", "Send to ALU");
+                ALU_in1 <= operand1; // Send operands to ALU
+                ALU_in2 <= operand2;
+                start_calc <= 1; // Trigger ALU computation
             end
-
+        
             WAIT_ALU: begin
-                $display("State: %s", "Wait ALU");
+                start_calc <= 0; // Stop ALU start signal
             end
-
+        
             SHOW_RESULT: begin
-                $display("State: %s", "Show Result");
+                complete <= 1;  // Indicate calculation done
+                display_output <= ALU_out;  // Store ALU result in display
             end
-
+        
             default: begin
-                $display("State: %s", "Default");
+                we <= 0;
+                complete <= 0;
             end
         endcase
     end
