@@ -10,7 +10,7 @@ module gencon (
     input logic equal_input,            // Equal input to trigger addition
 
     output logic complete,              // Calculation completion flag
-    output logic [15:0] display_output // 16-bit output to display result
+    output signed logic [15:0] display_output // 16-bit output to display result
 
 );
     // Signals to Send to ALU (ONLY ADDITION AND SUBTRACTION)
@@ -21,7 +21,7 @@ module gencon (
     
     // Signals Recieved from ALU
     logic ALU_finish;             // ALU finish signal
-    logic [15:0] ALU_out;         // Result from ALU
+    logic signed [15:0] ALU_out;         // Result from ALU
 
     // Signals to Send to Multiplier
     logic [15:0] mult_in1;        // Operand 1 to mult
