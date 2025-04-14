@@ -51,16 +51,18 @@ module gencon_tb;
         nRST = 1;
 
         // Input operand1 = 1 2
-        press_digit(1);
         press_digit(0);
+        press_digit(5);
 
         // Operator = Add (3'b001)
-        operator_input = 3'b001;
+        // Operator = Subtract (3'b010)
+        // Operator = Add (3'b100)
+        operator_input = 3'b010;
         #20;
 
         // Input operand2 = 3 4
-        press_digit(3);
-        press_digit(4);
+        press_digit(0);
+        press_digit(2);
 
         // Equal pressed
         equal_input = 1;
