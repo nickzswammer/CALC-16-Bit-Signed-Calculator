@@ -10,6 +10,10 @@ module gencon_tb;
     logic signed [15:0] display_output;
     logic read_input;
 
+    // TB-only variables
+    int test_number;
+    int num_passed;
+    
     // Clock generation
     always #5 clk = ~clk; // every 5 time units, flip clock signal
 
@@ -54,57 +58,63 @@ module gencon_tb;
         end
     endtask
 
+    task apply_inputs(
+        input int num_1, // in decimal
+        input [2:0] operation, // 001, 010, 100
+        input int num_2, // in decimal
+        input int expected_out // expected output
+    );
+        test_number += 1;
+        reset_dut();
+
+        int temp;
+        int digit;
+
+        // extract digits press for first number
+
+        temp = num_1;
+        while (temp > 0) begin
+            digit = temp % 10;
+            press_digit(digit);
+            temp = temp / 10;
+        end
+
+        // get operator 
+        operator_input = operation;
+        #20;
+
+        // second number digit press
+        temp = num_2;
+        while (temp > 0) begin
+            digit = temp % 10;
+            press_digit(digit);
+            temp = temp / 10;
+        end
+
+        // equal press
+        equal_input = 1;
+        equal_input = 0;
+
+        // Wait for completion
+        wait (complete);
+        $display("Result: %0d", display_output);
+        
+        if(expected_out != display_output) begin
+            $display("[Time %0t]: Expected %d, got %d\n", $time, expected_out, display_output);
+        end else begin
+            num_passed += 1;
+        end
+
+        #50;
+    endtask
+    
     initial begin
-        // Reset sequence
-        reset_dut();
+        test_number = 0;
+        num_passed = 0;
 
-        press_digit(1);
-        press_digit(2);
+        apply_inputs(1, 3'b001, 1, 2);
 
-        operator_input = 3'b001; // addition
-        //operator_input = 3'b010; // subtraction
-        //operator_input = 3'b100; // multiplication
-        #20;
-
-        press_digit(3);
-        press_digit(4);
-
-        // Equal pressed
-        equal_input = 1;
-        #10;
-        equal_input = 0;
-
-        // Wait for completion
-        wait (complete);
-        $display("Result: %0d", display_output);
-
-        // Finish simulation
-        #50;
-
-        // Reset sequence
-        reset_dut();
-
-        press_digit(1);
-        press_digit(5);
-
-        //operator_input = 3'b001; // addition
-        operator_input = 3'b010; // subtraction
-        //operator_input = 3'b100; // multiplication
-        #20;
-
-        press_digit(7);
-
-        // Equal pressed
-        equal_input = 1;
-        #10;
-        equal_input = 0;
-
-        // Wait for completion
-        wait (complete);
-        $display("Result: %0d", display_output);
-
-        // Finish simulation
-        #50;
+        $display("Passed %0d/%0d tests.", num_passed, test_number);
 
         $finish;
     end
