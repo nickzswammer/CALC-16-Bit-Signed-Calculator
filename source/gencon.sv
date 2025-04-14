@@ -1,62 +1,174 @@
 module gencon (
-    input logic clk,                    // System clock
-    input logic reset,                  // Reset signal
-    input logic [3:0] keypad_input,     // 4-bit Keypad input (single digit)
-    input logic operator_input,         // FLAG: Operator input (Add, sub, mult)
-    
-    input logic equal_input,            // Equal input to trigger addition
-    output logic complete,              // Calculation completion flag
-    output logic [15:0] display_output, // 16-bit output to display result
-    
-    // ALU Interface
-    
-    input logic [15:0] ALU_in1,        // Operand 1 to ALU
-    input logic [15:0] ALU_in2,        // Operand 2 to ALU
-    input logic start_calc,            // Start ALU calculation signal
+    input  logic clk,
+    input  logic reset,
+    input  logic [3:0] keypad_input,
+    input  logic [1:0] operator_code, // 00=ADD, 01=SUB, 10=MUL
+    input  logic equal_input,
 
-    output logic [15:0] ALU_out,         // Result from ALU
-    output logic ALU_finish,             // ALU finish signal
-    
-    // Memory Control
-    input logic we,                     // Write enable
-    input logic oe,                     // Output enable
-    input logic [3:0] mem_addr,         // Memory address (2 bits: 00, 01, 10)
-    input logic [15:0] mem_data,        // Data bus to update memory
-    output logic [15:0] data,             // Read Data
-    
-    // Multiply
-    input logic [15:0] mul_in1,        // Operand 1 to multi
-    input logic [15:0] mul_in2,        // Operand 2 to multi
-    input logic start_mul,            // Start ALU calculation signal
+    output logic complete,
+    output logic [15:0] display_output,
 
-    output logic [15:0] mul_out,         // Result from multi
-    output logic mul_finish             // multi finish signal
-
+    // Memory
+    output logic we,
+    output logic oe,
+    output logic [3:0] mem_addr,
+    output logic [15:0] mem_data,
+    input  logic [15:0] data
 );
 
-    addition add_calc(
+    // ALU signals
+    logic [15:0] ALU_in1, ALU_in2;
+    logic start_calc, ALU_finish;
+    logic [15:0] ALU_out;
+
+    // Multiplier signals
+    logic [15:0] mul_in1, mul_in2;
+    logic start_mul, mul_finish;
+    logic [15:0] mul_out;
+
+    // State machine
+    typedef enum logic [2:0] {
+        GET_FIRST_NUM,
+        GET_SECOND_NUM,
+        SEND_TO_UNIT,
+        WAIT_UNIT,
+        SHOW_RESULT
+    } state_t;
+
+    state_t current_state, next_state;
+
+    logic [15:0] operand1, operand2;
+    logic [3:0] prev_key;
+    logic is_calc_done;
+    logic [15:0] result;
+
+    // FSM register update
+    always_ff @(posedge clk or posedge reset) begin
+        if (reset) begin
+            current_state <= GET_FIRST_NUM;
+        end else begin
+            current_state <= next_state;
+        end
+    end
+
+    // FSM next state logic
+    always_comb begin
+        next_state = current_state;
+        case (current_state)
+            GET_FIRST_NUM:
+                if (keypad_input != 0 && keypad_input != prev_key)
+                    next_state = GET_FIRST_NUM;
+                else if (operator_code != 2'b11)
+                    next_state = GET_SECOND_NUM;
+            GET_SECOND_NUM:
+                if (keypad_input != 0 && keypad_input != prev_key)
+                    next_state = GET_SECOND_NUM;
+                else if (equal_input)
+                    next_state = SEND_TO_UNIT;
+            SEND_TO_UNIT:
+                next_state = WAIT_UNIT;
+            WAIT_UNIT:
+                if (is_calc_done)
+                    next_state = SHOW_RESULT;
+            SHOW_RESULT:
+                next_state = GET_FIRST_NUM;
+        endcase
+    end
+
+    // FSM output logic
+    always_ff @(posedge clk or posedge reset) begin
+        if (reset) begin
+            operand1 <= 0;
+            operand2 <= 0;
+            complete <= 0;
+            display_output <= 0;
+            start_calc <= 0;
+            start_mul <= 0;
+            ALU_in1 <= 0;
+            ALU_in2 <= 0;
+            mul_in1 <= 0;
+            mul_in2 <= 0;
+            mem_addr <= 0;
+            mem_data <= 0;
+            we <= 0;
+            oe <= 0;
+            prev_key <= 0;
+        end else begin
+            complete <= 0;
+            start_calc <= 0;
+            start_mul <= 0;
+            we <= 0;
+            case (current_state)
+                GET_FIRST_NUM: begin
+                    if (keypad_input != 0 && keypad_input != prev_key) begin
+                        operand1 <= operand1 * 10 + keypad_input;
+                        mem_addr <= 4'd0;
+                        mem_data <= operand1;
+                        we <= 1;
+                    end
+                    prev_key <= keypad_input;
+                end
+                GET_SECOND_NUM: begin
+                    if (keypad_input != 0 && keypad_input != prev_key) begin
+                        operand2 <= operand2 * 10 + keypad_input;
+                        mem_addr <= 4'd1;
+                        mem_data <= operand2;
+                        we <= 1;
+                    end
+                    prev_key <= keypad_input;
+                end
+                SEND_TO_UNIT: begin
+                    case (operator_code)
+                        2'b00, 2'b01: begin
+                            ALU_in1 <= operand1;
+                            ALU_in2 <= operand2;
+                            start_calc <= 1;
+                        end
+                        2'b10: begin
+                            mul_in1 <= operand1;
+                            mul_in2 <= operand2;
+                            start_mul <= 1;
+                        end
+                    endcase
+                end
+                SHOW_RESULT: begin
+                    complete <= 1;
+                    result <= (operator_code == 2'b10) ? mul_out : ALU_out;
+                    display_output <= result;
+                end
+            endcase
+        end
+    end
+
+    // Result readiness check
+    always_comb begin
+        is_calc_done = (operator_code == 2'b10) ? mul_finish : ALU_finish;
+    end
+
+    // ALU instantiation
+    addition add_calc (
         .clk(clk),
-        .nRST(reset),  // Reset signal (active low)
+        .nRST(~reset),
         .INn1(ALU_in1),
         .INn2(ALU_in2),
-        .sub(1'b0),       // Need to change so this either is 1 for subtraction or 0 for adding and how to tell from input controler
-        .start(start_calc), // 
-        
+        .sub(operator_code == 2'b01),
+        .start(start_calc),
         .out(ALU_out),
         .finish(ALU_finish)
     );
 
-    multiply mul_calc(
+    // Multiplier instantiation
+    multiply mul_calc (
         .clk(clk),
-        .nRST(reset),  // Reset signal (active low)
+        .nRST(~reset),
         .INn1(mul_in1),
         .INn2(mul_in2),
-        .start(start_mul), // 
-        
+        .start(start_mul),
         .out(mul_out),
         .finish(mul_finish)
     );
-    
+
+    // Memory instantiation
     memory mem (
         .clk(clk),
         .mem_addr(mem_addr),
@@ -65,112 +177,5 @@ module gencon (
         .we(we),
         .oe(oe)
     );
-    
-    // State Definitions
-    typedef enum logic [2:0] {
-        GET_FIRST_NUM = 3'b000,  // Getting the first operand
-        GET_SECOND_NUM = 3'b001, // Getting the second operand
-        SEND_TO_ALU   = 3'b010,  // Send operands to ALU
-        WAIT_ALU      = 3'b011,  // Wait for ALU to finish
-        SHOW_RESULT   = 3'b100   // Displaying result
-    } state_t;
-    
-    state_t current_state, next_state;
-    
-    // Internal Registers
-    logic [15:0] operand1, operand2;
-    
-    // FSM: State Transitions
-    always_ff @(posedge clk or posedge reset) begin
-        if (reset)
-            current_state <= GET_FIRST_NUM;
-        else
-            current_state <= next_state;
-    end
-    
-    // FSM: State Logic
-    always_comb begin
-	next_state = GET_FIRST_NUM; 
-        case (current_state)
-            GET_FIRST_NUM:
-                if (keypad_input != 4'b0000) 
-                    next_state = GET_FIRST_NUM;
-                else if (operator_input)     
-                    next_state = GET_SECOND_NUM;
-                else                         
-                    next_state = GET_FIRST_NUM;
-            
-            GET_SECOND_NUM:
-                if (keypad_input != 4'b0000)
-                    next_state = GET_SECOND_NUM;
-                else if (equal_input)
-                    next_state = SEND_TO_ALU;
-                else
-                    next_state = GET_SECOND_NUM;
-            
-            SEND_TO_ALU:
-                next_state = WAIT_ALU;  // Move to ALU wait state
-            
-            WAIT_ALU:
-                if (ALU_finish) 
-                    next_state = SHOW_RESULT;
-                else
-                    next_state = WAIT_ALU;
-            
-            SHOW_RESULT:
-                next_state = GET_FIRST_NUM; // Reset after showing result
-            
-            default:
-                next_state = GET_FIRST_NUM;
-        endcase
-    end
-    
-    // Comment out to test state functionality
 
-    
-    // Memory & ALU Interaction
-    always_comb begin
-        case (current_state)
-            GET_FIRST_NUM: begin
-                if (keypad_input != 4'b0000) begin
-                    // HEY send to multiplier with 10 put back in memory
-                    operand1 <= (operand1 << 3) + (operand1 << 1) + {12'd0, keypad_input}; // Append digit
-                    
-                    mem_addr <= 4'b0;  // Store in memory at address 00
-                    mem_data <= operand1;
-                    we <= 1;
-                end
-            end
-    
-            GET_SECOND_NUM: begin
-                if (keypad_input != 4'b0000) begin
-                    //operand2 <= operand2 * 10 + {12'd0, keypad_input}; // Append digit
-                    operand2 <= (operand2 << 3) + (operand2 << 1) + {12'd0, keypad_input};
-                    mem_addr <= 4'b1;  // Store in memory at address 01
-                    mem_data <= operand2;
-                    we <= 1;
-                end
-            end
-        
-            SEND_TO_ALU: begin
-                ALU_in1 <= operand1; // Send operands to ALU
-                ALU_in2 <= operand2;
-                start_calc <= 1; // Trigger ALU computation
-            end
-        
-            WAIT_ALU: begin
-                start_calc <= 0; // Stop ALU start signal
-            end
-        
-            SHOW_RESULT: begin
-                complete <= 1;  // Indicate calculation done
-                display_output <= ALU_out;  // Store ALU result in display
-            end
-        
-            default: begin
-                we <= 0;
-                complete <= 0;
-            end
-        endcase
-    end
 endmodule
