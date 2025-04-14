@@ -173,33 +173,4 @@ module gencon (
             end
         endcase
     end
-    
-
-    always_ff @(posedge clk) begin
-        case (current_state)
-            GET_FIRST_NUM: begin
-                $display("State: %s", "First Num");
-            end
-
-            GET_SECOND_NUM: begin
-                $display("State: %s", "Second Num");
-            end
-
-            SEND_TO_ALU: begin
-                $display("State: %s", "Send to ALU");
-            end
-
-            WAIT_ALU: begin
-                $display("State: %s", "Wait ALU");
-            end
-
-            SHOW_RESULT: begin
-                $display("State: %s", "Show Result");
-            end
-
-            default: begin
-                $display("State: %s", "Default");
-            end
-        endcase
-    end
 endmodule
