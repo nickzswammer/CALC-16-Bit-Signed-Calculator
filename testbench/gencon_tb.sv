@@ -47,13 +47,15 @@ module gencon_tb;
         nRST = 1;
 
         press_digit(1);
+        press_digit(2);
 
         operator_input = 3'b001; // addition
         //operator_input = 3'b010; // subtraction
         //operator_input = 3'b100; // multiplication
         #20;
 
-        press_digit(1);
+        press_digit(3);
+        press_digit(4);
 
         // Equal pressed
         equal_input = 1;
