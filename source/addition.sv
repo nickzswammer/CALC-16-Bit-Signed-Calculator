@@ -49,7 +49,7 @@ module addition
 	input logic sub,
 	input wire start,
 
-	output logic signed [15 : 0] out,
+	output logic [15 : 0] out,
 	output logic finish 
 );
 
