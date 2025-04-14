@@ -42,7 +42,7 @@ module gencon_tb;
         reg [15:0] temp;
         begin
             temp = number;
-            int digits[0:4]; // at most 5 digits
+            reg [3:0] digits[0:4];
             for (i = 4; i >= 0; i--) begin
                 digits[i] = temp % 10;
                 temp = temp / 10;
