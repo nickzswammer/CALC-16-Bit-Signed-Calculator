@@ -125,7 +125,7 @@ module gencon (
  
   // Memory & ALU Interaction
     always_ff @(posedge clk or posedge nRST) begin
-        case (current_state)
+        case (current_state) begin
             GET_FIRST_NUM: begin
                 if (keypad_input != 4'b0000) begin
                     operand1 <= (operand1 << 3) + (operand1 << 1) + {12'd0, keypad_input};
