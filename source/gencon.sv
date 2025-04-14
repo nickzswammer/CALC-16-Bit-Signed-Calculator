@@ -138,13 +138,13 @@ module gencon (
     always_ff @(posedge clk or negedge nRST) begin
         case (current_state) 
             GET_FIRST_NUM: begin
-                if (readInput) begin
+                if (read_input) begin
                     operand1 <= (operand1 << 3) + (operand1 << 1) + {12'd0, keypad_input};
                 end
             end
     
             GET_SECOND_NUM: begin
-                if (readInput) begin
+                if (read_input) begin
                     operand2 <= (operand2 << 3) + (operand2 << 1) + {12'd0, keypad_input};
                 end
             end
