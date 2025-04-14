@@ -136,11 +136,11 @@ module gencon (
             SEND_TO_ALU: begin
                 ALU_in1 <= operand1; // Send operands to ALU
                 ALU_in2 <= operand2;
-                start_calc <= 1; // Trigger ALU computation
+                start_alu <= 1; // Trigger ALU computation
             end
         
             WAIT_ALU: begin
-                start_calc <= 0; // Stop ALU start signal
+                start_alu <= 0; // Stop ALU start signal
             end
         
             SHOW_RESULT: begin
@@ -149,7 +149,6 @@ module gencon (
             end
         
             default: begin
-                we <= 0;
                 complete <= 0;
             end
         endcase
