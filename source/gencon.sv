@@ -88,13 +88,14 @@ module gencon (
     always_comb begin
         case (current_state)
             GET_FIRST_NUM:
-                if (keypad_input != 4'b0000) 
+
+                if (keypad_input == 4'b0000 && (operator_input == 3'b001 || operator_input == 3'b010 || operator_input == 3'b100)) begin
+                        next_state = GET_SECOND_NUM;
+                
+                end 
+                else begin                      
                     next_state = GET_FIRST_NUM;
-                if (keypad_input == 4'b0000 && (operator_input == 3'b001 || operator_input == 3'b010 || operator_input == 3'b100))
-                    next_state = GET_SECOND_NUM;
-                else                         
-                    next_state = GET_FIRST_NUM;
-            
+                end
             GET_SECOND_NUM:
                 if (keypad_input != 4'b0000)
                     next_state = GET_SECOND_NUM;
