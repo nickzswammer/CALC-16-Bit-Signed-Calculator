@@ -14,8 +14,8 @@ module gencon (
 
 );
     // Signals to Send to ALU (ONLY ADDITION AND SUBTRACTION)
-    logic [15:0] ALU_in1;        // Operand 1 to ALU
-    logic [15:0] ALU_in2;        // Operand 2 to ALU
+    logic signed [15:0] ALU_in1;        // Operand 1 to ALU
+    logic signed [15:0] ALU_in2;        // Operand 2 to ALU
     logic addOrSub; // 0 for add, 1 for subtraction
     logic start_ALU;            // Start ALU calculation signal
     
@@ -33,7 +33,6 @@ module gencon (
 
     // keypad check
     logic [3:0] prev_keypad_input;
-
 
     addition add_calc(
         .clk(clk),

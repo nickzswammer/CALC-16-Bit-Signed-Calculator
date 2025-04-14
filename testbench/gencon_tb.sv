@@ -99,11 +99,11 @@ module gencon_tb;
     	    end
     
             // get operator 
+
             operator_input = operation;
             #20;
     
-            // second number digit press
-   
+            // second number digit press 
 
             temp = num_2;
 	    num_digits = 0;
