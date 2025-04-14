@@ -145,21 +145,24 @@ module gencon (
             SEND_TO_ALU: begin
                 ALU_in1 <= operand1; // Send operands to ALU
                 ALU_in2 <= operand2;
-
+                
+                $display("Operand 1: %d", operand1);
+                $display("Operand 2: %d", operand2);
+                
                 // operator logic
                 if (operator_input == 3'b001) begin // addition
                     $display("Recognize Addition");
-                    $display("Operand 1: %d", operand1);
-                    $display("Operand 2: %d", operand2);
                     addOrSub <= 0; // 0 is addition
                     start_ALU <= 1; // Trigger ALU computation
                 end
                 else if (operator_input == 3'b010) begin // subtraction
+                    $display("Recognize Subtraction");
                     addOrSub <= 1; // 1 is subtraction
                     start_ALU <= 1; // Trigger ALU computation
                 end
 
                 else if (operator_input == 3'b100) begin // multiplication
+                    $display("Recognize Multiplication");
                     start_mult <= 1;
                 end
             end
