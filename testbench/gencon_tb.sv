@@ -37,14 +37,24 @@ module gencon_tb;
         end
     endtask
 
-    initial begin
-        // Reset sequence
-        nRST = 0;
+    // Reset Task
+    task reset_dut;
+    begin
         keypad_input = 0;
         operator_input = 3'b000;
         equal_input = 0;
-        #20;
-        nRST = 1;
+        n_rst = 1'b0;
+        @(posedge clk);
+        @(posedge clk);
+        @(negedge clk);
+        n_rst = 1'b1;
+        @(negedge clk);
+        @(negedge clk);
+    end
+
+    initial begin
+        // Reset sequence
+        reset_dut();
 
         press_digit(1);
         press_digit(2);
