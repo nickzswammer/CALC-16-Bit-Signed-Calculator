@@ -4,7 +4,7 @@ module gencon (
 
     // Operand, Operator, and Result Input
     input logic [3:0] keypad_input,     // 4-bit Keypad input (single digit)
-    input logic [2:0] operator_input,         // Operator Input [00 (add), 01 (subtract), 11 (multiplication)
+    input logic [2:0] operator_input,         // Operator Input [001 (add), 010 (subtract), 100 (multiplication)
     input logic equal_input,            // Equal input to trigger addition
 
     output logic complete,              // Calculation completion flag
@@ -90,7 +90,7 @@ module gencon (
             GET_FIRST_NUM:
                 if (keypad_input != 4'b0000) 
                     next_state = GET_FIRST_NUM;
-                else if (operator_input != 3'b000)
+            else if (keypad_input == 4'b0000 && (operator_input == 3'b001 || operator_input == 3'b010 || operator_input == 3'b100))
                     next_state = GET_SECOND_NUM;
                 else                         
                     next_state = GET_FIRST_NUM;
