@@ -1,6 +1,6 @@
 `timescale 1ns/1ps
 
-module gencon1_tb;
+module gencon_tb;
 
     // Testbench signals
     logic clk = 0;
@@ -15,7 +15,7 @@ module gencon1_tb;
     always #5 clk = ~clk; // 100 MHz clock
 
     // Instantiate DUT
-    gencon1 dut (
+    gencon dut (
         .clk(clk),
         .nRST(nRST),
         .keypad_input(keypad_input),

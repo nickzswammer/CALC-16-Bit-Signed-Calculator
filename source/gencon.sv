@@ -1,4 +1,4 @@
-module gencon1 (
+module gencon (
     input logic clk,                
     input logic nRST,    
 
@@ -8,23 +8,23 @@ module gencon1 (
     input logic equal_input,            // Equal input to trigger addition
 
     output logic complete,              // Calculation completion flag
-    output logic [15:0] display_output, // 16-bit output to display result
+    output logic [15:0] display_output // 16-bit output to display result
 
 );
     // Signals to Send to ALU (ONLY ADDITION AND SUBTRACTION)
-    logic [15:0] ALU_in1,        // Operand 1 to ALU
-    logic [15:0] ALU_in2,        // Operand 2 to ALU
+    logic [15:0] ALU_in1;        // Operand 1 to ALU
+    logic [15:0] ALU_in2;        // Operand 2 to ALU
     logic addOrSub; // 0 for add, 1 for subtraction
-    logic start_ALU,            // Start ALU calculation signal
+    logic start_ALU;            // Start ALU calculation signal
     
     // Signals Recieved from ALU
-    logic ALU_finish,             // ALU finish signal
-    logic [15:0] ALU_out,         // Result from ALU
+    logic ALU_finish;             // ALU finish signal
+    logic [15:0] ALU_out;         // Result from ALU
 
     // Signals to Send to Multiplier
-    logic [15:0] mult_in1,        // Operand 1 to mult
-    logic [15:0] mult_in2,        // Operand 2 to mult
-    logic start_mult,            // Start mult calculation signal
+    logic [15:0] mult_in1;        // Operand 1 to mult
+    logic [15:0] mult_in2;        // Operand 2 to mult
+    logic start_mult;            // Start mult calculation signal
     
     logic [15:0] mult_out;
     logic mult_finish;
