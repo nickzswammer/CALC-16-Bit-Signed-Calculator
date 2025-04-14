@@ -144,6 +144,9 @@ module gencon (
 
                 // operator logic
                 if (operator_input == 3'b001) begin // addition
+                    $display("Recognize Addition");
+                    $display("Operand 1: %d", operand1);
+                    $display("Operand 2: %d", operand2);
                     addOrSub <= 0; // 0 is addition
                     start_ALU <= 1; // Trigger ALU computation
                 end
