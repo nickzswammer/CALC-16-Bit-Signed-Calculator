@@ -1,4 +1,5 @@
 /* verilator lint_off LATCH */
+/* verilator lint_off UNOPTFLAT */
 
 module multiply
 (
@@ -145,4 +146,6 @@ module multiply
 endmodule
 
 /* verilator lint_on LATCH */
+/* verilator lint_on UNOPTFLAT */
+
 
