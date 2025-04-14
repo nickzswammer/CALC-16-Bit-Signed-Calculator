@@ -1,3 +1,4 @@
+
 module gencon_tb;
 
     // Inputs
@@ -38,22 +39,28 @@ module gencon_tb;
     // Task to simulate digit entry
     task enter_number(input [15:0] number);
         integer i;
-        reg [3:0] digit;
         reg [15:0] temp;
+        reg [3:0] digit;
         begin
             temp = number;
-            reg [3:0] digits[0:4];
-            for (i = 4; i >= 0; i--) begin
-                digits[i] = temp % 10;
-                temp = temp / 10;
-            end
-            for (i = 0; i < 5; i++) begin
-                if (number >= 10**i) begin
-                    keypad_input = digits[i];
-                    read_input = 1;
-                    #10;
-                    read_input = 0;
-                    #10;
+            if (temp == 0) begin
+                keypad_input = 0;
+                read_input = 1;
+                #10;
+                read_input = 0;
+                #10;
+            end else begin
+                int div = 10000;
+                while (div > 0) begin
+                    digit = (temp / div) % 10;
+                    if (number >= div) begin
+                        keypad_input = digit;
+                        read_input = 1;
+                        #10;
+                        read_input = 0;
+                        #10;
+                    end
+                    div = div / 10;
                 end
             end
         end
@@ -67,26 +74,17 @@ module gencon_tb;
             equal_input = 0;
             keypad_input = 0;
             read_input = 0;
-
-            // Reset complete flag
             complete = 0;
 
-            // First operand
             enter_number(op1);
-
-            // Operator
             operator_input = op;
             #20;
 
-            // Second operand
             enter_number(op2);
-
-            // Equal
             equal_input = 1;
             #10;
             equal_input = 0;
 
-            // Wait for complete
             wait (complete);
             $display("RESULT: %0d", display_output);
             #40;
@@ -95,27 +93,22 @@ module gencon_tb;
 
     // Test sequence
     initial begin
-        // Reset
         nRST = 0;
         #20;
         nRST = 1;
 
-        // Add: 12 + 34 = 46
-        do_operation(12, 3'b001, 34);
-
-        // Sub: 100 - 25 = 75
-        do_operation(100, 3'b010, 25);
-
-        // Mul: 6 * 7 = 42
-        do_operation(6, 3'b100, 7);
-
-        // Add: 123 + 456 = 579
-        do_operation(123, 3'b001, 456);
+        do_operation(12, 3'b001, 34);    // 12 + 34 = 46
+        do_operation(100, 3'b010, 25);   // 100 - 25 = 75
+        do_operation(6, 3'b100, 7);      // 6 * 7 = 42
+        do_operation(123, 3'b001, 456);  // 123 + 456 = 579
+        do_operation(0, 3'b001, 99);     // 0 + 99 = 99
 
         $finish;
     end
 
 endmodule
+
+
 
 
 /*module gencon_tb;
