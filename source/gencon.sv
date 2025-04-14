@@ -85,6 +85,9 @@ module gencon (
             prev_keypad_input <= 0;
             operand1 <= 0;
             operand2 <= 0;
+            complete <= 0;
+            display_output <= 0;
+
         end
 
         else begin
