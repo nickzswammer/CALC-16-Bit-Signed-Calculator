@@ -111,12 +111,10 @@ module gencon (
             
             WAIT_ALU:
                 if (ALU_finish) begin
-                    $display("Recognized Addition Finished");
                     next_state = SHOW_RESULT_ALU;
                 end
             
                 else if (mult_finish) begin
-                    $display("Recognized Multiplication Finished");
                     next_state = SHOW_RESULT_MULT;
                 end
             
@@ -150,26 +148,38 @@ module gencon (
             end
         
             SEND_TO_ALU: begin
-                ALU_in1 <= operand1; // Send operands to ALU
-                ALU_in2 <= operand2;
+
                 
                 $display("Operand 1: %d", operand1);
                 $display("Operand 2: %d", operand2);
                 
                 // operator logic
                 if (operator_input == 3'b001) begin // addition
+                    
                     $display("Recognize Addition");
+                    
+                    ALU_in1 <= operand1; // Send operands to ALU
+                    ALU_in2 <= operand2;
+                    
                     addOrSub <= 0; // 0 is addition
                     start_ALU <= 1; // Trigger ALU computation
                 end
                 else if (operator_input == 3'b010) begin // subtraction
                     $display("Recognize Subtraction");
+
+                    ALU_in1 <= operand1; // Send operands to ALU
+                    ALU_in2 <= operand2;
+                    
                     addOrSub <= 1; // 1 is subtraction
                     start_ALU <= 1; // Trigger ALU computation
                 end
 
                 else if (operator_input == 3'b100) begin // multiplication
                     $display("Recognize Multiplication");
+
+                    mult_in1 <= operand1; // Send operands to ALU
+                    mult_in2 <= operand2;
+                    
                     start_mult <= 1;
                 end
             end
