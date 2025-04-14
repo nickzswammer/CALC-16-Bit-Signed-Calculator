@@ -57,7 +57,7 @@ module gencon_tb;
         // Operator = Add (3'b001)
         // Operator = Subtract (3'b010)
         // Operator = Add (3'b100)
-        operator_input = 3'b010;
+        operator_input = 3'b100;
         #20;
 
         // Input operand2 = 3 4
