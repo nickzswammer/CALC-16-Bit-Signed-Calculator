@@ -153,5 +153,11 @@ module gencon (
             end
         endcase
     end
+
+    // debug
+    always_ff @(posedge clk) begin
+        $display("State: %0d, operand1: %d, operand2: %d, keypad_input: %d, equal: %b, complete: %b", current_state, operand1, operand2, keypad_input, equal_input, complete);
+    end
+    
 endmodule
 
