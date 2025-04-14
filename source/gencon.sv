@@ -93,6 +93,7 @@ module gencon (
         case (current_state)
             GET_FIRST_NUM:
                 if ((operator_input == 3'b001 || operator_input == 3'b010 || operator_input == 3'b100)) begin
+                    $display("============== Operator Input Detected, should be changing states now ==============");
                     next_state = GET_SECOND_NUM;
                 end 
                 else begin                     
