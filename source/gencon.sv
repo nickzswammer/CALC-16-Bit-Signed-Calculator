@@ -73,7 +73,7 @@ module gencon (
     
     // FSM: State Transitions
     always_ff @(posedge clk or posedge nRST) begin
-        if ()
+        if (nRST)
             current_state <= GET_FIRST_NUM;
         else
             current_state <= next_state;
