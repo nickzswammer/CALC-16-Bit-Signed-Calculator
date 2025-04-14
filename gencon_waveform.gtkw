@@ -1,0 +1,43 @@
+[*]
+[*] GTKWave Analyzer v3.3.111 (w)1999-2020 BSI
+[*] Mon Apr 14 20:58:36 2025
+[*]
+[dumpfile] "/home/asicfab/a/nzhang21/CALC-Intro-2/gencon.vcd"
+[dumpfile_mtime] "Mon Apr 14 20:54:37 2025"
+[dumpfile_size] 33690
+[savefile] "/home/asicfab/a/nzhang21/CALC-Intro-2/gencon_waveform.gtkw"
+[timestart] 0
+[size] 1244 644
+[pos] -322 -95
+*-8.000000 340 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] TOP.
+[treeopen] TOP.gencon_tb.
+[treeopen] TOP.gencon_tb.dut.
+[sst_width] 292
+[signals_width] 278
+[sst_expanded] 1
+[sst_vpaned_height] 158
+@28
+TOP.gencon_tb.clk
+TOP.gencon_tb.complete
+@22
+TOP.gencon_tb.digit[31:0]
+TOP.gencon_tb.display_output[15:0]
+@28
+TOP.gencon_tb.equal_input
+@22
+TOP.gencon_tb.keypad_input[3:0]
+@28
+TOP.gencon_tb.nRST
+@22
+TOP.gencon_tb.num_passed[31:0]
+@28
+TOP.gencon_tb.operator_input[2:0]
+TOP.gencon_tb.read_input
+@22
+TOP.gencon_tb.temp[31:0]
+TOP.gencon_tb.test_number[31:0]
+@200
+-Dut
+[pattern_trace] 1
+[pattern_trace] 0

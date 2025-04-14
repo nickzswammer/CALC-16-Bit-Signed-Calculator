@@ -13,6 +13,9 @@ module gencon_tb;
     // TB-only variables
     int test_number;
     int num_passed;
+
+    integer digit;
+    integer temp;
     
     // Clock generation
     always #5 clk = ~clk; // every 5 time units, flip clock signal
@@ -59,22 +62,22 @@ module gencon_tb;
     endtask
 
     task apply_inputs(
-        input int num_1, // in decimal
+        input integer num_1, // in decimal
         input [2:0] operation, // 001, 010, 100
-        input int num_2, // in decimal
-        input int expected_out // expected output
+        input integer num_2, // in decimal
+        input integer expected_out // expected output
     );
         begin
             test_number += 1;
             reset_dut();
     
-            integer temp, digit;    
             // extract digits press for first number
     
             temp = num_1;
             while (temp > 0) begin
                 digit = temp % 10;
-                press_digit(digit);
+		
+                press_digit(digit[3:0]);
                 temp = temp / 10;
             end
     
@@ -86,19 +89,18 @@ module gencon_tb;
             temp = num_2;
             while (temp > 0) begin
                 digit = temp % 10;
-                press_digit(digit);
+                press_digit(digit[3:0]);
                 temp = temp / 10;
             end
     
             // equal press
             equal_input = 1;
-            equal_input = 0;
-    
+		
             // Wait for completion
             wait (complete);
             $display("Result: %0d", display_output);
             
-            if(expected_out != display_output) begin
+            if(expected_out[15:0] != display_output) begin
                 $display("[Time %0t]: Expected %d, got %d\n", $time, expected_out, display_output);
             end else begin
                 num_passed += 1;
@@ -109,9 +111,15 @@ module gencon_tb;
     endtask
     
     initial begin
+	$dumpfile("gencon.vcd");
+	$dumpvars();
+
         test_number = 0;
         num_passed = 0;
 
+        apply_inputs(1, 3'b001, 1, 2);
+        apply_inputs(1, 3'b001, 1, 2);
+        apply_inputs(1, 3'b001, 1, 2);
         apply_inputs(1, 3'b001, 1, 2);
 
         $display("Passed %0d/%0d tests.", num_passed, test_number);
