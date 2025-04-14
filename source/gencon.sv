@@ -106,9 +106,12 @@ module gencon (
             
             WAIT_ALU:
                 if (ALU_finish) 
-                    next_state = SHOW_RESULT;
+                    next_state = SHOW_RESULT_ALU;
+                else if (mult_finish)
+                    next_state = SHOW_RESULT_MULT;
                 else
                     next_state = WAIT_ALU;
+                
             
             SHOW_RESULT:
                 next_state = GET_FIRST_NUM; // Reset after showing result
@@ -138,19 +141,34 @@ module gencon (
             SEND_TO_ALU: begin
                 ALU_in1 <= operand1; // Send operands to ALU
                 ALU_in2 <= operand2;
-                start_ALU <= 1; // Trigger ALU computation
-                // ========================================================================================================================================
-                addOrSub <= 1; // THIS IS A DEBUG STATEMENT PLEASE REMOVE AFTER, STILL HAVE TO IMPLEMENT MULTIPLICATION CHOOSING OR ADDITION SUBTRACTIon
-                // ========================================================================================================================================
+
+                // operator logic
+                if (operator_input == 3'b001) begin // addition
+                    addOrSub <= 0; // 0 is addition
+                    start_ALU <= 1; // Trigger ALU computation
+                end
+                else if (operator_input == 3'b010) begin // subtraction
+                    addOrSub <= 1; // 1 is subtraction
+                    start_ALU <= 1; // Trigger ALU computation
+                end
+
+                else if (operator_input == 3'b100) begin // multiplication
+                    start_mult <= 1;
             end
         
             WAIT_ALU: begin
                 start_ALU <= 0; // Stop ALU start signal
+                start_mult <= 0;
             end
         
-            SHOW_RESULT: begin
+            SHOW_RESULT_ALU: begin
                 complete <= 1;  // Indicate calculation done
                 display_output <= ALU_out;  // Store ALU result in display
+            end
+
+            SHOW_RESULT_MULT: begin
+                complete <= 1;  // Indicate calculation done
+                display_output <= mult_out;  // Store ALU result in display
             end
         
             default: begin
