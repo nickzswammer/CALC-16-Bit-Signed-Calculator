@@ -122,7 +122,7 @@ module gencon (
         case (current_state)
             GET_FIRST_NUM: begin
                 if (keypad_input != 4'b0000) begin
-                    operand2 <= (operand2 << 3) + (operand2 << 1) + {12'd0, keypad_input};
+                    operand1 <= (operand1 << 3) + (operand1 << 1) + {12'd0, keypad_input};
                 end
             end
     
