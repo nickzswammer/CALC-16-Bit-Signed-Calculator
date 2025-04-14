@@ -79,8 +79,8 @@ module gencon (
         end
 
         else begin
+            last_state <= current_state;
             current_state <= next_state;
-            last_state <= GET_FIRST_NUM;
         end
     end
     
@@ -164,7 +164,6 @@ module gencon (
         if (current_state != last_state) begin
             $display("STATE CHANGE: %0t ns: %0d -> %0d", $time, last_state, current_state);
         end
-        last_state <= current_state;
     end
 
     
