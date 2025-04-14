@@ -110,14 +110,19 @@ module gencon (
                 next_state = WAIT_ALU;  // Move to ALU wait state
             
             WAIT_ALU:
-                if (ALU_finish) 
+                if (ALU_finish) begin
                     $display("Recognized Addition Finished");
                     next_state = SHOW_RESULT_ALU;
-                else if (mult_finish)
+                end
+            
+                else if (mult_finish) begin
                     $display("Recognized Multiplication Finished");
                     next_state = SHOW_RESULT_MULT;
-                else
+                end
+            
+                else begin
                     next_state = WAIT_ALU;
+                end
                 
             SHOW_RESULT_ALU, SHOW_RESULT_MULT:
                 next_state = GET_FIRST_NUM; // Reset after showing result
