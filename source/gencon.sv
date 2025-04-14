@@ -128,7 +128,7 @@ module gencon (
     // MEMORY AND ALU INTERACTIONS WOULD GO HERE
  
   // Memory & ALU Interaction
-    always_ff @(posedge clk or posedge nRST) begin
+    always_ff @(posedge clk or negedge nRST) begin
         case (current_state) 
             GET_FIRST_NUM: begin
                 if (keypad_input != 4'b0000 && prev_keypad_input  == 4'b0000) begin
