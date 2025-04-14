@@ -82,13 +82,16 @@ module gencon (
             last_state <= current_state;
             current_state <= next_state;
         end
+        
+        if (current_state != last_state) begin
+            $display("STATE CHANGE: %0t ns: %0d -> %0d", $time, last_state, current_state);
+        end
     end
     
     // FSM: State Logic
     always_comb begin
         case (current_state)
             GET_FIRST_NUM:
-
                 if (keypad_input == 4'b0000 && (operator_input == 3'b001 || operator_input == 3'b010 || operator_input == 3'b100)) begin
                     next_state = GET_SECOND_NUM;
                 end 
@@ -163,15 +166,6 @@ module gencon (
                 complete <= 0;
             end
         endcase
-    end
-
-    
-    always_ff @(posedge clk) begin
-        if (current_state != last_state) begin
-            $display("STATE CHANGE: %0t ns: %0d -> %0d", $time, last_state, current_state);
-        end
-    end
-
-    
+    end 
 endmodule
 
