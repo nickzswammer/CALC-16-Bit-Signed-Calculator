@@ -90,14 +90,12 @@ module gencon (
             GET_FIRST_NUM:
 
                 if (keypad_input == 4'b0000 && (operator_input == 3'b001 || operator_input == 3'b010 || operator_input == 3'b100)) begin
-                    $display("TRANSISTION STATE NEVER HAPPNEING LOL");
                     next_state = GET_SECOND_NUM;
                 end 
                 else begin                     
-                    $display("ELSE STATEMENT BRUH");
-
                     next_state = GET_FIRST_NUM;
                 end
+            
             GET_SECOND_NUM:
                 if (keypad_input != 4'b0000)
                     next_state = GET_SECOND_NUM;
