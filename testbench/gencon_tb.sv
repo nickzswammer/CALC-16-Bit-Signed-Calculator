@@ -64,48 +64,50 @@ module gencon_tb;
         input int num_2, // in decimal
         input int expected_out // expected output
     );
-        test_number += 1;
-        reset_dut();
-
-        int temp;
-        int digit;
-
-        // extract digits press for first number
-
-        temp = num_1;
-        while (temp > 0) begin
-            digit = temp % 10;
-            press_digit(digit);
-            temp = temp / 10;
+        begin
+            test_number += 1;
+            reset_dut();
+    
+            int temp;
+            int digit;
+    
+            // extract digits press for first number
+    
+            temp = num_1;
+            while (temp > 0) begin
+                digit = temp % 10;
+                press_digit(digit);
+                temp = temp / 10;
+            end
+    
+            // get operator 
+            operator_input = operation;
+            #20;
+    
+            // second number digit press
+            temp = num_2;
+            while (temp > 0) begin
+                digit = temp % 10;
+                press_digit(digit);
+                temp = temp / 10;
+            end
+    
+            // equal press
+            equal_input = 1;
+            equal_input = 0;
+    
+            // Wait for completion
+            wait (complete);
+            $display("Result: %0d", display_output);
+            
+            if(expected_out != display_output) begin
+                $display("[Time %0t]: Expected %d, got %d\n", $time, expected_out, display_output);
+            end else begin
+                num_passed += 1;
+            end
+    
+            #50;
         end
-
-        // get operator 
-        operator_input = operation;
-        #20;
-
-        // second number digit press
-        temp = num_2;
-        while (temp > 0) begin
-            digit = temp % 10;
-            press_digit(digit);
-            temp = temp / 10;
-        end
-
-        // equal press
-        equal_input = 1;
-        equal_input = 0;
-
-        // Wait for completion
-        wait (complete);
-        $display("Result: %0d", display_output);
-        
-        if(expected_out != display_output) begin
-            $display("[Time %0t]: Expected %d, got %d\n", $time, expected_out, display_output);
-        end else begin
-            num_passed += 1;
-        end
-
-        #50;
     endtask
     
     initial begin
