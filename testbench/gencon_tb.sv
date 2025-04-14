@@ -7,7 +7,7 @@ module gencon_tb;
     logic [2:0] operator_input;
     logic equal_input;
     logic complete;
-    logic signed [15:0] display_output;
+    logic [15:0] display_output;
     logic read_input;
 
     // TB-only variables
