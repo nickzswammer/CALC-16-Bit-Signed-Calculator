@@ -54,7 +54,7 @@ module gencon_tb;
         press_digit(1);
         press_digit(2);
 
-        // Operator = Add (3'b000)
+        // Operator = Add (3'b001)
         operator_input = 3'b001;
         #20;
 
