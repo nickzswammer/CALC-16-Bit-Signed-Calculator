@@ -4,7 +4,7 @@ module gencon (
 
     // Operand, Operator, and Result Input
     input logic [3:0] keypad_input,     // 4-bit Keypad input (single digit)
-    input logic readInput;              // if 1, read whatever is in keypad input, if 0, don't read
+    input logic read_input;              // if 1, read whatever is in keypad input, if 0, don't read
     
     input logic [2:0] operator_input,         // Operator Input [001 (add), 010 (subtract), 100 (multiplication)
     input logic equal_input,            // Equal input to trigger addition
