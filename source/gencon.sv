@@ -38,7 +38,7 @@ module gencon (
         .INn2(ALU_in2),
         .sub(addOrSub),
         
-        .start(start_ALU) // to tell ALU to start
+        .start(start_ALU), // to tell ALU to start
         
         .out(ALU_out),
         .finish(ALU_finish)
@@ -51,7 +51,7 @@ module gencon (
         .INn1(mult_in1),
         .INn2(mult_in2),
         
-        .start(start_mult) // to tell mult to start
+        .start(start_mult), // to tell mult to start
         
         .out(mult_out),
         .finish(mult_finish)
@@ -72,7 +72,7 @@ module gencon (
     logic [15:0] operand1, operand2;
     
     // FSM: State Transitions
-    always_ff @(posedge clk or posedge ) begin
+    always_ff @(posedge clk or posedge nRST) begin
         if ()
             current_state <= GET_FIRST_NUM;
         else
