@@ -4,6 +4,8 @@ module gencon (
 
     // Operand, Operator, and Result Input
     input logic [3:0] keypad_input,     // 4-bit Keypad input (single digit)
+    input logic readInput;              // if 1, read whatever is in keypad input, if 0, don't read
+    
     input logic [2:0] operator_input,         // Operator Input [001 (add), 010 (subtract), 100 (multiplication)
     input logic equal_input,            // Equal input to trigger addition
 
@@ -136,13 +138,13 @@ module gencon (
     always_ff @(posedge clk or negedge nRST) begin
         case (current_state) 
             GET_FIRST_NUM: begin
-                if (keypad_input != 4'b0000 && prev_keypad_input  == 4'b0000) begin
+                if (readInput) begin
                     operand1 <= (operand1 << 3) + (operand1 << 1) + {12'd0, keypad_input};
                 end
             end
     
             GET_SECOND_NUM: begin
-                if (keypad_input != 4'b0000 && prev_keypad_input  == 4'b0000) begin
+                if (readInput) begin
                     operand2 <= (operand2 << 3) + (operand2 << 1) + {12'd0, keypad_input};
                 end
             end
