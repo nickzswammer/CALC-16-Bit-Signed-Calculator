@@ -44,6 +44,7 @@ module gencon_tb;
             operator_input = 3'b000;
             equal_input = 0;
             nRST = 1'b0;
+            
             @(posedge clk);
             @(posedge clk);
             @(negedge clk);
