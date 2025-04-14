@@ -14,7 +14,7 @@ module gencon_tb;
     int test_number;
     int num_passed;
 
-    int digit; // curr digit to be passed in to the press task
+    logic [3:0] digit; // curr digit to be passed in to the press task
     int temp; // temp for getting MSB
     int num_digits; // for getting MSB
     int divisor; // for the getting MSB
