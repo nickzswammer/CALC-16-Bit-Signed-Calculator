@@ -154,6 +154,7 @@ module gencon (
 
                 else if (operator_input == 3'b100) begin // multiplication
                     start_mult <= 1;
+                end
             end
         
             WAIT_ALU: begin
