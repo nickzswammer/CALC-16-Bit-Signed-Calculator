@@ -142,6 +142,9 @@ module gencon (
                 ALU_in1 <= operand1; // Send operands to ALU
                 ALU_in2 <= operand2;
                 start_ALU <= 1; // Trigger ALU computation
+                // ========================================================================================================================================
+                addOrSub <= 1; // THIS IS A DEBUG STATEMENT PLEASE REMOVE AFTER, STILL HAVE TO IMPLEMENT MULTIPLICATION CHOOSING OR ADDITION SUBTRACTIon
+                // ========================================================================================================================================
             end
         
             WAIT_ALU: begin
