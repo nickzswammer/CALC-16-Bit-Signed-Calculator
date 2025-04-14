@@ -140,7 +140,7 @@ module gencon_tb;
 	    $display("Result: %0d\n", display_output);
 	
             
-		if(expected_out[15:0] != display_output[14:0]) begin
+		if(expected_out[14:0] != display_output[14:0]) begin
                 $display("[Time %0t]: Expected %d, got %d\n", $time, expected_out, display_output);
             end else begin
                 num_passed += 1;
