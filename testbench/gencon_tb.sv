@@ -1,90 +1,108 @@
+// Testbench for gencon
+
+`timescale 1ns/1ps
+
 module gencon_tb;
-    // Testbench Signals
-    logic clk;
+
+    logic clk = 0;
     logic reset;
     logic [3:0] keypad_input;
-    logic operator_input;
+    logic [1:0] operator_code;
     logic equal_input;
+
     logic complete;
     logic [15:0] display_output;
-    logic [15:0] ALU_in1, ALU_in2;
-    logic start_calc;
-    logic [15:0] ALU_out;
-    logic ALU_finish;
+
     logic we, oe;
     logic [3:0] mem_addr;
     logic [15:0] mem_data;
-    logic [15:0] data;
-    logic [15:0] mul_in1, mul_in2;
-    logic start_mul;
-    logic [15:0] mul_out;
-    logic mul_finish;
+    logic [15:0] data = 16'd0;
 
-    // Instantiate the gencon module
-    gencon uut (
+    // Clock generation
+    always #5 clk = ~clk; // 100 MHz clock
+
+    // Instantiate DUT
+    gencon dut (
         .clk(clk),
         .reset(reset),
         .keypad_input(keypad_input),
-        .operator_input(operator_input),
+        .operator_code(operator_code),
         .equal_input(equal_input),
         .complete(complete),
         .display_output(display_output),
-        .ALU_in1(ALU_in1),
-        .ALU_in2(ALU_in2),
-        .start_calc(start_calc),
-        .ALU_out(ALU_out),
-        .ALU_finish(ALU_finish),
         .we(we),
         .oe(oe),
         .mem_addr(mem_addr),
         .mem_data(mem_data),
-        .data(data),
-        .mul_in1(mul_in1),
-        .mul_in2(mul_in2),
-        .start_mul(start_mul),
-        .mul_out(mul_out),
-        .mul_finish(mul_finish)
+        .data(data)
     );
 
-    // Clock Generation
-    always #5 clk = ~clk; // 10 ns clock period
+    // Mock ALU
+    assign dut.ALU_finish = dut.start_calc;
+    assign dut.ALU_out = dut.ALU_in1 + (dut.ALU_in2 ^ {16{dut.add_calc.sub}}) + dut.add_calc.sub;
 
-    // Test Sequence
+    // Mock Multiplier
+    assign dut.mul_finish = dut.start_mul;
+    assign dut.mul_out = dut.mul_in1 * dut.mul_in2;
+
+    // Task to press a digit
+    task press_digit(input [3:0] digit);
+        begin
+            keypad_input = digit;
+            #10;
+            keypad_input = 0;
+            #10;
+        end
+    endtask
+
     initial begin
-        clk = 0;
+        // Initialize
         reset = 1;
         keypad_input = 0;
-        operator_input = 0;
+        operator_code = 2'b11;
         equal_input = 0;
-        ALU_finish = 0;
-        mul_finish = 0;
+        #20;
+        reset = 0;
 
-        #10 reset = 0; // Release reset
-        
-        // Enter first number: 23 (Sequential Keypad Presses)
-        #10 keypad_input = 4'd2; #10 keypad_input = 4'd0;
-        #10 keypad_input = 4'd3; #10 keypad_input = 4'd0;
-        
-        #10 operator_input = 1; // Press operator to move to second number
-        #10 operator_input = 0;
-        
-        // Enter second number: 45 (Sequential Keypad Presses)
-        #10 keypad_input = 4'd4; #10 keypad_input = 4'd0;
-        #10 keypad_input = 4'd5; #10 keypad_input = 4'd0;
-        
-        #10 equal_input = 1; // Press equal to start addition
-        #10 equal_input = 0;
-        
-        // Simulate ALU finish signal
-        #20 ALU_out = 16'd68; // Expected result: 23 + 45 = 68
-        ALU_finish = 1;
-        #10 ALU_finish = 0;
-        
-        #50; // Wait for result to be displayed
-        
-        $display("Final Output: %d", display_output);
-        
-        #50 $finish; // End simulation
+        // Input: 12 + 34
+        press_digit(1);
+        press_digit(2);
+
+        operator_code = 2'b00; // ADD
+        #20;
+
+        press_digit(3);
+        press_digit(4);
+
+        equal_input = 1;
+        #10;
+        equal_input = 0;
+
+        wait (complete);
+        $display("Result (12 + 34) = %d", display_output);
+
+        #50;
+        reset = 1;
+        #20;
+        reset = 0;
+
+        // Input: 56 * 2
+        press_digit(5);
+        press_digit(6);
+
+        operator_code = 2'b10; // MUL
+        #20;
+
+        press_digit(2);
+
+        equal_input = 1;
+        #10;
+        equal_input = 0;
+
+        wait (complete);
+        $display("Result (56 * 2) = %d", display_output);
+
+        $finish;
     end
-endmodule
 
+endmodule
