@@ -83,6 +83,8 @@ module gencon (
             current_state <= GET_FIRST_NUM;
             last_state <= GET_FIRST_NUM;
             prev_keypad_input <= 0;
+            operand1 <= 0;
+            operand2 <= 0;
         end
 
         else begin
