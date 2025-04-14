@@ -72,8 +72,8 @@ module gencon (
     logic [15:0] operand1, operand2;
     
     // FSM: State Transitions
-    always_ff @(posedge clk or posedge nRST) begin
-        if (nRST) begin
+    always_ff @(posedge clk or negedge nRST) begin
+        if (!nRST) begin
             current_state <= GET_FIRST_NUM;
             last_state <= GET_FIRST_NUM;
         end
