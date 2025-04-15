@@ -6,7 +6,7 @@ module gencon (
     input logic [3:0] keypad_input,     // 4-bit Keypad input (single digit)
     input logic read_input,              // if 1, read whatever is in keypad input, if 0, don't read
     
-    input logic [2:0] operator_input,         // Operator Input [001 (add), 010 (subtract), 100 (multiplication)
+    input logic [2:0] operator_input,         // Operator Input [001 (add), 010 (subtract), 100 (multiplication)]
     input logic equal_input,            // Equal input to trigger addition
 
     output logic complete,              // Calculation completion flag
@@ -27,13 +27,15 @@ module gencon (
     logic [15:0] mult_in1;        // Operand 1 to mult
     logic [15:0] mult_in2;        // Operand 2 to mult
     logic start_mult;            // Start mult calculation signal
-    
-    logic [15:0] mult_out;
-    logic mult_finish;
+
+    // Signals Recieved from mult
+    logic [15:0] mult_out;       // mult finish signal
+    logic mult_finish;           // Result from mult
 
     // keypad check
     logic [3:0] prev_keypad_input;
 
+    // instantiate ALU
     addition add_calc(
         .clk(clk),
         .nRST(nRST),  // Reset signal (active low)
@@ -48,6 +50,7 @@ module gencon (
         .finish(ALU_finish)
     );
 
+    // instantiate multiply
     multiply mult_calc(
         .clk(clk),
         .nRST(nRST),
