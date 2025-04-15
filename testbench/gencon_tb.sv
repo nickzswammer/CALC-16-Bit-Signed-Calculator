@@ -101,6 +101,16 @@ module gencon_tb;
             // get operator 
 
             operator_input = operation;
+	    if (operation == 3'b001) begin
+		$display("Addition");
+	    end
+	    else if (operation == 3'b010) begin
+		$display("Subtraction");
+	    end
+	    else if (operation == 3'b100) begin
+		$display("Multiplication");
+	    end
+
             #20;
     
             // second number digit press 
@@ -136,11 +146,22 @@ module gencon_tb;
             wait (complete);
 	     
 	    $display("\n==========================================\n");
+
+	    operator_input = operation;
+	    if (operation == 3'b001) begin
+		$display("Addition");
+	    end
+	    else if (operation == 3'b010) begin
+		$display("Subtraction");
+	    end
+	    else if (operation == 3'b100) begin
+		$display("Multiplication");
+	    end
+
 	    $display("Operands: %d, %d\n", num_1, num_2);        
 	    $display("Result: %0d\n", display_output);
-	
             
-		if(expected_out[15:0] != display_output) begin
+	    if(expected_out[15:0] != display_output) begin
                 $display("[Time %0t]: Expected %d, got %d\n", $time, expected_out, display_output);
             end else begin
                 num_passed += 1;
