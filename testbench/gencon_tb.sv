@@ -179,16 +179,58 @@ module gencon_tb;
         test_number = 0;
         num_passed = 0;
 
-        apply_inputs(1, 3'b001, 1, 2);
-	apply_inputs(12, 3'b001, 31, 43);
-	apply_inputs(98, 3'b001, 101, 199); 
-	apply_inputs(4, 3'b010, 1, 3);
-	apply_inputs(59, 3'b010, 41, 18);
-	apply_inputs(2, 3'b010, 9, -7);
-	apply_inputs(1, 3'b010, 2, -1);
-	apply_inputs(1, 3'b100, 1, 1);
-	apply_inputs(51, 3'b100, 2, 102);
-	apply_inputs(11, 3'b100, 12, 132);
+	// Addition tests
+	apply_inputs(1,   3'b001, 2, 3);        // basic add
+	apply_inputs(99,  3'b001, 1000, 2345);  // large values
+	apply_inputs(50,  3'b001, -10, 10);     // neg + pos
+	apply_inputs(4,   3'b001, -25, -15);    // neg + neg
+	apply_inputs(2,   3'b001, 0, 0);        // zero + zero
+	apply_inputs(3,   3'b001, -32768, 32767); // max negative + max positive
+	
+	// Subtraction tests
+	apply_inputs(7,   3'b010, 5, 3);        // pos - pos (positive result)
+	apply_inputs(8,   3'b010, 3, 5);        // pos - pos (negative result)
+	apply_inputs(9,   3'b010, -3, -5);      // neg - neg (positive result)
+	apply_inputs(10,  3'b010, -5, -3);      // neg - neg (negative result)
+	apply_inputs(11,  3'b010, 32767, -32768); // extreme edge case
+	apply_inputs(12,  3'b010, 0, 99);       // zero - pos
+	apply_inputs(13,  3'b010, 99, 0);       // pos - zero
+	
+	// Multiplication tests
+	apply_inputs(14,  3'b100, 4, 3);        // basic mult
+	apply_inputs(15,  3'b100, -2, 5);       // neg * pos
+	apply_inputs(16,  3'b100, -3, -6);      // neg * neg
+	apply_inputs(17,  3'b100, 0, 100);      // 0 * pos
+	apply_inputs(18,  3'b100, 100, 0);      // pos * 0
+	apply_inputs(19,  3'b100, 1, -1);       // edge test
+	apply_inputs(20,  3'b100, 32767, 1);    // max positive
+	apply_inputs(21,  3'b100, -32768, 1);   // max negative
+	apply_inputs(22,  3'b100, 256, 256);    // potential overflow
+	
+	// Mixed type operand stress
+	apply_inputs(23,  3'b001, 1234, -5678);
+	apply_inputs(24,  3'b010, -999, 999);
+	apply_inputs(25,  3'b100, -12, 3000);
+	
+	// Identity tests
+	apply_inputs(26,  3'b001, -1, 1);       // cancel to 0
+	apply_inputs(27,  3'b010, 1, 1);        // cancel to 0
+	apply_inputs(28,  3'b100, 1, 1);        // 1 * 1
+	apply_inputs(29,  3'b100, -1, 1);       // -1 * 1
+	apply_inputs(30,  3'b100, -1, -1);      // -1 * -1
+	
+	// Large number coverage
+	apply_inputs(31,  3'b001, 16384, 16384); // sum near overflow
+	apply_inputs(32,  3'b010, -16384, 16384); // large diff
+	apply_inputs(33,  3'b100, 128, 256);    // medium mult
+	
+	// Zeros in all ops
+	apply_inputs(34,  3'b001, 0, -10);
+	apply_inputs(35,  3'b010, 0, -10);
+	apply_inputs(36,  3'b100, 0, -10);
+	apply_inputs(37,  3'b001, 0, 0);
+	apply_inputs(38,  3'b010, 0, 0);
+	apply_inputs(39,  3'b100, 0, 0);
 
         $display("Passed %0d/%0d tests.\n", num_passed, test_number);
 	$display("==========================================\n");
