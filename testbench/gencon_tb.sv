@@ -132,7 +132,7 @@ module gencon_tb;
             // Wait for completion
             wait (complete);
 
-	    $display("%s", $sformatf("Test#%d:", test_number));
+	    $display("%s", $sformatf("Test #%d: ", test_number));
 	     
 	    $display("\n==========================================\n");
 
