@@ -99,17 +99,7 @@ module gencon_tb;
     	    end
     
             // get operator 
-
-            operator_input = operation;
-	    if (operation == 3'b001) begin
-		$display("Addition");
-	    end
-	    else if (operation == 3'b010) begin
-		$display("Subtraction");
-	    end
-	    else if (operation == 3'b100) begin
-		$display("Multiplication");
-	    end
+	    operator_input = operation;
 
             #20;
     
@@ -137,8 +127,7 @@ module gencon_tb;
         	temp = temp % divisor;
                 divisor = divisor / 10;
 	    end
-
- 
+		
             // equal press
             equal_input = 1;
 		
