@@ -132,26 +132,26 @@ module gencon_tb;
             // Wait for completion
             wait (complete);
 
-	    $display("Test #%d: ", test_number);
+	    $display("%s", $sformatf("Test #%d:", test_number));
 	     
 	    $display("\n==========================================\n");
 
 	    operator_input = operation;
 	    if (operation == 3'b001) begin
-		$display("Addition");
+    		$display("%s", $sformatf("Operation: Addition"));
 	    end
 	    else if (operation == 3'b010) begin
-		$display("Subtraction");
+		$display("%s", $sformatf("Operation: Subtraction"));
 	    end
 	    else if (operation == 3'b100) begin
-		$display("Multiplication");
+		$display("%s", $sformatf("Operation: Multiplication"));
 	    end
 
-	    $display("Operands: %d, %d\n", num_1, num_2);        
-	    $display("Result: %0d\n", display_output);
+	    $display("%s", $sformatf("Operands: %0d, %0d", num_1, num_2));        
+	    $display("%s", $sformatf("Result: %0d", display_output));
             
 	    if(expected_out[15:0] != display_output) begin
-                $display("[Time %0t]: Expected %d, got %d\n", $time, expected_out, display_output);
+            	$display("%s", $sformatf("[Time %0t]: ❌ Expected %0d, got %0d", $time, expected_out, display_output));
             end else begin
                 num_passed += 1;
             end
