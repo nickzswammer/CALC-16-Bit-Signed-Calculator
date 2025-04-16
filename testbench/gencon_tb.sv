@@ -100,11 +100,9 @@ module gencon_tb;
     
             // get operator 
 	    operator_input = operation;
-
             #20;
     
             // second number digit press 
-
             temp = num_2;
 	    num_digits = 0;
 
@@ -133,6 +131,8 @@ module gencon_tb;
 		
             // Wait for completion
             wait (complete);
+
+	    $display("Test #%d: ", test_number);
 	     
 	    $display("\n==========================================\n");
 
