@@ -55,11 +55,8 @@ module gencon_tb;
             nRST = 1'b0;
             
             @(posedge clk);
-            @(posedge clk);
-            @(negedge clk);
             nRST = 1'b1;
-            @(negedge clk);
-            @(negedge clk);
+	    @(posedge clk);
         end
     endtask
 
