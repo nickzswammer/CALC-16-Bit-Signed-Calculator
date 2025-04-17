@@ -146,23 +146,33 @@ module gencon (
         case (current_state) 
             GET_FIRST_NUM: begin
                 if (read_input) begin
-                    operand1 <= (operand1 << 3) + (operand1 << 1) + {12'd0, keypad_input};
-                    $display("Input Keypad %b, Operand 1 %b", keypad_input, operand1);
+                    operand1 <= operand1 + {12'd0, keypad_input};
                 end
+            end
+
+            // multiply operator 1
+            SEND_TO_MULT_OP1: begin
+                mult_in1 <= operand1; // Send operands to ALU
+                mult_in2 <= 10;
+                    
+                start_mult <= 1;
+            end
+
+            // multiply operator 2
+            SEND_TO_MULT_OP2: begin
+                mult_in1 <= operand2; // Send operands to ALU
+                mult_in2 <= 10;
+                    
+                start_mult <= 1;
             end
     
             GET_SECOND_NUM: begin
                 if (read_input) begin
-                    operand2 <= (operand2 << 3) + (operand2 << 1) + {12'd0, keypad_input};
-                    $display("Input Keypad %b, Operand 2 %b", keypad_input, operand2);
-
+                    operand2 <= operand2 + {12'd0, keypad_input};
                 end
             end
         
             SEND_TO_ALU: begin
-                $display("Operand 1: %b", operand1);
-                $display("Operand 2: %b", operand2);
-                
                 // operator logic
                 if (operator_input == 3'b001) begin // addition
                     ALU_in1 <= operand1; // Send operands to ALU
