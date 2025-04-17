@@ -38,11 +38,11 @@ module gencon_tb;
     task press_digit(input [3:0] digit);
         begin
             keypad_input = digit;
-            #10;
+            @(posedge clk);
             read_input = 1;
-            #10;
+            @(posedge clk);
             read_input = 0;
-            #10;
+            @(posedge clk);
         end
     endtask
 
@@ -100,7 +100,7 @@ module gencon_tb;
     
             // get operator 
 	    operator_input = operation;
-            #20;
+            @(posedge clk);
     
             // second number digit press 
             temp = num_2;
@@ -159,7 +159,7 @@ module gencon_tb;
             end
 	    $display("==========================================\n");
     
-            #50;
+            @(posedge clk);
         end
     endtask
     
