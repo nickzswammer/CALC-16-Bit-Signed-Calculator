@@ -100,8 +100,6 @@ module gencon_tb;
     
             // get operator 
 	    operator_input = operation;
-            @(posedge clk);
-	    operator_input = 0;
     
             // second number digit press 
             temp = num_2;
