@@ -129,6 +129,8 @@ module gencon_tb;
 		
             // equal press
             equal_input = 1;
+	    @(posedge clk);
+	    equal_input = 0;
 		
             // Wait for completion
             wait (complete);
