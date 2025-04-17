@@ -147,7 +147,7 @@ module gencon (
             GET_FIRST_NUM: begin
                 if (read_input) begin
                     operand1 <= (operand1 << 3) + (operand1 << 1) + {12'd0, keypad_input};
-                    $display("Input Keypad %d, Operand 1 %b", keypad_input, operand1);
+                    $display("Input Keypad %b, Operand 1 %b", keypad_input, operand1);
                 end
             end
     
