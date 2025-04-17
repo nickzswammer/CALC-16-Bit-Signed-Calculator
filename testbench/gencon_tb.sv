@@ -150,6 +150,7 @@ module gencon_tb;
 	    $display("%s", $sformatf("Operands: %0d, %0d", num_1, num_2));      
 	    if(display_output[15]) begin
 		$write("-");
+	    end
 		
 	    $display("%s", $sformatf("Result: %0d", display_output[14:0]));
             
