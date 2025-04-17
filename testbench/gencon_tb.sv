@@ -42,6 +42,7 @@ module gencon_tb;
             read_input = 1;
             @(posedge clk);
             read_input = 0;
+	    keypad_input = 0;
             @(posedge clk);
         end
     endtask
