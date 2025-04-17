@@ -189,6 +189,7 @@ module gencon (
             SHOW_RESULT_ALU: begin
                 complete <= 1;  // Indicate calculation done
                 display_output <= ALU_out;  // Store ALU result in display
+                $display("ALU_OUT: %b", ALU_out);
             end
 
             SHOW_RESULT_MULT: begin
