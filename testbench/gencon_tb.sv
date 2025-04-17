@@ -147,8 +147,11 @@ module gencon_tb;
 		$display("%s", $sformatf("Operation: Multiplication"));
 	    end
 
-	    $display("%s", $sformatf("Operands: %0d, %0d", num_1, num_2));        
-	    $display("%s", $sformatf("Result: %0d", display_output));
+	    $display("%s", $sformatf("Operands: %0d, %0d", num_1, num_2));      
+	    if(display_output[15]) begin
+		$write("-");
+		
+	    $display("%s", $sformatf("Result: %0d", display_output[14:0]));
             
 	    if(expected_out[15:0] != display_output) begin
             	$display("%s", $sformatf("[Time %0t]: ❌ Expected %0d, got %0d", $time, expected_out, display_output));
