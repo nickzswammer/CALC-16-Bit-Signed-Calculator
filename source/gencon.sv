@@ -154,6 +154,8 @@ module gencon (
             GET_SECOND_NUM: begin
                 if (read_input) begin
                     operand2 <= (operand2 << 3) + (operand2 << 1) + {12'd0, keypad_input};
+                    $display("Input Keypad %b, Operand 2 %b", keypad_input, operand2);
+
                 end
             end
         
