@@ -146,7 +146,7 @@ module gencon (
 
                     else if (getting_op2) begin
                         next_state = GET_SECOND_NUM;
-                        next_getting_op2 <= 0;
+                        next_getting_op2 = 0;
                     end
                     next_state = SHOW_RESULT_MULT;
                 end
