@@ -35,6 +35,10 @@ module gencon (
     // keypad check
     logic [3:0] prev_keypad_input;
 
+    // getting operator multiplier logic states
+    logic getting_op1;
+    logic getting_op2;
+
     // instantiate ALU
     addition add_calc(
         .clk(clk),
@@ -82,13 +86,15 @@ module gencon (
     // FSM: State Transitions
     always_ff @(posedge clk or negedge nRST) begin
         if (!nRST) begin
-            current_state <= GET_FIRST_NUM;
-            last_state <= GET_FIRST_NUM;
+            current_state <= SEND_TO_MULT_OP1;
+            last_state <= SEND_TO_MULT_OP1;
             prev_keypad_input <= 0;
             operand1 <= 0;
             operand2 <= 0;
             complete <= 0;
             display_output <= 0;
+            getting_op1 <= 0;
+            getting_op2 <= 0;
 
         end
 
@@ -103,19 +109,19 @@ module gencon (
         case (current_state)
             GET_FIRST_NUM:
                 if ((operator_input == 3'b001 || operator_input == 3'b010 || operator_input == 3'b100)) begin
-                    next_state = GET_SECOND_NUM;
+                    next_state = SEND_TO_MULT_OP2;
                 end 
                 else begin                     
-                    next_state = GET_FIRST_NUM;
+                    next_state = SEND_TO_MULT_OP1;
                 end
             
             GET_SECOND_NUM:
                 if (equal_input)
                     next_state = SEND_TO_ALU;
                 else
-                    next_state = GET_SECOND_NUM;
+                    next_state = SEND_TO_MULT_OP1;
             
-            SEND_TO_ALU:
+            SEND_TO_ALU, SEND_TO_MULT_OP1, SEND_TO_MULT_OP2:
                 next_state = WAIT_ALU;  // Move to ALU wait state
             
             WAIT_ALU:
@@ -124,6 +130,15 @@ module gencon (
                 end
             
                 else if (mult_finish) begin
+                    if (getting_op1) begin
+                        next_state = GET_FIRST_NUM;
+                        getting_op1 <= 0;
+                    end
+
+                    else if (getting_op2) begin
+                        next_state = GET_SECOND_NUM;
+                        getting_op2 <= 0;
+                    end
                     next_state = SHOW_RESULT_MULT;
                 end
             
@@ -145,31 +160,33 @@ module gencon (
     always_ff @(posedge clk or negedge nRST) begin
         case (current_state) 
             GET_FIRST_NUM: begin
-                if (read_input) begin
-                    operand1 <= operand1 + {12'd0, keypad_input};
-                end
+                operand1 <= operand1 + {12'd0, keypad_input};
             end
 
             // multiply operator 1
             SEND_TO_MULT_OP1: begin
-                mult_in1 <= operand1; // Send operands to ALU
-                mult_in2 <= 10;
-                    
+                if (read_input) begin
+                    mult_in1 <= operand1; // Send operands to ALU
+                    mult_in2 <= 10;
+                end
+
+                getting_op1 <= 1;
                 start_mult <= 1;
             end
 
             // multiply operator 2
             SEND_TO_MULT_OP2: begin
-                mult_in1 <= operand2; // Send operands to ALU
-                mult_in2 <= 10;
-                    
+                if (read_input) begin
+                    mult_in1 <= operand2; // Send operands to ALU
+                    mult_in2 <= 10;
+                end
+                
+                getting_op2 <= 1;
                 start_mult <= 1;
             end
     
             GET_SECOND_NUM: begin
-                if (read_input) begin
-                    operand2 <= operand2 + {12'd0, keypad_input};
-                end
+                operand2 <= operand2 + {12'd0, keypad_input};
             end
         
             SEND_TO_ALU: begin
