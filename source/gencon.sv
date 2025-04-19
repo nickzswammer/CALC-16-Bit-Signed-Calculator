@@ -39,6 +39,8 @@ module gencon (
     logic getting_op1;
     logic getting_op2;
 
+    logic next_getting_op1, next_getting_op2;
+
     // instantiate ALU
     addition add_calc(
         .clk(clk),
@@ -103,11 +105,16 @@ module gencon (
         else begin
             last_state <= current_state;
             current_state <= next_state;
+            getting_op1 <= next_getting_op1;
+            getting_op2 <= next_getting_op2;
         end
     end
     
     // FSM: State Logic
     always_comb begin
+        next_getting_op1 = getting_op1;
+        next_getting_op2 = getting_op2;
+
         case (current_state)
             GET_FIRST_NUM:
                 if ((operator_input == 3'b001 || operator_input == 3'b010 || operator_input == 3'b100)) begin
@@ -134,12 +141,12 @@ module gencon (
                 else if (mult_finish) begin
                     if (getting_op1) begin
                         next_state = GET_FIRST_NUM;
-                        getting_op1 <= 0;
+                        next_getting_op1 = 0;
                     end
 
                     else if (getting_op2) begin
                         next_state = GET_SECOND_NUM;
-                        getting_op2 <= 0;
+                        next_getting_op2 <= 0;
                     end
                     next_state = SHOW_RESULT_MULT;
                 end
