@@ -117,7 +117,6 @@ module gencon (
 
         case (current_state)
             GET_FIRST_NUM:
-                $display("In GET_FIRST_NUM State");
                 if ((operator_input == 3'b001 || operator_input == 3'b010 || operator_input == 3'b100)) begin
                     next_state = SEND_TO_MULT_OP2;
                 end 
@@ -126,20 +125,15 @@ module gencon (
                 end
             
             GET_SECOND_NUM:
-                $display("In GET_SECOND_NUM State");
                 if (equal_input)
                     next_state = SEND_TO_ALU;
                 else
                     next_state = SEND_TO_MULT_OP1;
             
             SEND_TO_ALU:
-                $display("In SEND_TO_ALU State");
-    
                 next_state = WAIT_ALU;  // Move to ALU wait state
 
             SEND_TO_MULT_OP1:
-                $display("In SEND_TO_MULT_OP1 State");
-
                 if (getting_op1) begin
                     next_state = WAIT_ALU;
                 end
@@ -148,8 +142,6 @@ module gencon (
                 end
             
             SEND_TO_MULT_OP2:
-                $display("In SEND_TO_MULT_OP2 State");
-
                 if (getting_op2) begin
                     next_state = WAIT_ALU;
                 end
@@ -158,8 +150,6 @@ module gencon (
                 end
             
             WAIT_ALU:
-                $display("In WAIT_ALU State");
-
                 if (ALU_finish) begin
                     next_state = SHOW_RESULT_ALU;
                 end
@@ -182,8 +172,6 @@ module gencon (
                 end
                 
             SHOW_RESULT_ALU, SHOW_RESULT_MULT:
-                $display("In SHOW_RESULT_ALU, MULT State");
-
                 next_state = GET_FIRST_NUM; // Reset after showing result
             
             default:
