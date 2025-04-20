@@ -207,7 +207,6 @@ module gencon (
 
             // multiply operator 2
             SEND_TO_MULT_OP2: begin
-                $display("Current State: SEND TO MULT OP2");
 
                 if (read_input) begin
                     mult_in1 <= operand2; // Send operands to ALU
