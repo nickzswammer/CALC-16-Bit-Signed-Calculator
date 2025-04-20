@@ -227,7 +227,7 @@ module gencon_tb;
         $finish;
     end
 
-	function string state_to_string(input state_t s);
+function string state_to_string(input state_t s);
     case (s)
         GET_FIRST_NUM:       return "GET_FIRST_NUM";
         GET_SECOND_NUM:      return "GET_SECOND_NUM";
@@ -240,6 +240,7 @@ module gencon_tb;
         default:             return "UNKNOWN_STATE";
     endcase
 endfunction
+
 
 
 endmodule
