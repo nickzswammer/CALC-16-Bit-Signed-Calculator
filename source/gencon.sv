@@ -177,10 +177,10 @@ module gencon (
                 if (read_input) begin
                     mult_in1 <= operand1; // Send operands to ALU
                     mult_in2 <= 10;
+                    getting_op1 <= 1;
+                    start_mult <= 1;
                 end
 
-                getting_op1 <= 1;
-                start_mult <= 1;
             end
 
             // multiply operator 2
@@ -188,10 +188,10 @@ module gencon (
                 if (read_input) begin
                     mult_in1 <= operand2; // Send operands to ALU
                     mult_in2 <= 10;
+                    getting_op2 <= 1;
+                    start_mult <= 1;
                 end
                 
-                getting_op2 <= 1;
-                start_mult <= 1;
             end
     
             GET_SECOND_NUM: begin
