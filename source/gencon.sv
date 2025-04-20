@@ -130,8 +130,24 @@ module gencon (
                 else
                     next_state = SEND_TO_MULT_OP1;
             
-            SEND_TO_ALU, SEND_TO_MULT_OP1, SEND_TO_MULT_OP2:
+            SEND_TO_ALU:
                 next_state = WAIT_ALU;  // Move to ALU wait state
+
+            SEND_TO_MULT_OP1:
+                if (getting_op1) begin
+                    next_state = WAIT_ALU;
+                end
+                else begin
+                    next_state = SEND_TO_MULT_OP1;
+                end
+            
+            SEND_TO_MULT_OP2:
+                if (getting_op2) begin
+                    next_state = WAIT_ALU;
+                end
+                else begin
+                    next_state = SEND_TO_MULT_OP2;
+                end
             
             WAIT_ALU:
                 if (ALU_finish) begin
