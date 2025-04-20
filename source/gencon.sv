@@ -164,7 +164,10 @@ module gencon (
                         next_state = GET_SECOND_NUM;
                         next_getting_op2 = 0;
                     end
-                    next_state = SHOW_RESULT_MULT;
+
+                    else begin
+                        next_state = SHOW_RESULT_MULT;
+                    end
                 end
             
                 else begin
