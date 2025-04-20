@@ -171,6 +171,7 @@ module gencon_tb;
 
         test_number = 0;
         num_passed = 0;
+	    
 
 	    /*
 	// Addition tests (3'b001)
@@ -215,7 +216,9 @@ module gencon_tb;
 	    */
 
 
-	// test case
+			    $monitor("[Time %0t] State: %s", $time, state_to_string(dut.current_state));
+
+
 	    apply_inputs(11, 3'b001, 23, 34);
 
         $display("Passed %0d/%0d tests.\n", num_passed, test_number);
