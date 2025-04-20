@@ -227,4 +227,19 @@ module gencon_tb;
         $finish;
     end
 
+	function string state_to_string(input state_t s);
+    case (s)
+        GET_FIRST_NUM:       return "GET_FIRST_NUM";
+        GET_SECOND_NUM:      return "GET_SECOND_NUM";
+        SEND_TO_ALU:         return "SEND_TO_ALU";
+        SEND_TO_MULT_OP1:    return "SEND_TO_MULT_OP1";
+        SEND_TO_MULT_OP2:    return "SEND_TO_MULT_OP2";
+        WAIT_ALU:            return "WAIT_ALU";
+        SHOW_RESULT_ALU:     return "SHOW_RESULT_ALU";
+        SHOW_RESULT_MULT:    return "SHOW_RESULT_MULT";
+        default:             return "UNKNOWN_STATE";
+    endcase
+endfunction
+
+
 endmodule
