@@ -216,10 +216,7 @@ module gencon_tb;
 	    */
 
 
-	    $monitor("[Time %0t] State: %s", $time, state_to_string(dut.current_state));
-
-
-	    apply_inputs(11, 3'b001, 23, 34);
+	apply_inputs(11, 3'b001, 23, 34);
 
         $display("Passed %0d/%0d tests.\n", num_passed, test_number);
 	$display("==========================================\n");
@@ -229,19 +226,5 @@ module gencon_tb;
 
 
 endmodule
-
-function string state_to_string(input logic [2:0] s);
-    case (s)
-        3'b000: return "GET_FIRST_NUM";
-        3'b001: return "GET_SECOND_NUM";
-        3'b010: return "SEND_TO_ALU";
-        3'b011: return "SEND_TO_MULT_OP1";
-        3'b100: return "SEND_TO_MULT_OP2";
-        3'b101: return "WAIT_ALU";
-        3'b110: return "SHOW_RESULT_ALU";
-        3'b111: return "SHOW_RESULT_MULT";
-        default: return "UNKNOWN_STATE";
-    endcase
-endfunction
 
 
