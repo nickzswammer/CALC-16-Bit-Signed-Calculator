@@ -185,11 +185,14 @@ module gencon (
     always_ff @(posedge clk or negedge nRST) begin
         case (current_state) 
             GET_FIRST_NUM: begin
+                $display("Current State: GET_FIRST_NUM");
                 operand1 <= operand1 + {12'd0, keypad_input};
             end
 
             // multiply operator 1
             SEND_TO_MULT_OP1: begin
+                $display("Current State: SEND TO MULT OP1");
+                
                 if (read_input) begin
                     mult_in1 <= operand1; // Send operands to ALU
                     mult_in2 <= 10;
@@ -201,6 +204,8 @@ module gencon (
 
             // multiply operator 2
             SEND_TO_MULT_OP2: begin
+                $display("Current State: SEND TO MULT OP2");
+
                 if (read_input) begin
                     mult_in1 <= operand2; // Send operands to ALU
                     mult_in2 <= 10;
@@ -211,11 +216,14 @@ module gencon (
             end
     
             GET_SECOND_NUM: begin
+                $display("Current State: GET SECOND NUM");
+
                 operand2 <= operand2 + {12'd0, keypad_input};
             end
         
             SEND_TO_ALU: begin
-                $display("Operand 1: %d, Operand 2: %d", operand1, operand2);
+                $display("Current State: SENDTOALU");
+                
                 // operator logic
                 if (operator_input == 3'b001) begin // addition
                     ALU_in1 <= operand1; // Send operands to ALU
@@ -241,16 +249,21 @@ module gencon (
             end
         
             WAIT_ALU: begin
+                $display("Current State: WAIT_ALU");
+                
                 start_ALU <= 0; // Stop ALU start signal
                 start_mult <= 0;
             end
         
             SHOW_RESULT_ALU: begin
+                $display("Current State: SHOWRESULTALU");
+                
                 complete <= 1;  // Indicate calculation done
                 display_output <= ALU_out;  // Store ALU result in display
             end
 
             SHOW_RESULT_MULT: begin
+                $display("Current State: SHOW RESULT MULT");
                 complete <= 1;  // Indicate calculation done
                 display_output <= mult_out;  // Store ALU result in display
             end
