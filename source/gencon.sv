@@ -186,7 +186,7 @@ module gencon (
                     $display("In GET_SECOND_NUM");
                     $display("======= Adding Shifted operand with keypad input =======");
                     $display("operand2 before: %d, keypad_input: %d", operand2, latched_keypad_input);
-                    operand2 <= operand2 + {12'd0, keypad_input};
+                    operand2 <= operand2 + {12'd0, latched_keypad_input};
                 end
 
                 SEND_TO_ALU: begin
