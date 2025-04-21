@@ -37,6 +37,8 @@ module gencon_tb;
     // Task to simulate a digit keypress
     task press_digit(input [3:0] digit);
         begin
+		        // Wait until FSM is in a state that accepts digits
+	    wait (dut.tb_current_state == dut.SEND_MULT_OP1_START || dut.tb_current_state == dut.SEND_MULT_OP2_START);
             keypad_input = digit;
             @(posedge clk);
             read_input = 1;
@@ -96,6 +98,7 @@ module gencon_tb;
 		press_digit(digit[3:0]);
         	temp = temp % divisor;
                 divisor = divisor / 10;
+		    
     	    end
     
             // get operator 
