@@ -157,16 +157,26 @@ module gencon (
                     $display("In SEND_MULT_OP2_START");
                     
                     if (read_input) begin
+                        $display("===============================");
+                        $display("Input detected: %d", keypad_input);
+                        
+                        latched_keypad_input <= keypad_input;
                         mult_in1 <= operand2;
                         mult_in2 <= 16'd10;
                         start_mult <= 1;
                         getting_op2 <= 1;
+                        $display("Sent Operand 2: %d to be shifted left", operand2);
+                        
                     end
                 end
 
                 WAIT_MULT_OP2: begin
                     $display("In WAIT_MULT_OP2");
+                    
+                    $display("Waiting for multiplier to finish...");
                     if (mult_finish) begin
+                        $display("Multiplier Finished. Output: %d", mult_out);
+                        $display("===============================");
                         operand2 <= mult_out;
                         getting_op2 <= 0;
                     end
@@ -174,6 +184,8 @@ module gencon (
 
                 GET_SECOND_NUM: begin
                     $display("In GET_SECOND_NUM");
+                    $display("======= Adding Shifted operand with keypad input =======");
+                    $display("operand2 before: %d, keypad_input: %d", operand2, latched_keypad_input);
                     operand2 <= operand2 + {12'd0, keypad_input};
                 end
 
