@@ -1,3 +1,6 @@
+`include "gencon_defs.sv"
+
+
 module gencon_tb;
 
     // Testbench signals
