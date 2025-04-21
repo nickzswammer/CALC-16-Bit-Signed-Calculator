@@ -32,20 +32,6 @@ module gencon (
     // Internal state flags
     logic getting_op1, getting_op2;
 
-    // FSM states
-    typedef enum logic [3:0] {
-        SEND_MULT_OP1_START = 4'b0000,
-        WAIT_MULT_OP1       = 4'b0001,
-        GET_FIRST_NUM       = 4'b0010,
-        SEND_MULT_OP2_START = 4'b0011,
-        WAIT_MULT_OP2       = 4'b0100,
-        GET_SECOND_NUM      = 4'b0101,
-        SEND_TO_ALU         = 4'b0110,
-        WAIT_ALU            = 4'b0111,
-        SHOW_RESULT_ALU     = 4'b1000,
-        SHOW_RESULT_MULT    = 4'b1001
-    } state_t;
-
     state_t current_state, next_state;
 
     logic [15:0] operand1, operand2;
