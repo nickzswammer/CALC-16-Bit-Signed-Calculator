@@ -107,6 +107,7 @@ module gencon (
     
     // FSM: State Logic
     always_comb begin
+        $display("Current State: %d", current_state);
         next_getting_op1 = getting_op1;
         next_getting_op2 = getting_op2;
 
