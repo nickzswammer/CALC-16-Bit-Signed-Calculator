@@ -154,6 +154,8 @@ module gencon (
                 end
 
                 SEND_MULT_OP2_START: begin
+                    $display("In SEND_MULT_OP2_START");
+                    
                     if (read_input) begin
                         mult_in1 <= operand2;
                         mult_in2 <= 16'd10;
