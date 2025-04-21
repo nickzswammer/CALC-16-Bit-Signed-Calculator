@@ -112,15 +112,12 @@ module gencon (
 
         case (current_state)
             SEND_TO_MULT_OP1:
-                
                 if (getting_op1) begin
                     next_state = WAIT_ALU;
                 end
                 else begin
                     next_state = SEND_TO_MULT_OP1;
                 end
-                $display("INSIDE MULT OP 1");
-            
             
             GET_FIRST_NUM:
                 if ((operator_input == 3'b001 || operator_input == 3'b010 || operator_input == 3'b100)) begin
