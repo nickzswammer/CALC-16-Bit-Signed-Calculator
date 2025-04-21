@@ -269,6 +269,7 @@ module gencon (
                 start_mult <= 0;
 
                 if (mult_finish) begin
+                    $display("Multiplier Output: %d", mult_finish);
                     if (getting_op1) begin
                         operand1 <= mult_out;
                     end
