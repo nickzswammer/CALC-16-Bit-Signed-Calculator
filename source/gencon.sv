@@ -156,11 +156,13 @@ module gencon (
             
                 else if (mult_finish) begin
                     if (getting_op1) begin
+                        operand1 = mult_out;
                         next_state = GET_FIRST_NUM;
                         next_getting_op1 = 0;
                     end
 
                     else if (getting_op2) begin
+                        operand2 = mult_out;
                         next_state = GET_SECOND_NUM;
                         next_getting_op2 = 0;
                     end
