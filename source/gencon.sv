@@ -11,6 +11,8 @@ module gencon (
 
     output logic complete,
     output logic [15:0] display_output
+    output state_t tb_current_state;  // ← add this in port list
+
 );
 
     logic [3:0] latched_keypad_input;
