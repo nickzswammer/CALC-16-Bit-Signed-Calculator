@@ -245,6 +245,15 @@ module gencon (
                 start_ALU <= 0; // Stop ALU start signal
                 start_mult <= 0;
 
+                $display("========");
+                $display("Waiting for ALU to finish");
+                $display("mult_finish: %d", mult_finish);
+                $display("mult_out: %d", mult_out);
+                $display("getting_op1: %d", getting_op1);
+                $display("operand1: %d", operand1);
+                $display("operand1: %d", operand1);
+                $display("========");
+
                 if (mult_finish) begin
                     if (getting_op1) begin
                         operand1 <= mult_out;
