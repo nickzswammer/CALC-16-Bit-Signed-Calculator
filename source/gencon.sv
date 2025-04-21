@@ -181,6 +181,8 @@ module gencon (
                         ALU_in1 <= operand1;
                         ALU_in2 <= operand2;
                         addOrSub <= (operator_input == 3'b010);
+                        $display("Addition (0) or Subtraction (1): ", addOrSub);
+                        $display("Operand1 + Operand 2, %d + %d: ", operand1, operand2);
                         start_ALU <= 1;
                     end else if (operator_input == 3'b100) begin
                         mult_in1 <= operand1;
