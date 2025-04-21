@@ -1,4 +1,7 @@
 // gencon_defs.sv
+`ifndef GENCON_DEFS_SV
+`define GENCON_DEFS_SV
+
 typedef enum logic [3:0] {
     SEND_MULT_OP1_START = 4'b0000,
     WAIT_MULT_OP1       = 4'b0001,
@@ -11,3 +14,5 @@ typedef enum logic [3:0] {
     SHOW_RESULT_ALU     = 4'b1000,
     SHOW_RESULT_MULT    = 4'b1001
 } state_t;
+
+`endif
