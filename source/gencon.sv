@@ -73,6 +73,7 @@ module gencon (
             current_state <= next_state;
         end
     end
+    /* verilator lint_off CASEINCOMPLETE */
 
     // FSM logic
     always_comb begin
@@ -110,6 +111,8 @@ module gencon (
             SHOW_RESULT_ALU, SHOW_RESULT_MULT:
                 next_state = SEND_MULT_OP1_START;
         endcase
+        /* verilator lint_on CASEINCOMPLETE */
+
     end
 
     // Output + operand logic
