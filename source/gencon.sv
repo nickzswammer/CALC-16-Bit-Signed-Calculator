@@ -183,6 +183,7 @@ module gencon (
     always_ff @(posedge clk or negedge nRST) begin
         case (current_state) 
             GET_FIRST_NUM: begin
+                $display("Adding Operand 1: %d with keypad input: %d", operand1, keypad_input);
                 operand1 <= operand1 + {12'd0, keypad_input};
             end
 
@@ -194,7 +195,7 @@ module gencon (
                     mult_in2 <= 16'd10;
                     getting_op1 <= 1;
                     start_mult <= 1;
-                    $display("Sent Input: %d to multiplier with Operand 1: %d", keypad_input, operand1);
+                    $display("Sent Operand 1: %d to multiplier to be shifted left one: %d", operand1);
                     
                 end
 
@@ -202,7 +203,6 @@ module gencon (
 
             // multiply operator 2
             SEND_TO_MULT_OP2: begin
-
                 if (read_input) begin
                     mult_in1 <= operand2; // Send operands to ALU
                     mult_in2 <= 16'd10;
