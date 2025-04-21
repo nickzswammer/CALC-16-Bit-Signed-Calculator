@@ -82,7 +82,7 @@ module gencon (
         SHOW_RESULT_MULT   = 3'b111   // Displaying result from ALU
     } state_t;
     
-    state_t current_state, next_state, last_state;
+    state_t current_state, next_state
     
     // Internal Registers
     logic [15:0] operand1, operand2;
@@ -91,7 +91,6 @@ module gencon (
     always_ff @(posedge clk or negedge nRST) begin
         if (!nRST) begin
             current_state <= SEND_TO_MULT_OP1;
-            last_state <= SEND_TO_MULT_OP1;
             prev_keypad_input <= 0;
             operand1 <= 0;
             operand2 <= 0;
@@ -103,7 +102,6 @@ module gencon (
         end
 
         else begin
-            last_state <= current_state;
             current_state <= next_state;
             getting_op1 <= next_getting_op1;
             getting_op2 <= next_getting_op2;
@@ -116,6 +114,14 @@ module gencon (
         next_getting_op2 = getting_op2;
 
         case (current_state)
+            SEND_TO_MULT_OP1:
+                if (getting_op1) begin
+                    next_state = WAIT_ALU;
+                end
+                else begin
+                    next_state = SEND_TO_MULT_OP1;
+                end
+            
             GET_FIRST_NUM:
                 if ((operator_input == 3'b001 || operator_input == 3'b010 || operator_input == 3'b100)) begin
                     next_state = SEND_TO_MULT_OP2;
@@ -129,18 +135,7 @@ module gencon (
                     next_state = SEND_TO_ALU;
                 else
                     next_state = SEND_TO_MULT_OP1;
-            
-            SEND_TO_ALU:
-                next_state = WAIT_ALU;  // Move to ALU wait state
 
-            SEND_TO_MULT_OP1:
-                if (getting_op1) begin
-                    next_state = WAIT_ALU;
-                end
-                else begin
-                    next_state = SEND_TO_MULT_OP1;
-                end
-            
             SEND_TO_MULT_OP2:
                 if (getting_op2) begin
                     next_state = WAIT_ALU;
@@ -148,6 +143,9 @@ module gencon (
                 else begin
                     next_state = SEND_TO_MULT_OP2;
                 end
+            
+            SEND_TO_ALU:
+                next_state = WAIT_ALU;  // Move to ALU wait state
             
             WAIT_ALU:
                 if (ALU_finish) begin
@@ -258,10 +256,16 @@ module gencon (
 
                 if (mult_finish) begin
                     if (getting_op1) begin
+                        $display("======= INSIDE MULT FINISH WAIT_ALU =======");
+                        $display("Operand1 Before: Decimal: %d, Binary: %b", operand1, operand1); 
                         operand1 <= mult_out;
+                        $display("Operand1 After: Decimal: %d, Binary: %b", operand1, operand1);                     
                     end
                     else if (getting_op2) begin
+                        $display("======= INSIDE MULT FINISH WAIT_ALU =======");
+                        $display("Operand2 Before: Decimal: %d, Binary: %b", operand2, operand2); 
                         operand2 <= mult_out;
+                        $display("Operand2 After: Decimal: %d, Binary: %b", operand2, operand2);                       
                     end
                 end
             end
