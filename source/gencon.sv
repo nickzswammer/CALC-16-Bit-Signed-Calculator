@@ -150,17 +150,24 @@ module gencon (
                 end
             
                 else if (mult_finish) begin
+                    $display("Multiplier Finished.");
                     if (getting_op1) begin
+                        $display("Recognize Getting Op1.");
+                        
                         next_state = GET_FIRST_NUM;
                         next_getting_op1 = 0;
                     end
 
                     else if (getting_op2) begin
+                        $display("Recognize Getting Op2.");
+                        
                         next_state = GET_SECOND_NUM;
                         next_getting_op2 = 0;
                     end
 
                     else begin
+                        $display("Recognize Showing Result.");
+                        
                         next_state = SHOW_RESULT_MULT;
                     end
                 end
