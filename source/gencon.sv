@@ -87,6 +87,7 @@ module gencon (
     // FSM: State Transitions
     always_ff @(posedge clk or negedge nRST) begin
         if (!nRST) begin
+            $display(" ===== RESET BEGIN =====");
             current_state <= SEND_TO_MULT_OP1;
             operand1 <= 0;
             operand2 <= 0;
@@ -187,7 +188,6 @@ module gencon (
 
             // multiply operator 1
             SEND_TO_MULT_OP1: begin
-                $display(
                 if (read_input) begin
                     mult_in1 <= operand1; // Send operands to ALU
                     mult_in2 <= 10;
