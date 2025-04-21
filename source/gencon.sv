@@ -12,6 +12,8 @@ module gencon (
     output logic complete,
     output logic [15:0] display_output
 );
+
+    logic [3:0] latched_keypad_input;
     // ALU control
     logic [15:0] ALU_in1, ALU_in2;
     logic addOrSub, start_ALU;
@@ -129,6 +131,8 @@ module gencon (
                     if (read_input) begin
                         $display("===============================");
                         $display("Input detected: %d", keypad_input);
+                        latched_keypad_input <= keypad_input;
+                        
                         mult_in1 <= operand1;
                         mult_in2 <= 16'd10;
                         start_mult <= 1;
@@ -149,8 +153,8 @@ module gencon (
 
                 GET_FIRST_NUM: begin
                     $display("======= Adding Shifted operand with keypad input =======");
-                    $display("operand1 before: %d, keypad_input: %d", operand1, keypad_input);
-                    operand1 <= operand1 + {12'd0, keypad_input};
+                    $display("operand1 before: %d, keypad_input: %d", operand1, latched_keypad_input);
+                    operand1 <= operand1 + {12'd0, latched_keypad_input};
                     $display("operand1 after: %d", operand1);
                 end
 
