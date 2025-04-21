@@ -9,8 +9,8 @@ module gencon_tb;
     logic complete;
     logic [15:0] display_output;
     logic read_input;
-    logic [3:0] tb_current_state;
-
+    dut.state_t tb_current_state;
+	
     // TB-only variables
     int test_number;
     int num_passed;
