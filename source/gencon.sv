@@ -1,293 +1,188 @@
+// Refactored gencon module with proper multiplier operand handling via FSM state split
+
 module gencon (
-    input logic clk,                
-    input logic nRST,    
+    input logic clk,
+    input logic nRST,
 
-    // Operand, Operator, and Result Input
-    input logic [3:0] keypad_input,     // 4-bit Keypad input (single digit)
-    input logic read_input,              // if 1, read whatever is in keypad input, if 0, don't read
-    
-    input logic [2:0] operator_input,         // Operator Input [001 (add), 010 (subtract), 100 (multiplication)]
-    input logic equal_input,            // Equal input to trigger addition
+    input logic [3:0] keypad_input,
+    input logic read_input,
+    input logic [2:0] operator_input,
+    input logic equal_input,
 
-    output logic complete,              // Calculation completion flag
-    output logic [15:0] display_output // 16-bit output to display result
-
+    output logic complete,
+    output logic [15:0] display_output
 );
-    // Signals to Send to ALU (ONLY ADDITION AND SUBTRACTION)
-    logic [15:0] ALU_in1;        // Operand 1 to ALU
-    logic [15:0] ALU_in2;        // Operand 2 to ALU
-    logic addOrSub; // 0 for add, 1 for subtraction
-    logic start_ALU;            // Start ALU calculation signal
-    
-    // Signals Recieved from ALU
-    logic ALU_finish;             // ALU finish signal
-    logic [15:0] ALU_out;         // Result from ALU
+    // ALU control
+    logic [15:0] ALU_in1, ALU_in2;
+    logic addOrSub, start_ALU;
+    logic ALU_finish;
+    logic [15:0] ALU_out;
 
-    // Signals to Send to Multiplier
-    logic [15:0] mult_in1;        // Operand 1 to mult
-    logic [15:0] mult_in2;        // Operand 2 to mult
-    logic start_mult;            // Start mult calculation signal
+    // Multiplier control
+    logic [15:0] mult_in1, mult_in2;
+    logic start_mult;
+    logic [15:0] mult_out;
+    logic mult_finish;
 
-    // Signals Recieved from mult
-    logic [15:0] mult_out;       // mult finish signal
-    logic mult_finish;           // Result from mult
+    // Internal state flags
+    logic getting_op1, getting_op2;
 
-    // getting operator multiplier logic states
-    logic getting_op1;
-    logic getting_op2;
-
-    logic next_getting_op1, next_getting_op2;
-
-    // instantiate ALU
-    addition add_calc(
-        .clk(clk),
-        .nRST(nRST),  // Reset signal (active low)
-
-        .INn1(ALU_in1),
-        .INn2(ALU_in2),
-        .sub(addOrSub),
-        
-        .start(start_ALU), // to tell ALU to start
-        
-        .out(ALU_out),
-        .finish(ALU_finish)
-    );
-
-    // instantiate multiply
-    multiply mult_calc(
-        .clk(clk),
-        .nRST(nRST),
-
-        .INn1(mult_in1),
-        .INn2(mult_in2),
-        
-        .start(start_mult), // to tell mult to start
-        
-        .out(mult_out),
-        .finish(mult_finish)
-    );
-    
-    // State Definitions
-    typedef enum logic [2:0] {
-        SEND_TO_MULT_OP1   = 3'b000,  // Send operands to ALU
-        GET_FIRST_NUM = 3'b001,  // Getting the first operand
-        SEND_TO_MULT_OP2   = 3'b010,  // Send operands to ALU
-        GET_SECOND_NUM = 3'b011, // Getting the second operand
-        SEND_TO_ALU   = 3'b100,  // Send operands to ALU
-        WAIT_ALU      = 3'b101,  // Wait for ALU to finish
-        SHOW_RESULT_ALU   = 3'b110,   // Displaying result from ALU
-        SHOW_RESULT_MULT   = 3'b111   // Displaying result from ALU
+    // FSM states
+    typedef enum logic [3:0] {
+        SEND_MULT_OP1_START = 4'b0000,
+        WAIT_MULT_OP1       = 4'b0001,
+        GET_FIRST_NUM       = 4'b0010,
+        SEND_MULT_OP2_START = 4'b0011,
+        WAIT_MULT_OP2       = 4'b0100,
+        GET_SECOND_NUM      = 4'b0101,
+        SEND_TO_ALU         = 4'b0110,
+        WAIT_ALU            = 4'b0111,
+        SHOW_RESULT_ALU     = 4'b1000,
+        SHOW_RESULT_MULT    = 4'b1001
     } state_t;
-    
+
     state_t current_state, next_state;
-    
-    // Internal Registers
+
     logic [15:0] operand1, operand2;
-    
-    // FSM: State Transitions
+
+    // ALU instantiation
+    addition add_calc(
+        .clk(clk), .nRST(nRST),
+        .INn1(ALU_in1), .INn2(ALU_in2), .sub(addOrSub),
+        .start(start_ALU), .out(ALU_out), .finish(ALU_finish)
+    );
+
+    // Multiplier instantiation
+    multiply mult_calc(
+        .clk(clk), .nRST(nRST),
+        .INn1(mult_in1), .INn2(mult_in2),
+        .start(start_mult), .out(mult_out), .finish(mult_finish)
+    );
+
+    // FSM state transition
     always_ff @(posedge clk or negedge nRST) begin
         if (!nRST) begin
-            $display(" ===== RESET BEGIN =====");
-            current_state <= SEND_TO_MULT_OP1;
+            current_state <= SEND_MULT_OP1_START;
             operand1 <= 0;
             operand2 <= 0;
             complete <= 0;
             display_output <= 0;
             getting_op1 <= 0;
             getting_op2 <= 0;
-            $display(" ===== RESET END =====");
-        end
-
-        else begin
+        end else begin
             current_state <= next_state;
-            getting_op1 <= next_getting_op1;
-            getting_op2 <= next_getting_op2;
         end
     end
-    
-    // FSM: State Logic
+
+    // FSM logic
     always_comb begin
-        next_getting_op1 = getting_op1;
-        next_getting_op2 = getting_op2;
-
+        next_state = current_state;
         case (current_state)
-            SEND_TO_MULT_OP1:
-                
-                if (getting_op1) begin
-                    next_state = WAIT_ALU;
-                end
-                else begin
-                    next_state = SEND_TO_MULT_OP1;
-                end
-            
+            SEND_MULT_OP1_START:
+                next_state = (read_input) ? WAIT_MULT_OP1 : SEND_MULT_OP1_START;
+
+            WAIT_MULT_OP1:
+                next_state = (mult_finish) ? GET_FIRST_NUM : WAIT_MULT_OP1;
+
             GET_FIRST_NUM:
-                if ((operator_input == 3'b001 || operator_input == 3'b010 || operator_input == 3'b100)) begin
-                    next_state = SEND_TO_MULT_OP2;
-                end 
-                else begin                     
-                    next_state = SEND_TO_MULT_OP1;
-                end
-            
+                next_state = (operator_input != 3'b000) ? SEND_MULT_OP2_START : SEND_MULT_OP1_START;
+
+            SEND_MULT_OP2_START:
+                next_state = (read_input) ? WAIT_MULT_OP2 : SEND_MULT_OP2_START;
+
+            WAIT_MULT_OP2:
+                next_state = (mult_finish) ? GET_SECOND_NUM : WAIT_MULT_OP2;
+
             GET_SECOND_NUM:
-                if (equal_input)
-                    next_state = SEND_TO_ALU;
-                else
-                    next_state = SEND_TO_MULT_OP1;
+                next_state = (equal_input) ? SEND_TO_ALU : SEND_MULT_OP1_START;
 
-            SEND_TO_MULT_OP2:
-                if (getting_op2) begin
-                    next_state = WAIT_ALU;
-                end
-                else begin
-                    next_state = SEND_TO_MULT_OP2;
-                end
-            
             SEND_TO_ALU:
-                next_state = WAIT_ALU;  // Move to ALU wait state
-            
+                next_state = WAIT_ALU;
+
             WAIT_ALU:
-                if (ALU_finish) begin
+                if (ALU_finish)
                     next_state = SHOW_RESULT_ALU;
-                end
-            
-                else if (mult_finish) begin
-                    $display("Multiplier Finished.");
-                    if (getting_op1) begin
-                        $display("Recognize Getting Op1.");
-                        
-                        next_state = GET_FIRST_NUM;
-                        next_getting_op1 = 0;
-                    end
-
-                    else if (getting_op2) begin
-                        $display("Recognize Getting Op2.");
-                        
-                        next_state = GET_SECOND_NUM;
-                        next_getting_op2 = 0;
-                    end
-
-                    else begin
-                        $display("Recognize Showing Result.");
-                        
-                        next_state = SHOW_RESULT_MULT;
-                    end
-                end
-            
-                else begin
+                else if (mult_finish)
+                    next_state = SHOW_RESULT_MULT;
+                else
                     next_state = WAIT_ALU;
-                end
-                
+
             SHOW_RESULT_ALU, SHOW_RESULT_MULT:
-                next_state = GET_FIRST_NUM; // Reset after showing result
-            
-            default:
-                next_state = GET_FIRST_NUM;
+                next_state = SEND_MULT_OP1_START;
         endcase
     end
-   
-    // MEMORY AND ALU INTERACTIONS WOULD GO HERE
- 
-  // Memory & ALU Interaction
+
+    // Output + operand logic
     always_ff @(posedge clk or negedge nRST) begin
-        case (current_state) 
-            GET_FIRST_NUM: begin
-                $display("Adding Operand 1: %d with keypad input: %d", operand1, keypad_input);
-                operand1 <= operand1 + {12'd0, keypad_input};
-            end
+        if (!nRST) begin
+            start_ALU <= 0;
+            start_mult <= 0;
+        end else begin
+            start_ALU <= 0;
+            start_mult <= 0;
 
-            // multiply operator 1
-            SEND_TO_MULT_OP1: begin
-                $display("Blah Blah");
-                
-                if (read_input) begin
-                    $display("Input Detected: %d", keypad_input);
-                    mult_in1 <= operand1; // Send operands to ALU
-                    mult_in2 <= 16'd10;
-                    getting_op1 <= 1;
-                    start_mult <= 1;
-                    $display("Sent Operand 1: %d to multiplier to be shifted left one", operand1);
-                    
-                end
+            case (current_state)
+                SEND_MULT_OP1_START:
+                    if (read_input) begin
+                        mult_in1 <= operand1;
+                        mult_in2 <= 16'd10;
+                        start_mult <= 1;
+                        getting_op1 <= 1;
+                    end
 
-            end
-
-            // multiply operator 2
-            SEND_TO_MULT_OP2: begin
-                if (read_input) begin
-                    mult_in1 <= operand2; // Send operands to ALU
-                    mult_in2 <= 16'd10;
-                    getting_op2 <= 1;
-                    start_mult <= 1;
-                end
-                
-            end
-    
-            GET_SECOND_NUM: begin
-                operand2 <= operand2 + {12'd0, keypad_input};
-            end
-        
-            SEND_TO_ALU: begin
-                // operator logic
-                if (operator_input == 3'b001) begin // addition
-                    ALU_in1 <= operand1; // Send operands to ALU
-                    ALU_in2 <= operand2;
-                    
-                    addOrSub <= 0; // 0 is addition
-                    start_ALU <= 1; // Trigger ALU computation
-                end
-                else if (operator_input == 3'b010) begin // subtraction
-                    ALU_in1 <= operand1; // Send operands to ALU
-                    ALU_in2 <= operand2;
-                    
-                    addOrSub <= 1; // 1 is subtraction
-                    start_ALU <= 1; // Trigger ALU computation
-                end
-
-                else if (operator_input == 3'b100) begin // multiplication
-                    mult_in1 <= operand1; // Send operands to ALU
-                    mult_in2 <= operand2;
-                    
-                    start_mult <= 1;
-                end
-            end
-        
-            WAIT_ALU: begin
-                start_ALU <= 0; // Stop ALU start signal
-                start_mult <= 0;
-
-                $display("========");
-                $display("Waiting for ALU to finish");
-                $display("mult_finish: %d", mult_finish);
-                $display("mult_out: %d", mult_out);
-                $display("getting_op1: %d", getting_op1);
-                $display("operand1: %d", operand1);
-                $display("operand1: %d", operand1);
-                $display("========");
-
-                if (mult_finish) begin
-                    if (getting_op1) begin
+                WAIT_MULT_OP1:
+                    if (mult_finish) begin
                         operand1 <= mult_out;
+                        getting_op1 <= 0;
                     end
-                    else if (getting_op2) begin
+
+                GET_FIRST_NUM:
+                    operand1 <= operand1 + {12'd0, keypad_input};
+
+                SEND_MULT_OP2_START:
+                    if (read_input) begin
+                        mult_in1 <= operand2;
+                        mult_in2 <= 16'd10;
+                        start_mult <= 1;
+                        getting_op2 <= 1;
+                    end
+
+                WAIT_MULT_OP2:
+                    if (mult_finish) begin
                         operand2 <= mult_out;
+                        getting_op2 <= 0;
                     end
+
+                GET_SECOND_NUM:
+                    operand2 <= operand2 + {12'd0, keypad_input};
+
+                SEND_TO_ALU:
+                    if (operator_input == 3'b001 || operator_input == 3'b010) begin
+                        ALU_in1 <= operand1;
+                        ALU_in2 <= operand2;
+                        addOrSub <= (operator_input == 3'b010);
+                        start_ALU <= 1;
+                    end else if (operator_input == 3'b100) begin
+                        mult_in1 <= operand1;
+                        mult_in2 <= operand2;
+                        start_mult <= 1;
+                    end
+
+                WAIT_ALU:
+                    ; // no-op, waiting for finish signals
+
+                SHOW_RESULT_ALU: begin
+                    complete <= 1;
+                    display_output <= ALU_out;
                 end
-            end
-        
-            SHOW_RESULT_ALU: begin
-                complete <= 1;  // Indicate calculation done
-                display_output <= ALU_out;  // Store ALU result in display
-            end
 
-            SHOW_RESULT_MULT: begin
-                complete <= 1;  // Indicate calculation done
-                display_output <= mult_out;  // Store ALU result in display
-            end
-        
-            default: begin
-                complete <= 0;
-            end
-        endcase
-    end 
+                SHOW_RESULT_MULT: begin
+                    complete <= 1;
+                    display_output <= mult_out;
+                end
+
+                default: complete <= 0;
+            endcase
+        end
+    end
 endmodule
-
