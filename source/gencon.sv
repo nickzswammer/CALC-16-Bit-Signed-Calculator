@@ -119,84 +119,84 @@ module gencon (
 
             case (current_state)
                 SEND_MULT_OP1_START: begin
-                    $display("In SEND_MULT_OP1_START");
+                    //$display("In SEND_MULT_OP1_START");
                     if (read_input) begin
-                        $display("===============================");
-                        $display("Input detected: %d", keypad_input);
+                        //$display("===============================");
+                        //$display("Input detected: %d", keypad_input);
                         latched_keypad_input <= keypad_input;
                         
                         mult_in1 <= operand1;
                         mult_in2 <= 16'd10;
                         start_mult <= 1;
                         getting_op1 <= 1;
-                        $display("Sent Operand 1: %d to be shifted left", operand1);
+                        //$display("Sent Operand 1: %d to be shifted left", operand1);
                     end
                 end
 
                 WAIT_MULT_OP1: begin
-                    $display("In WAIT_MULT_OP1");
+                    //$display("In WAIT_MULT_OP1");
                     
-                    $display("Waiting for multiplier to finish...");
+                    //$display("Waiting for multiplier to finish...");
                     if (mult_finish) begin
-                        $display("Multiplier Finished. Output: %d", mult_out);
-                        $display("===============================");
+                        //$display("Multiplier Finished. Output: %d", mult_out);
+                        //$display("===============================");
                         operand1 <= mult_out;
                         getting_op1 <= 0;
                     end
                 end
 
                 GET_FIRST_NUM: begin
-                    $display("In GET_FIRST_NUM");
+                    //$display("In GET_FIRST_NUM");
                     
-                    $display("======= Adding Shifted operand with keypad input =======");
-                    $display("operand1 before: %d, keypad_input: %d", operand1, latched_keypad_input);
+                    //$display("======= Adding Shifted operand with keypad input =======");
+                    //$display("operand1 before: %d, keypad_input: %d", operand1, latched_keypad_input);
                     operand1 <= operand1 + {12'd0, latched_keypad_input};
                 end
 
                 SEND_MULT_OP2_START: begin
-                    $display("In SEND_MULT_OP2_START");
+                    //$display("In SEND_MULT_OP2_START");
                     
                     if (read_input) begin
-                        $display("===============================");
-                        $display("Input detected: %d", keypad_input);
+                        //$display("===============================");
+                        //$display("Input detected: %d", keypad_input);
                         
                         latched_keypad_input <= keypad_input;
                         mult_in1 <= operand2;
                         mult_in2 <= 16'd10;
                         start_mult <= 1;
                         getting_op2 <= 1;
-                        $display("Sent Operand 2: %d to be shifted left", operand2);
+                        //$display("Sent Operand 2: %d to be shifted left", operand2);
                         
                     end
                 end
 
                 WAIT_MULT_OP2: begin
-                    $display("In WAIT_MULT_OP2");
+                    //$display("In WAIT_MULT_OP2");
                     
-                    $display("Waiting for multiplier to finish...");
+                    //$display("Waiting for multiplier to finish...");
                     if (mult_finish) begin
-                        $display("Multiplier Finished. Output: %d", mult_out);
-                        $display("===============================");
+                        //$display("Multiplier Finished. Output: %d", mult_out);
+                        //$display("===============================");
                         operand2 <= mult_out;
                         getting_op2 <= 0;
                     end
                 end
 
                 GET_SECOND_NUM: begin
-                    $display("In GET_SECOND_NUM");
-                    $display("======= Adding Shifted operand with keypad input =======");
-                    $display("operand2 before: %d, keypad_input: %d", operand2, latched_keypad_input);
+                    //$display("In GET_SECOND_NUM");
+                    //$display("======= Adding Shifted operand with keypad input =======");
+                    //$display("operand2 before: %d, keypad_input: %d", operand2, latched_keypad_input);
                     operand2 <= operand2 + {12'd0, latched_keypad_input};
                 end
 
                 SEND_TO_ALU: begin
-                    $display("In SEND_TO_ALU");
+                    //$display("In SEND_TO_ALU");
                     if (operator_input == 3'b001 || operator_input == 3'b010) begin
                         ALU_in1 <= operand1;
                         ALU_in2 <= operand2;
                         addOrSub <= (operator_input == 3'b010);
-                        $display("Addition (0) or Subtraction (1): ", addOrSub);
-                        $display("Operand1 + Operand 2, %d + %d: ", operand1, operand2);
+                        //$display("Addition (0) or Subtraction (1): ", addOrSub);
+                        //$display("Operand1 + Operand 2, %d + %d: ", operand1, operand2);
                         start_ALU <= 1;
                     end else if (operator_input == 3'b100) begin
                         mult_in1 <= operand1;
@@ -206,16 +206,17 @@ module gencon (
                 end
 
                 WAIT_ALU:
-                    $display("In WAIT_ALU"); // no-op, waiting for finish signals
+                    //$display("In WAIT_ALU"); // no-op, waiting for finish signals
+                    ;
 
                 SHOW_RESULT_ALU: begin
-                    $display("In SHOW_RESULT_ALU");
+                    //$display("In SHOW_RESULT_ALU");
                     complete <= 1;
                     display_output <= ALU_out;
                 end
 
                 SHOW_RESULT_MULT: begin
-                    $display("In SHOW_RESULT_MULT");
+                    //$display("In SHOW_RESULT_MULT");
                     complete <= 1;
                     display_output <= mult_out;
                 end
