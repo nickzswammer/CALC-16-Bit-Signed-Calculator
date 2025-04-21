@@ -189,10 +189,13 @@ module gencon (
             // multiply operator 1
             SEND_TO_MULT_OP1: begin
                 if (read_input) begin
+                    $display("Input Detected: %d", keypad_input);
                     mult_in1 <= operand1; // Send operands to ALU
                     mult_in2 <= 16'd10;
                     getting_op1 <= 1;
                     start_mult <= 1;
+                    $display("Sent Input: %d to multiplier with Operand 1: %d", keypad_input, operand1);
+                    
                 end
 
             end
