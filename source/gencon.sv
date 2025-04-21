@@ -112,7 +112,6 @@ module gencon (
 
         case (current_state)
             SEND_TO_MULT_OP1:
-                $display("Blah Blah");
                 
                 if (getting_op1) begin
                     next_state = WAIT_ALU;
@@ -198,6 +197,8 @@ module gencon (
 
             // multiply operator 1
             SEND_TO_MULT_OP1: begin
+                $display("Blah Blah");
+                
                 if (read_input) begin
                     $display("Input Detected: %d", keypad_input);
                     mult_in1 <= operand1; // Send operands to ALU
