@@ -162,7 +162,7 @@ module gencon (
                     operand1 <= operand1 + {12'd0, latched_keypad_input};
                 end
 
-                SEND_MULT_OP2_START:
+                SEND_MULT_OP2_START: begin
                     $display("In SEND_MULT_OP2_START");
                     if (read_input) begin
                         mult_in1 <= operand2;
@@ -170,6 +170,7 @@ module gencon (
                         start_mult <= 1;
                         getting_op2 <= 1;
                     end
+                end
 
                 WAIT_MULT_OP2:
                     $display("In WAIT_MULT_OP2");
