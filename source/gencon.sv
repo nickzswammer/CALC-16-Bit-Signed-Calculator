@@ -32,9 +32,6 @@ module gencon (
     logic [15:0] mult_out;       // mult finish signal
     logic mult_finish;           // Result from mult
 
-    // keypad check
-    logic [3:0] prev_keypad_input;
-
     // getting operator multiplier logic states
     logic getting_op1;
     logic getting_op2;
@@ -91,7 +88,6 @@ module gencon (
     always_ff @(posedge clk or negedge nRST) begin
         if (!nRST) begin
             current_state <= SEND_TO_MULT_OP1;
-            prev_keypad_input <= 0;
             operand1 <= 0;
             operand2 <= 0;
             complete <= 0;
@@ -124,7 +120,6 @@ module gencon (
             
             GET_FIRST_NUM:
                 if ((operator_input == 3'b001 || operator_input == 3'b010 || operator_input == 3'b100)) begin
-                    $display(" === Operator Detected: Getting Second Number Now === ");
                     next_state = SEND_TO_MULT_OP2;
                 end 
                 else begin                     
@@ -155,22 +150,16 @@ module gencon (
             
                 else if (mult_finish) begin
                     if (getting_op1) begin
-                        $display("=== MULTIPLICATION FINISHED FOR OP1===");
-                        
                         next_state = GET_FIRST_NUM;
                         next_getting_op1 = 0;
                     end
 
                     else if (getting_op2) begin
-                        $display("=== MULTIPLICATION FINISHED FOR OP2===");
-                        
                         next_state = GET_SECOND_NUM;
                         next_getting_op2 = 0;
                     end
 
                     else begin
-                        $display("=== MULTIPLICATION FINISHED FOR DISPLAY===");
-                        
                         next_state = SHOW_RESULT_MULT;
                     end
                 end
@@ -193,25 +182,16 @@ module gencon (
     always_ff @(posedge clk or negedge nRST) begin
         case (current_state) 
             GET_FIRST_NUM: begin
-                $display("Current State: GET_FIRST_NUM");
-                $display("Keypad Input: %d", keypad_input);
-                $display("Operand Before: %d, %b", operand1, operand1);
                 operand1 <= operand1 + {12'd0, keypad_input};
-                $display("Operand After: %d, %b", operand1, operand1);
             end
 
             // multiply operator 1
             SEND_TO_MULT_OP1: begin
-                $display("Current State: SEND TO MULT OP1");
-                
                 if (read_input) begin
-                    $display("Input Read: %b, %d", keypad_input, keypad_input);
                     mult_in1 <= operand1; // Send operands to ALU
                     mult_in2 <= 10;
                     getting_op1 <= 1;
                     start_mult <= 1;
-                    $display("=== MULTIPLICATION STARTED for OP1 ===");
-                    
                 end
 
             end
@@ -224,21 +204,15 @@ module gencon (
                     mult_in2 <= 10;
                     getting_op2 <= 1;
                     start_mult <= 1;
-                    $display("=== MULTIPLICATION STARTED for OP2 ===");
-                    
                 end
                 
             end
     
             GET_SECOND_NUM: begin
-                $display("Current State: GET SECOND NUM");
-
                 operand2 <= operand2 + {12'd0, keypad_input};
             end
         
             SEND_TO_ALU: begin
-                $display("Current State: SENDTOALU");
-                
                 // operator logic
                 if (operator_input == 3'b001) begin // addition
                     ALU_in1 <= operand1; // Send operands to ALU
@@ -264,13 +238,10 @@ module gencon (
             end
         
             WAIT_ALU: begin
-                $display("Current State: WAIT_ALU");
-                
                 start_ALU <= 0; // Stop ALU start signal
                 start_mult <= 0;
 
                 if (mult_finish) begin
-                    $display("Multiplier Output: %d", mult_finish);
                     if (getting_op1) begin
                         operand1 <= mult_out;
                     end
@@ -281,14 +252,11 @@ module gencon (
             end
         
             SHOW_RESULT_ALU: begin
-                $display("Current State: SHOWRESULTALU");
-                
                 complete <= 1;  // Indicate calculation done
                 display_output <= ALU_out;  // Store ALU result in display
             end
 
             SHOW_RESULT_MULT: begin
-                $display("Current State: SHOW RESULT MULT");
                 complete <= 1;  // Indicate calculation done
                 display_output <= mult_out;  // Store ALU result in display
             end
@@ -297,7 +265,6 @@ module gencon (
                 complete <= 0;
             end
         endcase
-        prev_keypad_input <= keypad_input;
     end 
 endmodule
 
