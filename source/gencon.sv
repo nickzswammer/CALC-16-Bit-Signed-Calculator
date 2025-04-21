@@ -193,7 +193,10 @@ module gencon (
         case (current_state) 
             GET_FIRST_NUM: begin
                 $display("Current State: GET_FIRST_NUM");
+                $display("Keypad Input: %d", keypad_input);
+                $display("Operand Before: %d, %b", operand1, operand1);
                 operand1 <= operand1 + {12'd0, keypad_input};
+                $display("Operand After: %d, %b", operand1, operand1);
             end
 
             // multiply operator 1
@@ -201,7 +204,7 @@ module gencon (
                 $display("Current State: SEND TO MULT OP1");
                 
                 if (read_input) begin
-                    $display("Input Read: %b, %d", keypad_input, keypad_input);
+                    $display("Input Read: %b, %d", keypad_input);
                     mult_in1 <= operand1; // Send operands to ALU
                     mult_in2 <= 10;
                     getting_op1 <= 1;
