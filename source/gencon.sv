@@ -124,6 +124,7 @@ module gencon (
             
             GET_FIRST_NUM:
                 if ((operator_input == 3'b001 || operator_input == 3'b010 || operator_input == 3'b100)) begin
+                    $display(" === Operator Detected: Getting Second Number Now === ");
                     next_state = SEND_TO_MULT_OP2;
                 end 
                 else begin                     
