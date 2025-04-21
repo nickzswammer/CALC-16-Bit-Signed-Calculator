@@ -128,6 +128,7 @@ module gencon (
 
             case (current_state)
                 SEND_MULT_OP1_START: begin
+                    $display("In SEND_MULT_OP1_START");
                     if (read_input) begin
                         $display("===============================");
                         $display("Input detected: %d", keypad_input);
@@ -142,6 +143,8 @@ module gencon (
                 end
 
                 WAIT_MULT_OP1: begin
+                    $display("In WAIT_MULT_OP1");
+                    
                     $display("Waiting for multiplier to finish...");
                     if (mult_finish) begin
                         $display("Multiplier Finished. Output: %d", mult_out);
@@ -152,13 +155,15 @@ module gencon (
                 end
 
                 GET_FIRST_NUM: begin
+                    $display("In GET_FIRST_NUM");
+                    
                     $display("======= Adding Shifted operand with keypad input =======");
                     $display("operand1 before: %d, keypad_input: %d", operand1, latched_keypad_input);
                     operand1 <= operand1 + {12'd0, latched_keypad_input};
-                    $display("operand1 after: %d", operand1);
                 end
 
                 SEND_MULT_OP2_START:
+                    $display("In SEND_MULT_OP2_START");
                     if (read_input) begin
                         mult_in1 <= operand2;
                         mult_in2 <= 16'd10;
@@ -167,15 +172,18 @@ module gencon (
                     end
 
                 WAIT_MULT_OP2:
+                    $display("In WAIT_MULT_OP2");
                     if (mult_finish) begin
                         operand2 <= mult_out;
                         getting_op2 <= 0;
                     end
 
                 GET_SECOND_NUM:
+                    $display("In GET_SECOND_NUM");
                     operand2 <= operand2 + {12'd0, keypad_input};
 
                 SEND_TO_ALU:
+                    $display("In SEND_TO_ALU");
                     if (operator_input == 3'b001 || operator_input == 3'b010) begin
                         ALU_in1 <= operand1;
                         ALU_in2 <= operand2;
@@ -188,14 +196,16 @@ module gencon (
                     end
 
                 WAIT_ALU:
-                    ; // no-op, waiting for finish signals
+                    $display("In WAIT_ALU"); // no-op, waiting for finish signals
 
                 SHOW_RESULT_ALU: begin
+                    $display("In SHOW_RESULT_ALU");
                     complete <= 1;
                     display_output <= ALU_out;
                 end
 
                 SHOW_RESULT_MULT: begin
+                    $display("In SHOW_RESULT_MULT");
                     complete <= 1;
                     display_output <= mult_out;
                 end
