@@ -154,16 +154,22 @@ module gencon (
             
                 else if (mult_finish) begin
                     if (getting_op1) begin
+                        $display("=== MULTIPLICATION FINISHED FOR OP1===");
+                        
                         next_state = GET_FIRST_NUM;
                         next_getting_op1 = 0;
                     end
 
                     else if (getting_op2) begin
+                        $display("=== MULTIPLICATION FINISHED FOR OP2===");
+                        
                         next_state = GET_SECOND_NUM;
                         next_getting_op2 = 0;
                     end
 
                     else begin
+                        $display("=== MULTIPLICATION FINISHED FOR DISPLAY===");
+                        
                         next_state = SHOW_RESULT_MULT;
                     end
                 end
@@ -187,11 +193,7 @@ module gencon (
         case (current_state) 
             GET_FIRST_NUM: begin
                 $display("Current State: GET_FIRST_NUM");
-                $display("Keypad Input: %b, %d", keypad_input, keypad_input);
-                $display("Operand1 Before: Decimal: %d, Binary: %b", operand1, operand1); 
                 operand1 <= operand1 + {12'd0, keypad_input};
-                $display("Operand1 After: Decimal: %d, Binary: %b", operand1, operand1); 
-                
             end
 
             // multiply operator 1
@@ -199,11 +201,12 @@ module gencon (
                 $display("Current State: SEND TO MULT OP1");
                 
                 if (read_input) begin
-                    $display("INPUT READ, SENDING SIGNALS TO MULT");
                     mult_in1 <= operand1; // Send operands to ALU
                     mult_in2 <= 10;
                     getting_op1 <= 1;
                     start_mult <= 1;
+                    $display("=== MULTIPLICATION STARTED for OP1 ===");
+                    
                 end
 
             end
@@ -216,6 +219,8 @@ module gencon (
                     mult_in2 <= 10;
                     getting_op2 <= 1;
                     start_mult <= 1;
+                    $display("=== MULTIPLICATION STARTED for OP2 ===");
+                    
                 end
                 
             end
@@ -261,16 +266,10 @@ module gencon (
 
                 if (mult_finish) begin
                     if (getting_op1) begin
-                        $display("======= INSIDE MULT FINISH WAIT_ALU =======");
-                        $display("Operand1 Before: Decimal: %d, Binary: %b", operand1, operand1); 
                         operand1 <= mult_out;
-                        $display("Operand1 After: Decimal: %d, Binary: %b", operand1, operand1);                     
                     end
                     else if (getting_op2) begin
-                        $display("======= INSIDE MULT FINISH WAIT_ALU =======");
-                        $display("Operand2 Before: Decimal: %d, Binary: %b", operand2, operand2); 
                         operand2 <= mult_out;
-                        $display("Operand2 After: Decimal: %d, Binary: %b", operand2, operand2);                       
                     end
                 end
             end
