@@ -201,6 +201,7 @@ module gencon (
                 $display("Current State: SEND TO MULT OP1");
                 
                 if (read_input) begin
+                    $display("Input Read: %b, %d", keypad_input);
                     mult_in1 <= operand1; // Send operands to ALU
                     mult_in2 <= 10;
                     getting_op1 <= 1;
