@@ -195,7 +195,7 @@ module gencon (
                     mult_in2 <= 16'd10;
                     getting_op1 <= 1;
                     start_mult <= 1;
-                    $display("Sent Operand 1: %d to multiplier to be shifted left one: %d", operand1);
+                    $display("Sent Operand 1: %d to multiplier to be shifted left one", operand1);
                     
                 end
 
