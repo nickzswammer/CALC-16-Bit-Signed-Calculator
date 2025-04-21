@@ -88,7 +88,7 @@ module gencon (
                 next_state = (mult_finish) ? GET_SECOND_NUM : WAIT_MULT_OP2;
 
             GET_SECOND_NUM:
-                next_state = (equal_input) ? SEND_TO_ALU : SEND_MULT_OP1_START;
+                next_state = (equal_input) ? SEND_TO_ALU : SEND_MULT_OP2_START;
 
             SEND_TO_ALU:
                 next_state = WAIT_ALU;
