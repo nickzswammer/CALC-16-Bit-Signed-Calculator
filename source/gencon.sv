@@ -125,7 +125,7 @@ module gencon (
             start_mult <= 0;
 
             case (current_state)
-                SEND_MULT_OP1_START:
+                SEND_MULT_OP1_START: begin
                     if (read_input) begin
                         $display("Input detected: %d", keypad_input);
                         mult_in1 <= operand1;
@@ -134,14 +134,16 @@ module gencon (
                         getting_op1 <= 1;
                         $display("Sent Operand 1: %d to be shifted left", operand1);
                     end
+                end
 
-                WAIT_MULT_OP1:
+                WAIT_MULT_OP1: begin
                     $display("Waiting for multiplier to finish...");
                     if (mult_finish) begin
                         $display("Multiplier Finished. Output: %d", mult_out);
                         operand1 <= mult_out;
                         getting_op1 <= 0;
                     end
+                end
 
                 GET_FIRST_NUM:
                     operand1 <= operand1 + {12'd0, keypad_input};
