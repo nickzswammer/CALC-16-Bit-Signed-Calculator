@@ -69,11 +69,11 @@ module gencon (
     
     // State Definitions
     typedef enum logic [2:0] {
-        GET_FIRST_NUM = 3'b000,  // Getting the first operand
-        GET_SECOND_NUM = 3'b001, // Getting the second operand
-        SEND_TO_ALU   = 3'b010,  // Send operands to ALU
-        SEND_TO_MULT_OP1   = 3'b011,  // Send operands to ALU
-        SEND_TO_MULT_OP2   = 3'b100,  // Send operands to ALU
+        SEND_TO_MULT_OP1   = 3'b000,  // Send operands to ALU
+        GET_FIRST_NUM = 3'b001,  // Getting the first operand
+        SEND_TO_MULT_OP2   = 3'b010,  // Send operands to ALU
+        GET_SECOND_NUM = 3'b011, // Getting the second operand
+        SEND_TO_ALU   = 3'b100,  // Send operands to ALU
         WAIT_ALU      = 3'b101,  // Wait for ALU to finish
         SHOW_RESULT_ALU   = 3'b110,   // Displaying result from ALU
         SHOW_RESULT_MULT   = 3'b111   // Displaying result from ALU
@@ -107,7 +107,6 @@ module gencon (
     
     // FSM: State Logic
     always_comb begin
-        $display("Current State: %d", current_state);
         next_getting_op1 = getting_op1;
         next_getting_op2 = getting_op2;
 
