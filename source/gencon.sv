@@ -10,7 +10,7 @@ module gencon (
     input logic equal_input,
 
     output logic complete,
-    output logic [15:0] display_output
+    output logic [15:0] display_output,
     output state_t tb_current_state;  // ← add this in port list
 
 );
