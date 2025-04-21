@@ -82,7 +82,7 @@ module gencon (
         SHOW_RESULT_MULT   = 3'b111   // Displaying result from ALU
     } state_t;
     
-    state_t current_state, next_state
+    state_t current_state, next_state;
     
     // Internal Registers
     logic [15:0] operand1, operand2;
