@@ -63,6 +63,8 @@ module gencon (
         .start(start_mult), .out(mult_out), .finish(mult_finish)
     );
 
+    assign tb_current_state = current_state; // ← drive it inside gencon
+
     // FSM state transition
     always_ff @(posedge clk or negedge nRST) begin
         if (!nRST) begin
