@@ -112,6 +112,8 @@ module gencon (
 
         case (current_state)
             SEND_TO_MULT_OP1:
+                $display("Blah Blah");
+                
                 if (getting_op1) begin
                     next_state = WAIT_ALU;
                 end
