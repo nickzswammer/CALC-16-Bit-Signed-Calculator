@@ -113,6 +113,7 @@ module gencon (
         case (current_state)
             SEND_TO_MULT_OP1:
                 if (getting_op1) begin
+                    $display("INSIDE, SETTING STATE TO WAIT_ALU");
                     next_state = WAIT_ALU;
                 end
                 else begin
