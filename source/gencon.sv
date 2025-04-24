@@ -73,22 +73,33 @@ module gencon (
         next_state = current_state;
         case (current_state)
             SEND_MULT_OP1_START:
-                next_state = (read_input) ? WAIT_MULT_OP1 : SEND_MULT_OP1_START;
+    
+                if (operator_input != 3'b000 && operator_input != 3'b001) begin
+                    next_state = SEND_MULT_OP2_START;
+                end
+                else begin
+                    next_state = (read_input) ? WAIT_MULT_OP1 : SEND_MULT_OP1_START;
+                end
 
             WAIT_MULT_OP1:
                 next_state = (mult_finish) ? GET_FIRST_NUM : WAIT_MULT_OP1;
 
             GET_FIRST_NUM:
-                next_state = (operator_input != 3'b000 && operator_input != 3'b001) ? SEND_MULT_OP2_START : SEND_MULT_OP1_START;
+                next_state = SEND_MULT_OP1_START;
 
             SEND_MULT_OP2_START:
-                next_state = (read_input) ? WAIT_MULT_OP2 : SEND_MULT_OP2_START;
+                if (equal_input) begin
+                    next_state = SEND_TO_ALU;
+                end
+                else begin
+                    next_state = (read_input) ? WAIT_MULT_OP2 : SEND_MULT_OP2_START;
+                end
 
             WAIT_MULT_OP2:
                 next_state = (mult_finish) ? GET_SECOND_NUM : WAIT_MULT_OP2;
 
             GET_SECOND_NUM:
-                next_state = (equal_input) ? SEND_TO_ALU : SEND_MULT_OP2_START;
+                next_state = SEND_MULT_OP2_START;
 
             SEND_TO_ALU:
                 next_state = WAIT_ALU;
