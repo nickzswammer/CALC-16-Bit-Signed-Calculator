@@ -110,7 +110,7 @@ module gencon (
 
     // Output + operand logic
     always_ff @(posedge clk or negedge nRST) begin
-        $display("Current State: %d", current_state);
+        $monitor("Current State: %d", current_state);
         if (!nRST) begin
             start_ALU <= 0;
             start_mult <= 0;
