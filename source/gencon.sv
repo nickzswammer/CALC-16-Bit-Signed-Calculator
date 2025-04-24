@@ -132,6 +132,7 @@ module gencon (
             case (current_state)
                 SEND_MULT_OP1_START: begin
                     if (operator_input == 1) begin
+                        $display("Negative");
                         operand1[15] <=  operand1[15] ^ 1'b1;
                     end
                     //$display("In SEND_MULT_OP1_START");
@@ -171,6 +172,8 @@ module gencon (
                 SEND_MULT_OP2_START: begin
                     //$display("In SEND_MULT_OP2_START");
                     if (operator_input == 1) begin
+                        $display("Negative");
+                        
                         operand2[15] <=  operand2[15] ^ 1'b1;
                     end
                     
