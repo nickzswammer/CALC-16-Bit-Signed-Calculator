@@ -134,6 +134,7 @@ module gencon (
                     if (operator_input == 1) begin
                         $display("Negative");
                         operand1[15] <=  operand1[15] ^ 1'b1;
+                        $display("Operand1 %b", operand1);
                     end
                     //$display("In SEND_MULT_OP1_START");
                     if (read_input) begin
