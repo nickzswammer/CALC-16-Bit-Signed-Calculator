@@ -156,7 +156,7 @@ module gencon_tb;
 		
             // equal press
             equal_input = 1;
-		
+		$display("Waiting for completion");
             // Wait for completion
             wait (complete);
 
