@@ -92,6 +92,7 @@ module gencon_tb;
 		operator_input = 3'b001;
 		@(posedge clk);
 		operator_input = 0;
+
 	    end
 		
             while (temp > 0) begin
@@ -115,14 +116,16 @@ module gencon_tb;
                 divisor = divisor / 10;
 		    
     	    end
-    
+		
+	    wait (dut.tb_current_state == dut.SEND_MULT_OP1_START || dut.tb_current_state == dut.SEND_MULT_OP2_START);
+
             // get operator 
 	    operator_input = operation;
+		
     
             // second number digit press 
             temp = num_2;
 	    num_digits = 0;
-
 		
 	    if (num_2 < 0) begin
 	        num_2 = num_2 * -1;
