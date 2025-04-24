@@ -190,6 +190,9 @@ module gencon (
                 end
 
                 SEND_TO_ALU: begin
+                    $display("Operand1 %b", operand1);
+                    $display("Operand2 %b", operand2);
+                    
                     //$display("In SEND_TO_ALU");
                     if (operator_input == 3'b001 || operator_input == 3'b010) begin
                         ALU_in1 <= operand1;
