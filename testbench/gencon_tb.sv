@@ -160,8 +160,11 @@ module gencon_tb;
 	    end
 		
             // equal press
+	    wait (dut.tb_current_state == dut.SEND_MULT_OP1_START || dut.tb_current_state == dut.SEND_MULT_OP2_START);
+		
             equal_input = 1;
 		$display("Waiting for completion");
+		@(posedge clk);
             // Wait for completion
             wait (complete);
 
