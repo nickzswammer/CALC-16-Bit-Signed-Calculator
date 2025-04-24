@@ -121,7 +121,7 @@ module gencon (
 
     // Output + operand logic
     always_ff @(posedge clk or negedge nRST) begin
-        $monitor("Current State: %d", current_state);
+        $monitor("Operand1: %b", operand1);
         if (!nRST) begin
             start_ALU <= 0;
             start_mult <= 0;
@@ -134,7 +134,6 @@ module gencon (
                     if (operator_input == 1) begin
                         $display("Negative");
                         operand1[15] <=  operand1[15] ^ 1'b1;
-                        $display("Operand1 %b", operand1);
                     end
                     //$display("In SEND_MULT_OP1_START");
                     if (read_input) begin
