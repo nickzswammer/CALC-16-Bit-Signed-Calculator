@@ -119,6 +119,9 @@ module gencon (
 
             case (current_state)
                 SEND_MULT_OP1_START: begin
+                    if (operator_input == 1) begin
+                        operand1[15] <=  operand1[15] ^ 1'b1;
+                    end
                     //$display("In SEND_MULT_OP1_START");
                     if (read_input) begin
                         //$display("===============================");
@@ -155,6 +158,9 @@ module gencon (
 
                 SEND_MULT_OP2_START: begin
                     //$display("In SEND_MULT_OP2_START");
+                    if (operator_input == 1) begin
+                        operand2[15] <=  operand2[15] ^ 1'b1;
+                    end
                     
                     if (read_input) begin
                         //$display("===============================");
@@ -194,14 +200,14 @@ module gencon (
                     $display("Operand2 %b", operand2);
                     
                     //$display("In SEND_TO_ALU");
-                    if (operator_input == 3'b001 || operator_input == 3'b010) begin
+                    if (operator_input == 2 || operator_input == 3) begin
                         ALU_in1 <= operand1;
                         ALU_in2 <= operand2;
-                        addOrSub <= (operator_input == 3'b010);
+                        addOrSub <= (operator_input == 3);
                         //$display("Addition (0) or Subtraction (1): ", addOrSub);
                         //$display("Operand1 + Operand 2, %d + %d: ", operand1, operand2);
                         start_ALU <= 1;
-                    end else if (operator_input == 3'b100) begin
+                    end else if (operator_input == 4) begin
                         mult_in1 <= operand1;
                         mult_in2 <= operand2;
                         start_mult <= 1;
