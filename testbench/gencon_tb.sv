@@ -24,7 +24,7 @@ module gencon_tb;
     int divisor; // for the getting MSB
     
     // Clock generation
-    always #50000 clk = ~clk; // every 5 time units, flip clock signal
+    always #5 clk = ~clk; // every 5 time units, flip clock signal
 	
     // Instantiate DUT
     gencon dut (
