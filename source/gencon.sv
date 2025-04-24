@@ -89,6 +89,7 @@ module gencon (
 
             SEND_MULT_OP2_START:
                 if (equal_input) begin
+                    $display("GOT EQUAL INPUT");
                     next_state = SEND_TO_ALU;
                 end
                 else begin
