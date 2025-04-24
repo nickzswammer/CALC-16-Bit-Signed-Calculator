@@ -118,6 +118,7 @@ module gencon_tb;
     	    end
 		
 	    wait (dut.tb_current_state == dut.SEND_MULT_OP1_START || dut.tb_current_state == dut.SEND_MULT_OP2_START);
+		$display("Operator Pressed");
 
             // get operator 
 	    operator_input = operation;
