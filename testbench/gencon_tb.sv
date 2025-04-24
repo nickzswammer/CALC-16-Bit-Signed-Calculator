@@ -42,8 +42,9 @@ module gencon_tb;
     // Task to simulate a digit keypress
     task press_digit(input [3:0] digit);
         begin
-		        // Wait until FSM is in a state that accepts digits
+	    // Wait until FSM is in a state that accepts digits
 	    wait (dut.tb_current_state == dut.SEND_MULT_OP1_START || dut.tb_current_state == dut.SEND_MULT_OP2_START);
+	    operator_input = 0;
             keypad_input = digit;
             @(posedge clk);
             read_input = 1;
@@ -85,6 +86,14 @@ module gencon_tb;
             temp = num_1;
 	    num_digits = 0;
 
+	    if (num_1 < 0) begin
+	        num_1 = num_1 * -1;
+		@(posedge clk);
+		operator_input = 3'b001;
+		@(posedge clk);
+		operator_input = 0;
+	    end
+		
             while (temp > 0) begin
                 temp = temp / 10;
             	num_digits += 1;
@@ -113,6 +122,15 @@ module gencon_tb;
             // second number digit press 
             temp = num_2;
 	    num_digits = 0;
+
+		
+	    if (num_2 < 0) begin
+	        num_2 = num_2 * -1;
+		@(posedge clk);
+		operator_input = 3'b001;
+		@(posedge clk);
+		operator_input = 0;
+	    end
 
             while (temp > 0) begin
                 temp = temp / 10;
