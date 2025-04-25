@@ -142,7 +142,6 @@ module gencon (
 
     // Output + operand logic
     always_ff @(posedge clk or negedge nRST) begin
-        $monitor("Operand1: %b", operand1);
         if (!nRST) begin
             start_ALU <= 0;
             start_mult <= 0;
