@@ -43,7 +43,7 @@ module gencon_tb;
     task press_digit(input [3:0] digit);
         begin
 	    // Wait until FSM is in a state that accepts digits
-	    wait (dut.tb_current_state == dut.SEND_MULT_OP1_START || dut.tb_current_state == dut.SEND_MULT_OP2_START);
+		wait (tb_current_state == 0 || tb_current_state == 3);
 	    operator_input = 0;
             keypad_input = digit;
             @(posedge clk);
@@ -117,7 +117,7 @@ module gencon_tb;
 		    
     	    end
 		
-	    wait (dut.tb_current_state == dut.SEND_MULT_OP1_START || dut.tb_current_state == dut.SEND_MULT_OP2_START);
+		wait (tb_current_state == 0 || tb_current_state == 3);
 		$display("Operator Pressed");
 		@(posedge clk);
 
@@ -160,7 +160,7 @@ module gencon_tb;
 	    end
 		
             // equal press
-	    wait (dut.tb_current_state == dut.SEND_MULT_OP2_START);
+		wait (tb_current_state == 3);
 		
 		@(posedge clk);
 		@(posedge clk);
