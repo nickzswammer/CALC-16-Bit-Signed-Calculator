@@ -111,7 +111,6 @@ module gencon_tb;
 
     	    while (divisor > 0) begin
         	digit = temp / divisor;
-		    $display("Digit: %b", digit);
 		press_digit(digit[3:0]);
         	temp = temp % divisor;
                 divisor = divisor / 10;
@@ -153,8 +152,6 @@ module gencon_tb;
 
     	    while (divisor > 0) begin
         	digit = temp / divisor;
-		    $display("Digit: %b", digit);
-		    
 		press_digit(digit[3:0]);
         	temp = temp % divisor;
                 divisor = divisor / 10;
