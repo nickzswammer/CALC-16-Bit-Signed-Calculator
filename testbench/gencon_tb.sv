@@ -260,7 +260,7 @@ module gencon_tb;
  
 
 	// apply_inputs(-1, 3'b100, -1, 1);
-	apply_inputs(1, 3'b010, 1, 2);
+	    apply_inputs(2, 3'b011, 3, -1);
 	
         $display("Passed %0d/%0d tests.\n", num_passed, test_number);
 	$display("==========================================\n");
