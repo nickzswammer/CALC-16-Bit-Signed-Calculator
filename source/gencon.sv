@@ -194,6 +194,8 @@ module gencon (
                         //$display("Sent Operand 2: %d to be shifted left", operand2);
                         
                     end
+                    latched_operator_input <= operator_input;
+                    
                 end
 
                 WAIT_MULT_OP2: begin
