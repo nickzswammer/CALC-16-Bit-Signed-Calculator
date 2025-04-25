@@ -81,7 +81,8 @@ module gencon_tb;
         begin
             test_number += 1;
             reset_dut();
-    
+
+		/*
             // extract digits press for first number
     
             temp = num_1;
@@ -205,7 +206,16 @@ module gencon_tb;
             end
 	    $display("==========================================\n");
     
-            @(posedge clk);
+            @(posedge clk); */
+
+		@(posedge clk);
+	    operation_input = 3'b001;
+		@(posedge clk);
+	    operation_input = 3'b000;
+		@(posedge clk);
+	    operation_input = 3'b010;
+		@(posedge clk);
+	    operation_input = 3'b000;
         end
     endtask
     
