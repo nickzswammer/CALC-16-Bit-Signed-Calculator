@@ -120,9 +120,12 @@ module gencon_tb;
 		wait (tb_current_state == 0 || tb_current_state == 3);
 		$display("Operator Pressed");
 		@(posedge clk);
-
+		$display("Operator Input: %b", operator_input);
+		$display("Operation: %b", operation);
             // get operator 
 	    operator_input = operation;
+		$display("Operator Input: %b", operator_input);
+		$display("Operation: %b", operation);
 
 		$display("Operator ChecK");
     
