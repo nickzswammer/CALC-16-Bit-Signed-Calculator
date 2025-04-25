@@ -17,6 +17,7 @@ module gencon (
 );
 
     logic [3:0] latched_keypad_input;
+    logic [2:0] latched_operator_input;
     // ALU control
     logic [15:0] ALU_in1, ALU_in2;
     logic addOrSub, start_ALU;
@@ -148,10 +149,13 @@ module gencon (
                         getting_op1 <= 1;
                         //$display("Sent Operand 1: %d to be shifted left", operand1);
                     end
+
+                    latched_operator_input <= operator_input;
                 end
 
                 WAIT_MULT_OP1: begin
                     //$display("In WAIT_MULT_OP1");
+                    
                     
                     //$display("Waiting for multiplier to finish...");
                     if (mult_finish) begin
@@ -172,7 +176,7 @@ module gencon (
 
                 SEND_MULT_OP2_START: begin
                     //$display("In SEND_MULT_OP2_START");
-                    if (operator_input == 1) begin
+                    if (latched_operator_input == 1) begin
                         $display("Negative");
                         
                         operand2[15] <=  operand2[15] ^ 1'b1;
@@ -216,14 +220,14 @@ module gencon (
                     $display("Operand2 %b", operand2);
                     
                     //$display("In SEND_TO_ALU");
-                    if (operator_input == 2 || operator_input == 3) begin
+                    if (latched_operator_input == 2 || latched_operator_input == 3) begin
                         ALU_in1 <= operand1;
                         ALU_in2 <= operand2;
-                        addOrSub <= (operator_input == 3);
+                        addOrSub <= (latched_operator_input == 3);
                         //$display("Addition (0) or Subtraction (1): ", addOrSub);
                         //$display("Operand1 + Operand 2, %d + %d: ", operand1, operand2);
                         start_ALU <= 1;
-                    end else if (operator_input == 4) begin
+                    end else if (latched_operator_input == 4) begin
                         mult_in1 <= operand1;
                         mult_in2 <= operand2;
                         start_mult <= 1;
