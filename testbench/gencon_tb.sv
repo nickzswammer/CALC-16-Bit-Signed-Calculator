@@ -78,7 +78,7 @@ module gencon_tb;
     );
         begin
 	    $display("\n==========================================\n");
-	    $display("%s", $sformatf("Test #%d: ", test_number));
+		$display("%s", $sformatf("Test #%d: ", test_number + 1));
 		
             test_number += 1;
             reset_dut();
