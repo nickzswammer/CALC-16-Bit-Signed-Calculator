@@ -41,7 +41,7 @@ module gencon_tb;
     task press_digit(input [3:0] digit);
         begin
 	    // Wait until FSM is in a state that accepts digits
-		wait (tb_current_state == 0 || tb_current_state == 3);
+	    wait (tb_current_state == 0 || tb_current_state == 3);
 	    operator_input = 0;
             keypad_input = digit;
             @(posedge clk);
@@ -58,7 +58,7 @@ module gencon_tb;
     // Reset Task
     task reset_dut;
         begin
-		wait(tb_current_state == 0);
+	    wait(tb_current_state == 0);
             keypad_input = 0;
             operator_input = 3'b000;
             equal_input = 0;
@@ -116,20 +116,13 @@ module gencon_tb;
     	    end
 		
 		wait (tb_current_state == 0 || tb_current_state == 3);
-		$display("Operator Pressed");
 		@(posedge clk);
-		$display("Operator Input: %b", operator_input);
-		$display("Operation: %b", operation);
             // get operator 
 	    operator_input = operation;
 		@(posedge clk);
-		$display("Operator Input: %b", operator_input);
-		$display("Operation: %b", operation);
 	    operator_input = 0;
 		@(posedge clk);
 		
-		$display("Operator ChecK");
-    
             // second number digit press 
             temp = num_2;
 	    num_digits = 0;
@@ -172,7 +165,6 @@ module gencon_tb;
 		@(posedge clk);
 		
             equal_input = 1;
-		$display("Waiting for completion");
 		@(posedge clk);
             // Wait for completion
             wait (complete);
@@ -217,13 +209,13 @@ module gencon_tb;
         test_number = 0;
         num_passed = 0;
 	    
-	    // Addition tests (3'b010)
-	    apply_inputs(2,   3'b010, 3, 5);            // 2 + 3 = 5
-	    apply_inputs(1000,3'b010, 2345, 3345);      // 1000 + 2345 = 3345
-	    apply_inputs(-10, 3'b010, 10, 0);           // -10 + 10 = 0
-	    apply_inputs(-25, 3'b010, -15, -40);        // -25 + -15 = -40
-	    apply_inputs(0,   3'b010, 0, 0);            // 0 + 0 = 0
-	    apply_inputs(-32768, 3'b010, 32767, -1);    // edge case
+	// Addition tests (3'b010)
+	apply_inputs(2,   3'b010, 3, 5);            // 2 + 3 = 5
+	apply_inputs(1000,3'b010, 2345, 3345);      // 1000 + 2345 = 3345
+	apply_inputs(-10, 3'b010, 10, 0);           // -10 + 10 = 0
+	apply_inputs(-25, 3'b010, -15, -40);        // -25 + -15 = -40
+	apply_inputs(0,   3'b010, 0, 0);            // 0 + 0 = 0
+	apply_inputs(-32768, 3'b010, 32767, -1);    // edge case
 
 	/*
 	// Subtraction tests (3'b010)
