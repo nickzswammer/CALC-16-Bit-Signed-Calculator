@@ -76,6 +76,7 @@ module gencon (
             SEND_MULT_OP1_START:
     
                 if (operator_input != 3'b000 && operator_input != 3'b001) begin
+                    latched_operator_input = operator_input;
                     next_state = SEND_MULT_OP2_START;
                 end
                 else begin
@@ -149,8 +150,7 @@ module gencon (
                         getting_op1 <= 1;
                         //$display("Sent Operand 1: %d to be shifted left", operand1);
                     end
-
-                    latched_operator_input <= operator_input;
+    
                 end
 
                 WAIT_MULT_OP1: begin
@@ -176,7 +176,7 @@ module gencon (
 
                 SEND_MULT_OP2_START: begin
                     //$display("In SEND_MULT_OP2_START");
-                    if (latched_operator_input == 1) begin
+                    if (operator_input == 1) begin
                         $display("Negative");
                         
                         operand2[15] <=  operand2[15] ^ 1'b1;
@@ -194,7 +194,6 @@ module gencon (
                         //$display("Sent Operand 2: %d to be shifted left", operand2);
                         
                     end
-                    latched_operator_input <= operator_input;
                     
                 end
 
