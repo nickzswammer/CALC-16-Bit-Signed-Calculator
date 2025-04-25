@@ -125,6 +125,8 @@ module gencon_tb;
 		@(posedge clk);
 		$display("Operator Input: %b", operator_input);
 		$display("Operation: %b", operation);
+	    operator_input = 0;
+		@(posedge clk);
 		
 		$display("Operator ChecK");
     
