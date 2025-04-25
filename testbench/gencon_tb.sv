@@ -79,9 +79,10 @@ module gencon_tb;
         begin
             test_number += 1;
             reset_dut();
+
+	    $display("%s", $sformatf("Operands: %0d, %0d", num_1, num_2));      
 		
             // extract digits press for first number
-    
             temp = num_1;
 	    num_digits = 0;
 
@@ -183,10 +184,9 @@ module gencon_tb;
 		$display("%s", $sformatf("Operation: Multiplication"));
 	    end
 
-	    $display("%s", $sformatf("Operands: %0d, %0d", num_1, num_2));      
-		if(display_output[15]) begin
-			$write("-");
-		end
+	    if(display_output[15]) begin
+	        $write("-");
+	    end
 		
 	    $display("%s", $sformatf("%0d", display_output[14:0]));
 	    $display("Binary Output: %b", display_output);
