@@ -205,7 +205,7 @@ module gencon_tb;
 	$dumpfile("gencon.vcd");
 	$dumpvars();
 
-        test_number = 0;
+        test_number = 1;
         num_passed = 0;
 	    
 	// Addition tests (3'b010)
