@@ -123,7 +123,8 @@ module gencon_tb;
 
             // get operator 
 	    operator_input = operation;
-		
+
+		$display("Operator ChecK");
     
             // second number digit press 
             temp = num_2;
