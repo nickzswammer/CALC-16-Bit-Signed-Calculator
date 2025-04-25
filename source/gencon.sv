@@ -63,6 +63,14 @@ module gencon (
             display_output <= 0;
             getting_op1 <= 0;
             getting_op2 <= 0;
+            latched_operator_input <= 0;
+            latched_keypad_input <= 0;
+            mult_out <= 0;
+            mult_in1 <= 0;
+            mult_in2 <= 0;
+            ALU_out <= 0;
+            ALU_in1 <= 0;
+            ALU_in2 <= 0;
         end else begin
             current_state <= next_state;
         end
