@@ -60,6 +60,7 @@ module gencon_tb;
     // Reset Task
     task reset_dut;
         begin
+		wait(tb_current_state == 0);
             keypad_input = 0;
             operator_input = 3'b000;
             equal_input = 0;
@@ -215,7 +216,7 @@ module gencon_tb;
         test_number = 0;
         num_passed = 0;
 	    
-/*
+
 	
 	// Addition tests (3'b001)
 	apply_inputs(2,   3'b001, 3, 5);            // 2 + 3 = 5
@@ -255,7 +256,7 @@ module gencon_tb;
 	apply_inputs(1,   3'b100, 1, 1);            // 1 * 1 = 1
 	apply_inputs(-1,  3'b100, 1, -1);           // -1 * 1 = -1
 	apply_inputs(-1,  3'b100, -1, 1);           // -1 * -1 = 1
- */
+ 
 
 	apply_inputs(-1, 3'b100, -1, 1);
 	
