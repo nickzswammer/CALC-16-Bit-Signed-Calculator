@@ -82,7 +82,7 @@ module gencon_tb;
             test_number += 1;
             reset_dut();
 
-		/*
+		
             // extract digits press for first number
     
             temp = num_1;
@@ -127,7 +127,7 @@ module gencon_tb;
 	    operator_input = operation;
 		$display("Operator Input: %b", operator_input);
 		$display("Operation: %b", operation);
-
+		
 		$display("Operator ChecK");
     
             // second number digit press 
@@ -162,7 +162,7 @@ module gencon_tb;
                 divisor = divisor / 10;
 	    end
 		
-            // equal press
+	    // equal press
 		wait (tb_current_state == 3);
 		
 		@(posedge clk);
@@ -206,16 +206,7 @@ module gencon_tb;
             end
 	    $display("==========================================\n");
     
-            @(posedge clk); */
-
-		@(posedge clk);
-	    operator_input = 3'b001;
-		@(posedge clk);
-	    operator_input = 3'b000;
-		@(posedge clk);
-	    operator_input = 3'b010;
-		@(posedge clk);
-	    operator_input = 3'b000;
+            @(posedge clk);
         end
     endtask
     
@@ -270,7 +261,7 @@ module gencon_tb;
  
 
 	// apply_inputs(-1, 3'b100, -1, 1);
-	    apply_inputs(-2, 3'b010, 3, -5);
+	apply_inputs(-2, 3'b010, 3, -5);
 	
         $display("Passed %0d/%0d tests.\n", num_passed, test_number);
 	$display("==========================================\n");
