@@ -77,6 +77,9 @@ module gencon_tb;
         input integer expected_out // expected output
     );
         begin
+	    $display("\n==========================================\n");
+	    $display("%s", $sformatf("Test #%d: ", test_number));
+		
             test_number += 1;
             reset_dut();
 
@@ -169,10 +172,6 @@ module gencon_tb;
 		@(posedge clk);
             // Wait for completion
             wait (complete);
-
-	    $display("%s", $sformatf("Test #%d: ", test_number));
-	     
-	    $display("\n==========================================\n");
 
 	    if (operation == 3'b010) begin
     		$display("%s", $sformatf("Operation: Addition"));
