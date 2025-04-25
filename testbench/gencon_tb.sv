@@ -160,6 +160,7 @@ module gencon_tb;
 	    end
 		
             // equal press
+	    wait (dut.tb_current_state == dut.SEND_MULT_OP2_START);
 		
 		@(posedge clk);
 		@(posedge clk);
