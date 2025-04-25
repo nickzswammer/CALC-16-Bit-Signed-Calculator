@@ -177,7 +177,6 @@ module gencon_tb;
 	     
 	    $display("\n==========================================\n");
 
-	    operator_input = operation;
 	    if (operation == 3'b001) begin
     		$display("%s", $sformatf("Operation: Addition"));
 	    end
