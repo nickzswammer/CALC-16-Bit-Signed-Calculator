@@ -33,8 +33,14 @@ module gencon (
     // Internal state flags
     logic getting_op1, getting_op2;
 
+    // Temporary Operator Input Variables
+    logic latch_operator;
+    logic [2:0] operator_to_latch;
+
+
     state_t current_state, next_state;
 
+    // operands to send to ALU/ Multiplier
     logic [15:0] operand1, operand2;
 
     // ALU instantiation
@@ -73,6 +79,9 @@ module gencon (
             ALU_in2 <= 0;
         end else begin
             current_state <= next_state;
+            if (latch_operator) begin
+                latched_operator_input <= operator_to_latch;
+            end
         end
     end
     /* verilator lint_off CASEINCOMPLETE */
@@ -80,11 +89,15 @@ module gencon (
     // FSM logic
     always_comb begin
         next_state = current_state;
+        latch_operator = 0;
+        operator_to_latch = latched_operator_input;
+        
         case (current_state)
             SEND_MULT_OP1_START:
     
                 if (operator_input != 3'b000 && operator_input != 3'b001) begin
-                    latched_operator_input = operator_input;
+                    latch_operator = 1;
+                    operator_to_latch = operator_input;
                     next_state = SEND_MULT_OP2_START;
                 end
                 else begin
