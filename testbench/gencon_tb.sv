@@ -209,13 +209,13 @@ module gencon_tb;
             @(posedge clk); */
 
 		@(posedge clk);
-	    operation_input = 3'b001;
+	    operator_input = 3'b001;
 		@(posedge clk);
-	    operation_input = 3'b000;
+	    operator_input = 3'b000;
 		@(posedge clk);
-	    operation_input = 3'b010;
+	    operator_input = 3'b010;
 		@(posedge clk);
-	    operation_input = 3'b000;
+	    operator_input = 3'b000;
         end
     endtask
     
