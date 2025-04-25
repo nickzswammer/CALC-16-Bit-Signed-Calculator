@@ -180,10 +180,10 @@ module gencon_tb;
 	     
 	    $display("\n==========================================\n");
 
-	    if (operation == 3'b001) begin
+	    if (operation == 3'b010) begin
     		$display("%s", $sformatf("Operation: Addition"));
 	    end
-	    else if (operation == 3'b010) begin
+	    else if (operation == 3'b011) begin
 		$display("%s", $sformatf("Operation: Subtraction"));
 	    end
 	    else if (operation == 3'b100) begin
@@ -260,7 +260,7 @@ module gencon_tb;
  
 
 	// apply_inputs(-1, 3'b100, -1, 1);
-	    apply_inputs(-2, 3'b010, -3, -5);
+	    apply_inputs(-2, 3'b010, 3, -5);
 	
         $display("Passed %0d/%0d tests.\n", num_passed, test_number);
 	$display("==========================================\n");
