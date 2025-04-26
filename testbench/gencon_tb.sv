@@ -228,7 +228,7 @@ module gencon_tb;
         test_number = 0;
         num_passed = 0;
 
-	
+	/*
 	// Addition tests (3'b010)
 	apply_inputs(2,    3'b010, 3,    5);       // 2 + 3 = 5
 	apply_inputs(1000, 3'b010, 2345, 3345);    // 1000 + 2345 = 3345
@@ -247,8 +247,8 @@ module gencon_tb;
 	apply_inputs(0,    3'b011, 99,  -99);      // 0 - 99 = -99
 	apply_inputs(99,   3'b011, 0,    99);      // 99 - 0 = 99
 	 apply_inputs(32766,3'b011, -1,  32767);    // 32766 - (-1) = 32767
-
-	/*
+	*/
+	
 	// Multiplication tests (3'b100)
 	apply_inputs(4,    3'b100, 3,    12);      // 4 * 3 = 12
 	apply_inputs(-2,   3'b100, 5,   -10);      // -2 * 5 = -10
@@ -273,7 +273,7 @@ module gencon_tb;
 	apply_inputs(1,   3'b100, 1, 1);            // 1 * 1 = 1
 	apply_inputs(-1,  3'b100, 1, -1);           // -1 * 1 = -1
 	apply_inputs(-1,  3'b100, -1, 1);           // -1 * -1 = 1
-	*/
+	
 
         $display("Passed %0d/%0d tests.\n", num_passed, test_number);
 	$display("==========================================\n");
