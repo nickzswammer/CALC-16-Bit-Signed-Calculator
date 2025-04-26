@@ -86,7 +86,7 @@ module gencon_tb;
             test_number += 1;
             reset_dut();
 
-	    $display("%s", $sformatf("Operands: %0d, %0d\n", num_1, num_2));      
+	    $display("%s", $sformatf("Operands: %0d, %0d", num_1, num_2));      
 		
             // extract digits press for first number
             temp = num_1;
@@ -198,7 +198,7 @@ module gencon_tb;
 	        $write("-");
 	    end
 		
-		$display("%s", $sformatf("Decimal Output: %0d", display_output[14:0]));
+		$display("%s", $sformatf("\nDecimal Output: %0d", display_output[14:0]));
 	    $display("Binary Output: %b", display_output);
 		
 		// manually decode sign-magnitude
@@ -227,15 +227,14 @@ module gencon_tb;
         num_passed = 0;
 	    
 	// Addition tests (3'b010)
-	    /*
 	apply_inputs(2,   3'b010, 3, 5);            // 2 + 3 = 5
 	apply_inputs(1000,3'b010, 2345, 3345);      // 1000 + 2345 = 3345
 	apply_inputs(-10, 3'b010, 10, 0);           // -10 + 10 = 0
+	apply_inputs(-25, 3'b010, -15, -40);        // -25 + -15 = -40
 	apply_inputs(0,   3'b010, 0, 0);            // 0 + 0 = 0
 	apply_inputs(-32768, 3'b010, 32767, -1);    // edge case
- */
-	apply_inputs(-25, 3'b010, -15, -40);        // -25 + -15 = -40
-	/*
+
+	
 	// Subtraction tests (3'b011)
 	apply_inputs(5,   3'b010, 3, 2);            // 5 - 3 = 2
 	apply_inputs(3,   3'b010, 5, -2);           // 3 - 5 = -2
@@ -243,6 +242,7 @@ module gencon_tb;
 	apply_inputs(-5,  3'b010, -3, -2);          // -5 - (-3) = -2
 	apply_inputs(0,   3'b010, 99, -99);         // 0 - 99 = -99
 	apply_inputs(99,  3'b010, 0, 99);           // 99 - 0 = 99
+	/*
 	
 	// Multiplication tests (3'b100)
 	apply_inputs(4,   3'b100, 3, 12);           // 4 * 3 = 12
