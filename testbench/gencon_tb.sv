@@ -20,6 +20,9 @@ module gencon_tb;
     int temp; // temp for getting MSB
     int num_digits; // for getting MSB
     int divisor; // for the getting MSB
+
+    int display_output_signed;
+	
     
     // Clock generation
     always #5 clk = ~clk; // every 5 time units, flip clock signal
@@ -199,8 +202,6 @@ module gencon_tb;
 		
 	    $display("%s", $sformatf("%0d", display_output[14:0]));
 	    $display("Binary Output: %b", display_output);
-            
-		int display_output_signed;
 		
 		// manually decode sign-magnitude
 		if (display_output[15]) begin
