@@ -229,44 +229,50 @@ module gencon_tb;
         num_passed = 0;
 	/*
 	// Addition tests (3'b010)
-	
-	apply_inputs(2,   3'b010, 3, 5);            // 2 + 3 = 5
-	apply_inputs(1000,3'b010, 2345, 3345);      // 1000 + 2345 = 3345
-	apply_inputs(-10, 3'b010, 10, 0);           // -10 + 10 = 0
-	apply_inputs(-25, 3'b010, -15, -40);        // -25 + -15 = -40
-	apply_inputs(0,   3'b010, 0, 0);            // 0 + 0 = 0
-	apply_inputs(-32768, 3'b010, 32767, -1);    // edge case
-
+	apply_inputs(2,    3'b010, 3,    5);       // 2 + 3 = 5
+	apply_inputs(1000, 3'b010, 2345, 3345);    // 1000 + 2345 = 3345
+	apply_inputs(-10,  3'b010, 10,   0);       // -10 + 10 = 0
+	apply_inputs(-25,  3'b010, -15, -40);      // -25 + -15 = -40
+	apply_inputs(0,    3'b010, 0,    0);       // 0 + 0 = 0
+	apply_inputs(32766,3'b010, 1,    32767);   // 32766 + 1 = 32767 (borderline)
+	apply_inputs(-32766,3'b010, -1, -32767);   // -32766 + (-1) = -32767 (borderline)
+	apply_inputs(16384,3'b010, 16383, 32768);  // 16384 + 16383 = 32768 (overflow case)
 	
 	// Subtraction tests (3'b011)
-	
-	apply_inputs(5,   3'b011, 3, 2);            // 5 - 3 = 2
-	apply_inputs(3,   3'b011, 5, -2);           // 3 - 5 = -2
-	apply_inputs(-3,  3'b011, -5, 2);           // -3 - (-5) = 2
-	apply_inputs(-5,  3'b011, -3, -2);          // -5 - (-3) = -2
-	apply_inputs(0,   3'b011, 99, -99);         // 0 - 99 = -99
-	apply_inputs(99,  3'b011, 0, 99);           // 99 - 0 = 99
- 	
-
+	apply_inputs(5,    3'b011, 3,    2);       // 5 - 3 = 2
+	apply_inputs(3,    3'b011, 5,   -2);       // 3 - 5 = -2
+	apply_inputs(-3,   3'b011, -5,  2);        // -3 - (-5) = 2
+	apply_inputs(-5,   3'b011, -3, -2);        // -5 - (-3) = -2
+	apply_inputs(0,    3'b011, 99,  -99);      // 0 - 99 = -99
+	apply_inputs(99,   3'b011, 0,    99);      // 99 - 0 = 99
+	apply_inputs(32766,3'b011, -1,  32767);    // 32767 - (-1) = 32768
+	apply_inputs(-32768,3'b011, 1, -32769);    // -32768 - 1 = -32769 (overflow case)
 	
 	// Multiplication tests (3'b100)
-	apply_inputs(4,   3'b100, 3, 12);           // 4 * 3 = 12
-	apply_inputs(-2,  3'b100, 5, -10);          // -2 * 5 = -10
-	apply_inputs(-3,  3'b100, -6, 18);          // -3 * -6 = 18
-	apply_inputs(0,   3'b100, 100, 0);          // 0 * 100 = 0
-	apply_inputs(100, 3'b100, 0, 0);            // 100 * 0 = 0
-	apply_inputs(1,   3'b100, -1, -1);          // 1 * -1 = -1
-	apply_inputs(32767, 3'b100, 1, 32767);      // max positive * 1
-	apply_inputs(-32768, 3'b100, 1, -32768);    // min negative * 1
-	apply_inputs(128, 3'b100, 256, 32768);      // overflow borderline
+	apply_inputs(4,    3'b100, 3,    12);      // 4 * 3 = 12
+	apply_inputs(-2,   3'b100, 5,   -10);      // -2 * 5 = -10
+	apply_inputs(-3,   3'b100, -6,   18);      // -3 * -6 = 18
+	apply_inputs(0,    3'b100, 100,  0);       // 0 * 100 = 0
+	apply_inputs(100,  3'b100, 0,    0);       // 100 * 0 = 0
+	apply_inputs(1,    3'b100, -1,  -1);       // 1 * -1 = -1
+	apply_inputs(32767,3'b100, 1,  32767);     // 32767 * 1 = 32767
+	apply_inputs(-32767,3'b100, 1, -32767);    // -32767 * 1 = -32767
+	apply_inputs(4681,  3'b100, 7, 32767);    // 4681 * 7 = 32767
+	apply_inputs(-4681, 3'b100, 7, -32767);   // -4681 * 7 = -32767
+	apply_inputs(181,  3'b100, 181, 32761);    // 181 * 181 = 32761
+	apply_inputs(-1,   3'b100, -1, 1);         // -1 * -1 = 1
 	
 	// Additional edge coverage
-	apply_inputs(1234, 3'b010, -5678, -4444);   // addition with large neg
-	apply_inputs(-999, 3'b011, 999, -1998);     // subtraction extreme
-	apply_inputs(-12, 3'b100, 3000, -36000);    // large negative mult
+	apply_inputs(1234, 3'b010, -5678, -4444);  // addition with large neg
+	apply_inputs(-999, 3'b011, 999, -1998);    // subtraction extreme
 	
 	// Identity behavior
-	apply_inputs(-1,  3'b001, 1, 0);            // -1 + 1 = 0
+	apply_inputs(-1,  3'b010, 1, 0);            // -1 + 1 = 0
+	apply_inputs(1,   3'b011, 1, 0);            // 1 - 1 = 0
+	apply_inputs(1,   3'b100, 1, 1);            // 1 * 1 = 1
+	apply_inputs(-1,  3'b100, 1, -1);           // -1 * 1 = -1
+	apply_inputs(-1,  3'b100, -1, 1);           // -1 * -1 = 1
+
 	*/
 
 	apply_inputs(-32768, 3'b010, 32767, -1);    // edge case
