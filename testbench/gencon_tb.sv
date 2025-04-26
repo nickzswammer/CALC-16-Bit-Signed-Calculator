@@ -205,11 +205,11 @@ module gencon_tb;
 		
 		// manually decode sign-magnitude
 		if (display_output[15]) begin
-		    display_output_signed = -display_output[14:0];
+		    display_output_signed = -int'(display_output[14:0]);  // sign-magnitude: make it negative
 		end else begin
-		    display_output_signed = display_output[14:0];
+		    display_output_signed = int'(display_output[14:0]);   // positive as int
 		end
-		
+				
 		if (expected_out != display_output_signed) begin
 		    $display("[Time %0t]: ❌ Expected %0d, got %0d", $time, expected_out, display_output_signed);
 		end else begin
