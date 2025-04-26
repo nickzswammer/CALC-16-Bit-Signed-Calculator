@@ -114,6 +114,10 @@ module gencon_tb;
 
     	    temp = num_1;
 
+	    if (num_1 < 0) begin
+	        temp = num_1 * -1;		    
+	    end
+
     	    while (divisor > 0) begin
         	digit = temp / divisor;
 		press_digit(digit[3:0]);
@@ -154,6 +158,9 @@ module gencon_tb;
     	    end
 
     	    temp = num_2;
+	    if (num_2 < 0) begin
+	        temp = num_2 * -1;		    
+	    end
 
     	    while (divisor > 0) begin
         	digit = temp / divisor;
