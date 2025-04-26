@@ -61,7 +61,7 @@ module gencon (
     // FSM state transition
     always_ff @(posedge clk or negedge nRST) begin
         if (!nRST) begin
-            current_state <= SEND_MULT_OP1_START;
+            current_state <= WAIT_OP1;
             operand1 <= 0;
             operand2 <= 0;
             complete <= 0;
@@ -90,50 +90,50 @@ module gencon (
         operator_to_latch = latched_operator_input;
         
         case (current_state)
-            SEND_MULT_OP1_START:
+            WAIT_OP1:
     
                 if (operator_input != 3'b000 && operator_input != 3'b001) begin
                     latch_operator = 1;
                     operator_to_latch = operator_input;
-                    next_state = SEND_MULT_OP2_START;
+                    next_state = WAIT_OP2;
                 end
                 else begin
-                    next_state = (read_input) ? WAIT_MULT_OP1 : SEND_MULT_OP1_START;
+                    next_state = (read_input) ? WAIT_MULT_OP1 : WAIT_OP1;
                 end
 
             WAIT_MULT_OP1:
-                next_state = (mult_finish) ? GET_FIRST_NUM : WAIT_MULT_OP1;
+                next_state = (mult_finish) ? ADD_KEY_INPUT_OP1 : WAIT_MULT_OP1;
 
-            GET_FIRST_NUM:
-                next_state = SEND_MULT_OP1_START;
+            ADD_KEY_INPUT_OP1:
+                next_state = WAIT_OP1;
 
-            SEND_MULT_OP2_START:
+            WAIT_OP2:
                 if (equal_input) begin
-                    next_state = SEND_TO_ALU;
+                    next_state = SEND_TO_COMPUTE;
                 end
                 else begin
-                    next_state = (read_input) ? WAIT_MULT_OP2 : SEND_MULT_OP2_START;
+                    next_state = (read_input) ? WAIT_MULT_OP2 : WAIT_OP2;
                 end
 
             WAIT_MULT_OP2:
-                next_state = (mult_finish) ? GET_SECOND_NUM : WAIT_MULT_OP2;
+                next_state = (mult_finish) ? ADD_KEY_INPUT_OP2 : WAIT_MULT_OP2;
 
-            GET_SECOND_NUM:
-                next_state = SEND_MULT_OP2_START;
+            ADD_KEY_INPUT_OP2:
+                next_state = WAIT_OP2;
 
-            SEND_TO_ALU:
-                next_state = WAIT_ALU;
+            SEND_TO_COMPUTE:
+                next_state = WAIT_COMPUTE;
 
-            WAIT_ALU:
+            WAIT_COMPUTE:
                 if (ALU_finish)
-                    next_state = SHOW_RESULT_ALU;
+                    next_state = SHOW_RESULT_ADDSUB;
                 else if (mult_finish)
                     next_state = SHOW_RESULT_MULT;
                 else
-                    next_state = WAIT_ALU;
+                    next_state = WAIT_COMPUTE;
 
-            SHOW_RESULT_ALU, SHOW_RESULT_MULT:
-                next_state = SEND_MULT_OP1_START;
+            SHOW_RESULT_ADDSUB, SHOW_RESULT_MULT:
+                next_state = WAIT_OP1;
         endcase
         /* verilator lint_on CASEINCOMPLETE */
 
@@ -149,7 +149,7 @@ module gencon (
             start_mult <= 0;
 
             case (current_state)
-                SEND_MULT_OP1_START: begin
+                WAIT_OP1: begin
                     if (operator_input == 1) begin
                         operand1[15] <=  operand1[15] ^ 1'b1;
                     end
@@ -170,11 +170,11 @@ module gencon (
                     end
                 end
 
-                GET_FIRST_NUM: begin
+                ADD_KEY_INPUT_OP1: begin
                     operand1 <= operand1 + {12'd0, latched_keypad_input};
                 end
 
-                SEND_MULT_OP2_START: begin
+                WAIT_OP2: begin
                     if (operator_input == 1) begin
                         operand2[15] <=  operand2[15] ^ 1'b1;
                     end
@@ -195,11 +195,11 @@ module gencon (
                     end
                 end
 
-                GET_SECOND_NUM: begin
+                ADD_KEY_INPUT_OP2: begin
                     operand2 <= operand2 + {12'd0, latched_keypad_input};
                 end
 
-                SEND_TO_ALU: begin
+                SEND_TO_COMPUTE: begin
                     if (latched_operator_input == 2 || latched_operator_input == 3) begin
                         ALU_in1 <= operand1;
                         ALU_in2 <= operand2;
@@ -212,10 +212,10 @@ module gencon (
                     end
                 end
 
-                WAIT_ALU:
+                WAIT_COMPUTE:
                     ;
 
-                SHOW_RESULT_ALU: begin
+                SHOW_RESULT_ADDSUB: begin
                     complete <= 1;
                     display_output <= ALU_out;
                 end
