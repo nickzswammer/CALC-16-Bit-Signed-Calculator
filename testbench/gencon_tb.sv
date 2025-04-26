@@ -80,19 +80,17 @@ module gencon_tb;
         input integer expected_out // expected output
     );
         begin
-	    $display("\n==========================================\n");
-		$display("%s", $sformatf("Test #%d: ", test_number + 1));
+	    $display("\n==========================================");
+		$display("%s", $sformatf("Test #%d: \n", test_number + 1));
 		
             test_number += 1;
             reset_dut();
 
-	    $display("%s", $sformatf("Operands: %0d, %0d", num_1, num_2));      
+	    $display("%s", $sformatf("Operands: %0d, %0d\n", num_1, num_2));      
 		
             // extract digits press for first number
             temp = num_1;
 	    num_digits = 0;
-
-		$display("Num1: %d", num_1);
 
 	    if (num_1 < 0) begin
 	        temp = num_1 * -1;		    
@@ -200,7 +198,7 @@ module gencon_tb;
 	        $write("-");
 	    end
 		
-	    $display("%s", $sformatf("%0d", display_output[14:0]));
+		$display("%s", $sformatf("Decimal Output: %0d", display_output[14:0]));
 	    $display("Binary Output: %b", display_output);
 		
 		// manually decode sign-magnitude
