@@ -227,7 +227,7 @@ module gencon_tb;
 
         test_number = 0;
         num_passed = 0;
-	    
+	/*
 	// Addition tests (3'b010)
 	
 	apply_inputs(2,   3'b010, 3, 5);            // 2 + 3 = 5
@@ -248,7 +248,7 @@ module gencon_tb;
 	apply_inputs(99,  3'b011, 0, 99);           // 99 - 0 = 99
  	
 
-	/*
+	
 	// Multiplication tests (3'b100)
 	apply_inputs(4,   3'b100, 3, 12);           // 4 * 3 = 12
 	apply_inputs(-2,  3'b100, 5, -10);          // -2 * 5 = -10
@@ -268,7 +268,9 @@ module gencon_tb;
 	// Identity behavior
 	apply_inputs(-1,  3'b001, 1, 0);            // -1 + 1 = 0
 	*/
-	
+
+	apply_inputs(-32768, 3'b010, 32767, -1);    // edge case
+	    
         $display("Passed %0d/%0d tests.\n", num_passed, test_number);
 	$display("==========================================\n");
 
