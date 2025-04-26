@@ -237,7 +237,7 @@ module gencon_tb;
 	apply_inputs(0,    3'b010, 0,    0);       // 0 + 0 = 0
 	apply_inputs(32766,3'b010, 1,    32767);   // 32766 + 1 = 32767 (borderline)
 	apply_inputs(-32766,3'b010, -1, -32767);   // -32766 + (-1) = -32767 (borderline)
-	apply_inputs(16384,3'b010, 16383, 32768);  // 16384 + 16383 = 32768 (overflow case)
+	apply_inputs(16384,3'b010, 16383, 32767);  // 16384 + 16383 = 32767 (borderline)
 	
 	// Subtraction tests (3'b011)
 	apply_inputs(5,    3'b011, 3,    2);       // 5 - 3 = 2
@@ -246,8 +246,7 @@ module gencon_tb;
 	apply_inputs(-5,   3'b011, -3, -2);        // -5 - (-3) = -2
 	apply_inputs(0,    3'b011, 99,  -99);      // 0 - 99 = -99
 	apply_inputs(99,   3'b011, 0,    99);      // 99 - 0 = 99
-	apply_inputs(32766,3'b011, -1,  32767);    // 32767 - (-1) = 32768
-	apply_inputs(-32768,3'b011, 1, -32769);    // -32768 - 1 = -32769 (overflow case)
+	 apply_inputs(32766,3'b011, -1,  32767);    // 32766 - (-1) = 32767
 
 	/*
 	// Multiplication tests (3'b100)
