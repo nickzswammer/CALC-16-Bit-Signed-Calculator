@@ -238,12 +238,12 @@ module gencon_tb;
 	
 	// Subtraction tests (3'b011)
 	
-	apply_inputs(5,   3'b010, 3, 2);            // 5 - 3 = 2
-	apply_inputs(3,   3'b010, 5, -2);           // 3 - 5 = -2
-	apply_inputs(-3,  3'b010, -5, 2);           // -3 - (-5) = 2
-	apply_inputs(-5,  3'b010, -3, -2);          // -5 - (-3) = -2
-	apply_inputs(0,   3'b010, 99, -99);         // 0 - 99 = -99
-	apply_inputs(99,  3'b010, 0, 99);           // 99 - 0 = 99
+	apply_inputs(5,   3'b011, 3, 2);            // 5 - 3 = 2
+	apply_inputs(3,   3'b011, 5, -2);           // 3 - 5 = -2
+	apply_inputs(-3,  3'b011, -5, 2);           // -3 - (-5) = 2
+	apply_inputs(-5,  3'b011, -3, -2);          // -5 - (-3) = -2
+	apply_inputs(0,   3'b011, 99, -99);         // 0 - 99 = -99
+	apply_inputs(99,  3'b011, 0, 99);           // 99 - 0 = 99
  	
 
 	/*
@@ -259,8 +259,8 @@ module gencon_tb;
 	apply_inputs(128, 3'b100, 256, 32768);      // overflow borderline
 	
 	// Additional edge coverage
-	apply_inputs(1234, 3'b001, -5678, -4444);   // addition with large neg
-	apply_inputs(-999, 3'b010, 999, -1998);     // subtraction extreme
+	apply_inputs(1234, 3'b010, -5678, -4444);   // addition with large neg
+	apply_inputs(-999, 3'b011, 999, -1998);     // subtraction extreme
 	apply_inputs(-12, 3'b100, 3000, -36000);    // large negative mult
 	
 	// Identity behavior
