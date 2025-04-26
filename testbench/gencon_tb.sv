@@ -89,14 +89,17 @@ module gencon_tb;
             temp = num_1;
 	    num_digits = 0;
 
+		$display("Num1: %d", num_1);
+
 	    if (num_1 < 0) begin
-	        num_1 = num_1 * -1;
+	        temp = num_1 * -1;		    
 		@(posedge clk);
 		operator_input = 3'b001;
 		@(posedge clk);
 		operator_input = 0;
 
 	    end
+
 		
             while (temp > 0) begin
                 temp = temp / 10;
@@ -132,7 +135,7 @@ module gencon_tb;
 	    num_digits = 0;
 		
 	    if (num_2 < 0) begin
-	        num_2 = num_2 * -1;
+	        temp = num_2 * -1;
 		@(posedge clk);
 		operator_input = 3'b001;
 		@(posedge clk);
