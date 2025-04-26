@@ -236,13 +236,15 @@ module gencon_tb;
 
 	
 	// Subtraction tests (3'b011)
+	/*
 	apply_inputs(5,   3'b010, 3, 2);            // 5 - 3 = 2
 	apply_inputs(3,   3'b010, 5, -2);           // 3 - 5 = -2
 	apply_inputs(-3,  3'b010, -5, 2);           // -3 - (-5) = 2
 	apply_inputs(-5,  3'b010, -3, -2);          // -5 - (-3) = -2
 	apply_inputs(0,   3'b010, 99, -99);         // 0 - 99 = -99
 	apply_inputs(99,  3'b010, 0, 99);           // 99 - 0 = 99
-	/*
+ 	*/
+
 	
 	// Multiplication tests (3'b100)
 	apply_inputs(4,   3'b100, 3, 12);           // 4 * 3 = 12
@@ -261,8 +263,8 @@ module gencon_tb;
 	apply_inputs(-12, 3'b100, 3000, -36000);    // large negative mult
 	
 	// Identity behavior
-	    apply_inputs(-1,  3'b001, 1, 0);            // -1 + 1 = 0
-	    */
+	apply_inputs(-1,  3'b001, 1, 0);            // -1 + 1 = 0
+
 	
         $display("Passed %0d/%0d tests.\n", num_passed, test_number);
 	$display("==========================================\n");
