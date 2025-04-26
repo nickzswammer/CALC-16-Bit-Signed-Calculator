@@ -200,11 +200,20 @@ module gencon_tb;
 	    $display("%s", $sformatf("%0d", display_output[14:0]));
 	    $display("Binary Output: %b", display_output);
             
-		if(expected_out[14:0] != display_output[14:0]) begin
-			$display("%s", $sformatf("[Time %0t]: ❌ Expected %0b, got %0b", $time, expected_out, display_output));
-            end else begin
-                num_passed += 1;
-            end
+		int display_output_signed;
+		
+		// manually decode sign-magnitude
+		if (display_output[15]) begin
+		    display_output_signed = -display_output[14:0];
+		end else begin
+		    display_output_signed = display_output[14:0];
+		end
+		
+		if (expected_out != display_output_signed) begin
+		    $display("[Time %0t]: ❌ Expected %0d, got %0d", $time, expected_out, display_output_signed);
+		end else begin
+		    num_passed += 1;
+		end
 	    $display("==========================================\n");
     
             @(posedge clk);
