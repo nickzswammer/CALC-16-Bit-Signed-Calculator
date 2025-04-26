@@ -37,7 +37,6 @@ module gencon (
     logic latch_operator;
     logic [2:0] operator_to_latch;
 
-
     state_t current_state, next_state;
 
     // operands to send to ALU/ Multiplier
@@ -162,12 +161,9 @@ module gencon (
                         start_mult <= 1;
                         getting_op1 <= 1;
                     end
-    
                 end
 
                 WAIT_MULT_OP1: begin
-                    
-                    
                     if (mult_finish) begin
                         operand1 <= mult_out;
                         getting_op1 <= 0;
@@ -190,7 +186,6 @@ module gencon (
                         start_mult <= 1;
                         getting_op2 <= 1;
                     end
-                    
                 end
 
                 WAIT_MULT_OP2: begin
