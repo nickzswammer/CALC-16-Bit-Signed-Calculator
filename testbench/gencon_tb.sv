@@ -283,5 +283,3 @@ module gencon_tb;
 
 
 endmodule
-
-
