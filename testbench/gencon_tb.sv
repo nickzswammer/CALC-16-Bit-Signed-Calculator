@@ -194,11 +194,13 @@ module gencon_tb;
 		$display("%s", $sformatf("Operation: Multiplication"));
 	    end
 
+            $display("");
+		
 	    if(display_output[15]) begin
 	        $write("-");
 	    end
 		
-		$display("%s", $sformatf("\nDecimal Output: %0d", display_output[14:0]));
+	    $display("%s", $sformatf("Decimal Output: %0d", display_output[14:0]));
 	    $display("Binary Output: %b", display_output);
 		
 		// manually decode sign-magnitude
