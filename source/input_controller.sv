@@ -28,7 +28,7 @@ module input_controller (
     logic [15:0] key_pressed;       // detected keypress
     logic [15:0] prev_key_pressed;  // previous keypress (for debouncing)
 
-    logic [19:0] debounce_counter;  // debounce timer (adjust width depending on your clock speed)
+    logic [20:0] debounce_counter;  // debounce timer (adjust width depending on your clock speed)
     logic debounce_done;
 
     // Column drive
@@ -82,7 +82,7 @@ module input_controller (
             debounce_counter <= 0;
             debounce_done <= 0;
         end else if (current_state == DEBOUNCE) begin
-            if (debounce_counter == 20'd999_999) begin // adjust this for debounce timing
+            if (debounce_counter == 21'd1_999_999) begin // adjust this for debounce timing
                 debounce_done <= 1;
             end else begin
                 debounce_counter <= debounce_counter + 1;
@@ -110,28 +110,30 @@ module input_controller (
                 key_pressed <= key_matrix & ~prev_key_pressed; // only new press
 
                 // Map key
-                casez (key_pressed)
-                    16'b0000_0000_0000_0001: keypad_input <= 4'd1;
-                    16'b0000_0000_0000_0010: keypad_input <= 4'd2;
-                    16'b0000_0000_0000_0100: keypad_input <= 4'd3;
-                    16'b0000_0000_0000_1000: operator_input <= 3'b010; // Addition (A)
+            casez (key_pressed)
+                16'b0000_0000_0000_0001: keypad_input <= 4'd1;    // (Col0,Row0)
+                16'b0000_0000_0000_0010: keypad_input <= 4'd4;    // (Col0,Row1)
+                16'b0000_0000_0000_0100: keypad_input <= 4'd7;    // (Col0,Row2)
+                16'b0000_0000_0000_1000: equal_input  <= 1'b1;    // (Col0,Row3) '*' = '='
+                
+                16'b0000_0000_0001_0000: keypad_input <= 4'd2;    // (Col1,Row0)
+                16'b0000_0000_0010_0000: keypad_input <= 4'd5;    // (Col1,Row1)
+                16'b0000_0000_0100_0000: keypad_input <= 4'd8;    // (Col1,Row2)
+                16'b0000_0000_1000_0000: keypad_input <= 4'd0;    // (Col1,Row3)
+            
+                16'b0000_0001_0000_0000: keypad_input <= 4'd3;    // (Col2,Row0)
+                16'b0000_0010_0000_0000: keypad_input <= 4'd6;    // (Col2,Row1)
+                16'b0000_0100_0000_0000: keypad_input <= 4'd9;    // (Col2,Row2)
+                16'b0000_1000_0000_0000: ;                        // (Col2,Row3) '#' ignore
+            
+                16'b0001_0000_0000_0000: operator_input <= 3'b000; // (Col3,Row0) A (+)
+                16'b0010_0000_0000_0000: operator_input <= 3'b001; // (Col3,Row1) B (-)
+                16'b0100_0000_0000_0000: operator_input <= 3'b010; // (Col3,Row2) C (×)
+                16'b1000_0000_0000_0000: operator_input <= 3'b011; // (Col3,Row3) D (neg)
+            
+                default: ;
+            endcase
 
-                    16'b0000_0000_0001_0000: keypad_input <= 4'd4;
-                    16'b0000_0000_0010_0000: keypad_input <= 4'd5;
-                    16'b0000_0000_0100_0000: keypad_input <= 4'd6;
-                    16'b0000_0000_1000_0000: operator_input <= 3'b011; // Subtraction (B)
-
-                    16'b0000_0001_0000_0000: keypad_input <= 4'd7;
-                    16'b0000_0010_0000_0000: keypad_input <= 4'd8;
-                    16'b0000_0100_0000_0000: keypad_input <= 4'd9;
-                    16'b0000_1000_0000_0000: operator_input <= 3'b100; // Multiplication (C)
-
-                    16'b0001_0000_0000_0000: operator_input <= 3'b001; // Negative sign (D)
-                    16'b0010_0000_0000_0000: keypad_input <= 4'd0;
-                    16'b0100_0000_0000_0000: equal_input <= 1; // '*' as Equal
-
-                    default: ; // no action
-                endcase
 
                 // Detect if it was number or operator
                 if (|keypad_input)
