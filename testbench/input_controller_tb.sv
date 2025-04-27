@@ -62,7 +62,7 @@ module input_controller_tb;
     end
 
     // Task: Simulate pressing a key (by setting rows during the correct column active)
-    task simulate_keypress(input int col_idx, input int row_idx);
+    task simulate_keypress(input logic [1:0] col_idx, input logic [1:0] row_idx);
         begin
             // Wait until the correct column is selected
             wait (dut.scan_col == col_idx);
