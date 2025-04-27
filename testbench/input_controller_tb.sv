@@ -35,31 +35,31 @@ module input_controller_tb;
         row = 4'b1111;
         #(100); // Wait 100 ns
         nRST = 1;
-
-        // Press '2' key (column 0, row 1)
-        simulate_keypress(0, 1);
+    
+        // Press '2' key (column 1, row 0)
+        simulate_keypress(2'd1, 2'd0); // Col1, Row0
         wait_for_read();
-
-        // Release
+    
         row = 4'b1111;
-        #(500_000); // Wait ~5 ms between presses
-
-        // Press 'Addition' key (column 0, row 3)
-        simulate_keypress(0, 3);
+        #(500_000); // 5ms gap
+    
+        // Press 'Addition' key (column 3, row 0)
+        simulate_keypress(2'd3, 2'd0); // Col3, Row0
         wait_for_read();
-
+    
         row = 4'b1111;
         #(500_000);
-
-        // Press 'Equal' key (column 2, row 2)
-        simulate_keypress(2, 2);
+    
+        // Press '*' key (Equal input) (column 0, row 3)
+        simulate_keypress(2'd0, 2'd3); // Col0, Row3
         wait_for_read();
-
+    
         row = 4'b1111;
-        #(1_000_000); // Let simulation run a bit
-
+        #(1_000_000);
+    
         $finish;
     end
+
 
     // Task: Simulate pressing a key (by setting rows during the correct column active)
     task simulate_keypress(input logic [1:0] col_idx, input logic [1:0] row_idx);
