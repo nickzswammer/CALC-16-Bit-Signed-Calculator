@@ -138,8 +138,10 @@ module input_controller (
             endcase
 
                 // Detect if it was number or operator
-                if (|keypad_input)
+                if (|keypad_input) begin
+                    $display("Hello");
                     read_input <= 1;
+                end
             end
 
             // Save current key state for debouncing
