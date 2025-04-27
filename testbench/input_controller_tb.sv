@@ -64,14 +64,19 @@ module input_controller_tb;
     // Task: Simulate pressing a key (by setting rows during the correct column active)
     task simulate_keypress(input logic [1:0] col_idx, input logic [1:0] row_idx);
         begin
-            // Wait until the correct column is selected
+            // Wait until DUT is scanning the right column
             wait (dut.scan_col == col_idx);
-            // Simulate row active (active low)
-            row = ~(4'b0001 << row_idx);
-            // Hold key down enough time for debounce
-            #(2_100_000); // slightly longer than debounce (~21ms)
+            @(posedge clk); // synchronize
+            row = ~(4'b0001 << row_idx); // press the key
+            
+            // Hold the key just long enough to pass debounce
+            #(2_500_000); // 25 ms (little longer than 20 ms)
+            
+            @(posedge clk);
+            row = 4'b1111; // release key
         end
     endtask
+
 
     // Task: Wait for read_input signal
     task wait_for_read();
@@ -81,5 +86,6 @@ module input_controller_tb;
                      $time, keypad_input, operator_input, equal_input);
         end
     endtask
+
 
 endmodule
