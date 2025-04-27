@@ -64,18 +64,21 @@ module input_controller_tb;
     // Task: Simulate pressing a key (by setting rows during the correct column active)
     task simulate_keypress(input logic [1:0] col_idx, input logic [1:0] row_idx);
         begin
-            // Wait until DUT is scanning the right column
-            wait (dut.scan_col == col_idx);
-            @(posedge clk); // synchronize
-            row = ~(4'b0001 << row_idx); // press the key
-            
-            // Hold the key just long enough to pass debounce
-            #(2_500_000); // 25 ms (little longer than 20 ms)
-            
-            @(posedge clk);
-            row = 4'b1111; // release key
+            // Wait until DUT is scanning the correct column
+            while (dut.scan_col !== col_idx) @(posedge clk);
+            @(posedge clk); // Synchronize extra clean
+    
+            // Now press the key
+            row = ~(4'b0001 << row_idx);
+    
+            // Hold key down long enough for debounce
+            #(2_100_000); // Hold for 21ms
+    
+            @(posedge clk); 
+            row = 4'b1111; // Release
         end
     endtask
+
 
 
     // Task: Wait for read_input signal
