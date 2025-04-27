@@ -31,6 +31,8 @@ module input_controller (
     logic [20:0] debounce_counter;  // debounce timer (adjust width depending on your clock speed)
     logic debounce_done;
 
+    $monitor("Current State: %d", current_state);
+    
     // Column drive
     always_ff @(posedge clk or negedge nRST) begin
         if (!nRST)
