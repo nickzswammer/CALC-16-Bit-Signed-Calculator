@@ -66,7 +66,7 @@ module input_controller_tb;
         begin
             // Wait until DUT is scanning the correct column
             while (dut.scan_col !== col_idx) @(posedge clk);
-            @(posedge clk); // Synchronize extra clean
+            @(posedge clk); // Synchronize
     
             // Now press the key
             row = ~(4'b0001 << row_idx);
@@ -74,11 +74,11 @@ module input_controller_tb;
             // Hold key down long enough for debounce
             #(2_100_000); // Hold for 21ms
     
-            @(posedge clk); 
-            row = 4'b1111; // Release
+            // Release key immediately after hold
+            row = 4'b1111;
+            @(posedge clk); // Synchronize after release
         end
     endtask
-
 
 
     // Task: Wait for read_input signal
