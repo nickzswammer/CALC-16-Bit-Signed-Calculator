@@ -139,7 +139,6 @@ module input_controller (
 
                 // Detect if it was number or operator
                 if (|keypad_input) begin
-                    $display("Hello");
                     read_input <= 1;
                 end
             end
