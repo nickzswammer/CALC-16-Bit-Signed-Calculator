@@ -143,8 +143,16 @@ module input_controller (
             end
 
             // Save current key state for debouncing
-            if (current_state == PROCESS)
+            if (current_state == PROCESS) begin
+                key_pressed <= key_matrix & ~prev_key_pressed; // Detect new press
+            
+                // Decode key like normal (your casez already correct)
+            
+                // Save current key state
                 prev_key_pressed <= key_matrix;
+                
+                key_matrix <= 16'b0;  // <<< ADD THIS LINE to clear matrix
+            end
         end
     end
 
