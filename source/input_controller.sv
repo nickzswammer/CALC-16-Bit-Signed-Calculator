@@ -114,19 +114,19 @@ module input_controller (
                     16'b0000_0000_0000_0001: keypad_input <= 4'd1;
                     16'b0000_0000_0000_0010: keypad_input <= 4'd2;
                     16'b0000_0000_0000_0100: keypad_input <= 4'd3;
-                    16'b0000_0000_0000_1000: operator_input <= 3'b000; // Addition (A)
+                    16'b0000_0000_0000_1000: operator_input <= 3'b010; // Addition (A)
 
                     16'b0000_0000_0001_0000: keypad_input <= 4'd4;
                     16'b0000_0000_0010_0000: keypad_input <= 4'd5;
                     16'b0000_0000_0100_0000: keypad_input <= 4'd6;
-                    16'b0000_0000_1000_0000: operator_input <= 3'b001; // Subtraction (B)
+                    16'b0000_0000_1000_0000: operator_input <= 3'b011; // Subtraction (B)
 
                     16'b0000_0001_0000_0000: keypad_input <= 4'd7;
                     16'b0000_0010_0000_0000: keypad_input <= 4'd8;
                     16'b0000_0100_0000_0000: keypad_input <= 4'd9;
-                    16'b0000_1000_0000_0000: operator_input <= 3'b010; // Multiplication (C)
+                    16'b0000_1000_0000_0000: operator_input <= 3'b100; // Multiplication (C)
 
-                    16'b0001_0000_0000_0000: operator_input <= 3'b011; // Negative sign (D)
+                    16'b0001_0000_0000_0000: operator_input <= 3'b001; // Negative sign (D)
                     16'b0010_0000_0000_0000: keypad_input <= 4'd0;
                     16'b0100_0000_0000_0000: equal_input <= 1; // '*' as Equal
 
