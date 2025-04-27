@@ -1,3 +1,5 @@
+`timescale 1ns/1ps
+
 module input_controller (
     input logic clk,           // system clock
     input logic nRST,          // active low reset
