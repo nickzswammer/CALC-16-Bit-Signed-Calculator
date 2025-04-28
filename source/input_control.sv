@@ -12,10 +12,6 @@ module input_control (
     output logic EqualSign // equal sign 
 );
 
-// This module scans a 4x4 matrix keypad by driving columns and reading rows.
-// When a key is pressed, it sets KeyRdy high, outputs the key's position on RowColVector,
-// and waits for KeyRd to resume scanning.
-
 // State machine
 typedef enum logic [1:0] {
     SCAN = 2'b00,           //Scanning columns for key presses
