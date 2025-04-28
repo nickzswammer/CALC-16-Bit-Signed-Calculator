@@ -6,11 +6,13 @@ module input_control_tb();
         logic [3:0] ColOut;
     	logic LFSRReset;
     	logic LFSRFlg;
-    	logic [3:0] RowColVector;
+    	logic [3:0] Number;
+	logic [2:0] Operator;
+	logic EqualSign;
     	logic KeyRdy;
     	logic KeyRd;
 
-	read dut (
+	input_control dut (
        	 .Reset(Reset),
        	 .Clock(Clock),
        	 .RowIn(RowIn),
@@ -33,7 +35,7 @@ module input_control_tb();
        		 RowIn = 4'b1111; //start with no key pressed
        		 LFSRFlg = 0;
         	KeyRd = 0;	
-		$monitor("button pressed is %d",RowColVector);
+		$monitor("button pressed is %d", Number);
 		
 	RowIn = 4'b1011;
 	
