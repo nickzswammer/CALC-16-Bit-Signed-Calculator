@@ -22,6 +22,7 @@ module input_control_tb();
        	 .KeyRdy(KeyRdy),
        	 .KeyRd(KeyRd),
 	 .Number(Number),
+	 .Operator(Operator),
 	 .EqualSign(EqualSign)		 
   	);
 
@@ -40,6 +41,9 @@ module input_control_tb();
 	RowIn = 4'b1011;
 	
 	$monitor("When RowIn 4'b1011, Number = %d", Number);
+	
+	RowIn = 4'b0001;
+	$monitor("When RowIN 4'b0001, Number = %d", Number);
 
 	end
 endmodule 
