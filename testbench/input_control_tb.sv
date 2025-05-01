@@ -32,8 +32,9 @@ module input_control_tb();
 		#10;
 		LFSRFlg = 1;
 		#10;
+		wait(dut.Col == 4'b
 		// Simulate key press in row 0, column 0
-		RowIn = 4'b1111;  // row 0 active
+		RowIn = 4'b1110;  // row 0 active
 
 		#10;
 		RowIn = 4'b1111;
@@ -42,7 +43,7 @@ module input_control_tb();
 		$display("Key Detected: Number = %d, Operator = %d, Equal = %b",
 		         Number, Operator, EqualSign);
 
-		KeyRd = 1; #10; KeyRd = 0;
+		KeyRd = 1; #10; KeeyRd = 0;
 		
 		#20;
 		$finish;
