@@ -34,8 +34,6 @@ module input_control_tb();
 		RowIn = 4'b1110;  // row 0 active
 
 		#500;
-		wait (KeyRdy == 1);
-		#10;  // Let values propagate
 		$display("Key Detected: Number = %d, Operator = %d, Equal = %b",
 		         Number, Operator, EqualSign);
 
