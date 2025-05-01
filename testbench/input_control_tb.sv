@@ -43,7 +43,7 @@ module input_control_tb();
 		$display("Key Detected: Number = %d, Operator = %d, Equal = %b",
 		         Number, Operator, EqualSign);
 
-		KeyRd = 1; #10; KeeyRd = 0;
+		KeyRd = 1; #10; KeyRd = 0;
 		
 		#20;
 		$finish;
