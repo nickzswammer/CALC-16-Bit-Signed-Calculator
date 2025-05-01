@@ -173,7 +173,6 @@ always_ff @(posedge Clock or negedge Reset) begin
                 LFSRReset <= 0;
                 KeyRdy <= 1;
                 Number <= 4'b0000;
-                Counter <= 0;
                 Data <= 16'hFFFF;
                 Sum <= 0;
             end
