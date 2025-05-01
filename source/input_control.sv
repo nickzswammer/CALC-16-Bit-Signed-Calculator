@@ -59,7 +59,7 @@ always_ff @(posedge Clock or negedge Reset) begin
                     case (Col)
                         4'b0111: begin 
                             if (waitbit == 1) begin
-                                Data[15:12] <= RowIn;   // row data
+				    Data[15:12] <= ~RowIn;   // row data
                                 Col <= 4'b1011;         // Move to next column
                                 waitbit <= 0;           
                             end
@@ -67,7 +67,7 @@ always_ff @(posedge Clock or negedge Reset) begin
                         end
                         4'b1011: begin  
                             if (waitbit == 1) begin
-                                Data[11:8] <= RowIn;    
+				    Data[11:8] <= ~RowIn;    
 				Col <= 4'b1101;	
                                 waitbit <= 0;
                             end
@@ -75,7 +75,7 @@ always_ff @(posedge Clock or negedge Reset) begin
                         end
                         4'b1101: begin  
                             if (waitbit == 1) begin
-                                Data[7:4] <= RowIn;     
+				    Data[7:4] <= ~RowIn;     
                                 Col <= 4'b1110;         
                                 waitbit <= 0;
                             end
@@ -83,7 +83,7 @@ always_ff @(posedge Clock or negedge Reset) begin
                         end
                         4'b1110: begin  
                             if (waitbit == 1) begin
-                                Data[3:0] <= RowIn;     
+				    Data[3:0] <= ~RowIn;     
                                 Col <= 4'b0111;         
                                 State <= CALCULATE;     
                                 waitbit <= 0;
