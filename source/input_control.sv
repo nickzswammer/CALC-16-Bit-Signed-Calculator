@@ -1,18 +1,16 @@
-module read (
+module input_control (
     input logic Reset,        
     input logic Clock,          
     input logic [3:0] RowIn,    // input from keypad rows - input all 1?
     output logic [3:0] ColOut,  // output to keypad columns 
     output logic LFSRReset,     // Reset (Linear Feedback Shift Register)
     input logic LFSRFlg,        // Flag from LFSR for readiness - input 0
-    output logic [3:0] RowColVector, // 4-bit output 
     output logic KeyRdy,        // ready to be read
-    input logic KeyRd           // data read - input 0
+    input logic KeyRd,           // data read - input 0
+    output logic [3:0] Number,  //number to be output
+    output logic [2:0] Operator, //operator output
+    output logic EqualSign // equal sign 
 );
-
-// This module scans a 4x4 matrix keypad by driving columns and reading rows.
-// When a key is pressed, it sets KeyRdy high, outputs the key's position on RowColVector,
-// and waits for KeyRd to resume scanning.
 
 // State machine
 typedef enum logic [1:0] {
@@ -43,12 +41,14 @@ always_ff @(posedge Clock or negedge Reset) begin
         Col <= 4'b0111;             // Activate first column 
         LFSRReset <= 0;             
 	KeyRdy <=0;
-        RowColVector <= 4'b1101;    
+        Number <= 4'b0000;    
         Counter <= 0;               // Reset counter
+	EqualSign <= 0;
         Data <= 16'hFFFF;           
         Sum <= 0;                   
         ZeroChecker <= 0;           
-        waitbit <= 0;               
+        waitbit <= 0;
+	Operator <= 0;               
     end
     else begin
         // State machine 
@@ -103,10 +103,8 @@ always_ff @(posedge Clock or negedge Reset) begin
             end
             CALCULATE: begin
                 // num 0s in data
-		 Sum <= !(Data[0] ^ Data[1] ^ Data[2] ^ Data[3] ^
-      	 	Data[4] ^ Data[5] ^ Data[6] ^ Data[7] ^
-     		  Data[8] ^ Data[9] ^ Data[10] ^ Data[11] ^
-      		 Data[12] ^ Data[13] ^ Data[14] ^ Data[15]);
+		Sum <= (Data != 16'hFFFF) && ((Data & (Data - 1)) == 0);
+
 		
                 State <= ANALYZE;                   
             end
@@ -117,31 +115,35 @@ always_ff @(posedge Clock or negedge Reset) begin
                         
                         Counter <= Counter + 1'b1;  // debouncing
                         if (Counter == 3'b100) begin
+				$display("After 4 Clock Cycles");
                             
                             case (Data)
-                                16'hFFFE: RowColVector <= 4'b0000; // 1
-                                16'hFFFD: RowColVector <= 4'b0100; // 4
-                                16'hFFFB: RowColVector <= 4'b1000; // 7
-                                16'hFFF7: RowColVector <= 4'b1100; // *
-                                16'hFFEF: RowColVector <= 4'b0001; // 2
-                                16'hFFDF: RowColVector <= 4'b0101; // 5
-                                16'hFFBF: RowColVector <= 4'b1001; // 8
-                                16'hFF7F: RowColVector <= 4'b1101; // 0
-                                16'hFEFF: RowColVector <= 4'b0010; // 3
-                                16'hFDFF: RowColVector <= 4'b0110; // 6
-                                16'hFBFF: RowColVector <= 4'b1010; // 9
-                                16'hF7FF: RowColVector <= 4'b1110; // #
-                                16'hEFFF: RowColVector <= 4'b0011; // A
-                                16'hDFFF: RowColVector <= 4'b0111; //B
-                                16'hBFFF: RowColVector <= 4'b1011; // C
-                                16'h7FFF: RowColVector <= 4'b1111; // D
-                                default: RowColVector <= 4'b1101; // Default to 0
+                                16'hFFFE: Number <= 4'b0001; // 1
+                                16'hFFFD: Number <= 4'b0100; // 4
+                                16'hFFFB: Number <= 4'b1000; // 7
+                                16'hFFF7: Operator <= 3'b100; // *(multiplication)
+                                16'hFFEF: Number <= 4'b0010; // 2
+                                16'hFFDF: Number <= 4'b0101; // 5
+                                16'hFFBF: Number <= 4'b1000; // 8
+                                16'hFF7F: Number <= 4'b0000; // 0
+                                16'hFEFF: Number <= 4'b0011; // 3
+                                16'hFDFF: Number <= 4'b0110; // 6
+                                16'hFBFF: Number <= 4'b1001; // 9
+                                16'hF7FF: Operator <= 3'b001; // # (change sign
+                                16'hEFFF: Operator <= 3'b010; // A (Addition
+                                16'hDFFF: Operator <= 3'b011; //B (subraction
+                                16'hBFFF: EqualSign <= 1'b1; // C (equals)
+                                16'h7FFF: Operator <= 3'b110; // D (NAN or operator)
+                                default: Number <= 4'b0000; // Default to 0
                             endcase
                             KeyRdy <= 1;                
                             State <= WAIT_FOR_READ;     
                             Counter <= 0;               
-                            ZeroChecker <= 0;           
+                            ZeroChecker <= 0;
+			    
+			    	           
                         end
+			
                     end
                     
                     else begin // multiple keys pressed  so restart the state machinee                       
@@ -171,7 +173,7 @@ always_ff @(posedge Clock or negedge Reset) begin
                 Col <= 4'b1110;
                 LFSRReset <= 0;
                 KeyRdy <= 1;
-                RowColVector <= 4'b1111;
+                Number <= 4'b0000;
                 Counter <= 0;
                 Data <= 16'hFFFF;
                 Sum <= 0;

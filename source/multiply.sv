@@ -1,3 +1,6 @@
+/* verilator lint_off LATCH */
+/* verilator lint_off UNOPTFLAT */
+
 module multiply
 (
 	input wire clk,
@@ -91,7 +94,8 @@ module multiply
 	
 	//coutner for multiply
     adder15 compCount(.sum(), .cOut(stopCount), .in1(countOut), .in2(n2), .sub(1'b1)); 
-        
+
+	
     always_comb begin
         
 	finish = 1'b0;
@@ -140,3 +144,8 @@ module multiply
     end
 
 endmodule
+
+/* verilator lint_on LATCH */
+/* verilator lint_on UNOPTFLAT */
+
+

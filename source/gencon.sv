@@ -1,203 +1,232 @@
+// Refactored gencon module with proper multiplier operand handling via FSM state split
+`include "gencon_defs.sv"
+
 module gencon (
-    input logic clk,                    // System clock
-    input logic reset,                  // Reset signal
-    input logic [3:0] keypad_input,     // 4-bit Keypad input (single digit)
-    input logic operator_input,         // Operator input (ignored since only addition)
-    input logic equal_input,            // Equal input to trigger addition
-    output logic complete,              // Calculation completion flag
-    output logic [15:0] display_output, // 16-bit output to display result
-    
-    // ALU Interface
-    output logic [15:0] ALU_in1,        // Operand 1 to ALU
-    output logic [15:0] ALU_in2,        // Operand 2 to ALU
-    output logic start_calc,            // Start ALU calculation signal
+    input logic clk,
+    input logic nRST,
 
-    output logic [15:0] ALU_out,         // Result from ALU
-    output logic ALU_finish,             // ALU finish signal
-    
-    // Memory Control
-    output logic we,                     // Write enable
-    output logic oe,                     // Output enable
-    output logic [3:0] mem_addr,         // Memory address (2 bits: 00, 01, 10)
-    output logic [15:0] mem_data,        // Data bus to update memory
-    output logic [15:0] data,             // Read Data
-    
-    // Multiply
-    input logic [15:0] mul_in1,        // Operand 1 to multi
-    input logic [15:0] mul_in2,        // Operand 2 to multi
-    input logic start_mul,            // Start ALU calculation signal
+    input logic [3:0] keypad_input,
+    input logic read_input,
+    input logic [2:0] operator_input,
+    input logic equal_input,
 
-    output logic [15:0] mul_out,         // Result from multi
-    output logic mul_finish             // multi finish signal
+    output logic complete,
+    output logic [15:0] display_output,
+    output state_t tb_current_state  // ← add this in port list
 
 );
 
-    addition add_calc(
-        .clk(clk),
-        .nRST(reset),  // Reset signal (active low)
-        .INn1(ALU_in1),
-        .INn2(ALU_in2),
-        .sub(1'b0),       // Need to change so this either is 1 for subtraction or 0 for adding and how to tell from input controler
-        .start(start_calc), // 
-        
-        .out(ALU_out),
-        .finish(ALU_finish)
-    );
+    logic [3:0] latched_keypad_input;
+    logic [2:0] latched_operator_input;
+    // ALU control
+    logic [15:0] ALU_in1, ALU_in2;
+    logic addOrSub, start_ALU;
+    logic ALU_finish;
+    logic [15:0] ALU_out;
 
-    multiply mul_calc(
-        .clk(clk),
-        .nRST(reset),  // Reset signal (active low)
-        .INn1(mul_in1),
-        .INn2(mul_in2),
-        .start(start_mul), // 
-        
-        .out(mul_out),
-        .finish(mul_finish)
-    );
-    
-    memory mem (
-        .clk(clk),
-        .mem_addr(mem_addr),
-        .mem_data(mem_data),
-        .data(data),
-        .we(we),
-        .oe(oe)
-    );
-    
-    // State Definitions
-    typedef enum logic [2:0] {
-        GET_FIRST_NUM = 3'b000,  // Getting the first operand
-        GET_SECOND_NUM = 3'b001, // Getting the second operand
-        SEND_TO_ALU   = 3'b010,  // Send operands to ALU
-        WAIT_ALU      = 3'b011,  // Wait for ALU to finish
-        SHOW_RESULT   = 3'b100   // Displaying result
-    } state_t;
-    
+    // Multiplier control
+    logic [15:0] mult_in1, mult_in2;
+    logic start_mult;
+    logic [15:0] mult_out;
+    logic mult_finish;
+
+    // Internal state flags
+    logic getting_op1, getting_op2;
+
+    // Temporary Operator Input Variables
+    logic latch_operator;
+    logic [2:0] operator_to_latch;
+
     state_t current_state, next_state;
-    
-    // Internal Registers
+
+    // operands to send to ALU/ Multiplier
     logic [15:0] operand1, operand2;
-    
-    // FSM: State Transitions
-    always_ff @(posedge clk or posedge reset) begin
-        if (reset)
-            current_state <= GET_FIRST_NUM;
-        else
+
+    // ALU instantiation
+    addition add_calc(
+        .clk(clk), .nRST(nRST),
+        .INn1(ALU_in1), .INn2(ALU_in2), .sub(addOrSub),
+        .start(start_ALU), .out(ALU_out), .finish(ALU_finish)
+    );
+
+    // Multiplier instantiation
+    multiply mult_calc(
+        .clk(clk), .nRST(nRST),
+        .INn1(mult_in1), .INn2(mult_in2),
+        .start(start_mult), .out(mult_out), .finish(mult_finish)
+    );
+
+    assign tb_current_state = current_state; // ← drive it inside gencon
+
+    // FSM state transition
+    always_ff @(posedge clk or negedge nRST) begin
+        if (!nRST) begin
+            current_state <= WAIT_OP1;
+            operand1 <= 0;
+            operand2 <= 0;
+            complete <= 0;
+            display_output <= 0;
+            getting_op1 <= 0;
+            getting_op2 <= 0;
+            latched_operator_input <= 0;
+            latched_keypad_input <= 0;
+            mult_in1 <= 0;
+            mult_in2 <= 0;
+            ALU_in1 <= 0;
+            ALU_in2 <= 0;
+        end else begin
             current_state <= next_state;
+            if (latch_operator) begin
+                latched_operator_input <= operator_to_latch;
+            end
+        end
     end
-    
-    // FSM: State Logic
+    /* verilator lint_off CASEINCOMPLETE */
+
+    // FSM logic
     always_comb begin
-	next_state = GET_FIRST_NUM; 
+        next_state = current_state;
+        latch_operator = 0;
+        operator_to_latch = latched_operator_input;
+        
         case (current_state)
-            GET_FIRST_NUM:
-                if (keypad_input != 4'b0000) 
-                    next_state = GET_FIRST_NUM;
-                else if (operator_input)     
-                    next_state = GET_SECOND_NUM;
-                else                         
-                    next_state = GET_FIRST_NUM;
-            
-            GET_SECOND_NUM:
-                if (keypad_input != 4'b0000)
-                    next_state = GET_SECOND_NUM;
-                else if (equal_input)
-                    next_state = SEND_TO_ALU;
-                else
-                    next_state = GET_SECOND_NUM;
-            
-            SEND_TO_ALU:
-                next_state = WAIT_ALU;  // Move to ALU wait state
-            
-            WAIT_ALU:
-                if (ALU_finish) 
-                    next_state = SHOW_RESULT;
-                else
-                    next_state = WAIT_ALU;
-            
-            SHOW_RESULT:
-                next_state = GET_FIRST_NUM; // Reset after showing result
-            
-            default:
-                next_state = GET_FIRST_NUM;
-        endcase
-    end
+            WAIT_OP1:
     
-    // Comment out to test state functionality
+                if (operator_input != 3'b000 && operator_input != 3'b001) begin
+                    latch_operator = 1;
+                    operator_to_latch = operator_input;
+                    next_state = WAIT_OP2;
+                end
+                else begin
+                    next_state = (read_input) ? WAIT_MULT_OP1 : WAIT_OP1;
+                end
 
-    /* 
-    // Memory & ALU Interaction
-    always_ff @(posedge clk) begin
-        case (current_state)
-            GET_FIRST_NUM: begin
-                if (keypad_input != 4'b0000) begin
-                    // HEY send to multiplier with 10 put back in memory
-                    operand1 <= (operand1 << 3) + (operand1 << 1) + {12'd0, keypad_input}; // Append digit
+            WAIT_MULT_OP1:
+                next_state = (mult_finish) ? ADD_KEY_INPUT_OP1 : WAIT_MULT_OP1;
+
+            ADD_KEY_INPUT_OP1:
+                next_state = WAIT_OP1;
+
+            WAIT_OP2:
+                if (equal_input) begin
+                    next_state = SEND_TO_COMPUTE;
+                end
+                else begin
+                    next_state = (read_input) ? WAIT_MULT_OP2 : WAIT_OP2;
+                end
+
+            WAIT_MULT_OP2:
+                next_state = (mult_finish) ? ADD_KEY_INPUT_OP2 : WAIT_MULT_OP2;
+
+            ADD_KEY_INPUT_OP2:
+                next_state = WAIT_OP2;
+
+            SEND_TO_COMPUTE:
+                next_state = WAIT_COMPUTE;
+
+            WAIT_COMPUTE:
+                if (ALU_finish)
+                    next_state = SHOW_RESULT_ADDSUB;
+                else if (mult_finish)
+                    next_state = SHOW_RESULT_MULT;
+                else
+                    next_state = WAIT_COMPUTE;
+
+            SHOW_RESULT_ADDSUB, SHOW_RESULT_MULT:
+                next_state = WAIT_OP1;
+        endcase
+        /* verilator lint_on CASEINCOMPLETE */
+
+    end
+
+    // Output + operand logic
+    always_ff @(posedge clk or negedge nRST) begin
+        if (!nRST) begin
+            start_ALU <= 0;
+            start_mult <= 0;
+        end else begin
+            start_ALU <= 0;
+            start_mult <= 0;
+
+            case (current_state)
+                WAIT_OP1: begin
+                    if (operator_input == 1) begin
+                        operand1[15] <=  operand1[15] ^ 1'b1;
+                    end
+                    if (read_input) begin
+                        latched_keypad_input <= keypad_input;
+                        
+                        mult_in1 <= operand1;
+                        mult_in2 <= 16'd10;
+                        start_mult <= 1;
+                        getting_op1 <= 1;
+                    end
+                end
+
+                WAIT_MULT_OP1: begin
+                    if (mult_finish) begin
+                        operand1 <= mult_out;
+                        getting_op1 <= 0;
+                    end
+                end
+
+                ADD_KEY_INPUT_OP1: begin
+                    operand1 <= operand1 + {12'd0, latched_keypad_input};
+                end
+
+                WAIT_OP2: begin
+                    if (operator_input == 1) begin
+                        operand2[15] <=  operand2[15] ^ 1'b1;
+                    end
                     
-                    mem_addr <= 4'b0;  // Store in memory at address 00
-                    mem_data <= operand1;
-                    we <= 1;
+                    if (read_input) begin
+                        latched_keypad_input <= keypad_input;
+                        mult_in1 <= operand2;
+                        mult_in2 <= 16'd10;
+                        start_mult <= 1;
+                        getting_op2 <= 1;
+                    end
                 end
-            end
-    
-            GET_SECOND_NUM: begin
-                if (keypad_input != 4'b0000) begin
-                    //operand2 <= operand2 * 10 + {12'd0, keypad_input}; // Append digit
-                    operand2 <= (operand2 << 3) + (operand2 << 1) + {12'd0, keypad_input};
-                    mem_addr <= 4'b1;  // Store in memory at address 01
-                    mem_data <= operand2;
-                    we <= 1;
+
+                WAIT_MULT_OP2: begin
+                    if (mult_finish) begin
+                        operand2 <= mult_out;
+                        getting_op2 <= 0;
+                    end
                 end
-            end
-        
-            SEND_TO_ALU: begin
-                ALU_in1 <= operand1; // Send operands to ALU
-                ALU_in2 <= operand2;
-                start_calc <= 1; // Trigger ALU computation
-            end
-        
-            WAIT_ALU: begin
-                start_calc <= 0; // Stop ALU start signal
-            end
-        
-            SHOW_RESULT: begin
-                complete <= 1;  // Indicate calculation done
-                display_output <= ALU_out;  // Store ALU result in display
-            end
-        
-            default: begin
-                we <= 0;
-                complete <= 0;
-            end
-        endcase
-    end
-    */
 
-    always_ff @(posedge clk) begin
-        case (current_state)
-            GET_FIRST_NUM: begin
-                $display("State: %s", "First Num");
-            end
+                ADD_KEY_INPUT_OP2: begin
+                    operand2 <= operand2 + {12'd0, latched_keypad_input};
+                end
 
-            GET_SECOND_NUM: begin
-                $display("State: %s", "Second Num");
-            end
+                SEND_TO_COMPUTE: begin
+                    if (latched_operator_input == 2 || latched_operator_input == 3) begin
+                        ALU_in1 <= operand1;
+                        ALU_in2 <= operand2;
+                        addOrSub <= (latched_operator_input == 3);
+                        start_ALU <= 1;
+                    end else if (latched_operator_input == 4) begin
+                        mult_in1 <= operand1;
+                        mult_in2 <= operand2;
+                        start_mult <= 1;
+                    end
+                end
 
-            SEND_TO_ALU: begin
-                $display("State: %s", "Send to ALU");
-            end
+                WAIT_COMPUTE:
+                    ;
 
-            WAIT_ALU: begin
-                $display("State: %s", "Wait ALU");
-            end
+                SHOW_RESULT_ADDSUB: begin
+                    complete <= 1;
+                    display_output <= ALU_out;
+                end
 
-            SHOW_RESULT: begin
-                $display("State: %s", "Show Result");
-            end
+                SHOW_RESULT_MULT: begin
+                    complete <= 1;
+                    display_output <= mult_out;
+                end
 
-            default: begin
-                $display("State: %s", "Default");
-            end
-        endcase
+                default: complete <= 0;
+            endcase
+        end
     end
 endmodule
