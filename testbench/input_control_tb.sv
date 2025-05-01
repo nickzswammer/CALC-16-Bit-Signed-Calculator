@@ -1,52 +1,45 @@
 module input_control_tb();
 
-	logic Reset;
-	logic Clock;
+	logic Reset, Clock;
 	logic [3:0] RowIn;
-        logic [3:0] ColOut;
-    	logic LFSRReset;
-    	logic LFSRFlg;
-    	logic [3:0] Number;
+	logic [3:0] ColOut;
+	logic LFSRReset, LFSRFlg;
+	logic KeyRdy, KeyRd;
+	logic [3:0] Number;
 	logic [2:0] Operator;
 	logic EqualSign;
-    	logic KeyRdy;
-    	logic KeyRd;
 
 	input_control dut (
-       	 .Reset(Reset),
-       	 .Clock(Clock),
-       	 .RowIn(RowIn),
-       	 .ColOut(ColOut),
-       	 .LFSRReset(LFSRReset),
-       	 .LFSRFlg(LFSRFlg),
-       	 .KeyRdy(KeyRdy),
-       	 .KeyRd(KeyRd),
-	 .Number(Number),
-	 .Operator(Operator),
-	 .EqualSign(EqualSign)		 
-  	);
+        .Reset(Reset), .Clock(Clock),
+        .RowIn(RowIn), .ColOut(ColOut),
+        .LFSRReset(LFSRReset), .LFSRFlg(LFSRFlg),
+        .KeyRdy(KeyRdy), .KeyRd(KeyRd),
+        .Number(Number), .Operator(Operator), .EqualSign(EqualSign)
+    );
 
 	always #5 Clock = ~Clock;
 
-
-	initial begin	
+	initial begin
 		$dumpfile("input_control.vcd");
 		$dumpvars();
 		
-		Reset = 1;
+		// Initialization
 		Clock = 0;
-		RowIn = 4'b1111; //start with no key pressed
-		LFSRFlg = 0;
-		KeyRd = 0;	
-		$monitor("button pressed is %d", Number);
-			
-		RowIn = 4'b1011;
+		Reset = 1; LFSRFlg = 0; RowIn = 4'b1111; KeyRd = 0;
+		#10 Reset = 0;
+		#10 Reset = 1;
 		
-		$monitor("When RowIn 4'b1011, Number = %d", Number);
+		// Simulate key press in row 0, column 0
+		LFSRFlg = 1;
+		RowIn = 4'b1110;  // row 0 active
+		#100;
+
+		$display("KeyRdy = %b, Number = %d, Operator = %d, EqualSign = %b",
+		          KeyRdy, Number, Operator, EqualSign);
+
+		KeyRd = 1; #10; KeyRd = 0;
 		
-		RowIn = 4'b0001;
-		$monitor("When RowIN 4'b0001, Number = %d", Number);
-	
+		#20;
 		$finish;
 	end
-endmodule 
+endmodule
