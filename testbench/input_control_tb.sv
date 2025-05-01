@@ -45,5 +45,7 @@ module input_control_tb();
 	RowIn = 4'b0001;
 	$monitor("When RowIN 4'b0001, Number = %d", Number);
 
+	$finish;
+
 	end
 endmodule 
