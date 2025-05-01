@@ -113,7 +113,6 @@ always_ff @(posedge Clock or negedge Reset) begin
 
 
             ANALYZE: begin
-                if (ZeroChecker == 1'b1) begin //if the previous check had no key pressed
                     
                     if (Sum) begin // if only one key was pressed  
                         Counter <= Counter + 1'b1;  // debouncing
@@ -147,8 +146,6 @@ always_ff @(posedge Clock or negedge Reset) begin
 			    	           
                         end
 			
-                    end
-                    
                     else begin // multiple keys pressed  so restart the state machinee                       
                         ZeroChecker <= 1'b0;
                         Counter <= 0;
