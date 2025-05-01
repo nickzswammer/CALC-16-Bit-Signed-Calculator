@@ -32,7 +32,8 @@ module input_control_tb();
 		// Simulate key press in row 0, column 0
 		LFSRFlg = 1;
 		RowIn = 4'b1110;  // row 0 active
-		
+
+		#500;
 		wait (KeyRdy == 1);
 		#10;  // Let values propagate
 		$display("Key Detected: Number = %d, Operator = %d, Equal = %b",
