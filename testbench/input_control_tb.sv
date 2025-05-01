@@ -29,23 +29,24 @@ module input_control_tb();
 	always #5 Clock = ~Clock;
 
 
-	initial begin
+	initial begin	
+		$dumpfile("input_control.vcd");
+		$dumpvars();
 		
 		Reset = 1;
-        	Clock = 0;
-       		 RowIn = 4'b1111; //start with no key pressed
-       		 LFSRFlg = 0;
-        	KeyRd = 0;	
+		Clock = 0;
+		RowIn = 4'b1111; //start with no key pressed
+		LFSRFlg = 0;
+		KeyRd = 0;	
 		$monitor("button pressed is %d", Number);
+			
+		RowIn = 4'b1011;
 		
-	RowIn = 4'b1011;
+		$monitor("When RowIn 4'b1011, Number = %d", Number);
+		
+		RowIn = 4'b0001;
+		$monitor("When RowIN 4'b0001, Number = %d", Number);
 	
-	$monitor("When RowIn 4'b1011, Number = %d", Number);
-	
-	RowIn = 4'b0001;
-	$monitor("When RowIN 4'b0001, Number = %d", Number);
-
-	$finish;
-
+		$finish;
 	end
 endmodule 
