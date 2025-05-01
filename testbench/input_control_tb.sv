@@ -33,6 +33,9 @@ module input_control_tb();
 		LFSRFlg = 1;
 		RowIn = 4'b1110;  // row 0 active
 
+		#10;
+		RowIn = 4'b1111;
+
 		#500;
 		$display("Key Detected: Number = %d, Operator = %d, Equal = %b",
 		         Number, Operator, EqualSign);
