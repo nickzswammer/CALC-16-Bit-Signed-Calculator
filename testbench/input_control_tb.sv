@@ -32,7 +32,7 @@ module input_control_tb();
 		#10;
 		LFSRFlg = 1;
 		#10;
-		wait(dut.Col == 4'b
+		wait(dut.Col == 4'b0111);
 		// Simulate key press in row 0, column 0
 		RowIn = 4'b1110;  // row 0 active
 
