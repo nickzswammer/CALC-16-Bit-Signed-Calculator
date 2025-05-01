@@ -106,7 +106,9 @@ always_ff @(posedge Clock or negedge Reset) begin
 		Sum <= (!Data[0] ^ !Data[1] ^ !Data[2] ^ !Data[3] ^
 			!Data[4] ^ !Data[5] ^ !Data[6] ^ !Data[7] ^
 			!Data[8] ^ !Data[9] ^ !Data[10] ^ !Data[11] ^
-			!Data[12] ^ !Data[13] ^ !Data[14] ^ !Data[15]);	    
+			!Data[12] ^ !Data[13] ^ !Data[14] ^ !Data[15]);	
+
+		Counter = 0;
 		
 		State <= ANALYZE;
 	end
@@ -142,13 +144,10 @@ always_ff @(posedge Clock or negedge Reset) begin
                             State <= WAIT_FOR_READ;     
                             Counter <= 0;               
                             ZeroChecker <= 0;
-			    
-			    	           
                         end
 			
                     else begin // multiple keys pressed  so restart the state machinee                       
                         ZeroChecker <= 1'b0;
-                        Counter <= 0;
                         State <= SCAN;
                     end
                 end
