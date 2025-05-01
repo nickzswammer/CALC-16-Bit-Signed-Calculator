@@ -28,9 +28,6 @@ logic Sum;            //inverted Data bits to detect key presses
 logic ZeroChecker;          //no-key-pressed condition
 logic waitbit;              // timing for column scans
 
-logic [15:0] active;
-
-
 // creates a 'debouncing function'
 assign ColOut[0] = Col[0] ? 1'bz : 1'b0; 
 assign ColOut[1] = Col[1] ? 1'bz : 1'b0; 
@@ -104,12 +101,12 @@ always_ff @(posedge Clock or negedge Reset) begin
                     LFSRReset <= 1;                 
                 end
             end
-		
+			
 	CALCULATE: begin
-	    active = ~Data;
-	    Sum <= (active != 0) && ((active & (active - 1)) == 0);
+	    Sum <= ((~Data) != 0) && (((~Data) & ((~Data) - 1)) == 0);
 	    State <= ANALYZE;
 	end
+
 
             ANALYZE: begin
                 if (ZeroChecker == 1'b1) begin //if the previous check had no key pressed
