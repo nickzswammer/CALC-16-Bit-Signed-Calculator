@@ -108,7 +108,7 @@ always_ff @(posedge Clock or negedge Reset) begin
 			!Data[8] ^ !Data[9] ^ !Data[10] ^ !Data[11] ^
 			!Data[12] ^ !Data[13] ^ !Data[14] ^ !Data[15]);	
 
-		Counter = 0;
+		Counter <= 0;
 		
 		State <= ANALYZE;
 	end
