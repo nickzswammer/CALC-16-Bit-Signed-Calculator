@@ -115,6 +115,7 @@ always_ff @(posedge Clock or negedge Reset) begin
                         
                         Counter <= Counter + 1'b1;  // debouncing
                         if (Counter == 3'b100) begin
+				$display("After 4 Clock Cycles");
                             
                             case (Data)
                                 16'hFFFE: Number <= 4'b0001; // 1
