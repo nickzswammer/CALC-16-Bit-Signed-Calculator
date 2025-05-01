@@ -146,10 +146,7 @@ always_ff @(posedge Clock or negedge Reset) begin
                             ZeroChecker <= 0;
                         end
 			
-                    else begin // multiple keys pressed  so restart the state machinee                       
-                        ZeroChecker <= 1'b0;
-                        State <= SCAN;
-                    end
+
                 end
                 else if (!Sum) begin // no button press
                     
