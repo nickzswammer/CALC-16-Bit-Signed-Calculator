@@ -28,9 +28,12 @@ module input_control_tb();
 		Reset = 1; LFSRFlg = 0; RowIn = 4'b1111; KeyRd = 0;
 		#10 Reset = 0;
 		#10 Reset = 1;
-		
-		// Simulate key press in row 0, column 0
+
+		#10;
 		LFSRFlg = 1;
+		#10;
+		wait(Col == 4'b0111);
+		// Simulate key press in row 0, column 0
 		RowIn = 4'b1110;  // row 0 active
 
 		#10;
