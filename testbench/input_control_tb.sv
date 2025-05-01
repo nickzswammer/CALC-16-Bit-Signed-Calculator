@@ -33,7 +33,7 @@ module input_control_tb();
 		LFSRFlg = 1;
 		#10;
 		// Simulate key press in row 0, column 0
-		RowIn = 4'b1110;  // row 0 active
+		RowIn = 4'b1101;  // row 0 active
 
 		#10;
 		RowIn = 4'b1111;
