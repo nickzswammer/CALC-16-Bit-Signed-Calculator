@@ -32,11 +32,12 @@ module input_control_tb();
 		#10;
 		LFSRFlg = 1;
 		#10;
-		// Simulate key press in row 0, column 0
-		RowIn = 4'b1101;  // row 0 active
-
+		
+		wait (dut.Col == 4'b0111); // Wait for column 0 active
 		#10;
-		RowIn = 4'b1111;
+		RowIn = 4'b1110;           // Active-low: row 0 pressed
+		#10;
+		RowIn = 4'b1111;           // Release the key
 
 		#500;
 		$display("Key Detected: Number = %d, Operator = %d, Equal = %b",
