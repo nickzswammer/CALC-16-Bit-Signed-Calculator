@@ -20,15 +20,15 @@ module input_control_tb();
   always #5 clk = ~clk;
 
   task automatic apply_inputs(input int key_index);
+    int row = key_index / 4;
+    int col = key_index % 4;
+
     @(posedge clk);
     nRST = 0;
     @(posedge clk);
     nRST = 1;
     @(posedge clk);
 	  
-    int row = key_index / 4;
-    int col = key_index % 4;
-
     // Wait until the correct column is active
     wait (ColOut == ~(4'b0001 << col));
 
