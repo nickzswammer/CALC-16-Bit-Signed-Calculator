@@ -39,7 +39,7 @@ module input_inverse_tb();
     //repeat (13) @(posedge clk);
 
     // Wait until in CONFIRM state (state == 3)
-	  wait(dut.state == state't(3));
+	  wait(dut.state == state_t'(3));
     @(posedge clk);
     @(posedge clk);
 
