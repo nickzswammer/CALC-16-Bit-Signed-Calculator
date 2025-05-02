@@ -82,8 +82,9 @@ module input_control (
     // Translate row and column index to keypad index 0–15
     function logic [3:0] encode_key(input logic [3:0] row, input logic [1:0] col);
         for (int r = 0; r < 4; r++)
-            if (row[r] == 0)
-	        return logic [3:0](r * 4 + col); // explicit cast to 4-bit logic
+	    if (row[r] == 0) begin
+		return (r * 4 + col)[3:0];
+	    end
         return 4'hF;
     endfunction
 
