@@ -65,7 +65,7 @@ module input_control (
 	        equal_input <= next_equal_input;
 	
 	        // Only raise read_input if it’s a digit
-	        if (!read_input && next_operator_input == 3'b000 && next_equal_input == 0) begin
+		    if (!read_input && operator_input == 3'b000 && equal_input == 0) begin
 	            read_input <= 1;
 	        end
 	    end
