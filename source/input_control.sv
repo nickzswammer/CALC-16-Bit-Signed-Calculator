@@ -1,10 +1,12 @@
 module input_control (
     input  logic clk,
     input  logic nRST,               // active-low reset
+	
     input  logic [3:0] RowIn,        // keypad rows (pulled up)
     output logic [3:0] ColOut,       // keypad columns (drive low to scan)
-    output logic KeyRdy,            // signal to general controller
-    input  logic KeyRd,             // signal from general controller
+	
+    output logic read_input,            // signal to general controller
+    input  logic key_read,             // signal from general controller
 
     output logic [3:0] keypad_input,     // 0–9 digits only
     output logic [2:0] operator_input,   // 3-bit operator code
@@ -31,7 +33,7 @@ module input_control (
             state <= IDLE;
             col_index <= 0;
             debounce_cnt <= 0;
-            KeyRdy <= 0;
+            read_input <= 0;
         end else begin
             state <= next_state;
 		
@@ -45,13 +47,13 @@ module input_control (
                     debounce_cnt <= 0;
             end
 
-            if (state == CONFIRM && !KeyRdy) begin
-                KeyRdy <= 1;
+            if (state == CONFIRM && !read_input) begin
+                read_input <= 1;
                 key_code <= encode_key(RowIn, col_index);
             end
 
             if (state == WAIT_RELEASE && !key_valid)
-                KeyRdy <= 0;
+                read_input <= 0;
         end
     end
 
@@ -63,7 +65,7 @@ module input_control (
             IDLE:        next_state = SCAN_COL;
             SCAN_COL:    next_state = key_valid ? WAIT_STABLE : SCAN_COL;
             WAIT_STABLE: next_state = (debounce_cnt >= 4'd10) ? CONFIRM : WAIT_STABLE;
-            CONFIRM:     next_state = KeyRd ? WAIT_RELEASE : CONFIRM;
+            CONFIRM:     next_state = key_read ? WAIT_RELEASE : CONFIRM;
             WAIT_RELEASE:next_state = !key_valid ? IDLE : WAIT_RELEASE;
 	    default: next_state = IDLE;
         endcase
@@ -131,8 +133,8 @@ endmodule
     output logic [3:0] ColOut,  // output to keypad columns 
     output logic LFSRReset,     // Reset (Linear Feedback Shift Register)
     input logic LFSRFlg,        // Flag from LFSR for readiness - input 0
-    output logic KeyRdy,        // ready to be read
-    input logic KeyRd,           // data read - input 0
+    output logic read_input,        // ready to be read
+    input logic key_read,           // data read - input 0
     output logic [3:0] Number,  //number to be output
     output logic [2:0] Operator, //operator output
     output logic EqualSign // equal sign 
@@ -166,7 +168,7 @@ always_ff @(posedge Clock or negedge Reset) begin
         State <= SCAN;             
         Col <= 4'b0111;             // Activate first column 
         LFSRReset <= 0;             
-	KeyRdy <=0;
+	read_input <=0;
         Number <= 4'b0000;    
         Counter <= 0;               // Reset counter
 	EqualSign <= 0;
@@ -266,7 +268,7 @@ always_ff @(posedge Clock or negedge Reset) begin
                                 16'h7FFF: Operator <= 3'b110; // D (NAN or operator)
                                 default: Number <= 4'b0000; // Default to 0
                             endcase
-                            KeyRdy <= 1;                
+                            read_input <= 1;                
                             State <= WAIT_FOR_READ;     
                             Counter <= 0;               
                             ZeroChecker <= 0;
@@ -282,9 +284,9 @@ always_ff @(posedge Clock or negedge Reset) begin
                 else State <= SCAN;                 
             end
             WAIT_FOR_READ: begin
-                if (KeyRd == 1) begin
+                if (key_read == 1) begin
                     
-                    KeyRdy <= 0;                    
+                    read_input <= 0;                    
                     LFSRReset <= 0;                 
                     State <= SCAN;                  
                 end
@@ -294,7 +296,7 @@ always_ff @(posedge Clock or negedge Reset) begin
                 State <= SCAN;
                 Col <= 4'b1110;
                 LFSRReset <= 0;
-                KeyRdy <= 1;
+                read_input <= 1;
                 Number <= 4'b0000;
                 Data <= 16'hFFFF;
                 Sum <= 0;
