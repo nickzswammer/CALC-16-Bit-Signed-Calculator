@@ -29,9 +29,6 @@
 	
     // Sequential logic with active-low reset
     always_ff @(posedge clk or negedge nRST) begin
-		$monitor("Current State: %d", state);
-	    $monitor("Read_input: %d", read_input);
-	    
         if (!nRST) begin
             state <= IDLE;
             col_index <= 0;
@@ -50,22 +47,10 @@
                     debounce_cnt <= 0;
             end
 
-if (state == CONFIRM) begin
-    logic [3:0] temp_key;
-    temp_key = encode_key(RowIn, col_index);
-    key_code <= temp_key; // 🔁 always latch the key
-
-    // ✅ Only raise read_input if it's a digit
-    if (!read_input) begin
-        case (temp_key)
-            4'h0, 4'h1, 4'h2, 4'h4, 4'h5, 4'h6, 4'h8, 4'h9, 4'hA, 4'hD:
-                read_input <= 1;
-            default:
-                read_input <= 0; // or just leave unchanged
-        endcase
-    end
-end
-
+	    if (state == CONFIRM && !read_input) begin
+    		key_code <= encode_key(RowIn, col_index);
+		read_input <= 1;
+    	    end
 
             if (state == WAIT_RELEASE && !key_valid)
                 read_input <= 0;
