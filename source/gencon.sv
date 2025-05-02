@@ -13,7 +13,7 @@ module gencon (
     output logic key_read, // to input controller to indicate key is read
     
     output logic complete,
-    output logic [15:0] display_output,
+    output logic [15:0] display_output
 );
 
     logic [3:0] latched_keypad_input;
