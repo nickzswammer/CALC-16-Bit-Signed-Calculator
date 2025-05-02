@@ -36,7 +36,7 @@ module calculator_top (
         .operator_input(operator_input),
         .equal_input(equal_input),
         .complete(complete),
-        .display_output(display_output),
+        .display_output(display_output)
     );
 
 endmodule
