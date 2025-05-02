@@ -23,7 +23,6 @@ module input_control_tb();
     int row = key_index / 4;
     int col = key_index % 4;
 
-    nRST = 1;
     @(posedge clk);
     nRST = 0;
     @(posedge clk);
