@@ -1,3 +1,6 @@
+`timescale 1ns / 1ns
+
+
 module inverse (
     input  logic clk,
     input  logic nRST,               // active-low reset
