@@ -45,6 +45,8 @@ module input_control_tb();
 
     // Hold for debounce
 	  repeat (13) @(posedge clk);
+
+	  wait(dut.state == 3);
     RowIn = 4'b1111; // release key
 
     // Wait for KeyRdy
