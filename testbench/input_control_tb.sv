@@ -24,6 +24,8 @@ module input_control_tb();
     $dumpfile("input_control.vcd");
     $dumpvars();
 
+    $monitor("Current State: %d", dut.state);
+
     // Initialization
     clk = 0;
     nRST = 0;
