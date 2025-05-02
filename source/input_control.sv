@@ -34,6 +34,20 @@ module input_control (
     logic [3:0] temp_key;
 
     int idx;
+
+	logic [3:0] RowMid, RowSync;
+
+    // synchronizer
+	always_ff @(posedge clk or negedge nRST) begin
+		if (!nRST) begin
+			RowMid <= 0;
+			RowSync <= 0;
+		end
+		else begin
+			RowMid <= RowIn;
+			RowSync <= RowMid;
+		end
+	end
 	
     // Sequential logic with active-low reset
     always_ff @(posedge clk or negedge nRST) begin
@@ -56,7 +70,7 @@ module input_control (
             end
 
 	    if (state == CONFIRM) begin
-	        temp_key = encode_key(RowIn, col_index);
+		temp_key = encode_key(RowSync, col_index);
 	        key_code <= temp_key;
 	        decoded_key = temp_key;
 	
@@ -101,8 +115,8 @@ module input_control (
     always_comb begin
         key_valid = 0;
         for (int i = 0; i < 4; i++)
-            if (RowIn[i] == 0)
-                key_valid = 1;
+		if (RowSync[i] == 0)
+                	key_valid = 1;
     end
 
     // Translate row and column index to keypad index 0–15
