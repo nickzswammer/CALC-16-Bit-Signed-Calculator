@@ -1,3 +1,5 @@
+`timescale 1ns / 1ns
+
 module calculator_top_tb();
 
   logic clk, nRST;
