@@ -5,7 +5,6 @@ module calculator_top (
     output logic [3:0] ColOut,  // to keypad columns
     output logic [15:0] display_output,  // final calculation output
     output logic complete,
-    output state_t current_state // for debugging
 );
 
     // Internal signals connecting input_control and gencon
@@ -38,7 +37,6 @@ module calculator_top (
         .equal_input(equal_input),
         .complete(complete),
         .display_output(display_output),
-        .tb_current_state(current_state)
     );
 
     always_ff @(posedge clk or negedge nRST) begin
