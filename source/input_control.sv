@@ -51,6 +51,7 @@
 		if (state == CONFIRM) begin
     logic [3:0] temp_key;
     temp_key = encode_key(RowIn, col_index);
+			$display("Temp Key: %b", temp_key);
     key_code <= temp_key; // 🔁 always latch the key
 
     // ✅ Only raise read_input if it's a digit
