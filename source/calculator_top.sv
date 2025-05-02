@@ -35,6 +35,7 @@ module calculator_top (
         .read_input(read_input),
         .operator_input(operator_input),
         .equal_input(equal_input),
+        .key_read(key_read),
         .complete(complete),
         .display_output(display_output)
     );
