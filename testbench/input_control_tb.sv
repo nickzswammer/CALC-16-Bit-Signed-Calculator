@@ -63,6 +63,11 @@ module input_control_tb();
     @(posedge clk);
     KeyRd = 0;
 
+	  @(posedge clk);
+	nRST = 0;
+	  @(posedge clk);
+	nRST = 1;
+	  
     #20 $finish;
   end
 
