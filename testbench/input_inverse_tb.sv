@@ -30,10 +30,10 @@ module input_inverse_tb();
     @(posedge clk);
 	  
     // Wait until the correct column is active
-    wait (ColOut == ~(4'b0001 << col));
+    wait (ColOut == (4'b0001 << col));
 
     // Press the key by pulling the correct row low
-    RowIn = ~(4'b0001 << row);
+    RowIn = (4'b0001 << row);
 
     // Hold for debounce cycles
     //repeat (13) @(posedge clk);
@@ -43,7 +43,7 @@ module input_inverse_tb();
     @(posedge clk);
     @(posedge clk);
 
-    RowIn = 4'b1111;  // release key
+    RowIn = 4'b0000;  // release key
     @(posedge clk);
 
     wait (read_input == 1);
@@ -63,7 +63,7 @@ module input_inverse_tb();
 
     clk = 0;
     nRST = 0;
-    RowIn = 4'b1111;
+    RowIn = 4'b0000;
     key_read = 0;
     keypad_input = 0;
 
