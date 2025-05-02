@@ -30,6 +30,7 @@
     // Sequential logic with active-low reset
     always_ff @(posedge clk or negedge nRST) begin
 		$monitor("Current State: %d", state);
+	    $monitor("Read_input: %d", read_input);
 	    
         if (!nRST) begin
             state <= IDLE;
