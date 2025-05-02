@@ -39,10 +39,10 @@ module input_control_tb();
 
 
     // Wait for ColOut to scan to column 0 (ColOut = 4'b1110)
-    wait (ColOut == 4'b1110);  // column 0 active (bit 0 driven low)
+	  wait (ColOut == 4'b0111);  // column 0 active (bit 0 driven low)
 
     // Simulate key press in row 0
-    RowIn = 4'b1101; // row 0 pulled low (key '1')
+    RowIn = 4'b1110; // row 0 pulled low (key '1')
 
     // Hold for debounce
 	  repeat (13) @(posedge clk);
