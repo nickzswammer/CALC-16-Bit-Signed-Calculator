@@ -41,6 +41,7 @@ module input_control_tb();
     // Wait until in CONFIRM state (state == 3)
     wait(dut.state == 3);
     @(posedge clk);
+    @(posedge clk);
 
     RowIn = 4'b1111;  // release key
     @(posedge clk);
