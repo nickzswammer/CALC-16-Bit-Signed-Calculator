@@ -67,7 +67,7 @@ module input_control (
 	        col_index <= (col_index == 3) ? 0 : col_index + 1;
 
             if (state == WAIT_STABLE) begin
-                if (key_valid)
+		    if (key_valid && debounce_cnt < 10)
                     debounce_cnt <= debounce_cnt + 1;
 		else if (debounce_cnt == 10)
                     debounce_cnt <= 0;
