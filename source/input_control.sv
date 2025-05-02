@@ -62,6 +62,7 @@ module input_control (
             WAIT_STABLE: next_state = (debounce_cnt >= 4'd10) ? CONFIRM : WAIT_STABLE;
             CONFIRM:     next_state = KeyRd ? WAIT_RELEASE : CONFIRM;
             WAIT_RELEASE:next_state = !key_valid ? IDLE : WAIT_RELEASE;
+	    default: next_state = IDLE;
         endcase
     end
 
