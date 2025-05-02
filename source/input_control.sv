@@ -80,13 +80,16 @@ module input_control (
     end
 
     // Translate row and column index to keypad index 0–15
-    function logic [3:0] encode_key(input logic [3:0] row, input logic [1:0] col);
-        for (int r = 0; r < 4; r++)
-	    if (row[r] == 0) begin
-		return (r * 4 + col)[3:0];
+	function logic [3:0] encode_key(input logic [3:0] row, input logic [1:0] col);
+	    int idx;
+	    for (int r = 0; r < 4; r++) begin
+	        if (row[r] == 0) begin
+	            idx = r * 4 + col;
+	            return idx[3:0];  // ✅ legal slice on named variable
+	        end
 	    end
-        return 4'hF;
-    endfunction
+	    return 4'hF;  // fallback if no row matched
+	endfunction
 
     // Decode key_code into outputs
     always_comb begin
