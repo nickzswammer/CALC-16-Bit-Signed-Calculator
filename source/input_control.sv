@@ -37,9 +37,10 @@ module input_control (
 
     int idx;
 
-	logic [3:0] RowMid, RowSync;
+	//logic [3:0] RowMid, RowSync;
 
     // synchronizer
+	/*
 	always_ff @(posedge clk or negedge nRST) begin
 		if (!nRST) begin
 			RowMid <= 4'b1111;
@@ -50,7 +51,7 @@ module input_control (
 			RowSync <= RowMid;
 		end
 	end
-	
+	*/
     // Sequential logic with active-low reset
     always_ff @(posedge clk or negedge nRST) begin
         if (!nRST) begin
@@ -72,7 +73,7 @@ module input_control (
             end
 
 	    if (state == CONFIRM) begin
-		temp_key = encode_key(RowSync, col_index);
+		    temp_key = encode_key(RowIn, col_index);
 	        key_code <= temp_key;
 	        decoded_key = temp_key;
 	
@@ -117,7 +118,7 @@ module input_control (
     always_comb begin
         key_valid = 0;
         for (int i = 0; i < 4; i++)
-		if (RowSync[i] == 0)
+		if (RowIn[i] == 0)
                 	key_valid = 1;
     end
 
