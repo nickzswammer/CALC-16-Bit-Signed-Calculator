@@ -8,7 +8,7 @@ module input_inverse_tb();
   logic [2:0] operator_input;
   logic equal_input;
 
-  input_control dut (
+  input_inverse dut (
     .clk(clk), .nRST(nRST),
     .RowIn(RowIn), .ColOut(ColOut),
     .read_input(read_input), .key_read(key_read),
