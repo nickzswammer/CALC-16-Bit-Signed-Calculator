@@ -33,7 +33,7 @@ module input_control_tb();
 		LFSRFlg = 1;
 		#10;
 		
-		RowIn = 4'b0111;           // Active-low: row 0 pressed
+		RowIn = 4'b0110;           // Active-low: row 0 pressed
 		#10;
 		RowIn = 4'b1111;           // Release the key
 
