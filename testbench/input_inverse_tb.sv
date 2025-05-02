@@ -58,7 +58,7 @@ module input_inverse_tb();
   endtask
 
   initial begin
-    $dumpfile("input_control.vcd");
+	  $dumpfile("input_control_inverse.vcd");
     $dumpvars();
 
     clk = 0;
