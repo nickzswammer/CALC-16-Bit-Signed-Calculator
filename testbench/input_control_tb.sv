@@ -3,7 +3,7 @@ module input_control_tb();
   logic clk, nRST;
   logic [3:0] RowIn;
   logic [3:0] ColOut;
-  logic KeyRdy, KeyRd;
+  logic read_input, key_read;
   logic [3:0] keypad_input;
   logic [2:0] operator_input;
   logic equal_input;
@@ -11,7 +11,7 @@ module input_control_tb();
   input_control dut (
     .clk(clk), .nRST(nRST),
     .RowIn(RowIn), .ColOut(ColOut),
-    .KeyRdy(KeyRdy), .KeyRd(KeyRd),
+    .read_input(read_input), .key_read(key_read),
     .keypad_input(keypad_input),
     .operator_input(operator_input),
     .equal_input(equal_input)
@@ -45,13 +45,13 @@ module input_control_tb();
     RowIn = 4'b1111;  // release key
     @(posedge clk);
 
-    wait (KeyRdy == 1);
+    wait (read_input == 1);
     $display("Key [%0d] => keypad = %0d, op = %0d, eq = %0b",
               key_index, keypad_input, operator_input, equal_input);
 
-    KeyRd = 1;
+    key_read = 1;
     @(posedge clk);
-    KeyRd = 0;
+    key_read = 0;
 
     repeat (5) @(posedge clk);
   endtask
@@ -63,7 +63,7 @@ module input_control_tb();
     clk = 0;
     nRST = 0;
     RowIn = 4'b1111;
-    KeyRd = 0;
+    key_read = 0;
     keypad_input = 0;
 
     #10;
@@ -90,7 +90,7 @@ module input_control_tb();
 	logic [3:0] RowIn;
 	logic [3:0] ColOut;
 	logic LFSRReset, LFSRFlg;
-	logic KeyRdy, KeyRd;
+	logic read_input, key_read;
 	logic [3:0] Number;
 	logic [2:0] Operator;
 	logic EqualSign;
@@ -99,7 +99,7 @@ module input_control_tb();
         .Reset(Reset), .Clock(Clock),
         .RowIn(RowIn), .ColOut(ColOut),
         .LFSRReset(LFSRReset), .LFSRFlg(LFSRFlg),
-        .KeyRdy(KeyRdy), .KeyRd(KeyRd),
+        .read_input(read_input), .key_read(key_read),
         .Number(Number), .Operator(Operator), .EqualSign(EqualSign)
     );
 
@@ -111,7 +111,7 @@ module input_control_tb();
 		
 		// Initialization
 		Clock = 0;
-		Reset = 1; LFSRFlg = 0; RowIn = 4'b1111; KeyRd = 0;
+		Reset = 1; LFSRFlg = 0; RowIn = 4'b1111; key_read = 0;
 		#10 Reset = 0;
 		#10 Reset = 1;
 
@@ -130,7 +130,7 @@ module input_control_tb();
 		$display("Key Detected: Number = %x, Operator = %x, Equal = %b",
 		         Number, Operator, EqualSign);
 
-		KeyRd = 1; #10; KeyRd = 0;
+		key_read = 1; #10; key_read = 0;
 		
 		#20;
 		$finish;
