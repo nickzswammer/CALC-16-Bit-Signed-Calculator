@@ -151,6 +151,7 @@ module gencon (
             case (current_state)
                 WAIT_OP1: begin
                     if (operator_input == 1) begin
+                        key_read <= 1;
                         operand1[15] <=  operand1[15] ^ 1'b1;
                     end
                     if (read_input) begin
@@ -178,6 +179,7 @@ module gencon (
 
                 WAIT_OP2: begin
                     if (operator_input == 1) begin
+                        key_read <= 1;
                         operand2[15] <=  operand2[15] ^ 1'b1;
                     end
                     
@@ -206,11 +208,13 @@ module gencon (
 
                 SEND_TO_COMPUTE: begin
                     if (latched_operator_input == 2 || latched_operator_input == 3) begin
+                        key_read <= 1;
                         ALU_in1 <= operand1;
                         ALU_in2 <= operand2;
                         addOrSub <= (latched_operator_input == 3);
                         start_ALU <= 1;
                     end else if (latched_operator_input == 4) begin
+                        key_read <= 1;
                         mult_in1 <= operand1;
                         mult_in2 <= operand2;
                         start_mult <= 1;
