@@ -10,6 +10,8 @@ module gencon (
     input logic [2:0] operator_input,
     input logic equal_input,
 
+    output logic key_read, // to input controller to indicate key is read
+    
     output logic complete,
     output logic [15:0] display_output,
     output state_t tb_current_state  // ← add this in port list
@@ -62,6 +64,7 @@ module gencon (
     always_ff @(posedge clk or negedge nRST) begin
         if (!nRST) begin
             current_state <= WAIT_OP1;
+            key_read <= 0;
             operand1 <= 0;
             operand2 <= 0;
             complete <= 0;
@@ -78,6 +81,7 @@ module gencon (
             current_state <= next_state;
             if (latch_operator) begin
                 latched_operator_input <= operator_to_latch;
+                key_read <= 0;
             end
         end
     end
@@ -91,7 +95,6 @@ module gencon (
         
         case (current_state)
             WAIT_OP1:
-    
                 if (operator_input != 3'b000 && operator_input != 3'b001) begin
                     latch_operator = 1;
                     operator_to_latch = operator_input;
@@ -155,6 +158,8 @@ module gencon (
                     end
                     if (read_input) begin
                         latched_keypad_input <= keypad_input;
+
+                        key_read <= 1;
                         
                         mult_in1 <= operand1;
                         mult_in2 <= 16'd10;
@@ -181,6 +186,9 @@ module gencon (
                     
                     if (read_input) begin
                         latched_keypad_input <= keypad_input;
+
+                        key_read <= 1;
+                        
                         mult_in1 <= operand2;
                         mult_in2 <= 16'd10;
                         start_mult <= 1;
