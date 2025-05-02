@@ -20,6 +20,7 @@ module input_control (
     state_t state, next_state;
 
     logic [1:0] col_index;
+	/// logic [18:0] debounce_cnt; for final
     logic [3:0] debounce_cnt;
     logic [3:0] key_code;
     logic key_valid;
