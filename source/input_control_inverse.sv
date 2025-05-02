@@ -82,7 +82,7 @@ module input_inverse (
         for (int i = 0; i < 4; i++)
 	    if (RowIn[i] == 1'b1)
                 key_valid = 1;
-    	    end
+    	    
     end
 
     // Translate row and column index to keypad index 0–15
