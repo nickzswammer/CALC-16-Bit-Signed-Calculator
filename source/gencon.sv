@@ -59,7 +59,6 @@ module gencon (
 
     // FSM state transition
     always_ff @(posedge clk or negedge nRST) begin
-        $monitor("Gen Control State: %d", current_state);
         if (!nRST) begin
             current_state <= WAIT_OP1;
             key_read <= 0;
