@@ -29,6 +29,7 @@
 	
     // Sequential logic with active-low reset
     always_ff @(posedge clk or negedge nRST) begin
+	    $monitor("key_code: %h", key_code);
         if (!nRST) begin
             state <= IDLE;
             col_index <= 0;
