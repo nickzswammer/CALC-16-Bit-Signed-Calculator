@@ -29,6 +29,8 @@ module input_control (
             col_index <= 0;
             debounce_cnt <= 0;
             KeyRdy <= 0;
+	    keypad_input <= 0;
+	    operator_input <= 0;
         end else begin
             state <= next_state;
 		
