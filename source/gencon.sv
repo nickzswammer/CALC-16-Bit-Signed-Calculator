@@ -41,7 +41,7 @@ module gencon (
 
     // operands to send to ALU/ Multiplier
     logic [15:0] operand1, operand2;
-
+    
     // ALU instantiation
     addition add_calc(
         .clk(clk), .nRST(nRST),
