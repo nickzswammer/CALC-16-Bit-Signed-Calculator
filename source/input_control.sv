@@ -22,6 +22,9 @@ module input_control (
     logic [3:0] key_code;
     logic key_valid;
 
+    int idx;
+	
+
     // Sequential logic with active-low reset
     always_ff @(posedge clk or negedge nRST) begin
         if (!nRST) begin
@@ -82,7 +85,6 @@ module input_control (
 
     // Translate row and column index to keypad index 0–15
 	function logic [3:0] encode_key(input logic [3:0] row, input logic [1:0] col);
-	    int idx;
 	    for (int r = 0; r < 4; r++) begin
 	        if (row[r] == 0) begin
 			idx = r * 4 + {30'd0, col};
