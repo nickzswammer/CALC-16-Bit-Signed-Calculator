@@ -73,9 +73,8 @@ module input_control (
             end
 
 	    if (state == CONFIRM) begin
-		    temp_key = encode_key(RowIn, col_index);
-	        key_code <= temp_key;
-	        decoded_key = temp_key;
+		key_code = encode_key(RowIn, col_index);
+		decoded_key <= key_code;
 	
 	        // Decode in-place
 	        keypad_input <= next_keypad_input;
