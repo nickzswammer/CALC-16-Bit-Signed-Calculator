@@ -39,7 +39,7 @@ module inverse_tb();
     //repeat (13) @(posedge clk);
 
     // Wait until in CONFIRM state (state == 3)
-	  wait(dut.state == state_t'(3));
+	  wait(dut.state == 3);
     @(posedge clk);
     @(posedge clk);
 
@@ -58,7 +58,7 @@ module inverse_tb();
   endtask
 
   initial begin
-	  $dumpfile("input_control_inverse.vcd");
+	  $dumpfile("inverse.vcd");
     $dumpvars();
 
     clk = 0;
