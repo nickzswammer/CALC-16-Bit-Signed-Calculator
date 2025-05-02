@@ -26,17 +26,17 @@ module input_control_tb();
 
 	  $monitor("State, Counter: %d %d", dut.state, dut.debounce_cnt);
 
-    #10;
+    #5;
     // Initialization
     clk = 0;
     nRST = 0;
     RowIn = 4'b1111;
     KeyRd = 0;
 
-    #10;
+    #5;
     nRST = 1;
+    #5;
 
-    #10;
 
     // Wait for ColOut to scan to column 0 (ColOut = 4'b1110)
     wait (ColOut == 4'b1110);  // column 0 active (bit 0 driven low)
