@@ -38,7 +38,7 @@ module input_control_tb();
 		RowIn = 4'b1111;           // Release the key
 
 		// 0111, 1011, 1101, 1110 (Bottom to Top)
-		// 7FFF, BFFF, DFFF, 
+		// 7FFF, BFFF, DFFF, EFFF
 		
 		#500;
 		$display("Key Detected: Number = %x, Operator = %x, Equal = %b",
