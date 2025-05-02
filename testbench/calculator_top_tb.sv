@@ -40,19 +40,14 @@ module calculator_top_tb();
     @(posedge clk);
 
     // Let gencon acknowledge
-    wait (dut.gencon_inst.read_input == 1);
+    wait (dut.gencon_inst.key_read == 1);
     @(posedge clk);
 
     // Release the key
     RowIn = 4'b1111;
     @(posedge clk);
     @(posedge clk);
-
     
-    dut.gencon_inst.key_read = 1;
-    @(posedge clk);
-    dut.gencon_inst.key_read = 0;
-
     repeat (4) @(posedge clk);  // wait for FSM reset
   endtask
 
