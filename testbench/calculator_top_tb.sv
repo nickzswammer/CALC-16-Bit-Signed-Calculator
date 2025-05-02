@@ -36,6 +36,9 @@ module calculator_top_tb();
 
     wait(dut.input_ctrl_inst.state == 3);
     
+    @(posedge clk);
+    @(posedge clk);
+
     // Release the key
     RowIn = 4'b1111;
     @(posedge clk);
