@@ -19,7 +19,7 @@ module input_control_tb();
 
   always #5 clk = ~clk;
 
-  task apply_inputs(input int key_index);
+  task automatic apply_inputs(input int key_index);
     int row = key_index / 4;
     int col = key_index % 4;
 
