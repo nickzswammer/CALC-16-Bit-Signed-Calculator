@@ -14,8 +14,6 @@ module gencon (
     
     output logic complete,
     output logic [15:0] display_output,
-    output state_t tb_current_state  // ← add this in port list
-
 );
 
     logic [3:0] latched_keypad_input;
@@ -57,8 +55,6 @@ module gencon (
         .INn1(mult_in1), .INn2(mult_in2),
         .start(start_mult), .out(mult_out), .finish(mult_finish)
     );
-
-    assign tb_current_state = current_state; // ← drive it inside gencon
 
     // FSM state transition
     always_ff @(posedge clk or negedge nRST) begin
