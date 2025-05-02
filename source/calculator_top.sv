@@ -41,14 +41,11 @@ module calculator_top (
         .tb_current_state(current_state)
     );
 
-    // Signal key_read whenever gencon accepts the digit input
     always_ff @(posedge clk or negedge nRST) begin
         if (!nRST) begin
             key_read <= 0;
         end else begin
-            // Simple handshaking: indicate the key is read
             key_read <= read_input; 
-            // Alternatively, implement explicit acknowledgment from gencon
         end
     end
 
