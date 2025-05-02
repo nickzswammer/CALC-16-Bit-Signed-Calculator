@@ -25,10 +25,11 @@
     logic [3:0] key_code;
     logic key_valid;
 
-logic [3:0] decoded_key;
-logic [3:0] next_keypad_input;
-logic [2:0] next_operator_input;
-logic       next_equal_input;
+    // to handle read_input states
+    logic [3:0] decoded_key;
+    logic [3:0] next_keypad_input;
+    logic [2:0] next_operator_input;
+    logic next_equal_input;
 
     int idx;
 	
@@ -52,29 +53,22 @@ logic       next_equal_input;
                     debounce_cnt <= 0;
             end
 
-if (state == CONFIRM) begin
-    logic [3:0] temp_key;
-    temp_key = encode_key(RowIn, col_index);
-    key_code <= temp_key;
-    decoded_key = temp_key;
-
-    // Decode in-place
-    keypad_input <= next_keypad_input;
-    operator_input <= next_operator_input;
-    equal_input <= next_equal_input;
-
-    // Only raise read_input if it’s a digit
-    if (!read_input && next_operator_input == 3'b000 && next_equal_input == 0) begin
-        read_input <= 1;
-    end
-end
-
-		/*
-	    if (state == CONFIRM && !read_input) begin
-    		key_code <= encode_key(RowIn, col_index);
-		read_input <= 1;
-    	    end
-	 */
+	    if (state == CONFIRM) begin
+	        logic [3:0] temp_key;
+	        temp_key = encode_key(RowIn, col_index);
+	        key_code <= temp_key;
+	        decoded_key = temp_key;
+	
+	        // Decode in-place
+	        keypad_input <= next_keypad_input;
+	        operator_input <= next_operator_input;
+	        equal_input <= next_equal_input;
+	
+	        // Only raise read_input if it’s a digit
+	        if (!read_input && next_operator_input == 3'b000 && next_equal_input == 0) begin
+	            read_input <= 1;
+	        end
+	    end
 
             if (state == WAIT_RELEASE && !key_valid)
                 read_input <= 0;
@@ -110,41 +104,41 @@ end
     end
 
     // Translate row and column index to keypad index 0–15
-	function logic [3:0] encode_key(input logic [3:0] row, input logic [1:0] col);
-	    for (int r = 0; r < 4; r++) begin
-	        if (row[r] == 0) begin
-			idx = r * 4 + {30'd0, col};
-	            return idx[3:0];  // ✅ legal slice on named variable
-	        end
+    function logic [3:0] encode_key(input logic [3:0] row, input logic [1:0] col);
+        for (int r = 0; r < 4; r++) begin
+	    if (row[r] == 0) begin
+		idx = r * 4 + {30'd0, col};
+	        return idx[3:0];
 	    end
-	    return 4'hE;  // fallback if no row matched
-	endfunction
+        end
+        return 4'hE;  // fallback if no row matched, return the empty key (14)
+    endfunction
 
     // Decode key_code into outputs
-always_comb begin
-    next_keypad_input = 4'd0;
-    next_operator_input = 3'b000;
-    next_equal_input = 0;
-
-    case (decoded_key)
-        4'h0: next_keypad_input = 4'd1;
-        4'h1: next_keypad_input = 4'd2;
-        4'h2: next_keypad_input = 4'd3;
-        4'h3: next_operator_input = 3'b010;
-        4'h4: next_keypad_input = 4'd4;
-        4'h5: next_keypad_input = 4'd5;
-        4'h6: next_keypad_input = 4'd6;
-        4'h7: next_operator_input = 3'b011;
-        4'h8: next_keypad_input = 4'd7;
-        4'h9: next_keypad_input = 4'd8;
-        4'hA: next_keypad_input = 4'd9;
-        4'hB: next_operator_input = 3'b100;
-        4'hC: next_equal_input = 1;
-        4'hD: next_keypad_input = 4'd0;
-        4'hF: next_operator_input = 3'b001;
-        default: ;
-    endcase
-end
+    always_comb begin
+	next_keypad_input = 4'd0;
+	next_operator_input = 3'b000;
+	next_equal_input = 0;
+	
+	case (decoded_key)
+	    4'h0: next_keypad_input = 4'd1;
+	    4'h1: next_keypad_input = 4'd2;
+	    4'h2: next_keypad_input = 4'd3;
+	    4'h3: next_operator_input = 3'b010;
+	    4'h4: next_keypad_input = 4'd4;
+	    4'h5: next_keypad_input = 4'd5;
+	    4'h6: next_keypad_input = 4'd6;
+	    4'h7: next_operator_input = 3'b011;
+	    4'h8: next_keypad_input = 4'd7;
+	    4'h9: next_keypad_input = 4'd8;
+	    4'hA: next_keypad_input = 4'd9;
+	    4'hB: next_operator_input = 3'b100;
+	    4'hC: next_equal_input = 1;
+	    4'hD: next_keypad_input = 4'd0;
+	    4'hF: next_operator_input = 3'b001;
+     	    default: ;
+        endcase
+    end
 endmodule
 
 
