@@ -35,7 +35,7 @@ module input_control (
         end else begin
             state <= next_state;
 		
-	    if (state == SCAN_COL)
+	    if (state == SCAN_COL && next_state == SCAN_COL)
 	        col_index <= (col_index == 3) ? 0 : col_index + 1;
 
             if (state == WAIT_STABLE) begin
