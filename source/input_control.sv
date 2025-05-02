@@ -85,9 +85,7 @@ module input_control (
 
     // Translate row and column index to keypad index 0–15
 	function logic [3:0] encode_key(input logic [3:0] row, input logic [1:0] col);
-		$display("Inside Function");
 	    for (int r = 0; r < 4; r++) begin
-		$display("encode_key: RowIn = %b, col_index = %d", row, col);
 	        if (row[r] == 0) begin
 			idx = r * 4 + {30'd0, col};
 	            return idx[3:0];  // ✅ legal slice on named variable
