@@ -1,4 +1,4 @@
-module input__control_inverse (
+module input_control_inverse (
     input  logic clk,
     input  logic nRST,               // active-low reset
 	
