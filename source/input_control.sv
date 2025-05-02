@@ -93,7 +93,7 @@ module input_control (
 	            return idx[3:0];  // ✅ legal slice on named variable
 	        end
 	    end
-	    return 4'hABCD;  // fallback if no row matched
+	    return 4'hE;  // fallback if no row matched
 	endfunction
 
     // Decode key_code into outputs
