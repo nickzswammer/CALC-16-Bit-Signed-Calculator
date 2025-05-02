@@ -51,6 +51,7 @@ module input_control (
 	
     // Sequential logic with active-low reset
     always_ff @(posedge clk or negedge nRST) begin
+	    $monitor("State: %d", state);
         if (!nRST) begin
             state <= IDLE;
             col_index <= 0;
