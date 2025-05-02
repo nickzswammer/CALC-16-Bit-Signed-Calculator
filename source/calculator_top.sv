@@ -39,12 +39,4 @@ module calculator_top (
         .display_output(display_output),
     );
 
-    always_ff @(posedge clk or negedge nRST) begin
-        if (!nRST) begin
-            key_read <= 0;
-        end else begin
-            key_read <= read_input; 
-        end
-    end
-
 endmodule
