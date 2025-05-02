@@ -1,0 +1,80 @@
+module calculator_top_tb();
+
+  logic clk, nRST;
+  logic [3:0] RowIn;
+  logic [3:0] ColOut;
+  logic [15:0] display_output;
+  logic complete;
+
+  calculator_top dut (
+    .clk(clk),
+    .nRST(nRST),
+    .RowIn(RowIn),
+    .ColOut(ColOut),
+    .display_output(display_output),
+    .complete(complete)
+  );
+
+  // Clock generation
+  always #5 clk = ~clk;
+
+  // Helper: simulate a key press
+  task automatic press_key(input int key_index);
+    int row = key_index / 4;
+    int col = key_index % 4;
+
+    // Wait for the right column to become active
+    wait (ColOut == ~(4'b0001 << col));
+    @(posedge clk);
+
+    // Pull the correct row low (active low press)
+    RowIn = ~(4'b0001 << row);
+    @(posedge clk);  // debounce or FSM transition delay
+    @(posedge clk);
+
+    // Release the key
+    RowIn = 4'b1111;
+    @(posedge clk);
+    @(posedge clk);
+
+    // Let gencon acknowledge
+    wait (dut.gencon_inst.read_input == 1);
+    @(posedge clk);
+    dut.gencon_inst.key_read = 1;
+    @(posedge clk);
+    dut.gencon_inst.key_read = 0;
+
+    repeat (4) @(posedge clk);  // wait for FSM reset
+  endtask
+
+  // Map: keypad index for 3 + 4 =
+  localparam KEY_3 = 2;   // 3
+  localparam KEY_ADD = 12; // A (Add)
+  localparam KEY_4 = 5;   // 4
+  localparam KEY_EQ = 15; // D (Equal)
+
+  initial begin
+    $dumpfile("calculator_top.vcd");
+    $dumpvars();
+
+    clk = 0;
+    nRST = 0;
+    RowIn = 4'b1111;
+
+    @(posedge clk);  // reset pulse
+    nRST = 1;
+
+    // Sequence: 3 + 4 =
+    press_key(KEY_3);
+    press_key(KEY_ADD);
+    press_key(KEY_4);
+    press_key(KEY_EQ);
+
+    wait (complete == 1);
+    $display("✅ Result: %0d", display_output);
+
+    #20;
+    $finish;
+  end
+
+endmodule
