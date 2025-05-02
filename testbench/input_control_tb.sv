@@ -36,7 +36,7 @@ module input_control_tb();
     RowIn = ~(4'b0001 << row);
 
     // Hold for debounce cycles
-    repeat (13) @(posedge clk);
+    //repeat (13) @(posedge clk);
 
     // Wait until in CONFIRM state (state == 3)
     wait(dut.state == 3);
