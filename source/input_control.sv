@@ -43,8 +43,8 @@ module input_control (
 	always_ff @(posedge clk or negedge nRST) begin
 		$monitor("State: %d", state);
 		if (!nRST) begin
-			RowMid <= 0;
-			RowSync <= 0;
+			RowMid <= '1;
+			RowSync <= '1;
 		end
 		else begin
 			RowMid <= RowIn;
