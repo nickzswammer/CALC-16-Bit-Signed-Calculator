@@ -53,22 +53,45 @@ module input_control (
                     debounce_cnt <= 0;
             end
 
-	    if (state == CONFIRM) begin
-	        logic [3:0] temp_key;
-	        temp_key = encode_key(RowIn, col_index);
-	        key_code <= temp_key;
-	        decoded_key = temp_key;
-	
-	        // Decode in-place
-	        keypad_input <= next_keypad_input;
-	        operator_input <= next_operator_input;
-	        equal_input <= next_equal_input;
-	
-	        // Only raise read_input if it’s a digit
-	        if (!read_input && next_operator_input == 3'b000 && next_equal_input == 0) begin
-	            read_input <= 1;
-	        end
-	    end
+if (state == CONFIRM) begin
+    logic [3:0] temp_key;
+    temp_key = encode_key(RowIn, col_index);
+    key_code <= temp_key;
+
+    // Default all outputs to 0
+    keypad_input <= 4'd0;
+    operator_input <= 3'b000;
+    equal_input <= 0;
+
+    case (temp_key)
+        4'h0: keypad_input <= 4'd1;
+        4'h1: keypad_input <= 4'd2;
+        4'h2: keypad_input <= 4'd3;
+        4'h3: operator_input <= 3'b010;
+        4'h4: keypad_input <= 4'd4;
+        4'h5: keypad_input <= 4'd5;
+        4'h6: keypad_input <= 4'd6;
+        4'h7: operator_input <= 3'b011;
+        4'h8: keypad_input <= 4'd7;
+        4'h9: keypad_input <= 4'd8;
+        4'hA: keypad_input <= 4'd9;
+        4'hB: operator_input <= 3'b100;
+        4'hC: equal_input <= 1;
+        4'hD: keypad_input <= 4'd0;
+        4'hF: operator_input <= 3'b001;
+        default: ;
+    endcase
+
+    // ✅ Check the case result right away — we’re in the same procedural context
+    if (!read_input && (temp_key == 4'h0 || temp_key == 4'h1 || temp_key == 4'h2 ||
+                        temp_key == 4'h4 || temp_key == 4'h5 || temp_key == 4'h6 ||
+                        temp_key == 4'h8 || temp_key == 4'h9 || temp_key == 4'hA || temp_key == 4'hD)) begin
+        read_input <= 1;
+    end else begin
+        read_input <= 0;
+    end
+end
+
 
             if (state == WAIT_RELEASE && !key_valid)
                 read_input <= 0;
@@ -113,7 +136,7 @@ module input_control (
         end
         return 4'hE;  // fallback if no row matched, return the empty key (14)
     endfunction
-
+/*
     // Decode key_code into outputs
     always_comb begin
 	next_keypad_input = 4'd0;
@@ -140,7 +163,7 @@ module input_control (
         endcase
     end
 endmodule
-
+*/
 
 /*module input_control (
     input logic Reset,        
