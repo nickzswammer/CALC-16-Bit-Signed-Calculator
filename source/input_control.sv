@@ -59,6 +59,7 @@ module input_control (
             col_index <= 0;
             debounce_cnt <= 0;
             read_input <= 0;
+	    decoded_key <= 4'd14;
         end else begin
             state <= next_state;
 		
