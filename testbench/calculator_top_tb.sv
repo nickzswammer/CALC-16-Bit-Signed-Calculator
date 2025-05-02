@@ -60,10 +60,14 @@ module calculator_top_tb();
     $dumpvars();
 
     clk = 0;
-    nRST = 0;
+    nRST = 1;
     RowIn = 4'b1111;
+    #(1);
+    nRST = 0;
+    @(negedge clk);
+    @(negedge clk);
 
-    @(posedge clk);  // reset pulse
+    @(negedge clk);  // reset pulse
     nRST = 1;
 
     // Sequence: 3 + 4 =
