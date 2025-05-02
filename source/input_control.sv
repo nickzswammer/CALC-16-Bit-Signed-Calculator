@@ -13,7 +13,6 @@
     output logic equal_input             // 1-bit equal flag (*)
 );
 
-		$monitor("Current State: %d", state);
 		
     typedef enum logic [2:0] {
         IDLE, SCAN_COL, WAIT_STABLE, CONFIRM, WAIT_RELEASE
@@ -30,6 +29,8 @@
 	
     // Sequential logic with active-low reset
     always_ff @(posedge clk or negedge nRST) begin
+		$monitor("Current State: %d", state);
+	    
         if (!nRST) begin
             state <= IDLE;
             col_index <= 0;
