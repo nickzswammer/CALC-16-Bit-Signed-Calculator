@@ -31,6 +31,7 @@ module input_control_tb();
     nRST = 0;
     RowIn = 4'b1111;
     KeyRd = 0;
+    keypad_input = 0;
 
     #10;
     nRST = 1;
