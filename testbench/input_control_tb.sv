@@ -33,8 +33,6 @@ module input_control_tb();
 		LFSRFlg = 1;
 		#10;
 		
-		wait (dut.Col == 4'b0111); // Wait for column 0 active
-		#10;
 		RowIn = 4'b0111;           // Active-low: row 0 pressed
 		#10;
 		RowIn = 4'b1111;           // Release the key
