@@ -1,4 +1,4 @@
-module input_control_tb();
+module input_inverse_tb();
 
   logic clk, nRST;
   logic [3:0] RowIn;
