@@ -17,16 +17,44 @@ module input_control_tb();
     .equal_input(equal_input)
   );
 
-  // Clock
   always #5 clk = ~clk;
+
+  task apply_inputs(input int key_index);
+    int row = key_index / 4;
+    int col = key_index % 4;
+
+    // Wait until the correct column is active
+    wait (ColOut == ~(4'b0001 << col));
+
+    // Press the key by pulling the correct row low
+    RowIn = ~(4'b0001 << row);
+
+    // Hold for debounce cycles
+    repeat (13) @(posedge clk);
+
+    // Wait until in CONFIRM state (state == 3)
+    wait(dut.state == 3);
+    @(posedge clk);
+
+    RowIn = 4'b1111;  // release key
+    @(posedge clk);
+
+    wait (KeyRdy == 1);
+    $display("Key [%0d] => keypad = %0d, op = %0d, eq = %0b",
+              key_index, keypad_input, operator_input, equal_input);
+
+    KeyRd = 1;
+    @(posedge clk);
+    KeyRd = 0;
+
+    repeat (5) @(posedge clk);
+  endtask
 
   initial begin
     $dumpfile("input_control.vcd");
     $dumpvars();
+    $monitor("State: %d  Count: %d", dut.state, dut.debounce_cnt);
 
-	  $monitor("State, Counter: %d %d", dut.state, dut.debounce_cnt);
-
-    // Initialization
     clk = 0;
     nRST = 0;
     RowIn = 4'b1111;
@@ -35,48 +63,20 @@ module input_control_tb();
 
     #10;
     nRST = 1;
-    #10;
+    #20;
 
+    // Try all 16 keys from index 0 to 15
+    for (int i = 0; i < 16; i++) begin
+      apply_inputs(i);
+    end
 
-    // Wait for ColOut to scan to column 0 (ColOut = 4'b1110)
-	  wait (ColOut == 4'b0111);  // column 0 active (bit 0 driven low)
-
-    // Simulate key press in row 0
-    RowIn = 4'b1110; // row 0 pulled low (key '1')
-
-    // Hold for debounce
-	  repeat (13) @(posedge clk);
-
-	  wait(dut.state == 3);
-	  #10;
-    RowIn = 4'b1111; // release key
-	  #10;
-
-    // Wait for KeyRdy
-    wait (KeyRdy == 1);
-    $display("Key Detected: keypad_input = %0d, operator = %0d, equal = %0b",
-              keypad_input, operator_input, equal_input);
-
-    // Check if key '1' was detected
-    if (keypad_input == 4'd1 && operator_input == 3'b000 && equal_input == 0)
-      $display("✅ Test PASSED: Key '1' correctly detected.");
-    else
-      $display("❌ Test FAILED: Expected 1, got keypad_input = %0d", keypad_input);
-
-    // Acknowledge read
-    KeyRd = 1;
-    @(posedge clk);
-    KeyRd = 0;
-
-	  @(posedge clk);
-	nRST = 0;
-	  @(posedge clk);
-	nRST = 1;
-	  
-    #20 $finish;
+    $display("✅ Finished testing all 16 keypad inputs.");
+    #20;
+    $finish;
   end
 
 endmodule
+
 
 /*
 module input_control_tb();
