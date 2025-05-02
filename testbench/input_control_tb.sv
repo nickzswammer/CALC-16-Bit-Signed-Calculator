@@ -22,7 +22,12 @@ module input_control_tb();
   task automatic apply_inputs(input int key_index);
     int row = key_index / 4;
     int col = key_index % 4;
-
+	  
+    logic is_digit_key;
+    is_digit_key = (key_index == 0 || key_index == 1 || key_index == 2 ||
+                    key_index == 4 || key_index == 5 || key_index == 6 ||
+                    key_index == 8 || key_index == 9 || key_index == 10 || key_index == 13);
+	  
     @(posedge clk);
     nRST = 0;
     @(posedge clk);
@@ -46,7 +51,13 @@ module input_control_tb();
     RowIn = 4'b1111;  // release key
     @(posedge clk);
 
-    wait (read_input == 1);
+    // Now wait for the right output to be valid
+    if (is_digit_key) begin
+        wait (read_input);
+    end else begin
+        wait (operator_input != 3'b000 || equal_input);
+    end
+	  
     $display("Key [%0d] => keypad = %0d, op = %0d, eq = %0b",
               key_index, keypad_input, operator_input, equal_input);
 
