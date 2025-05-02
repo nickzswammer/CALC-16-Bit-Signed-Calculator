@@ -140,18 +140,18 @@ module input_control (
 	    4'h0: next_keypad_input = 4'd1;
 	    4'h1: next_keypad_input = 4'd2;
 	    4'h2: next_keypad_input = 4'd3;
-	    4'h3: next_operator_input = 3'b010;
+	    4'h3: next_operator_input = 3'b010; // addition
 	    4'h4: next_keypad_input = 4'd4;
 	    4'h5: next_keypad_input = 4'd5;
 	    4'h6: next_keypad_input = 4'd6;
-	    4'h7: next_operator_input = 3'b011;
+	    4'h7: next_operator_input = 3'b011; // subtraction
 	    4'h8: next_keypad_input = 4'd7;
 	    4'h9: next_keypad_input = 4'd8;
 	    4'hA: next_keypad_input = 4'd9;
-	    4'hB: next_operator_input = 3'b100;
-	    4'hC: next_equal_input = 1;
+	    4'hB: next_operator_input = 3'b100; // multiplication
+	    4'hC: next_equal_input = 1;         // equals
 	    4'hD: next_keypad_input = 4'd0;
-	    4'hF: next_operator_input = 3'b001;
+	    4'hF: next_operator_input = 3'b001; // minus symbol
      	    default: ;
         endcase
     end
