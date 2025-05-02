@@ -53,8 +53,10 @@ module input_control_tb();
 
     // Now wait for the right output to be valid
     if (is_digit_key) begin
+	    $display("is digit");
         wait (read_input);
     end else begin
+	    $display("is operator or equal");
         wait (operator_input != 3'b000 || equal_input);
     end
 	  
