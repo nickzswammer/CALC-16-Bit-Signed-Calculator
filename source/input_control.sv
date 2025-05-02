@@ -26,7 +26,6 @@ module input_control (
 
     int idx;
 	
-
     // Sequential logic with active-low reset
     always_ff @(posedge clk or negedge nRST) begin
         if (!nRST) begin
