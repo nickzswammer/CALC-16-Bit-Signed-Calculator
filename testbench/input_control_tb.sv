@@ -52,10 +52,15 @@ module input_control_tb();
     @(posedge clk);
 
     // Now wait for the right output to be valid
-    wait(read_input);
-	  
-    $display("Key [%0d] => keypad = %0d, op = %0d, eq = %0b",
-              key_index, keypad_input, operator_input, equal_input);
+    if (is_digit_key) begin
+        wait (read_input);
+	$display("Key [%0d] => keypad = %0d",
+              key_index, keypad_input);
+    end else begin
+        wait (operator_input != 3'b000 || equal_input);
+	$display("Key [%0d] => op = %0d, eq = %0b",
+              key_index, operator_input, equal_input);
+    end
 
     key_read = 1;
     @(posedge clk);
