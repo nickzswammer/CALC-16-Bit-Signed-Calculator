@@ -49,9 +49,9 @@ module calculator_top_tb();
 
   // Map: keypad index for 3 + 4 =
   localparam KEY_3 = 2;   // 3
-  localparam KEY_ADD = 12; // A (Add)
+  localparam KEY_ADD = 3; // A (Add)
   localparam KEY_4 = 5;   // 4
-  localparam KEY_EQ = 15; // D (Equal)
+  localparam KEY_EQ = 12; // D (Equal)
 
   initial begin
     $dumpfile("calculator_top.vcd");
