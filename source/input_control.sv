@@ -136,6 +136,7 @@ end
         end
         return 4'hE;  // fallback if no row matched, return the empty key (14)
     endfunction
+endmodule
 /*
     // Decode key_code into outputs
     always_comb begin
