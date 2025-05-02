@@ -41,7 +41,7 @@ module input_control_tb();
     RowIn = 4'b1110; // row 0 pulled low (key '1')
 
     // Hold for debounce
-    repeat (12) @(posedge clk);
+	  repeat (13) @(posedge clk);
     RowIn = 4'b1111; // release key
 
     // Wait for KeyRdy
