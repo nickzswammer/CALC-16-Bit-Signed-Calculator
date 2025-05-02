@@ -46,10 +46,22 @@
                     debounce_cnt <= 0;
             end
 
-            if (state == CONFIRM && !read_input) begin
+if (state == CONFIRM) begin
+    logic [3:0] temp_key;
+    temp_key = encode_key(RowIn, col_index);
+    key_code <= temp_key; // 🔁 always latch the key
+
+    // ✅ Only raise read_input if it's a digit
+    if (!read_input) begin
+        case (temp_key)
+            4'h0, 4'h1, 4'h2, 4'h4, 4'h5, 4'h6, 4'h8, 4'h9, 4'hA, 4'hD:
                 read_input <= 1;
-                key_code <= encode_key(RowIn, col_index);
-            end
+            default:
+                read_input <= 0; // or just leave unchanged
+        endcase
+    end
+end
+
 
             if (state == WAIT_RELEASE && !key_valid)
                 read_input <= 0;
