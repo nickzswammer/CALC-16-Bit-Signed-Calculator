@@ -1,4 +1,4 @@
-	module input_control (
+module input_control (
     input  logic clk,
     input  logic nRST,               // active-low reset
 	
