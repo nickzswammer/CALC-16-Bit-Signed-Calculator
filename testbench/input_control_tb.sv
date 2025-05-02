@@ -33,11 +33,12 @@ module input_control_tb();
 		LFSRFlg = 1;
 		#10;
 		
-		RowIn = 4'b0111;           // Active-low: row 0 pressed
+		RowIn = 4'b1011;           // Active-low: row 0 pressed 
 		#10;
 		RowIn = 4'b1111;           // Release the key
 
 		// 0111, 1011, 1101, 1110 (Bottom to Top)
+		// 6, 
 		
 		#500;
 		$display("Key Detected: Number = %x, Operator = %x, Equal = %b",
