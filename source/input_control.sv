@@ -83,7 +83,7 @@ module input_control (
     function logic [3:0] encode_key(input logic [3:0] row, input logic [1:0] col);
         for (int r = 0; r < 4; r++)
             if (row[r] == 0)
-	        return logic [3:0]'(r * 4 + col); // explicit cast to 4-bit logic
+	        return logic [3:0](r * 4 + col); // explicit cast to 4-bit logic
         return 4'hF;
     endfunction
 
