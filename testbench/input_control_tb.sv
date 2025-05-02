@@ -20,6 +20,12 @@ module input_control_tb();
   always #5 clk = ~clk;
 
   task automatic apply_inputs(input int key_index);
+    @(posedge clk);
+    nRST = 0;
+    @(posedge clk);
+    nRST = 1;
+    @(posedge clk);
+	  
     int row = key_index / 4;
     int col = key_index % 4;
 
