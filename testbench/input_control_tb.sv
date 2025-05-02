@@ -47,7 +47,9 @@ module input_control_tb();
     wait(dut.state == 3);
     @(posedge clk);
     @(posedge clk);
-
+    
+    RowIn = 4'b1111;  // release key
+    @(posedge clk);
     // Now wait for the right output to be valid
 	  
     if (is_digit_key) begin
@@ -69,10 +71,6 @@ module input_control_tb();
 
 	    end
     end
-    
-    RowIn = 4'b1111;  // release key
-    @(posedge clk);
-	  
 	  
     key_read = 1;
     @(posedge clk);
