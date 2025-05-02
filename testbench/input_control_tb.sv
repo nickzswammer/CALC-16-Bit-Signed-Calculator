@@ -25,6 +25,7 @@ module input_control_tb();
     $dumpvars();
 
     $monitor("Current State: %d", dut.state);
+	  $monitor("Counter: %d", dut.debounce_cnt);
 
     // Initialization
     clk = 0;
