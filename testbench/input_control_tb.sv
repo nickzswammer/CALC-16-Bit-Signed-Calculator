@@ -53,7 +53,6 @@ module input_control_tb();
   initial begin
     $dumpfile("input_control.vcd");
     $dumpvars();
-    $monitor("State: %d  Count: %d", dut.state, dut.debounce_cnt);
 
     clk = 0;
     nRST = 0;
