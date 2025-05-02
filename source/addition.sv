@@ -1,3 +1,5 @@
+`timescale 1ns / 1ns
+
 module adder(
 	/* verilator lint_off UNOPTFLAT */	
 	output sum,
