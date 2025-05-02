@@ -31,6 +31,9 @@ module input_control (
     logic [2:0] next_operator_input;
     logic next_equal_input;
 
+    logic [3:0] temp_key;
+	
+
     int idx;
 	
     // Sequential logic with active-low reset
@@ -54,7 +57,6 @@ module input_control (
             end
 
 	    if (state == CONFIRM) begin
-	        logic [3:0] temp_key;
 	        temp_key = encode_key(RowIn, col_index);
 	        key_code <= temp_key;
 	        decoded_key = temp_key;
@@ -65,7 +67,7 @@ module input_control (
 	        equal_input <= next_equal_input;
 	
 	        // Only raise read_input if it’s a digit
-		    if (!read_input && operator_input == 3'b000 && equal_input == 0) begin
+		if (!read_input && operator_input == 3'b000 && equal_input == 0) begin
 	            read_input <= 1;
 	        end
 	    end
