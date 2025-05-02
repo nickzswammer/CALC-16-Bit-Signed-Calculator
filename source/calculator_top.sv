@@ -4,7 +4,7 @@ module calculator_top (
     input logic [3:0] RowIn,  // from keypad rows
     output logic [3:0] ColOut,  // to keypad columns
     output logic [15:0] display_output,  // final calculation output
-    output logic complete,
+    output logic complete
 );
 
     // Internal signals connecting input_control and gencon
