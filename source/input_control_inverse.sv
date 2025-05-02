@@ -1,4 +1,4 @@
-module input_control (
+module input_inverse (
     input  logic clk,
     input  logic nRST,               // active-low reset
 	
@@ -72,22 +72,23 @@ module input_control (
 
     // Output the scanning column (drive low one at a time)
     always_comb begin
-        ColOut = 4'b1111;
-        ColOut[col_index] = 1'b0;
+        ColOut = 4'b0000;
+	ColOut[col_index] = 1'b1;
     end
 
     // Detect active-low key press
     always_comb begin
         key_valid = 0;
         for (int i = 0; i < 4; i++)
-            if (RowIn[i] == 0)
+	    if (RowIn[i] == 1'b1)
                 key_valid = 1;
+    	    end
     end
 
     // Translate row and column index to keypad index 0–15
 	function logic [3:0] encode_key(input logic [3:0] row, input logic [1:0] col);
 	    for (int r = 0; r < 4; r++) begin
-	        if (row[r] == 0) begin
+		    if (row[r] == 1'b1) begin
 			idx = r * 4 + {30'd0, col};
 	            return idx[3:0];  // ✅ legal slice on named variable
 	        end
