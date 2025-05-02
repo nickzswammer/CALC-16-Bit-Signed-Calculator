@@ -1,3 +1,5 @@
+`timescale 1ns / 1ns
+
 module input_control_tb();
 
   logic clk, nRST;
