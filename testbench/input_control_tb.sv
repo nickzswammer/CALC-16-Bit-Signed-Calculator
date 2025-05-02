@@ -47,7 +47,9 @@ module input_control_tb();
 	  repeat (13) @(posedge clk);
 
 	  wait(dut.state == 3);
+	  #10;
     RowIn = 4'b1111; // release key
+	  #10;
 
     // Wait for KeyRdy
     wait (KeyRdy == 1);
