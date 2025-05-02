@@ -34,6 +34,8 @@ module calculator_top_tb();
     @(posedge clk);  // debounce or FSM transition delay
     @(posedge clk);
 
+    wait(dut.input_ctrl_inst.state == 3);
+    
     // Release the key
     RowIn = 4'b1111;
     @(posedge clk);
