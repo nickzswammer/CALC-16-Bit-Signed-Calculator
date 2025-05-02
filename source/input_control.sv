@@ -30,7 +30,6 @@
     // Sequential logic with active-low reset
     always_ff @(posedge clk or negedge nRST) begin
 	    $monitor("key_code: %h", key_code);
-			$monitor("Temp Key: %b", temp_key);
         if (!nRST) begin
             state <= IDLE;
             col_index <= 0;
@@ -53,6 +52,7 @@
     logic [3:0] temp_key;
     temp_key = encode_key(RowIn, col_index);
     key_code <= temp_key; // 🔁 always latch the key
+			$monitor("Temp Key: %b", temp_key);
 
     // ✅ Only raise read_input if it's a digit
     if (!read_input) begin
