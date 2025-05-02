@@ -1,6 +1,7 @@
 // gencon_defs.sv
 `ifndef GENCON_DEFS_SV
 `define GENCON_DEFS_SV
+`timescale 1ns / 1ns
 
 typedef enum logic [3:0] {
     WAIT_OP1 = 4'b0000,           // 0
