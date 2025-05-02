@@ -40,7 +40,7 @@ module input_control_tb();
 		// 0111, 1011, 1101, 1110 (Bottom to Top)
 		
 		#500;
-		$display("Key Detected: Number = %d, Operator = %d, Equal = %b",
+		$display("Key Detected: Number = %h, Operator = %h, Equal = %h",
 		         Number, Operator, EqualSign);
 
 		KeyRd = 1; #10; KeyRd = 0;
