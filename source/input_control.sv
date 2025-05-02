@@ -93,12 +93,12 @@ module input_control (
 	            return idx[3:0];  // ✅ legal slice on named variable
 	        end
 	    end
-	    return 4'hF;  // fallback if no row matched
+	    return 4'hABCD;  // fallback if no row matched
 	endfunction
 
     // Decode key_code into outputs
     always_comb begin
-        keypad_input = 4'hF;
+        keypad_input = 4'h0;
         operator_input = 3'b000;
         equal_input = 0;
 
