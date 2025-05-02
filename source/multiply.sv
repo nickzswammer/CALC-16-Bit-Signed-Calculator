@@ -1,5 +1,7 @@
 /* verilator lint_off LATCH */
 /* verilator lint_off UNOPTFLAT */
+`timescale 1ns / 1ns
+
 
 module multiply
 (
