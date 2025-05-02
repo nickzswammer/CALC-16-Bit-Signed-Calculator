@@ -24,8 +24,7 @@ module input_control_tb();
     $dumpfile("input_control.vcd");
     $dumpvars();
 
-    $monitor("Current State: %d", dut.state);
-	  $monitor("Counter: %d", dut.debounce_cnt);
+	  $monitor("State, Counter: %d %d", dut.state, dut.debounce_cnt);
 
     // Initialization
     clk = 0;
