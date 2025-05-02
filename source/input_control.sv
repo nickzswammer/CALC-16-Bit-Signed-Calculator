@@ -84,7 +84,7 @@ module input_control (
 	    int idx;
 	    for (int r = 0; r < 4; r++) begin
 	        if (row[r] == 0) begin
-	            idx = r * 4 + col;
+			idx = r * 4 + {30'd0, col};
 	            return idx[3:0];  // ✅ legal slice on named variable
 	        end
 	    end
