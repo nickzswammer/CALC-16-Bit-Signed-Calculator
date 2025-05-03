@@ -114,7 +114,12 @@ module calculator_top_tb();
     press_key(KEY_EQ);
 
     wait (complete == 1);
-    $display("✅ Result: %0b", display_output);
+    if(sum [15]) begin
+			$write("-");
+		end else begin
+			$write("+");
+		end
+    $display("%0b", display_output);
 
     #20;
     $finish;
