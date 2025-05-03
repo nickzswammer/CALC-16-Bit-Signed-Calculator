@@ -51,7 +51,6 @@ module calculator_top_tb();
     @(posedge clk);
     @(posedge clk);
     
-    repeat (4) @(posedge clk);  // wait for FSM reset
   endtask
 
   // Map: keypad index for 3 + 4 =
