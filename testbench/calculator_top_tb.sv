@@ -22,10 +22,12 @@ module calculator_top_tb();
 
   // Helper: simulate a key press
   task automatic press_key(input int key_index);
-	  $display("Row: %d, Col: %d, Time: %0t", row, col, $time);
     int row = key_index / 4;
     int col = key_index % 4;
 
+	  $display("Row: %d, Col: %d, Time: %0t", row, col, $time);
+	  
+	  
     // Wait for the right column to become active
     wait (ColOut == ~(4'b0001 << col));
     @(posedge clk);
