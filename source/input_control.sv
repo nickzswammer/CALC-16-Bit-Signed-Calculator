@@ -18,7 +18,7 @@ module input_control (
     typedef enum logic [2:0] {
         IDLE, SCAN_COL, WAIT_STABLE, CONFIRM, WAIT_RELEASE
     } state_t;
-
+e
     state_t state, next_state;
 
     logic [1:0] col_index;
@@ -134,6 +134,9 @@ module input_control (
 
     // Decode key_code into outputs
     always_comb begin
+
+	key_code = 4'hE; // default to avoid latch
+	    
 	if (state == CONFIRM) begin
 	    key_code = encode_key(RowIn, col_index);
 	end
