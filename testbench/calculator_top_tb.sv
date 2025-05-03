@@ -150,10 +150,4 @@ module calculator_top_tb();
     $finish;
   end
 
-  // timeout block
-  initial begin
-    repeat(100000) @(negedge clk);
-    $finish;
-  end
-
 endmodule
