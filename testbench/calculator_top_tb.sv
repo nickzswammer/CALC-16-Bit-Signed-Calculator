@@ -114,7 +114,7 @@ module calculator_top_tb();
     press_key(KEY_EQ);
 
     wait (complete == 1);
-    if(sum [15]) begin
+	  if(display_output [15]) begin
 			$write("-");
 		end else begin
 			$write("+");
