@@ -119,7 +119,7 @@ module calculator_top_tb();
 		end else begin
 			$write("+");
 		end
-    $display("%0b", display_output);
+	  $display("%0d", display_output);
 
     #20;
     $finish;
