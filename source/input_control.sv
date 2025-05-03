@@ -62,6 +62,7 @@ module input_control (
 	    decoded_key <= 4'd14;
         end else begin
             state <= next_state;
+	    operator_input <= next_operator_input;
 		
 	    if (state == SCAN_COL && next_state == SCAN_COL)
 	        col_index <= (col_index == 3) ? 0 : col_index + 1;
@@ -79,7 +80,7 @@ module input_control (
 	
 	        // Decode in-place
 	        keypad_input <= next_keypad_input;
-	        operator_input <= next_operator_input;
+	        //operator_input <= next_operator_input;
 	        equal_input <= next_equal_input;
 	
 	        // Only raise read_input if it’s a digit
