@@ -167,6 +167,7 @@ module gencon (
                 end
 
                 WAIT_MULT_OP1: begin
+                    key_read <= 0;
                     if (mult_finish) begin
                         operand1 <= mult_out;
                         getting_op1 <= 0;
@@ -196,6 +197,7 @@ module gencon (
                 end
 
                 WAIT_MULT_OP2: begin
+                    key_read <= 0;
                     if (mult_finish) begin
                         operand2 <= mult_out;
                         getting_op2 <= 0;
@@ -222,7 +224,7 @@ module gencon (
                 end
 
                 WAIT_COMPUTE:
-                    ;
+                    key_read <= 0;
 
                 SHOW_RESULT_ADDSUB: begin
                     complete <= 1;
