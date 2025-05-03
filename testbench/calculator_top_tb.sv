@@ -97,7 +97,16 @@ module calculator_top_tb();
     $display("✅ Result: %0d", display_output);
 
     #20;
-    
+        // Sequence: 7 - 5 = 2
+    press_key(KEY_7);
+    press_key(KEY_SUB);
+    press_key(KEY_5);
+    press_key(KEY_EQ);
+
+    wait (complete == 1);
+    $display("✅ Result: %0d", display_output);
+
+    #20;
     $finish;
   end
 
