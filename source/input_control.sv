@@ -27,7 +27,7 @@ module input_control (
 	/// logic [18:0] debounce_cnt; for final
 	//logic [18:0] debounce_cnt;
 
-	logic [18:0] debounce_cnt;
+    logic [18:0] debounce_cnt;
     logic [3:0] key_code;
     logic key_valid;
 
@@ -36,6 +36,8 @@ module input_control (
     logic [3:0] next_keypad_input;
     logic [2:0] next_operator_input;
     logic next_equal_input;
+
+    logic [19:0] scan_timer = 0;
 
     logic [3:0] temp_key;
 
@@ -68,8 +70,14 @@ module input_control (
             state <= next_state;
 	    operator_input <= next_operator_input;
 		
-	    if (state == SCAN_COL && next_state == SCAN_COL)
-	        col_index <= (col_index == 3) ? 0 : col_index + 1;
+	    if (state == SCAN_COL && next_state == SCAN_COL) begin
+		    if(scan_timer == 99_999) begin
+			scan_timer <= 0;
+	        	col_index <= (col_index == 3) ? 0 : col_index + 1;
+		    end
+		    else
+			scan_timer <= scan_timer + 1;
+	    end
 
             if (state == WAIT_STABLE) begin
 		    if (key_valid && debounce_cnt < DEBOUNCE_SIZE)
