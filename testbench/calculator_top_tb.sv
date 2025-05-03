@@ -114,7 +114,7 @@ module calculator_top_tb();
     press_key(KEY_EQ);
 
     wait (complete == 1);
-    $display("✅ Result: %0d", display_output);
+    $display("✅ Result: %0b", display_output);
 
     #20;
     $finish;
