@@ -27,7 +27,7 @@ module input_control (
 	/// logic [18:0] debounce_cnt; for final
 	//logic [18:0] debounce_cnt;
 
-	logic [3:0] debounce_cnt;
+	logic [18:0] debounce_cnt;
     logic [3:0] key_code;
     logic key_valid;
 
