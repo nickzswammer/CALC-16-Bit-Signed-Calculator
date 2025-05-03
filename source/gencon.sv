@@ -179,7 +179,7 @@ module gencon (
                 end
 
                 WAIT_OP2: begin
-                    if (operator_input || read_input)
+                    if (operator_input != 0 || read_input)
                         key_read <= 1;
                     
                     if (operator_input == 1) begin
