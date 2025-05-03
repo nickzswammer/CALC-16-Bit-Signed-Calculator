@@ -148,7 +148,7 @@ module gencon (
 
             case (current_state)
                 WAIT_OP1: begin
-                    display_output <= operand1;
+                    //display_output <= operand1;
                     complete <= 0;
                     
                     if (operator_input != 0 || read_input)
@@ -186,7 +186,7 @@ module gencon (
                 end
 
                 WAIT_OP2: begin
-                    display_output <= operand2;
+                    //display_output <= operand2;
                     if (operator_input != 0 || read_input)
                         key_read <= 1;
                     else
@@ -238,7 +238,8 @@ module gencon (
                     key_read <= 0;
 
                 SHOW_RESULT_ADDSUB: begin
-                    operand1 <= ALU_out;
+                    //operand1 <= ALU_out;
+                    operand1 <= 0;
                     operand2 <= 0;
                     complete <= 1;
                     
@@ -246,7 +247,8 @@ module gencon (
                 end
 
                 SHOW_RESULT_MULT: begin
-                    operand1 <= mult_out;
+                    //operand1 <= mult_out;
+                    operand1 <= 0;
                     operand2 <= 0;
                     complete <= 1;
                     display_output <= mult_out;
