@@ -91,8 +91,8 @@ module gencon (
         operator_to_latch = latched_operator_input;
         
         case (current_state)
-            WAIT_OP1:
-                    display_output  <= 0;
+            WAIT_OP1: begin
+                display_output  <= 0;
                 if (operator_input != 3'b000 && operator_input != 3'b001) begin
                     latch_operator = 1;
                     operator_to_latch = operator_input;
@@ -101,6 +101,7 @@ module gencon (
                 else begin
                     next_state = (read_input) ? WAIT_MULT_OP1 : WAIT_OP1;
                 end
+            end
 
             WAIT_MULT_OP1:
                 next_state = (mult_finish) ? ADD_KEY_INPUT_OP1 : WAIT_MULT_OP1;
