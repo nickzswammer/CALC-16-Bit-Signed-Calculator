@@ -181,6 +181,8 @@ module gencon (
                 WAIT_OP2: begin
                     if (operator_input != 0 || read_input)
                         key_read <= 1;
+                    else
+                        key_read <= 0;
                     
                     if (operator_input == 1) begin
                         operand2[15] <=  operand2[15] ^ 1'b1;
