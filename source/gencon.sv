@@ -92,7 +92,6 @@ module gencon (
         
         case (current_state)
             WAIT_OP1: begin
-                display_output  <= 0;
                 if (operator_input != 3'b000 && operator_input != 3'b001) begin
                     latch_operator = 1;
                     operator_to_latch = operator_input;
