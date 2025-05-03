@@ -168,7 +168,6 @@ module gencon (
                 end
 
                 WAIT_MULT_OP1: begin
-                    display_output  <= 0;
                     key_read <= 0;
                     if (mult_finish) begin
                         operand1 <= mult_out;
