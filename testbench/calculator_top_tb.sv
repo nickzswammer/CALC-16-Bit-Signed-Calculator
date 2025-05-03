@@ -22,6 +22,7 @@ module calculator_top_tb();
 
   // Helper: simulate a key press
   task automatic press_key(input int key_index);
+	  $display("Row: %d, Col: %d, Time: %0t", row, col, $time);
     int row = key_index / 4;
     int col = key_index % 4;
 
