@@ -76,7 +76,7 @@ module calculator_top_tb();
     @(negedge clk);  // reset pulse
     nRST = 1;
 
-    // Sequence: 3 * 4 = 12
+    // Sequence: -3 * -4 = 12
     press_key(KEY_NEG); // negative
     press_key(KEY_3);
 	  
@@ -103,7 +103,7 @@ module calculator_top_tb();
 
     #20;
 
-    // Sequence: 3 * 4 = 12
+    // Sequence: 3 + 4 = 7
     press_key(KEY_3);
     press_key(KEY_ADD);
 	  
@@ -115,7 +115,7 @@ module calculator_top_tb();
 
     #20;
 
-    // Sequence: 3 * 4 = 12
+    // Sequence: 5 - 4 = 1
     press_key(KEY_5);
     press_key(KEY_SUB);
 	  
@@ -127,7 +127,7 @@ module calculator_top_tb();
 
     #20;
 
-    // Sequence: 3 * 4 = 12
+    // Sequence: -5 - 4 = -9
     press_key(KEY_NEG);
     press_key(KEY_5);
     press_key(KEY_SUB);
