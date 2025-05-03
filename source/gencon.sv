@@ -192,7 +192,12 @@ module gencon (
                         key_read <= 0;
                     
                     if (operator_input == 1) begin
-                        operand2[15] <=  operand2[15] ^ 1'b1;
+                        if (key_read == 1)
+                            key_read <= 0;
+                        else begin
+                            operand2[15] <=  operand2[15] ^ 1'b1;
+                            key_read <= 1;
+                        end
                     end
                     
                     if (read_input) begin
