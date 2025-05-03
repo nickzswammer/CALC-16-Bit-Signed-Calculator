@@ -61,11 +61,8 @@ module gencon (
     always_ff @(posedge clk or negedge nRST) begin
         if (!nRST) begin
             current_state <= WAIT_OP1;
-            key_read <= 0;
             operand1 <= 0;
             operand2 <= 0;
-            complete <= 0;
-            display_output <= 0;
             getting_op1 <= 0;
             getting_op2 <= 0;
             latched_operator_input <= 0;
@@ -74,13 +71,7 @@ module gencon (
             mult_in2 <= 0;
             ALU_in1 <= 0;
             ALU_in2 <= 0;
-        end else begin
-            current_state <= next_state;
-            if (latch_operator) begin
-                latched_operator_input <= operator_to_latch;
-                key_read <= 0;
-            end
-        end
+        end 
     end
     /* verilator lint_off CASEINCOMPLETE */
 
@@ -146,9 +137,19 @@ module gencon (
         if (!nRST) begin
             start_ALU <= 0;
             start_mult <= 0;
+            key_read <= 0;
+            display_output <= 0;
+            complete <= 0;
+            
         end else begin
             start_ALU <= 0;
             start_mult <= 0;
+            
+            current_state <= next_state;
+            if (latch_operator) begin
+                latched_operator_input <= operator_to_latch;
+                key_read <= 0;
+            end
 
             case (current_state)
                 WAIT_OP1: begin
