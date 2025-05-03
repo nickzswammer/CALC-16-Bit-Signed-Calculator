@@ -34,12 +34,14 @@ module calculator_top_tb();
     @(posedge clk);  // debounce or FSM transition delay
     @(posedge clk);
 
+    $display("Waiting for Input Contorl to be in the Control State");
     wait(dut.input_ctrl_inst.state == 3);
     
     @(posedge clk);
     @(posedge clk);
 
     // Let gencon acknowledge
+    $display("Gencon Read Key");
     wait (dut.gencon_inst.key_read == 1);
     @(posedge clk);
 
