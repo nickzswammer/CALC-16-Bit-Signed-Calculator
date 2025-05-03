@@ -59,6 +59,7 @@ module calculator_top_tb();
   localparam KEY_MULT = 11; // A (Add)
   localparam KEY_4 = 4;   // 4
   localparam KEY_EQ = 12; // D (Equal)
+  localparam KEY_NEG = 15; // D (Equal)
 
   initial begin
     $dumpfile("calculator_top.vcd");
@@ -76,12 +77,12 @@ module calculator_top_tb();
     nRST = 1;
 
     // Sequence: 3 * 4 = 12
-    press_key(15); // negative
+    press_key(KEY_NEG); // negative
     press_key(KEY_3);
 	  
     press_key(KEY_MULT);
 
-    press_key(15); // negative
+    press_key(KEY_NEG); // negative
     press_key(KEY_4);
     press_key(KEY_EQ);
 
@@ -114,6 +115,31 @@ module calculator_top_tb();
 
     #20;
 
+    // Sequence: 3 * 4 = 12
+    press_key(KEY_5);
+    press_key(KEY_SUB);
+	  
+    press_key(KEY_4);
+    press_key(KEY_EQ);
+
+    wait (complete == 1);
+    $display("✅ Result: %0d", display_output);
+
+    #20;
+
+    // Sequence: 3 * 4 = 12
+    press_key(KEY_NEG);
+    press_key(KEY_5);
+    press_key(KEY_SUB);
+	  
+    press_key(KEY_4);
+    press_key(KEY_EQ);
+
+    wait (complete == 1);
+    $display("✅ Result: %0d", display_output);
+
+    #20;
+	  
     $finish;
   end
 
