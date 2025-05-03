@@ -18,7 +18,7 @@ module input_control (
     typedef enum logic [2:0] {
         IDLE, SCAN_COL, WAIT_STABLE, CONFIRM, WAIT_RELEASE
     } state_t;
-e
+
     state_t state, next_state;
 
     logic [1:0] col_index;
