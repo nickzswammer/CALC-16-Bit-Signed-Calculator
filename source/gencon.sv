@@ -97,9 +97,7 @@ module gencon (
                     operator_to_latch = operator_input;
                     next_state = WAIT_OP2;
                 end
-                else if(operator_input == 3'b001) begin
-                        read_input = 1;
-                end
+               //amogh messed something up here, need to keep checking if it works
                 else
                     next_state = (read_input) ? WAIT_MULT_OP1 : WAIT_OP1;
                 end
