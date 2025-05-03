@@ -151,6 +151,7 @@ module gencon (
 
             case (current_state)
                 WAIT_OP1: begin
+                    complete <= 0;
                     if (operator_input == 1) begin
                         key_read <= 1;
                         operand1[15] <=  operand1[15] ^ 1'b1;
