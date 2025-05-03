@@ -135,11 +135,13 @@ module input_control (
     // Decode key_code into outputs
     always_comb begin
 
+	    /*
 	key_code = 4'hE; // default to avoid latch
 	    
 	if (state == CONFIRM) begin
 	    key_code = encode_key(RowIn, col_index);
 	end
+	    */
 
 	next_keypad_input = 4'd0;
 	next_operator_input = 3'b000;
