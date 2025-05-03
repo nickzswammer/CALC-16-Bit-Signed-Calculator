@@ -37,7 +37,6 @@ module calculator_top_tb();
 
 	  $display("RowIn: %b, ColOut: %b, Time: %0t", ColOut, RowIn, $time);
     @(posedge clk);  // debounce or FSM transition delay
-    @(posedge clk);
 
     wait(dut.input_ctrl_inst.state == 3);
     
