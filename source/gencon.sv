@@ -153,8 +153,13 @@ module gencon (
                 WAIT_OP1: begin
                     complete <= 0;
                     if (operator_input == 1) begin
-                        key_read <= 1;
-                        operand1[15] <=  operand1[15] ^ 1'b1;
+                        if (key_read == 1)
+                            key_read <= 0;
+                        else begin
+                            key_read <= 1;
+                            operand1[15] <=  operand1[15] ^ 1'b1;
+                        end
+                        
                     end
                     if (read_input) begin
                         latched_keypad_input <= keypad_input;
