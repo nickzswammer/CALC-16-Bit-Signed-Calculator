@@ -23,7 +23,7 @@ module input_control (
 
     logic [1:0] col_index;
 	/// logic [18:0] debounce_cnt; for final
-    logic [3:0] debounce_cnt;
+    logic [18:0] debounce_cnt;
     logic [3:0] key_code;
     logic key_valid;
 
@@ -101,7 +101,7 @@ module input_control (
         case (state)
             IDLE:        next_state = SCAN_COL;
             SCAN_COL:    next_state = key_valid ? WAIT_STABLE : SCAN_COL;
-            WAIT_STABLE: next_state = (debounce_cnt >= 4'd10) ? CONFIRM : WAIT_STABLE;
+	   WAIT_STABLE: next_state = (debounce_cnt >= 19'd500000) ? CONFIRM : WAIT_STABLE;
             CONFIRM:     next_state = key_read ? WAIT_RELEASE : CONFIRM;
             WAIT_RELEASE:next_state = !key_valid ? IDLE : WAIT_RELEASE;
 	    default: next_state = IDLE;
