@@ -179,16 +179,16 @@ module gencon (
                 end
 
                 WAIT_OP2: begin
-                    if (operator_input == 1) begin
+                    if (operator_input || read_input)
                         key_read <= 1;
+                    
+                    if (operator_input == 1) begin
                         operand2[15] <=  operand2[15] ^ 1'b1;
                     end
                     
                     if (read_input) begin
                         latched_keypad_input <= keypad_input;
 
-                        key_read <= 1;
-                        
                         mult_in1 <= operand2;
                         mult_in2 <= 16'd10;
                         start_mult <= 1;
