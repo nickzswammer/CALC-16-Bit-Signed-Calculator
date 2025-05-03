@@ -66,6 +66,7 @@ module calculator_top_tb();
   localparam KEY_NEG = 15; // D (Equal)
 
   initial begin
+	  $monitor("Output: %d", display_output);
     $dumpfile("calculator_top.vcd");
     $dumpvars();
 
