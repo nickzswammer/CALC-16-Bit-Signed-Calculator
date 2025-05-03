@@ -53,7 +53,10 @@ module calculator_top_tb();
 
   // Map: keypad index for 3 + 4 =
   localparam KEY_3 = 2;   // 3
+  localparam KEY_5 = 5;   // 3
+  localparam KEY_7 = 8;   // 3
   localparam KEY_ADD = 3; // A (Add)
+  localparam KEY_SUB = 7; // S (Subtract)
   localparam KEY_MULT = 11; // A (Add)
   localparam KEY_4 = 4;   // 4
   localparam KEY_EQ = 12; // D (Equal)
@@ -73,7 +76,7 @@ module calculator_top_tb();
     @(negedge clk);  // reset pulse
     nRST = 1;
 
-    // Sequence: 3 * 4 =
+    // Sequence: 3 * 4 = 12
     press_key(KEY_3);
     press_key(KEY_MULT);
     press_key(KEY_4);
@@ -84,7 +87,7 @@ module calculator_top_tb();
 
     #20;
 
-    // Sequence: 3 * 4 =
+    // Sequence: 3 + 4 = 7
     press_key(KEY_3);
     press_key(KEY_ADD);
     press_key(KEY_4);
@@ -94,6 +97,18 @@ module calculator_top_tb();
     $display("✅ Result: %0d", display_output);
 
     #20;
+
+    // Sequence: 7 - 5 = 2
+    press_key(KEY_7);
+    press_key(KEY_SUB);
+    press_key(KEY_5);
+    press_key(KEY_EQ);
+
+    wait (complete == 1);
+    $display("✅ Result: %0d", display_output);
+
+    #20;
+    
     $finish;
   end
 
