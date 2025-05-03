@@ -83,6 +83,17 @@ module calculator_top_tb();
     $display("✅ Result: %0d", display_output);
 
     #20;
+
+    // Sequence: 3 * 4 =
+    press_key(KEY_3);
+    press_key(KEY_ADD);
+    press_key(KEY_4);
+    press_key(KEY_EQ);
+
+    wait (complete == 1);
+    $display("✅ Result: %0d", display_output);
+
+    #20;
     $finish;
   end
 
