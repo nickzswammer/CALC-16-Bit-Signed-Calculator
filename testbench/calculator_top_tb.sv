@@ -66,7 +66,7 @@ module calculator_top_tb();
   localparam KEY_NEG = 15; // D (Equal)
 
   initial begin
-	  $monitor("Output: %d", display_output);
+	  $monitor("Output: %b", display_output);
     $dumpfile("calculator_top.vcd");
     $dumpvars();
 
@@ -107,6 +107,13 @@ module calculator_top_tb();
     $display("✅ Result: %0d", display_output);
 
     #20;
+
+    nRST = 0;
+    @(negedge clk);
+    @(negedge clk);
+
+    @(negedge clk);  // reset pulse
+    nRST = 1;
 
     // Sequence: 3 + 4 = 7
     press_key(KEY_3);
