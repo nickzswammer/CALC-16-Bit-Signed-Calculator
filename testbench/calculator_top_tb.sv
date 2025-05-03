@@ -54,6 +54,7 @@ module calculator_top_tb();
   // Map: keypad index for 3 + 4 =
   localparam KEY_3 = 2;   // 3
   localparam KEY_ADD = 3; // A (Add)
+  localparam KEY_MULT = 11; // A (Add)
   localparam KEY_4 = 4;   // 4
   localparam KEY_EQ = 12; // D (Equal)
 
@@ -72,9 +73,9 @@ module calculator_top_tb();
     @(negedge clk);  // reset pulse
     nRST = 1;
 
-    // Sequence: 3 + 4 =
+    // Sequence: 3 * 4 =
     press_key(KEY_3);
-    press_key(KEY_ADD);
+    press_key(KEY_MULT);
     press_key(KEY_4);
     press_key(KEY_EQ);
 
