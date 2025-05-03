@@ -34,6 +34,8 @@ module calculator_top_tb();
 
     // Pull the correct row low (active low press)
     RowIn = ~(4'b0001 << row);
+
+	  $display("RowIn: %b, ColOut: %b, Time: %0t", ColOut, RowIn, $time);
     @(posedge clk);  // debounce or FSM transition delay
     @(posedge clk);
 
