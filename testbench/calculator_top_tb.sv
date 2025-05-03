@@ -31,6 +31,7 @@ module calculator_top_tb();
     // Wait for the right column to become active
     wait (ColOut == ~(4'b0001 << col));
     @(posedge clk);
+    @(posedge clk);
 
     // Pull the correct row low (active low press)
     RowIn = ~(4'b0001 << row);
