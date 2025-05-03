@@ -38,6 +38,13 @@ module calculator_top_tb();
     wait(dut.input_ctrl_inst.state == 3);
     
     @(posedge clk);
+    @(posedge clk);    @(posedge clk);
+    @(posedge clk);    @(posedge clk);
+    @(posedge clk);    @(posedge clk);
+    @(posedge clk);    @(posedge clk);
+    @(posedge clk);    @(posedge clk);
+    @(posedge clk);    @(posedge clk);
+    @(posedge clk);    @(posedge clk);
     @(posedge clk);
 
     // Let gencon acknowledge
