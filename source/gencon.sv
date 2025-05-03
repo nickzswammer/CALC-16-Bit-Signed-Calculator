@@ -230,11 +230,15 @@ module gencon (
                     key_read <= 0;
 
                 SHOW_RESULT_ADDSUB: begin
+                    operand1 <= 0;
+                    operand2 <= 0;
                     complete <= 1;
                     display_output <= ALU_out;
                 end
 
                 SHOW_RESULT_MULT: begin
+                    operand1 <= 0;
+                    operand2 <= 0;
                     complete <= 1;
                     display_output <= mult_out;
                 end
