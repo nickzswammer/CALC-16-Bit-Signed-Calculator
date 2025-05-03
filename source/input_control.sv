@@ -14,6 +14,8 @@ module input_control (
     output logic [2:0] operator_input,   // 3-bit operator code
     output logic equal_input             // 1-bit equal flag (*)
 );
+
+	localparam DEBOUNCE_SIZE = 500000;
 		
     typedef enum logic [2:0] {
         IDLE, SCAN_COL, WAIT_STABLE, CONFIRM, WAIT_RELEASE
@@ -70,9 +72,9 @@ module input_control (
 	        col_index <= (col_index == 3) ? 0 : col_index + 1;
 
             if (state == WAIT_STABLE) begin
-		    if (key_valid && debounce_cnt < 10)
+		    if (key_valid && debounce_cnt < DEBOUNCE_SIZE)
                     debounce_cnt <= debounce_cnt + 1;
-		    else if (debounce_cnt == 10)
+		    else if (debounce_cnt == DEBOUNCE_SIZE)
                     debounce_cnt <= 0;
             end
 
@@ -103,7 +105,7 @@ module input_control (
         case (state)
             IDLE:        next_state = SCAN_COL;
             SCAN_COL:    next_state = key_valid ? WAIT_STABLE : SCAN_COL;
-		WAIT_STABLE: next_state = (debounce_cnt >= 4'd10) ? CONFIRM : WAIT_STABLE;
+		WAIT_STABLE: next_state = (debounce_cnt >= DEBOUNCE_SIZE) ? CONFIRM : WAIT_STABLE;
             CONFIRM:     next_state = key_read ? WAIT_RELEASE : CONFIRM;
             WAIT_RELEASE:next_state = !key_valid ? IDLE : WAIT_RELEASE;
 	    default: next_state = IDLE;
