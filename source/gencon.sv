@@ -57,22 +57,6 @@ module gencon (
         .start(start_mult), .out(mult_out), .finish(mult_finish)
     );
 
-    // FSM state transition
-    always_ff @(posedge clk or negedge nRST) begin
-        if (!nRST) begin
-            current_state <= WAIT_OP1;
-            operand1 <= 0;
-            operand2 <= 0;
-            getting_op1 <= 0;
-            getting_op2 <= 0;
-            latched_operator_input <= 0;
-            latched_keypad_input <= 0;
-            mult_in1 <= 0;
-            mult_in2 <= 0;
-            ALU_in1 <= 0;
-            ALU_in2 <= 0;
-        end 
-    end
     /* verilator lint_off CASEINCOMPLETE */
 
     // FSM logic
@@ -140,6 +124,17 @@ module gencon (
             key_read <= 0;
             display_output <= 0;
             complete <= 0;
+            current_state <= WAIT_OP1;
+            operand1 <= 0;
+            operand2 <= 0;
+            getting_op1 <= 0;
+            getting_op2 <= 0;
+            latched_operator_input <= 0;
+            latched_keypad_input <= 0;
+            mult_in1 <= 0;
+            mult_in2 <= 0;
+            ALU_in1 <= 0;
+            ALU_in2 <= 0;
             
         end else begin
             start_ALU <= 0;
