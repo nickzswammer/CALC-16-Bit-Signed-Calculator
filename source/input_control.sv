@@ -75,9 +75,7 @@ module input_control (
             end
 
 	    if (state == CONFIRM) begin
-		key_code = encode_key(RowIn, col_index);
 		decoded_key <= key_code;
-	
 	        // Decode in-place
 	        keypad_input <= next_keypad_input;
 	        //operator_input <= next_operator_input;
@@ -136,6 +134,10 @@ module input_control (
 
     // Decode key_code into outputs
     always_comb begin
+	if (state == CONFIRM) begin
+	    key_code = encode_key(RowIn, col_index);
+	end
+
 	next_keypad_input = 4'd0;
 	next_operator_input = 3'b000;
 	next_equal_input = 0;
