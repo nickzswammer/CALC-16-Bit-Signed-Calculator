@@ -41,8 +41,9 @@ module calculator_top_tb();
     @(posedge clk);
 
     // Let gencon acknowledge
-    $display("Gencon Read Key");
+    $display("Pre Read Key");
     wait (dut.gencon_inst.key_read == 1);
+    $display("Read Key!");
     @(posedge clk);
 
     // Release the key
