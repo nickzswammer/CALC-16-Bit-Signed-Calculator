@@ -160,7 +160,7 @@ module gencon (
                     
                     if (operator_input == 1) begin
                         if (key_read == 1)
-                            operand1[15] <=  operand1[15] ^ 1'b1;
+                            operand1[15] <= 1'b1;
                     end
                     
                     if (read_input) begin
@@ -195,7 +195,7 @@ module gencon (
                     
                     if (operator_input == 1) begin
                         if (key_read == 1)
-                            operand2[15] <=  operand2[15] ^ 1'b1;
+                            operand2[15] <=  1'b1;
                     end
                     
                     if (read_input) begin
