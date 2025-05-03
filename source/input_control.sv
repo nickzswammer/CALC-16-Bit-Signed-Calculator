@@ -84,7 +84,7 @@ module input_control (
 	        equal_input <= next_equal_input;
 	
 	        // Only raise read_input if it’s a digit
-		    if ((decoded_key == 0 || decoded_key == 1 || decoded_key == 2 || decoded_key == 4 || decoded_key == 5 || decoded_key == 6 || 
+		if ((decoded_key == 0 || decoded_key == 1 || decoded_key == 2 || decoded_key == 4 || decoded_key == 5 || decoded_key == 6 || 
 			  decoded_key == 8 || decoded_key == 9 || decoded_key == 10 || decoded_key == 13)) begin
 	            read_input <= 1;
 	        end
