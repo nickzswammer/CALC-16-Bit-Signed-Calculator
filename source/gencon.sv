@@ -67,6 +67,7 @@ module gencon (
         
         case (current_state)
             WAIT_OP1: begin
+                display_output <= operand1;
                 if (operator_input != 3'b000 && operator_input != 3'b001) begin
                     latch_operator = 1;
                     operator_to_latch = operator_input;
@@ -85,6 +86,7 @@ module gencon (
                 next_state = WAIT_OP1;
 
             WAIT_OP2:
+                display_output <= operand2;
                 if (equal_input) begin
                     next_state = SEND_TO_COMPUTE;
                 end
@@ -236,14 +238,15 @@ module gencon (
                     key_read <= 0;
 
                 SHOW_RESULT_ADDSUB: begin
-                    operand1 <= 0;
+                    operand1 <= ALU_out;
                     operand2 <= 0;
                     complete <= 1;
+                    
                     display_output <= ALU_out;
                 end
 
                 SHOW_RESULT_MULT: begin
-                    operand1 <= 0;
+                    operand1 <= mult_out;
                     operand2 <= 0;
                     complete <= 1;
                     display_output <= mult_out;
