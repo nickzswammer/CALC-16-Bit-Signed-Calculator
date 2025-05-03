@@ -133,6 +133,7 @@ module calculator_top_tb();
 
     #20;
 
+	  @(posedge clk);
 	  $display("Output Mismatch %0t", $time);
     // Sequence: -5 - 4 = -9
     press_key(KEY_NEG);
