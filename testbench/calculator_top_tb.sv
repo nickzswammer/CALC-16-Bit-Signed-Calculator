@@ -25,9 +25,6 @@ module calculator_top_tb();
     int row = key_index / 4;
     int col = key_index % 4;
 
-	  $display("Row: %d, Col: %d, Time: %0t", row, col, $time);
-	  
-	  
     // Wait for the right column to become active
     wait (ColOut == ~(4'b0001 << col));
     @(posedge clk);
@@ -35,7 +32,6 @@ module calculator_top_tb();
     // Pull the correct row low (active low press)
     RowIn = ~(4'b0001 << row);
 
-	  $display("RowIn: %b, ColOut: %b, Time: %0t", ColOut, RowIn, $time);
     @(posedge clk);  // debounce or FSM transition delay
 
     wait(dut.input_ctrl_inst.state == 3);
@@ -66,7 +62,7 @@ module calculator_top_tb();
   localparam KEY_NEG = 15; // D (Equal)
 
   initial begin
-	  $monitor("Output: %b", display_output);
+    $monitor("Output: %b", display_output);
     $dumpfile("calculator_top.vcd");
     $dumpvars();
 
@@ -101,7 +97,7 @@ module calculator_top_tb();
 
     @(negedge clk);  // reset pulse
     nRST = 1;
-	  @(posedge clk);
+    @(posedge clk);
     // Sequence: 3 * 4 = 12
     press_key(KEY_3);
     press_key(KEY_MULT);
