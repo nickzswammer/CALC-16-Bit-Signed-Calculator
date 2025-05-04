@@ -1,4 +1,5 @@
 `include "gencon_defs.sv"
+`timescale 1ns / 1ns
 
 module gencon_tb;	
     // Testbench signals
