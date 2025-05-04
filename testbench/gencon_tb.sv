@@ -283,5 +283,11 @@ module gencon_tb;
         $finish;
     end
 
+initial begin
+  // Timeout after 1 ms at 1ns timestep = 1,000,000 steps
+  #1000000;
+  $display("ERROR: Timeout - DUT did not complete.");
+  $finish;
+end
 
 endmodule
