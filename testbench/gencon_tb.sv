@@ -12,7 +12,6 @@ module gencon_tb;
     logic [15:0] display_output;
     logic read_input;
     logic key_read;
-    state_t tb_current_state;
 	
     // TB-only variables
     int test_number;
@@ -46,7 +45,7 @@ module gencon_tb;
     task press_digit(input [3:0] digit);
         begin
 	    // Wait until FSM is in a state that accepts digits
-	    wait (tb_current_state == 0 || tb_current_state == 3);
+		wait (dut.current_state == 0 || dut.current_state == 3);
 	    operator_input = 0;
             keypad_input = digit;
             @(posedge clk);
@@ -63,7 +62,7 @@ module gencon_tb;
     // Reset Task
     task reset_dut;
         begin
-	    wait(tb_current_state == 0);
+		wait(dut.current_state == 0);
             keypad_input = 0;
             operator_input = 3'b000;
             equal_input = 0;
@@ -129,7 +128,7 @@ module gencon_tb;
 		    
     	    end
 		
-		wait (tb_current_state == 0 || tb_current_state == 3);
+		wait (dut.current_state == 0 || dut.current_state == 3);
 		@(posedge clk);
             // get operator 
 	    operator_input = operation;
@@ -173,7 +172,7 @@ module gencon_tb;
 	    end
 		
 	    // equal press
-		wait (tb_current_state == 3);
+		wait (dut.current_state == 3);
 		
 		@(posedge clk);
 		@(posedge clk);
