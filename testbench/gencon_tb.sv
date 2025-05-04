@@ -10,6 +10,7 @@ module gencon_tb;
     logic complete;
     logic [15:0] display_output;
     logic read_input;
+    logic key_read;
     state_t tb_current_state;
 	
     // TB-only variables
@@ -38,6 +39,7 @@ module gencon_tb;
         .complete(complete),
 	.display_output(display_output),
 	.tb_current_state(tb_current_state)
+	.key_read(key_read);
     );
 
     // Task to simulate a digit keypress
