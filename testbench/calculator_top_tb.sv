@@ -140,13 +140,26 @@ module calculator_top_tb();
     #20;
 
 	  @(posedge clk);
-	  $display("Output Mismatch %0t", $time);
     // Sequence: -5 - 4 = -9
     press_key(KEY_NEG);
     press_key(KEY_5);
     press_key(KEY_SUB);
 	  
     press_key(KEY_4);
+    press_key(KEY_EQ);
+
+    wait (complete == 1);
+    $display("✅ Result: %0d", display_output);
+
+    #20;
+	@(posedge clk);
+    // Sequence: 35 * 45 = 1575
+    press_key(KEY_3);
+    press_key(KEY_5);
+    press_key(KEY_MULT);
+	  
+    press_key(KEY_4);
+    press_key(KEY_5);
     press_key(KEY_EQ);
 
     wait (complete == 1);
