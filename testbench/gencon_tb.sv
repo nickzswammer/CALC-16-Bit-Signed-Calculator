@@ -38,8 +38,8 @@ module gencon_tb;
         .equal_input(equal_input),
         .complete(complete),
 	.display_output(display_output),
-	.tb_current_state(tb_current_state)
-	.key_read(key_read);
+	.tb_current_state(tb_current_state),
+	.key_read(key_read)
     );
 
     // Task to simulate a digit keypress
