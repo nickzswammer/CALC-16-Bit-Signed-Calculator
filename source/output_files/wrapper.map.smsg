@@ -1,0 +1,1 @@
+Warning (10268): Verilog HDL information at input_control.sv(62): always construct contains both blocking and non-blocking assignments File: /home/shay/a/du347/CALC-Intro-2 (another copy)/source/input_control.sv Line: 62

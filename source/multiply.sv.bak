@@ -101,14 +101,6 @@ module multiply
     always_comb begin
         
 	finish = 1'b0;
-	diffSign = 0;
-	n1 = 0;
-	n2 = 0;
-	countSave = 0;
-	countIn = 0;
-	adderSave = 0;
-	adderIn = 0;
-	out = 0;
 
         casez(state)
             

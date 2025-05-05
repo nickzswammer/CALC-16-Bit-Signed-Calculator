@@ -33,7 +33,7 @@ module adder15(
 	adder a0(sum[0], carry[0], in1[0], in2[0] ^ sub, sub);
 	
 	genvar i;
-	generate for (i = 1; i < 15; i = i + 1) begin: GENERATE_ADDER
+	generate for (i = 1; i < 15; i = i + 1) begin
     		adder thingy(sum[i], carry[i], in1[i], in2[i] ^ sub, carry[i - 1]);
 	end endgenerate
 	
@@ -120,11 +120,6 @@ module addition
     always_comb begin
         
 	finish = 1'b0;
-	diffSign = 0;
-	n2 = 0;
-	n1 = 0;
-	sameSignVal = 0;
-	out = 0;
 
         casez(state)
             
@@ -165,7 +160,6 @@ module addition
                 finish = 1'b1;
 			default:
 				finish = 1'b0;
-				
         endcase
     end
 endmodule

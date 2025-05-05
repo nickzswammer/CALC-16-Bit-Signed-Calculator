@@ -1,0 +1,1899 @@
+|wrapper
+CLOCK_50 => CLOCK_50.IN1
+KEY[0] => ~NO_FANOUT~
+KEY[1] => ~NO_FANOUT~
+KEY[2] => ~NO_FANOUT~
+KEY[3] => nRST.IN1
+SW[0] => ~NO_FANOUT~
+SW[1] => ~NO_FANOUT~
+SW[2] => ~NO_FANOUT~
+SW[3] => ~NO_FANOUT~
+SW[4] => ~NO_FANOUT~
+SW[5] => ~NO_FANOUT~
+SW[6] => ~NO_FANOUT~
+SW[7] => ~NO_FANOUT~
+SW[8] => ~NO_FANOUT~
+SW[9] => ~NO_FANOUT~
+SW[10] => ~NO_FANOUT~
+SW[11] => ~NO_FANOUT~
+SW[12] => ~NO_FANOUT~
+SW[13] => ~NO_FANOUT~
+SW[14] => ~NO_FANOUT~
+SW[15] => ~NO_FANOUT~
+SW[16] => ~NO_FANOUT~
+SW[17] => ~NO_FANOUT~
+GPIO[0] <> <UNC>
+GPIO[1] <> <UNC>
+GPIO[2] <> <UNC>
+GPIO[3] <> <UNC>
+GPIO[4] <> <UNC>
+GPIO[5] <> <UNC>
+GPIO[6] <> <UNC>
+GPIO[7] <> <UNC>
+GPIO[8] <> <UNC>
+GPIO[9] <> <UNC>
+GPIO[10] <> <UNC>
+GPIO[11] <> GPIO[11]
+GPIO[12] <> <UNC>
+GPIO[13] <> GPIO[13]
+GPIO[14] <> <UNC>
+GPIO[15] <> GPIO[15]
+GPIO[16] <> <UNC>
+GPIO[17] <> GPIO[17]
+GPIO[18] <> <UNC>
+GPIO[20] <> <UNC>
+GPIO[22] <> <UNC>
+GPIO[24] <> <UNC>
+GPIO[26] <> <UNC>
+GPIO[27] <> <UNC>
+GPIO[28] <> <UNC>
+GPIO[29] <> <UNC>
+GPIO[30] <> <UNC>
+GPIO[31] <> <UNC>
+GPIO[32] <> <UNC>
+GPIO[33] <> <UNC>
+GPIO[34] <> <UNC>
+LEDR[0] << calculator_top:DUT.display_output
+LEDR[1] << calculator_top:DUT.display_output
+LEDR[2] << calculator_top:DUT.display_output
+LEDR[3] << calculator_top:DUT.display_output
+LEDR[4] << calculator_top:DUT.display_output
+LEDR[5] << calculator_top:DUT.display_output
+LEDR[6] << calculator_top:DUT.display_output
+LEDR[7] << calculator_top:DUT.display_output
+LEDR[8] << calculator_top:DUT.display_output
+LEDR[9] << calculator_top:DUT.display_output
+LEDR[10] << calculator_top:DUT.display_output
+LEDR[11] << calculator_top:DUT.display_output
+LEDR[12] << calculator_top:DUT.display_output
+LEDR[13] << calculator_top:DUT.display_output
+LEDR[14] << calculator_top:DUT.display_output
+LEDR[15] << calculator_top:DUT.display_output
+LEDR[16] << <GND>
+LEDR[17] << <GND>
+LEDG[0] << test.DB_MAX_OUTPUT_PORT_TYPE
+LEDG[1] << <GND>
+LEDG[2] << <GND>
+LEDG[3] << <GND>
+LEDG[4] << calculator_top:DUT.complete
+LEDG[5] << calculator_top:DUT.input_state
+LEDG[6] << calculator_top:DUT.input_state
+LEDG[7] << calculator_top:DUT.input_state
+
+
+|wrapper|calculator_top:DUT
+clk => clk.IN2
+nRST => nRST.IN2
+RowIn[0] => RowIn[0].IN1
+RowIn[1] => RowIn[1].IN1
+RowIn[2] => RowIn[2].IN1
+RowIn[3] => RowIn[3].IN1
+ColOut[0] <= input_control:input_ctrl_inst.ColOut
+ColOut[1] <= input_control:input_ctrl_inst.ColOut
+ColOut[2] <= input_control:input_ctrl_inst.ColOut
+ColOut[3] <= input_control:input_ctrl_inst.ColOut
+display_output[0] <= gencon:gencon_inst.display_output
+display_output[1] <= gencon:gencon_inst.display_output
+display_output[2] <= gencon:gencon_inst.display_output
+display_output[3] <= gencon:gencon_inst.display_output
+display_output[4] <= gencon:gencon_inst.display_output
+display_output[5] <= gencon:gencon_inst.display_output
+display_output[6] <= gencon:gencon_inst.display_output
+display_output[7] <= gencon:gencon_inst.display_output
+display_output[8] <= gencon:gencon_inst.display_output
+display_output[9] <= gencon:gencon_inst.display_output
+display_output[10] <= gencon:gencon_inst.display_output
+display_output[11] <= gencon:gencon_inst.display_output
+display_output[12] <= gencon:gencon_inst.display_output
+display_output[13] <= gencon:gencon_inst.display_output
+display_output[14] <= gencon:gencon_inst.display_output
+display_output[15] <= gencon:gencon_inst.display_output
+input_state[0] <= input_control:input_ctrl_inst.input_state
+input_state[1] <= input_control:input_ctrl_inst.input_state
+input_state[2] <= input_control:input_ctrl_inst.input_state
+complete <= gencon:gencon_inst.complete
+
+
+|wrapper|calculator_top:DUT|input_control:input_ctrl_inst
+clk => equal_input~reg0.CLK
+clk => keypad_input[0]~reg0.CLK
+clk => keypad_input[1]~reg0.CLK
+clk => keypad_input[2]~reg0.CLK
+clk => keypad_input[3]~reg0.CLK
+clk => scan_timer[0].CLK
+clk => scan_timer[1].CLK
+clk => scan_timer[2].CLK
+clk => scan_timer[3].CLK
+clk => scan_timer[4].CLK
+clk => scan_timer[5].CLK
+clk => scan_timer[6].CLK
+clk => scan_timer[7].CLK
+clk => scan_timer[8].CLK
+clk => scan_timer[9].CLK
+clk => scan_timer[10].CLK
+clk => scan_timer[11].CLK
+clk => scan_timer[12].CLK
+clk => scan_timer[13].CLK
+clk => scan_timer[14].CLK
+clk => scan_timer[15].CLK
+clk => scan_timer[16].CLK
+clk => scan_timer[17].CLK
+clk => scan_timer[18].CLK
+clk => scan_timer[19].CLK
+clk => operator_input[0]~reg0.CLK
+clk => operator_input[1]~reg0.CLK
+clk => operator_input[2]~reg0.CLK
+clk => input_state[0]~reg0.CLK
+clk => input_state[1]~reg0.CLK
+clk => input_state[2]~reg0.CLK
+clk => decoded_key[0].CLK
+clk => decoded_key[1].CLK
+clk => decoded_key[2].CLK
+clk => decoded_key[3].CLK
+clk => read_input~reg0.CLK
+clk => debounce_cnt[0].CLK
+clk => debounce_cnt[1].CLK
+clk => debounce_cnt[2].CLK
+clk => debounce_cnt[3].CLK
+clk => debounce_cnt[4].CLK
+clk => debounce_cnt[5].CLK
+clk => debounce_cnt[6].CLK
+clk => debounce_cnt[7].CLK
+clk => debounce_cnt[8].CLK
+clk => debounce_cnt[9].CLK
+clk => debounce_cnt[10].CLK
+clk => debounce_cnt[11].CLK
+clk => debounce_cnt[12].CLK
+clk => debounce_cnt[13].CLK
+clk => debounce_cnt[14].CLK
+clk => debounce_cnt[15].CLK
+clk => debounce_cnt[16].CLK
+clk => debounce_cnt[17].CLK
+clk => debounce_cnt[18].CLK
+clk => col_index[0].CLK
+clk => col_index[1].CLK
+clk => state~1.DATAIN
+nRST => input_state[0]~reg0.ACLR
+nRST => input_state[1]~reg0.ACLR
+nRST => input_state[2]~reg0.ACLR
+nRST => decoded_key[0].ACLR
+nRST => decoded_key[1].PRESET
+nRST => decoded_key[2].PRESET
+nRST => decoded_key[3].PRESET
+nRST => read_input~reg0.ACLR
+nRST => debounce_cnt[0].ACLR
+nRST => debounce_cnt[1].ACLR
+nRST => debounce_cnt[2].ACLR
+nRST => debounce_cnt[3].ACLR
+nRST => debounce_cnt[4].ACLR
+nRST => debounce_cnt[5].ACLR
+nRST => debounce_cnt[6].ACLR
+nRST => debounce_cnt[7].ACLR
+nRST => debounce_cnt[8].ACLR
+nRST => debounce_cnt[9].ACLR
+nRST => debounce_cnt[10].ACLR
+nRST => debounce_cnt[11].ACLR
+nRST => debounce_cnt[12].ACLR
+nRST => debounce_cnt[13].ACLR
+nRST => debounce_cnt[14].ACLR
+nRST => debounce_cnt[15].ACLR
+nRST => debounce_cnt[16].ACLR
+nRST => debounce_cnt[17].ACLR
+nRST => debounce_cnt[18].ACLR
+nRST => col_index[0].ACLR
+nRST => col_index[1].ACLR
+nRST => state~3.DATAIN
+nRST => operator_input[2]~reg0.ENA
+nRST => operator_input[1]~reg0.ENA
+nRST => operator_input[0]~reg0.ENA
+nRST => scan_timer[19].ENA
+nRST => scan_timer[18].ENA
+nRST => scan_timer[17].ENA
+nRST => scan_timer[16].ENA
+nRST => scan_timer[15].ENA
+nRST => scan_timer[14].ENA
+nRST => scan_timer[13].ENA
+nRST => scan_timer[12].ENA
+nRST => scan_timer[11].ENA
+nRST => scan_timer[10].ENA
+nRST => scan_timer[9].ENA
+nRST => scan_timer[8].ENA
+nRST => scan_timer[7].ENA
+nRST => scan_timer[6].ENA
+nRST => scan_timer[5].ENA
+nRST => scan_timer[4].ENA
+nRST => scan_timer[3].ENA
+nRST => scan_timer[2].ENA
+nRST => scan_timer[1].ENA
+nRST => scan_timer[0].ENA
+nRST => keypad_input[3]~reg0.ENA
+nRST => keypad_input[2]~reg0.ENA
+nRST => keypad_input[1]~reg0.ENA
+nRST => keypad_input[0]~reg0.ENA
+nRST => equal_input~reg0.ENA
+RowIn[0] => encode_key.DATAB
+RowIn[0] => key_pressed.DATAB
+RowIn[0] => encode_key.IN0
+RowIn[1] => key_pressed.OUTPUTSELECT
+RowIn[1] => encode_key.IN1
+RowIn[2] => key_pressed.OUTPUTSELECT
+RowIn[2] => encode_key.IN1
+RowIn[3] => key_pressed.OUTPUTSELECT
+RowIn[3] => encode_key.IN1
+ColOut[0] <= Decoder0.DB_MAX_OUTPUT_PORT_TYPE
+ColOut[1] <= Decoder0.DB_MAX_OUTPUT_PORT_TYPE
+ColOut[2] <= Decoder0.DB_MAX_OUTPUT_PORT_TYPE
+ColOut[3] <= Decoder0.DB_MAX_OUTPUT_PORT_TYPE
+read_input <= read_input~reg0.DB_MAX_OUTPUT_PORT_TYPE
+key_read => Selector3.IN2
+key_read => Selector2.IN2
+keypad_input[0] <= keypad_input[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+keypad_input[1] <= keypad_input[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+keypad_input[2] <= keypad_input[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+keypad_input[3] <= keypad_input[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+operator_input[0] <= operator_input[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+operator_input[1] <= operator_input[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+operator_input[2] <= operator_input[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+input_state[0] <= input_state[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+input_state[1] <= input_state[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+input_state[2] <= input_state[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+equal_input <= equal_input~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst
+clk => clk.IN2
+nRST => nRST.IN2
+keypad_input[0] => latched_keypad_input.DATAB
+keypad_input[1] => latched_keypad_input.DATAB
+keypad_input[2] => latched_keypad_input.DATAB
+keypad_input[3] => latched_keypad_input.DATAB
+read_input => always1.IN1
+read_input => latched_keypad_input.OUTPUTSELECT
+read_input => latched_keypad_input.OUTPUTSELECT
+read_input => latched_keypad_input.OUTPUTSELECT
+read_input => latched_keypad_input.OUTPUTSELECT
+read_input => key_read.OUTPUTSELECT
+read_input => mult_in1.OUTPUTSELECT
+read_input => mult_in1.OUTPUTSELECT
+read_input => mult_in1.OUTPUTSELECT
+read_input => mult_in1.OUTPUTSELECT
+read_input => mult_in1.OUTPUTSELECT
+read_input => mult_in1.OUTPUTSELECT
+read_input => mult_in1.OUTPUTSELECT
+read_input => mult_in1.OUTPUTSELECT
+read_input => mult_in1.OUTPUTSELECT
+read_input => mult_in1.OUTPUTSELECT
+read_input => mult_in1.OUTPUTSELECT
+read_input => mult_in1.OUTPUTSELECT
+read_input => mult_in1.OUTPUTSELECT
+read_input => mult_in1.OUTPUTSELECT
+read_input => mult_in1.OUTPUTSELECT
+read_input => mult_in1.OUTPUTSELECT
+read_input => mult_in2.OUTPUTSELECT
+read_input => mult_in2.OUTPUTSELECT
+read_input => mult_in2.OUTPUTSELECT
+read_input => mult_in2.OUTPUTSELECT
+read_input => mult_in2.OUTPUTSELECT
+read_input => mult_in2.OUTPUTSELECT
+read_input => mult_in2.OUTPUTSELECT
+read_input => mult_in2.OUTPUTSELECT
+read_input => mult_in2.OUTPUTSELECT
+read_input => mult_in2.OUTPUTSELECT
+read_input => mult_in2.OUTPUTSELECT
+read_input => mult_in2.OUTPUTSELECT
+read_input => mult_in2.OUTPUTSELECT
+read_input => mult_in2.OUTPUTSELECT
+read_input => mult_in2.OUTPUTSELECT
+read_input => mult_in2.OUTPUTSELECT
+read_input => mult_in1.OUTPUTSELECT
+read_input => mult_in1.OUTPUTSELECT
+read_input => mult_in1.OUTPUTSELECT
+read_input => mult_in1.OUTPUTSELECT
+read_input => mult_in1.OUTPUTSELECT
+read_input => mult_in1.OUTPUTSELECT
+read_input => mult_in1.OUTPUTSELECT
+read_input => mult_in1.OUTPUTSELECT
+read_input => mult_in1.OUTPUTSELECT
+read_input => mult_in1.OUTPUTSELECT
+read_input => mult_in1.OUTPUTSELECT
+read_input => mult_in1.OUTPUTSELECT
+read_input => mult_in1.OUTPUTSELECT
+read_input => mult_in1.OUTPUTSELECT
+read_input => mult_in1.OUTPUTSELECT
+read_input => mult_in1.OUTPUTSELECT
+read_input => next_state.DATAA
+read_input => next_state.DATAA
+read_input => Selector75.IN3
+read_input => Selector75.IN4
+read_input => next_state.DATAA
+read_input => next_state.DATAA
+operator_input[0] => operator_to_latch.DATAB
+operator_input[0] => Equal0.IN2
+operator_input[0] => Equal1.IN0
+operator_input[0] => Equal2.IN31
+operator_input[0] => Equal3.IN0
+operator_input[1] => operator_to_latch.DATAB
+operator_input[1] => Equal0.IN1
+operator_input[1] => Equal1.IN2
+operator_input[1] => Equal2.IN30
+operator_input[1] => Equal3.IN31
+operator_input[2] => operator_to_latch.DATAB
+operator_input[2] => Equal0.IN0
+operator_input[2] => Equal1.IN1
+operator_input[2] => Equal2.IN29
+operator_input[2] => Equal3.IN30
+equal_input => next_state.OUTPUTSELECT
+equal_input => next_state.OUTPUTSELECT
+equal_input => next_state.SEND_TO_COMPUTE.DATAB
+key_read <= key_read~reg0.DB_MAX_OUTPUT_PORT_TYPE
+complete <= complete~reg0.DB_MAX_OUTPUT_PORT_TYPE
+display_output[0] <= display_output[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+display_output[1] <= display_output[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+display_output[2] <= display_output[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+display_output[3] <= display_output[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+display_output[4] <= display_output[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+display_output[5] <= display_output[5]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+display_output[6] <= display_output[6]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+display_output[7] <= display_output[7]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+display_output[8] <= display_output[8]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+display_output[9] <= display_output[9]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+display_output[10] <= display_output[10]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+display_output[11] <= display_output[11]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+display_output[12] <= display_output[12]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+display_output[13] <= display_output[13]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+display_output[14] <= display_output[14]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+display_output[15] <= display_output[15]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc
+clk => state~1.DATAIN
+nRST => state~3.DATAIN
+INn1[0] => n2.DATAB
+INn1[0] => n1.DATAA
+INn1[0] => n1.DATAA
+INn1[1] => n2.DATAB
+INn1[1] => n1.DATAA
+INn1[1] => n1.DATAA
+INn1[2] => n2.DATAB
+INn1[2] => n1.DATAA
+INn1[2] => n1.DATAA
+INn1[3] => n2.DATAB
+INn1[3] => n1.DATAA
+INn1[3] => n1.DATAA
+INn1[4] => n2.DATAB
+INn1[4] => n1.DATAA
+INn1[4] => n1.DATAA
+INn1[5] => n2.DATAB
+INn1[5] => n1.DATAA
+INn1[5] => n1.DATAA
+INn1[6] => n2.DATAB
+INn1[6] => n1.DATAA
+INn1[6] => n1.DATAA
+INn1[7] => n2.DATAB
+INn1[7] => n1.DATAA
+INn1[7] => n1.DATAA
+INn1[8] => n2.DATAB
+INn1[8] => n1.DATAA
+INn1[8] => n1.DATAA
+INn1[9] => n2.DATAB
+INn1[9] => n1.DATAA
+INn1[9] => n1.DATAA
+INn1[10] => n2.DATAB
+INn1[10] => n1.DATAA
+INn1[10] => n1.DATAA
+INn1[11] => n2.DATAB
+INn1[11] => n1.DATAA
+INn1[11] => n1.DATAA
+INn1[12] => n2.DATAB
+INn1[12] => n1.DATAA
+INn1[12] => n1.DATAA
+INn1[13] => n2.DATAB
+INn1[13] => n1.DATAA
+INn1[13] => n1.DATAA
+INn1[14] => n2.DATAB
+INn1[14] => n1.DATAA
+INn1[14] => n1.DATAA
+INn1[15] => always2.IN1
+INn1[15] => n2.OUTPUTSELECT
+INn1[15] => n2.OUTPUTSELECT
+INn1[15] => n2.OUTPUTSELECT
+INn1[15] => n2.OUTPUTSELECT
+INn1[15] => n2.OUTPUTSELECT
+INn1[15] => n2.OUTPUTSELECT
+INn1[15] => n2.OUTPUTSELECT
+INn1[15] => n2.OUTPUTSELECT
+INn1[15] => n2.OUTPUTSELECT
+INn1[15] => n2.OUTPUTSELECT
+INn1[15] => n2.OUTPUTSELECT
+INn1[15] => n2.OUTPUTSELECT
+INn1[15] => n2.OUTPUTSELECT
+INn1[15] => n2.OUTPUTSELECT
+INn1[15] => n2.OUTPUTSELECT
+INn1[15] => n1.OUTPUTSELECT
+INn1[15] => n1.OUTPUTSELECT
+INn1[15] => n1.OUTPUTSELECT
+INn1[15] => n1.OUTPUTSELECT
+INn1[15] => n1.OUTPUTSELECT
+INn1[15] => n1.OUTPUTSELECT
+INn1[15] => n1.OUTPUTSELECT
+INn1[15] => n1.OUTPUTSELECT
+INn1[15] => n1.OUTPUTSELECT
+INn1[15] => n1.OUTPUTSELECT
+INn1[15] => n1.OUTPUTSELECT
+INn1[15] => n1.OUTPUTSELECT
+INn1[15] => n1.OUTPUTSELECT
+INn1[15] => n1.OUTPUTSELECT
+INn1[15] => n1.OUTPUTSELECT
+INn2[0] => n2.DATAA
+INn2[0] => n1.DATAB
+INn2[0] => n2.DATAA
+INn2[1] => n2.DATAA
+INn2[1] => n1.DATAB
+INn2[1] => n2.DATAA
+INn2[2] => n2.DATAA
+INn2[2] => n1.DATAB
+INn2[2] => n2.DATAA
+INn2[3] => n2.DATAA
+INn2[3] => n1.DATAB
+INn2[3] => n2.DATAA
+INn2[4] => n2.DATAA
+INn2[4] => n1.DATAB
+INn2[4] => n2.DATAA
+INn2[5] => n2.DATAA
+INn2[5] => n1.DATAB
+INn2[5] => n2.DATAA
+INn2[6] => n2.DATAA
+INn2[6] => n1.DATAB
+INn2[6] => n2.DATAA
+INn2[7] => n2.DATAA
+INn2[7] => n1.DATAB
+INn2[7] => n2.DATAA
+INn2[8] => n2.DATAA
+INn2[8] => n1.DATAB
+INn2[8] => n2.DATAA
+INn2[9] => n2.DATAA
+INn2[9] => n1.DATAB
+INn2[9] => n2.DATAA
+INn2[10] => n2.DATAA
+INn2[10] => n1.DATAB
+INn2[10] => n2.DATAA
+INn2[11] => n2.DATAA
+INn2[11] => n1.DATAB
+INn2[11] => n2.DATAA
+INn2[12] => n2.DATAA
+INn2[12] => n1.DATAB
+INn2[12] => n2.DATAA
+INn2[13] => n2.DATAA
+INn2[13] => n1.DATAB
+INn2[13] => n2.DATAA
+INn2[14] => n2.DATAA
+INn2[14] => n1.DATAB
+INn2[14] => n2.DATAA
+INn2[15] => always2.IN0
+sub => always2.IN1
+start => next.OUTPUTSELECT
+start => next.OUTPUTSELECT
+start => next.OUTPUTSELECT
+start => next.OUTPUTSELECT
+start => next.OUTPUTSELECT
+start => next.OUTPUTSELECT
+start => next.OUTPUTSELECT
+start => next.OUTPUTSELECT
+out[0] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[1] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[2] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[3] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[4] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[5] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[6] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[7] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[8] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[9] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[10] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[11] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[12] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[13] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[14] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[15] <= <GND>
+finish <= finish.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main
+sum[0] <= adder:a0.port0
+sum[1] <= adder:GENERATE_ADDER[1].thingy.port0
+sum[2] <= adder:GENERATE_ADDER[2].thingy.port0
+sum[3] <= adder:GENERATE_ADDER[3].thingy.port0
+sum[4] <= adder:GENERATE_ADDER[4].thingy.port0
+sum[5] <= adder:GENERATE_ADDER[5].thingy.port0
+sum[6] <= adder:GENERATE_ADDER[6].thingy.port0
+sum[7] <= adder:GENERATE_ADDER[7].thingy.port0
+sum[8] <= adder:GENERATE_ADDER[8].thingy.port0
+sum[9] <= adder:GENERATE_ADDER[9].thingy.port0
+sum[10] <= adder:GENERATE_ADDER[10].thingy.port0
+sum[11] <= adder:GENERATE_ADDER[11].thingy.port0
+sum[12] <= adder:GENERATE_ADDER[12].thingy.port0
+sum[13] <= adder:GENERATE_ADDER[13].thingy.port0
+sum[14] <= adder:GENERATE_ADDER[14].thingy.port0
+cOut <= adder:GENERATE_ADDER[14].thingy.port1
+in1[0] => in1[0].IN1
+in1[1] => in1[1].IN1
+in1[2] => in1[2].IN1
+in1[3] => in1[3].IN1
+in1[4] => in1[4].IN1
+in1[5] => in1[5].IN1
+in1[6] => in1[6].IN1
+in1[7] => in1[7].IN1
+in1[8] => in1[8].IN1
+in1[9] => in1[9].IN1
+in1[10] => in1[10].IN1
+in1[11] => in1[11].IN1
+in1[12] => in1[12].IN1
+in1[13] => in1[13].IN1
+in1[14] => in1[14].IN1
+in2[0] => comb.IN0
+in2[1] => comb.IN0
+in2[2] => comb.IN0
+in2[3] => comb.IN0
+in2[4] => comb.IN0
+in2[5] => comb.IN0
+in2[6] => comb.IN0
+in2[7] => comb.IN0
+in2[8] => comb.IN0
+in2[9] => comb.IN0
+in2[10] => comb.IN0
+in2[11] => comb.IN0
+in2[12] => comb.IN0
+in2[13] => comb.IN0
+in2[14] => comb.IN0
+sub => sub.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:a0
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[1].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[2].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[3].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[4].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[5].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[6].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[7].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[8].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[9].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[10].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[11].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[12].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[13].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[14].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement
+sum[0] <= adder:a0.port0
+sum[1] <= adder:GENERATE_ADDER[1].thingy.port0
+sum[2] <= adder:GENERATE_ADDER[2].thingy.port0
+sum[3] <= adder:GENERATE_ADDER[3].thingy.port0
+sum[4] <= adder:GENERATE_ADDER[4].thingy.port0
+sum[5] <= adder:GENERATE_ADDER[5].thingy.port0
+sum[6] <= adder:GENERATE_ADDER[6].thingy.port0
+sum[7] <= adder:GENERATE_ADDER[7].thingy.port0
+sum[8] <= adder:GENERATE_ADDER[8].thingy.port0
+sum[9] <= adder:GENERATE_ADDER[9].thingy.port0
+sum[10] <= adder:GENERATE_ADDER[10].thingy.port0
+sum[11] <= adder:GENERATE_ADDER[11].thingy.port0
+sum[12] <= adder:GENERATE_ADDER[12].thingy.port0
+sum[13] <= adder:GENERATE_ADDER[13].thingy.port0
+sum[14] <= adder:GENERATE_ADDER[14].thingy.port0
+cOut <= adder:GENERATE_ADDER[14].thingy.port1
+in1[0] => in1[0].IN1
+in1[1] => in1[1].IN1
+in1[2] => in1[2].IN1
+in1[3] => in1[3].IN1
+in1[4] => in1[4].IN1
+in1[5] => in1[5].IN1
+in1[6] => in1[6].IN1
+in1[7] => in1[7].IN1
+in1[8] => in1[8].IN1
+in1[9] => in1[9].IN1
+in1[10] => in1[10].IN1
+in1[11] => in1[11].IN1
+in1[12] => in1[12].IN1
+in1[13] => in1[13].IN1
+in1[14] => in1[14].IN1
+in2[0] => comb.IN0
+in2[1] => comb.IN0
+in2[2] => comb.IN0
+in2[3] => comb.IN0
+in2[4] => comb.IN0
+in2[5] => comb.IN0
+in2[6] => comb.IN0
+in2[7] => comb.IN0
+in2[8] => comb.IN0
+in2[9] => comb.IN0
+in2[10] => comb.IN0
+in2[11] => comb.IN0
+in2[12] => comb.IN0
+in2[13] => comb.IN0
+in2[14] => comb.IN0
+sub => sub.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement|adder:a0
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement|adder:GENERATE_ADDER[1].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement|adder:GENERATE_ADDER[2].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement|adder:GENERATE_ADDER[3].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement|adder:GENERATE_ADDER[4].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement|adder:GENERATE_ADDER[5].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement|adder:GENERATE_ADDER[6].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement|adder:GENERATE_ADDER[7].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement|adder:GENERATE_ADDER[8].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement|adder:GENERATE_ADDER[9].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement|adder:GENERATE_ADDER[10].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement|adder:GENERATE_ADDER[11].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement|adder:GENERATE_ADDER[12].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement|adder:GENERATE_ADDER[13].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement|adder:GENERATE_ADDER[14].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc
+clk => state~1.DATAIN
+nRST => state~3.DATAIN
+INn1[0] => n1.DATAB
+INn1[1] => n1.DATAB
+INn1[2] => n1.DATAB
+INn1[3] => n1.DATAB
+INn1[4] => n1.DATAB
+INn1[5] => n1.DATAB
+INn1[6] => n1.DATAB
+INn1[7] => n1.DATAB
+INn1[8] => n1.DATAB
+INn1[9] => n1.DATAB
+INn1[10] => n1.DATAB
+INn1[11] => n1.DATAB
+INn1[12] => n1.DATAB
+INn1[13] => n1.DATAB
+INn1[14] => n1.DATAB
+INn1[15] => ~NO_FANOUT~
+INn2[0] => n2.DATAB
+INn2[0] => Equal0.IN14
+INn2[1] => n2.DATAB
+INn2[1] => Equal0.IN13
+INn2[2] => n2.DATAB
+INn2[2] => Equal0.IN12
+INn2[3] => n2.DATAB
+INn2[3] => Equal0.IN11
+INn2[4] => n2.DATAB
+INn2[4] => Equal0.IN10
+INn2[5] => n2.DATAB
+INn2[5] => Equal0.IN9
+INn2[6] => n2.DATAB
+INn2[6] => Equal0.IN8
+INn2[7] => n2.DATAB
+INn2[7] => Equal0.IN7
+INn2[8] => n2.DATAB
+INn2[8] => Equal0.IN6
+INn2[9] => n2.DATAB
+INn2[9] => Equal0.IN5
+INn2[10] => n2.DATAB
+INn2[10] => Equal0.IN4
+INn2[11] => n2.DATAB
+INn2[11] => Equal0.IN3
+INn2[12] => n2.DATAB
+INn2[12] => Equal0.IN2
+INn2[13] => n2.DATAB
+INn2[13] => Equal0.IN1
+INn2[14] => n2.DATAB
+INn2[14] => Equal0.IN0
+INn2[15] => ~NO_FANOUT~
+start => next.OUTPUTSELECT
+start => next.OUTPUTSELECT
+start => next.OUTPUTSELECT
+start => next.OUTPUTSELECT
+start => next.OUTPUTSELECT
+start => next.OUTPUTSELECT
+start => next.OUTPUTSELECT
+start => next.OUTPUTSELECT
+start => next.OUTPUTSELECT
+start => next.OUTPUTSELECT
+out[0] <= <GND>
+out[1] <= <GND>
+out[2] <= <GND>
+out[3] <= <GND>
+out[4] <= <GND>
+out[5] <= <GND>
+out[6] <= <GND>
+out[7] <= <GND>
+out[8] <= <GND>
+out[9] <= <GND>
+out[10] <= <GND>
+out[11] <= <GND>
+out[12] <= <GND>
+out[13] <= <GND>
+out[14] <= <GND>
+out[15] <= <GND>
+finish <= finish.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main
+sum[0] <= adder:a0.port0
+sum[1] <= adder:GENERATE_ADDER[1].thingy.port0
+sum[2] <= adder:GENERATE_ADDER[2].thingy.port0
+sum[3] <= adder:GENERATE_ADDER[3].thingy.port0
+sum[4] <= adder:GENERATE_ADDER[4].thingy.port0
+sum[5] <= adder:GENERATE_ADDER[5].thingy.port0
+sum[6] <= adder:GENERATE_ADDER[6].thingy.port0
+sum[7] <= adder:GENERATE_ADDER[7].thingy.port0
+sum[8] <= adder:GENERATE_ADDER[8].thingy.port0
+sum[9] <= adder:GENERATE_ADDER[9].thingy.port0
+sum[10] <= adder:GENERATE_ADDER[10].thingy.port0
+sum[11] <= adder:GENERATE_ADDER[11].thingy.port0
+sum[12] <= adder:GENERATE_ADDER[12].thingy.port0
+sum[13] <= adder:GENERATE_ADDER[13].thingy.port0
+sum[14] <= adder:GENERATE_ADDER[14].thingy.port0
+cOut <= adder:GENERATE_ADDER[14].thingy.port1
+in1[0] => in1[0].IN1
+in1[1] => in1[1].IN1
+in1[2] => in1[2].IN1
+in1[3] => in1[3].IN1
+in1[4] => in1[4].IN1
+in1[5] => in1[5].IN1
+in1[6] => in1[6].IN1
+in1[7] => in1[7].IN1
+in1[8] => in1[8].IN1
+in1[9] => in1[9].IN1
+in1[10] => in1[10].IN1
+in1[11] => in1[11].IN1
+in1[12] => in1[12].IN1
+in1[13] => in1[13].IN1
+in1[14] => in1[14].IN1
+in2[0] => comb.IN0
+in2[1] => comb.IN0
+in2[2] => comb.IN0
+in2[3] => comb.IN0
+in2[4] => comb.IN0
+in2[5] => comb.IN0
+in2[6] => comb.IN0
+in2[7] => comb.IN0
+in2[8] => comb.IN0
+in2[9] => comb.IN0
+in2[10] => comb.IN0
+in2[11] => comb.IN0
+in2[12] => comb.IN0
+in2[13] => comb.IN0
+in2[14] => comb.IN0
+sub => sub.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main|adder:a0
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main|adder:GENERATE_ADDER[1].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main|adder:GENERATE_ADDER[2].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main|adder:GENERATE_ADDER[3].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main|adder:GENERATE_ADDER[4].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main|adder:GENERATE_ADDER[5].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main|adder:GENERATE_ADDER[6].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main|adder:GENERATE_ADDER[7].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main|adder:GENERATE_ADDER[8].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main|adder:GENERATE_ADDER[9].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main|adder:GENERATE_ADDER[10].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main|adder:GENERATE_ADDER[11].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main|adder:GENERATE_ADDER[12].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main|adder:GENERATE_ADDER[13].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main|adder:GENERATE_ADDER[14].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:count
+sum[0] <= adder:a0.port0
+sum[1] <= adder:GENERATE_ADDER[1].thingy.port0
+sum[2] <= adder:GENERATE_ADDER[2].thingy.port0
+sum[3] <= adder:GENERATE_ADDER[3].thingy.port0
+sum[4] <= adder:GENERATE_ADDER[4].thingy.port0
+sum[5] <= adder:GENERATE_ADDER[5].thingy.port0
+sum[6] <= adder:GENERATE_ADDER[6].thingy.port0
+sum[7] <= adder:GENERATE_ADDER[7].thingy.port0
+sum[8] <= adder:GENERATE_ADDER[8].thingy.port0
+sum[9] <= adder:GENERATE_ADDER[9].thingy.port0
+sum[10] <= adder:GENERATE_ADDER[10].thingy.port0
+sum[11] <= adder:GENERATE_ADDER[11].thingy.port0
+sum[12] <= adder:GENERATE_ADDER[12].thingy.port0
+sum[13] <= adder:GENERATE_ADDER[13].thingy.port0
+sum[14] <= adder:GENERATE_ADDER[14].thingy.port0
+cOut <= adder:GENERATE_ADDER[14].thingy.port1
+in1[0] => in1[0].IN1
+in1[1] => in1[1].IN1
+in1[2] => in1[2].IN1
+in1[3] => in1[3].IN1
+in1[4] => in1[4].IN1
+in1[5] => in1[5].IN1
+in1[6] => in1[6].IN1
+in1[7] => in1[7].IN1
+in1[8] => in1[8].IN1
+in1[9] => in1[9].IN1
+in1[10] => in1[10].IN1
+in1[11] => in1[11].IN1
+in1[12] => in1[12].IN1
+in1[13] => in1[13].IN1
+in1[14] => in1[14].IN1
+in2[0] => comb.IN0
+in2[1] => comb.IN0
+in2[2] => comb.IN0
+in2[3] => comb.IN0
+in2[4] => comb.IN0
+in2[5] => comb.IN0
+in2[6] => comb.IN0
+in2[7] => comb.IN0
+in2[8] => comb.IN0
+in2[9] => comb.IN0
+in2[10] => comb.IN0
+in2[11] => comb.IN0
+in2[12] => comb.IN0
+in2[13] => comb.IN0
+in2[14] => comb.IN0
+sub => sub.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:count|adder:a0
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:count|adder:GENERATE_ADDER[1].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:count|adder:GENERATE_ADDER[2].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:count|adder:GENERATE_ADDER[3].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:count|adder:GENERATE_ADDER[4].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:count|adder:GENERATE_ADDER[5].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:count|adder:GENERATE_ADDER[6].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:count|adder:GENERATE_ADDER[7].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:count|adder:GENERATE_ADDER[8].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:count|adder:GENERATE_ADDER[9].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:count|adder:GENERATE_ADDER[10].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:count|adder:GENERATE_ADDER[11].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:count|adder:GENERATE_ADDER[12].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:count|adder:GENERATE_ADDER[13].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:count|adder:GENERATE_ADDER[14].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:compCount
+sum[0] <= adder:a0.port0
+sum[1] <= adder:GENERATE_ADDER[1].thingy.port0
+sum[2] <= adder:GENERATE_ADDER[2].thingy.port0
+sum[3] <= adder:GENERATE_ADDER[3].thingy.port0
+sum[4] <= adder:GENERATE_ADDER[4].thingy.port0
+sum[5] <= adder:GENERATE_ADDER[5].thingy.port0
+sum[6] <= adder:GENERATE_ADDER[6].thingy.port0
+sum[7] <= adder:GENERATE_ADDER[7].thingy.port0
+sum[8] <= adder:GENERATE_ADDER[8].thingy.port0
+sum[9] <= adder:GENERATE_ADDER[9].thingy.port0
+sum[10] <= adder:GENERATE_ADDER[10].thingy.port0
+sum[11] <= adder:GENERATE_ADDER[11].thingy.port0
+sum[12] <= adder:GENERATE_ADDER[12].thingy.port0
+sum[13] <= adder:GENERATE_ADDER[13].thingy.port0
+sum[14] <= adder:GENERATE_ADDER[14].thingy.port0
+cOut <= adder:GENERATE_ADDER[14].thingy.port1
+in1[0] => in1[0].IN1
+in1[1] => in1[1].IN1
+in1[2] => in1[2].IN1
+in1[3] => in1[3].IN1
+in1[4] => in1[4].IN1
+in1[5] => in1[5].IN1
+in1[6] => in1[6].IN1
+in1[7] => in1[7].IN1
+in1[8] => in1[8].IN1
+in1[9] => in1[9].IN1
+in1[10] => in1[10].IN1
+in1[11] => in1[11].IN1
+in1[12] => in1[12].IN1
+in1[13] => in1[13].IN1
+in1[14] => in1[14].IN1
+in2[0] => comb.IN0
+in2[1] => comb.IN0
+in2[2] => comb.IN0
+in2[3] => comb.IN0
+in2[4] => comb.IN0
+in2[5] => comb.IN0
+in2[6] => comb.IN0
+in2[7] => comb.IN0
+in2[8] => comb.IN0
+in2[9] => comb.IN0
+in2[10] => comb.IN0
+in2[11] => comb.IN0
+in2[12] => comb.IN0
+in2[13] => comb.IN0
+in2[14] => comb.IN0
+sub => sub.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:compCount|adder:a0
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:compCount|adder:GENERATE_ADDER[1].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:compCount|adder:GENERATE_ADDER[2].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:compCount|adder:GENERATE_ADDER[3].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:compCount|adder:GENERATE_ADDER[4].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:compCount|adder:GENERATE_ADDER[5].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:compCount|adder:GENERATE_ADDER[6].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:compCount|adder:GENERATE_ADDER[7].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:compCount|adder:GENERATE_ADDER[8].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:compCount|adder:GENERATE_ADDER[9].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:compCount|adder:GENERATE_ADDER[10].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:compCount|adder:GENERATE_ADDER[11].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:compCount|adder:GENERATE_ADDER[12].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:compCount|adder:GENERATE_ADDER[13].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+
+|wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:compCount|adder:GENERATE_ADDER[14].thingy
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cOut <= cOut.DB_MAX_OUTPUT_PORT_TYPE
+in1 => sum.IN0
+in1 => cOut.IN0
+in1 => cOut.IN0
+in2 => sum.IN1
+in2 => cOut.IN1
+in2 => cOut.IN0
+cIn => sum.IN1
+cIn => cOut.IN1
+cIn => cOut.IN1
+
+

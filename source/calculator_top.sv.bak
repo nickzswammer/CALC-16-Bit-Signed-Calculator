@@ -6,7 +6,6 @@ module calculator_top (
     input logic [3:0] RowIn,  // from keypad rows
     output logic [3:0] ColOut,  // to keypad columns
     output logic [15:0] display_output,  // final calculation output
-	 output logic [2:0] input_state,
     output logic complete
 );
 
@@ -16,7 +15,7 @@ module calculator_top (
     logic [3:0] keypad_input;
     logic [2:0] operator_input;
     logic equal_input;
-	 
+
     // Instantiate input_control (handles keypad scanning & debouncing)
     input_control input_ctrl_inst (
         .clk(clk),
@@ -27,7 +26,6 @@ module calculator_top (
         .key_read(key_read),          // input from general controller
         .keypad_input(keypad_input),  
         .operator_input(operator_input),
-		  .input_state(input_state),
         .equal_input(equal_input)
     );
 

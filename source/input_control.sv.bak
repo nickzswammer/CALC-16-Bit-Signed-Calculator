@@ -12,14 +12,13 @@ module input_control (
 
     output logic [3:0] keypad_input,     // 0–9 digits only
     output logic [2:0] operator_input,   // 3-bit operator code
-	 output logic [2:0] input_state,
     output logic equal_input             // 1-bit equal flag (*)
 );
 
     //localparam DEBOUNCE_SIZE = 500_000; // Debounce Length (for 50 MHz clock this is 10ms)
     //localparam SCAN_DURATION = 50_000;  // scan length (50mHz clock this is 1 ms)
-	localparam DEBOUNCE_SIZE = 10;
-	localparam SCAN_DURATION = 1;
+	localparam DEBOUNCE_SIZE = 500_000;
+	localparam SCAN_DURATION = 50_000;
 	
     typedef enum logic [2:0] {
         IDLE,                           // IDLE, but just pre state for SCAN_COL
@@ -62,7 +61,6 @@ module input_control (
 	end
 	*/
 	
-	
     // Sequential logic with active-low reset
     always_ff @(posedge clk or negedge nRST) begin
         if (!nRST) begin
@@ -71,10 +69,8 @@ module input_control (
             debounce_cnt <= 0;
             read_input <= 0;
 	    decoded_key <= 4'd14;
-				input_state <= 0;
         end else begin
             state <= next_state;
-				input_state <= state;
 	    operator_input <= next_operator_input;
 		
 	    if (state == SCAN_COL && next_state == SCAN_COL) begin
