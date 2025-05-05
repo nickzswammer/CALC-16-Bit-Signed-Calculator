@@ -66,6 +66,7 @@ module multiply
 				n2 <= next_n2;
 				countSave <= next_countSave;
 				countIn <= next_countIn;
+				adderSave <= next_adderSave;
 				adderIn <= next_adderIn;
 				out <= next_out;
         end
