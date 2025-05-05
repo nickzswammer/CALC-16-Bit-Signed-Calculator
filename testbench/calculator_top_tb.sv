@@ -20,8 +20,8 @@ module calculator_top_tb();
   // Clock generation
   always #5 clk = ~clk;
 
-	task reset_dut();
-		nRST = 0;
+  task reset_dut();
+    nRST = 0;
     @(negedge clk);
     @(negedge clk);
 
