@@ -28,8 +28,8 @@ module calculator_top_tb();
     @(negedge clk);  // reset pulse
     nRST = 1;
     @(posedge clk);
-		
-	endtask
+    
+  endtask
 
   // Helper: simulate a key press
   task automatic press_key(input int key_index);
@@ -75,13 +75,13 @@ module calculator_top_tb();
     nRST = 1;
     RowIn = 4'b1111;
     #(1);
-		
-		reset_dut();
+    
+    reset_dut();
 
     // Sequence: -3 * -4 = 12
     press_key(KEY_NEG); // negative
     press_key(KEY_3);
-	  
+    
     press_key(KEY_MULT);
 
     press_key(KEY_NEG); // negative
@@ -92,13 +92,13 @@ module calculator_top_tb();
     $display("✅ Result: %0d", display_output);
 
     #20;
-		
-		reset_dut();
-		
+    
+    reset_dut();
+    
     // Sequence: 3 * 4 = 12
     press_key(KEY_3);
     press_key(KEY_MULT);
-	  
+    
     press_key(KEY_4);
     press_key(KEY_EQ);
 
@@ -112,7 +112,7 @@ module calculator_top_tb();
     // Sequence: 3 + 4 = 7
     press_key(KEY_3);
     press_key(KEY_ADD);
-	  
+    
     press_key(KEY_4);
     press_key(KEY_EQ);
 
@@ -121,12 +121,12 @@ module calculator_top_tb();
 
     #20;
 
-	  reset_dut();
+    reset_dut();
 
     // Sequence: 5 - 4 = 1
     press_key(KEY_5);
     press_key(KEY_SUB);
-	  
+    
     press_key(KEY_4);
     press_key(KEY_EQ);
 
@@ -134,14 +134,14 @@ module calculator_top_tb();
     $display("✅ Result: %0d", display_output);
 
     #20;
-	   		
-		reset_dut();
-		
+         
+    reset_dut();
+    
     // Sequence: -5 - 4 = -9
     press_key(KEY_NEG);
     press_key(KEY_5);
     press_key(KEY_SUB);
-	  
+    
     press_key(KEY_4);
     press_key(KEY_EQ);
 
@@ -149,14 +149,14 @@ module calculator_top_tb();
     $display("✅ Result: %0d", display_output);
 
     #20;
-		
-	  reset_dut();
-		
+    
+    reset_dut();
+    
     // Sequence: 35 * 45 = 1575
     press_key(KEY_3);
     press_key(KEY_5);
     press_key(KEY_MULT);
-	  
+    
     press_key(KEY_4);
     press_key(KEY_5);
     press_key(KEY_EQ);
@@ -165,7 +165,7 @@ module calculator_top_tb();
     $display("✅ Result: %0d", display_output);
 
     #20;
-	  
+    
     $finish;
   end
 
