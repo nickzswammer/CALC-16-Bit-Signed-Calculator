@@ -18,8 +18,8 @@ module input_control (
 
     //localparam DEBOUNCE_SIZE = 500_000; // Debounce Length (for 50 MHz clock this is 10ms)
     //localparam SCAN_DURATION = 50_000;  // scan length (50mHz clock this is 1 ms)
-	localparam DEBOUNCE_SIZE = 10;
-	localparam SCAN_DURATION = 1;
+	localparam DEBOUNCE_SIZE = 500_000;
+	localparam SCAN_DURATION = 50_000;
 	
     typedef enum logic [2:0] {
         IDLE,                           // IDLE, but just pre state for SCAN_COL
