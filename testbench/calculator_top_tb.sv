@@ -55,8 +55,8 @@ module calculator_top_tb();
 
     // Release the key
     RowIn = 4'b1111;
-    //@(posedge clk);
-    //@(posedge clk);
+    @(posedge clk);
+    @(posedge clk);
     
   endtask
 
