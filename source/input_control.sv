@@ -93,7 +93,7 @@ module input_control (
 			decoded_key <= key_code;
 	  		*/
 
-		decoded_key <= encode_key(RowIn, col_index);
+			decoded_key <= encode_key(RowIn, col_index);
 			
 	        // Decode in-place
 	        keypad_input <= next_keypad_input;
