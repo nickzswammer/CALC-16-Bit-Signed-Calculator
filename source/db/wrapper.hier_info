@@ -72,7 +72,7 @@ LEDR[15] << calculator_top:DUT.display_output
 LEDR[16] << <GND>
 LEDR[17] << <GND>
 LEDG[0] << test.DB_MAX_OUTPUT_PORT_TYPE
-LEDG[1] << <GND>
+LEDG[1] << calculator_top:DUT.key_pressed
 LEDG[2] << <GND>
 LEDG[3] << <GND>
 LEDG[4] << calculator_top:DUT.complete
@@ -111,6 +111,7 @@ display_output[15] <= gencon:gencon_inst.display_output
 input_state[0] <= input_control:input_ctrl_inst.input_state
 input_state[1] <= input_control:input_ctrl_inst.input_state
 input_state[2] <= input_control:input_ctrl_inst.input_state
+key_pressed <= input_control:input_ctrl_inst.key_pressed
 complete <= gencon:gencon_inst.complete
 
 
@@ -172,6 +173,14 @@ clk => debounce_cnt[17].CLK
 clk => debounce_cnt[18].CLK
 clk => col_index[0].CLK
 clk => col_index[1].CLK
+clk => RowSync[0].CLK
+clk => RowSync[1].CLK
+clk => RowSync[2].CLK
+clk => RowSync[3].CLK
+clk => RowMid[0].CLK
+clk => RowMid[1].CLK
+clk => RowMid[2].CLK
+clk => RowMid[3].CLK
 clk => state~1.DATAIN
 nRST => input_state[0]~reg0.ACLR
 nRST => input_state[1]~reg0.ACLR
@@ -202,6 +211,14 @@ nRST => debounce_cnt[17].ACLR
 nRST => debounce_cnt[18].ACLR
 nRST => col_index[0].ACLR
 nRST => col_index[1].ACLR
+nRST => RowSync[0].PRESET
+nRST => RowSync[1].PRESET
+nRST => RowSync[2].PRESET
+nRST => RowSync[3].PRESET
+nRST => RowMid[0].PRESET
+nRST => RowMid[1].PRESET
+nRST => RowMid[2].PRESET
+nRST => RowMid[3].PRESET
 nRST => state~3.DATAIN
 nRST => operator_input[2]~reg0.ENA
 nRST => operator_input[1]~reg0.ENA
@@ -231,15 +248,10 @@ nRST => keypad_input[2]~reg0.ENA
 nRST => keypad_input[1]~reg0.ENA
 nRST => keypad_input[0]~reg0.ENA
 nRST => equal_input~reg0.ENA
-RowIn[0] => encode_key.DATAB
-RowIn[0] => key_pressed.DATAB
-RowIn[0] => encode_key.IN0
-RowIn[1] => key_pressed.OUTPUTSELECT
-RowIn[1] => encode_key.IN1
-RowIn[2] => key_pressed.OUTPUTSELECT
-RowIn[2] => encode_key.IN1
-RowIn[3] => key_pressed.OUTPUTSELECT
-RowIn[3] => encode_key.IN1
+RowIn[0] => RowMid[0].DATAIN
+RowIn[1] => RowMid[1].DATAIN
+RowIn[2] => RowMid[2].DATAIN
+RowIn[3] => RowMid[3].DATAIN
 ColOut[0] <= Decoder0.DB_MAX_OUTPUT_PORT_TYPE
 ColOut[1] <= Decoder0.DB_MAX_OUTPUT_PORT_TYPE
 ColOut[2] <= Decoder0.DB_MAX_OUTPUT_PORT_TYPE
@@ -254,6 +266,7 @@ keypad_input[3] <= keypad_input[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 operator_input[0] <= operator_input[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 operator_input[1] <= operator_input[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 operator_input[2] <= operator_input[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+key_pressed <= key_pressed.DB_MAX_OUTPUT_PORT_TYPE
 input_state[0] <= input_state[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 input_state[1] <= input_state[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 input_state[2] <= input_state[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE

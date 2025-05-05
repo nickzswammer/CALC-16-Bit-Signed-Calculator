@@ -12,6 +12,7 @@ module input_control (
 
     output logic [3:0] keypad_input,     // 0–9 digits only
     output logic [2:0] operator_input,   // 3-bit operator code
+	 output logic key_pressed,
 	 output logic [2:0] input_state,
     output logic equal_input             // 1-bit equal flag (*)
 );
@@ -22,18 +23,19 @@ module input_control (
 	localparam SCAN_DURATION = 50_000;
 	
     typedef enum logic [2:0] {
-        IDLE,                           // IDLE, but just pre state for SCAN_COL
-		SCAN_COL,                       // drives columns low 1 by 1 every 10ms, transitions when detects key_pressed high
-		WAIT_STABLE,                    // debounce state, waits until input is stable before processing in the confirm state
-		CONFIRM,                        // encodes key, sets the output variables to respective outputs, waits until gencon confirms key_read
-		WAIT_RELEASE                    // waits for button to be released IE when RowIn = 4'b1111
+      IDLE,         // 0                  // IDLE, but just pre state for SCAN_COL
+		SCAN_COL,     // 1                 // drives columns low 1 by 1 every 10ms, transitions when detects key_pressed high
+		WAIT_STABLE,  // 2                 // debounce state, waits until input is stable before processing in the confirm state
+		CONFIRM,      // 3                 // encodes key, sets the output variables to respective outputs, waits until gencon confirms key_read
+		WAIT_RELEASE,  // 4                  // waits for button to be released IE when RowIn = 4'b1111
+		WAIT_RELEASE_STABLE
     } state_t;
 
     state_t state, next_state;
 
 	logic [1:0] col_index;           // current column being scanned, gets incremented every 1 ms (50,000 clock cycles)
 	logic [18:0] debounce_cnt;       // how many clock cycles have elapsed, only reads when key_pressed asserted for 500,000 clock cycles
-	logic key_pressed;               // key pressed, turns high when there is a 0 detected in RowIn (always_comb)
+	// logic key_pressed;               // key pressed, turns high when there is a 0 detected in RowIn (always_comb)
 
     // to handle read_input states
 	// logic [3:0] key_code;         // kind of useless
@@ -46,10 +48,9 @@ module input_control (
 
 	int idx;                         // output of encoder function, (0-15) then gets trimmed down
 
-	//logic [3:0] RowMid, RowSync;
+	logic [3:0] RowMid, RowSync;
 
     // synchronizer
-	/*
 	always_ff @(posedge clk or negedge nRST) begin
 		if (!nRST) begin
 			RowMid <= 4'b1111;
@@ -60,7 +61,6 @@ module input_control (
 			RowSync <= RowMid;
 		end
 	end
-	*/
 	
 	
     // Sequential logic with active-low reset
@@ -89,7 +89,7 @@ module input_control (
             if (state == WAIT_STABLE) begin
 		    if (key_pressed && debounce_cnt < DEBOUNCE_SIZE)
                     debounce_cnt <= debounce_cnt + 1;
-		    else if (debounce_cnt == DEBOUNCE_SIZE)
+		    else if (debounce_cnt >= DEBOUNCE_SIZE)
                     debounce_cnt <= 0;
             end
 
@@ -99,7 +99,7 @@ module input_control (
 			decoded_key <= key_code;
 	  		*/
 
-			decoded_key <= encode_key(RowIn, col_index);
+			decoded_key <= encode_key(RowSync, col_index);
 			
 	        // Decode in-place
 	        keypad_input <= next_keypad_input;
@@ -113,8 +113,18 @@ module input_control (
 	        end
 	    end
 
-            if (state == WAIT_RELEASE && !key_pressed)
+
+            if (state == WAIT_RELEASE && !key_pressed) begin
                 read_input <= 0;
+				end
+				
+				if (state == WAIT_RELEASE_STABLE) begin
+					if (!key_pressed && debounce_cnt < DEBOUNCE_SIZE)
+                    debounce_cnt <= debounce_cnt + 1;
+					else if (debounce_cnt >= DEBOUNCE_SIZE)
+                    debounce_cnt <= 0;
+				end
+				
         end
     end
 
@@ -125,9 +135,10 @@ module input_control (
         case (state)
             IDLE:        next_state = SCAN_COL;
             SCAN_COL:    next_state = key_pressed ? WAIT_STABLE : SCAN_COL;
-		WAIT_STABLE: next_state = (debounce_cnt >= DEBOUNCE_SIZE) ? CONFIRM : WAIT_STABLE;
+				WAIT_STABLE: next_state = (debounce_cnt >= DEBOUNCE_SIZE) ? CONFIRM : WAIT_STABLE;
             CONFIRM:     next_state = key_read ? WAIT_RELEASE : CONFIRM;
-            WAIT_RELEASE:next_state = !key_pressed ? IDLE : WAIT_RELEASE;
+            WAIT_RELEASE:next_state = !key_pressed ? WAIT_RELEASE_STABLE : WAIT_RELEASE;
+				WAIT_RELEASE_STABLE: next_state = (debounce_cnt >= DEBOUNCE_SIZE) ? IDLE : WAIT_RELEASE_STABLE;
 	    default: next_state = IDLE;
         endcase
     end
@@ -142,7 +153,7 @@ module input_control (
     always_comb begin
         key_pressed = 0;
         for (int i = 0; i < 4; i++)
-		if (RowIn[i] == 0)
+		if (RowSync[i] == 0)
                 	key_pressed = 1;
     end
 

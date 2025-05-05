@@ -46,19 +46,18 @@ module wrapper(
 				test <= 1;
 	 end
 	   
-	 logic[2:0] input_state;
 		
     calculator_top DUT(
         .clk(CLOCK_50),
         .nRST(nRST),
         .RowIn(RowIn),
         .ColOut(ColOut),
-		  .input_state(input_state),
+		  .input_state(LEDG[7:5]),
+		  .key_pressed(LEDG[1]),
         .display_output(LEDR[15:0]),
         .complete(complete)
     );
 	 
-	 assign LEDG[7:5] = input_state;
 	 
 	 assign LEDG[0] = test;
 	 

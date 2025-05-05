@@ -28,9 +28,10 @@ state.ADD 0 1 0 1
 state.FIN 1 0 0 1 
 
 State Machine - |wrapper|calculator_top:DUT|input_control:input_ctrl_inst|state
-Name state.CONFIRM state.WAIT_STABLE state.SCAN_COL state.IDLE state.WAIT_RELEASE 
-state.IDLE 0 0 0 0 0 
-state.SCAN_COL 0 0 1 1 0 
-state.WAIT_STABLE 0 1 0 1 0 
-state.CONFIRM 1 0 0 1 0 
-state.WAIT_RELEASE 0 0 0 1 1 
+Name state.WAIT_RELEASE_STABLE state.WAIT_RELEASE state.CONFIRM state.WAIT_STABLE state.SCAN_COL state.IDLE 
+state.IDLE 0 0 0 0 0 0 
+state.SCAN_COL 0 0 0 0 1 1 
+state.WAIT_STABLE 0 0 0 1 0 1 
+state.CONFIRM 0 0 1 0 0 1 
+state.WAIT_RELEASE 0 1 0 0 0 1 
+state.WAIT_RELEASE_STABLE 1 0 0 0 0 1 

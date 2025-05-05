@@ -72,6 +72,10 @@
 					"strict" : false
 				},
 				{
+					"name" : "LEDG[1]",
+					"strict" : false
+				},
+				{
 					"name" : "LEDG[4]",
 					"strict" : false
 				},

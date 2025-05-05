@@ -7,6 +7,7 @@ module calculator_top (
     output logic [3:0] ColOut,  // to keypad columns
     output logic [15:0] display_output,  // final calculation output
 	 output logic [2:0] input_state,
+	 output logic key_pressed,
     output logic complete
 );
 
@@ -28,6 +29,7 @@ module calculator_top (
         .keypad_input(keypad_input),  
         .operator_input(operator_input),
 		  .input_state(input_state),
+		  .key_pressed(key_pressed),
         .equal_input(equal_input)
     );
 

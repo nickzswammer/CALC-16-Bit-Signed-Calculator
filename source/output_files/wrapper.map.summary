@@ -1,12 +1,12 @@
-Analysis & Synthesis Status : Successful - Mon May  5 18:46:32 2025
+Analysis & Synthesis Status : Successful - Mon May  5 19:34:59 2025
 Quartus Prime Version : 21.1.1 Build 850 06/23/2022 SJ Standard Edition
 Revision Name : wrapper
 Top-level Entity Name : wrapper
 Family : Cyclone IV E
-Total logic elements : 576
-    Total combinational functions : 488
-    Dedicated logic registers : 368
-Total registers : 368
+Total logic elements : 591
+    Total combinational functions : 500
+    Dedicated logic registers : 377
+Total registers : 377
 Total pins : 84
 Total virtual pins : 0
 Total memory bits : 0

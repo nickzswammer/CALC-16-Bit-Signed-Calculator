@@ -1,5 +1,5 @@
 Fitter report for wrapper
-Mon May  5 18:46:45 2025
+Mon May  5 19:35:12 2025
 Quartus Prime Version 21.1.1 Build 850 06/23/2022 SJ Standard Edition
 
 
@@ -68,17 +68,17 @@ https://fpgasoftware.intel.com/eula.
 +--------------------------------------------------------------------------------------+
 ; Fitter Summary                                                                       ;
 +------------------------------------+-------------------------------------------------+
-; Fitter Status                      ; Successful - Mon May  5 18:46:45 2025           ;
+; Fitter Status                      ; Successful - Mon May  5 19:35:12 2025           ;
 ; Quartus Prime Version              ; 21.1.1 Build 850 06/23/2022 SJ Standard Edition ;
 ; Revision Name                      ; wrapper                                         ;
 ; Top-level Entity Name              ; wrapper                                         ;
 ; Family                             ; Cyclone IV E                                    ;
 ; Device                             ; EP4CE115F29C7                                   ;
 ; Timing Models                      ; Final                                           ;
-; Total logic elements               ; 529 / 114,480 ( < 1 % )                         ;
-;     Total combinational functions  ; 489 / 114,480 ( < 1 % )                         ;
-;     Dedicated logic registers      ; 368 / 114,480 ( < 1 % )                         ;
-; Total registers                    ; 368                                             ;
+; Total logic elements               ; 543 / 114,480 ( < 1 % )                         ;
+;     Total combinational functions  ; 501 / 114,480 ( < 1 % )                         ;
+;     Dedicated logic registers      ; 377 / 114,480 ( < 1 % )                         ;
+; Total registers                    ; 377                                             ;
 ; Total pins                         ; 84 / 529 ( 16 % )                               ;
 ; Total virtual pins                 ; 0                                               ;
 ; Total memory bits                  ; 0 / 3,981,312 ( 0 % )                           ;
@@ -164,7 +164,7 @@ https://fpgasoftware.intel.com/eula.
 ;     Processor 3            ;   0.6%      ;
 ;     Processor 4            ;   0.6%      ;
 ;     Processor 5            ;   0.6%      ;
-;     Processor 6            ;   0.5%      ;
+;     Processor 6            ;   0.6%      ;
 +----------------------------+-------------+
 
 
@@ -1064,8 +1064,8 @@ https://fpgasoftware.intel.com/eula.
 ; Type                ; Total [A + B]       ; From Design Partitions [A] ; From Rapid Recompile [B] ;
 +---------------------+---------------------+----------------------------+--------------------------+
 ; Placement (by node) ;                     ;                            ;                          ;
-;     -- Requested    ; 0.00 % ( 0 / 1072 ) ; 0.00 % ( 0 / 1072 )        ; 0.00 % ( 0 / 1072 )      ;
-;     -- Achieved     ; 0.00 % ( 0 / 1072 ) ; 0.00 % ( 0 / 1072 )        ; 0.00 % ( 0 / 1072 )      ;
+;     -- Requested    ; 0.00 % ( 0 / 1093 ) ; 0.00 % ( 0 / 1093 )        ; 0.00 % ( 0 / 1093 )      ;
+;     -- Achieved     ; 0.00 % ( 0 / 1093 ) ; 0.00 % ( 0 / 1093 )        ; 0.00 % ( 0 / 1093 )      ;
 ;                     ;                     ;                            ;                          ;
 ; Routing (by net)    ;                     ;                            ;                          ;
 ;     -- Requested    ; 0.00 % ( 0 / 0 )    ; 0.00 % ( 0 / 0 )           ; 0.00 % ( 0 / 0 )         ;
@@ -1088,7 +1088,7 @@ https://fpgasoftware.intel.com/eula.
 +--------------------------------+-----------------------+-------------------------+-------------------+---------------------+-------+
 ; Partition Name                 ; Preservation Achieved ; Preservation Level Used ; Netlist Type Used ; Preservation Method ; Notes ;
 +--------------------------------+-----------------------+-------------------------+-------------------+---------------------+-------+
-; Top                            ; 0.00 % ( 0 / 1062 )   ; N/A                     ; Source File       ; N/A                 ;       ;
+; Top                            ; 0.00 % ( 0 / 1083 )   ; N/A                     ; Source File       ; N/A                 ;       ;
 ; hard_block:auto_generated_inst ; 0.00 % ( 0 / 10 )     ; N/A                     ; Source File       ; N/A                 ;       ;
 +--------------------------------+-----------------------+-------------------------+-------------------+---------------------+-------+
 
@@ -1104,26 +1104,26 @@ The pin-out file can be found in /home/shay/a/du347/CALC-Intro-2 (another copy)/
 +---------------------------------------------+-------------------------+
 ; Resource                                    ; Usage                   ;
 +---------------------------------------------+-------------------------+
-; Total logic elements                        ; 529 / 114,480 ( < 1 % ) ;
-;     -- Combinational with no register       ; 161                     ;
-;     -- Register only                        ; 40                      ;
-;     -- Combinational with a register        ; 328                     ;
+; Total logic elements                        ; 543 / 114,480 ( < 1 % ) ;
+;     -- Combinational with no register       ; 166                     ;
+;     -- Register only                        ; 42                      ;
+;     -- Combinational with a register        ; 335                     ;
 ;                                             ;                         ;
 ; Logic element usage by number of LUT inputs ;                         ;
-;     -- 4 input functions                    ; 234                     ;
-;     -- 3 input functions                    ; 109                     ;
-;     -- <=2 input functions                  ; 146                     ;
-;     -- Register only                        ; 40                      ;
+;     -- 4 input functions                    ; 237                     ;
+;     -- 3 input functions                    ; 89                      ;
+;     -- <=2 input functions                  ; 175                     ;
+;     -- Register only                        ; 42                      ;
 ;                                             ;                         ;
 ; Logic elements by mode                      ;                         ;
-;     -- normal mode                          ; 422                     ;
+;     -- normal mode                          ; 434                     ;
 ;     -- arithmetic mode                      ; 67                      ;
 ;                                             ;                         ;
-; Total registers*                            ; 368 / 117,053 ( < 1 % ) ;
-;     -- Dedicated logic registers            ; 368 / 114,480 ( < 1 % ) ;
+; Total registers*                            ; 377 / 117,053 ( < 1 % ) ;
+;     -- Dedicated logic registers            ; 377 / 114,480 ( < 1 % ) ;
 ;     -- I/O registers                        ; 0 / 2,573 ( 0 % )       ;
 ;                                             ;                         ;
-; Total LABs:  partially or completely used   ; 42 / 7,155 ( < 1 % )    ;
+; Total LABs:  partially or completely used   ; 41 / 7,155 ( < 1 % )    ;
 ; Virtual pins                                ; 0                       ;
 ; I/O pins                                    ; 84 / 529 ( 16 % )       ;
 ;     -- Clock pins                           ; 1 / 7 ( 14 % )          ;
@@ -1142,11 +1142,11 @@ The pin-out file can be found in /home/shay/a/du347/CALC-Intro-2 (another copy)/
 ; Oscillator blocks                           ; 0 / 1 ( 0 % )           ;
 ; Impedance control blocks                    ; 0 / 4 ( 0 % )           ;
 ; Average interconnect usage (total/H/V)      ; 0.2% / 0.2% / 0.2%      ;
-; Peak interconnect usage (total/H/V)         ; 4.8% / 5.5% / 3.9%      ;
-; Maximum fan-out                             ; 368                     ;
+; Peak interconnect usage (total/H/V)         ; 5.7% / 5.5% / 5.8%      ;
+; Maximum fan-out                             ; 377                     ;
 ; Highest non-global fan-out                  ; 40                      ;
-; Total fan-out                               ; 3155                    ;
-; Average fan-out                             ; 2.85                    ;
+; Total fan-out                               ; 3206                    ;
+; Average fan-out                             ; 2.83                    ;
 +---------------------------------------------+-------------------------+
 *  Register count does not include registers inside RAM blocks or DSP blocks.
 
@@ -1159,26 +1159,26 @@ The pin-out file can be found in /home/shay/a/du347/CALC-Intro-2 (another copy)/
 +---------------------------------------------+------------------------+--------------------------------+
 ; Difficulty Clustering Region                ; Low                    ; Low                            ;
 ;                                             ;                        ;                                ;
-; Total logic elements                        ; 529 / 114480 ( < 1 % ) ; 0 / 114480 ( 0 % )             ;
-;     -- Combinational with no register       ; 161                    ; 0                              ;
-;     -- Register only                        ; 40                     ; 0                              ;
-;     -- Combinational with a register        ; 328                    ; 0                              ;
+; Total logic elements                        ; 543 / 114480 ( < 1 % ) ; 0 / 114480 ( 0 % )             ;
+;     -- Combinational with no register       ; 166                    ; 0                              ;
+;     -- Register only                        ; 42                     ; 0                              ;
+;     -- Combinational with a register        ; 335                    ; 0                              ;
 ;                                             ;                        ;                                ;
 ; Logic element usage by number of LUT inputs ;                        ;                                ;
-;     -- 4 input functions                    ; 234                    ; 0                              ;
-;     -- 3 input functions                    ; 109                    ; 0                              ;
-;     -- <=2 input functions                  ; 146                    ; 0                              ;
-;     -- Register only                        ; 40                     ; 0                              ;
+;     -- 4 input functions                    ; 237                    ; 0                              ;
+;     -- 3 input functions                    ; 89                     ; 0                              ;
+;     -- <=2 input functions                  ; 175                    ; 0                              ;
+;     -- Register only                        ; 42                     ; 0                              ;
 ;                                             ;                        ;                                ;
 ; Logic elements by mode                      ;                        ;                                ;
-;     -- normal mode                          ; 422                    ; 0                              ;
+;     -- normal mode                          ; 434                    ; 0                              ;
 ;     -- arithmetic mode                      ; 67                     ; 0                              ;
 ;                                             ;                        ;                                ;
-; Total registers                             ; 368                    ; 0                              ;
-;     -- Dedicated logic registers            ; 368 / 114480 ( < 1 % ) ; 0 / 114480 ( 0 % )             ;
+; Total registers                             ; 377                    ; 0                              ;
+;     -- Dedicated logic registers            ; 377 / 114480 ( < 1 % ) ; 0 / 114480 ( 0 % )             ;
 ;     -- I/O registers                        ; 0                      ; 0                              ;
 ;                                             ;                        ;                                ;
-; Total LABs:  partially or completely used   ; 42 / 7155 ( < 1 % )    ; 0 / 7155 ( 0 % )               ;
+; Total LABs:  partially or completely used   ; 41 / 7155 ( < 1 % )    ; 0 / 7155 ( 0 % )               ;
 ;                                             ;                        ;                                ;
 ; Virtual pins                                ; 0                      ; 0                              ;
 ; I/O pins                                    ; 84                     ; 0                              ;
@@ -1194,8 +1194,8 @@ The pin-out file can be found in /home/shay/a/du347/CALC-Intro-2 (another copy)/
 ;     -- Registered Output Connections        ; 0                      ; 0                              ;
 ;                                             ;                        ;                                ;
 ; Internal Connections                        ;                        ;                                ;
-;     -- Total Connections                    ; 3150                   ; 5                              ;
-;     -- Registered Connections               ; 1278                   ; 0                              ;
+;     -- Total Connections                    ; 3201                   ; 5                              ;
+;     -- Registered Connections               ; 1280                   ; 0                              ;
 ;                                             ;                        ;                                ;
 ; External Connections                        ;                        ;                                ;
 ;     -- Top                                  ; 70                     ; 0                              ;
@@ -1227,7 +1227,7 @@ The pin-out file can be found in /home/shay/a/du347/CALC-Intro-2 (another copy)/
 +----------+-------+----------+--------------+--------------+--------------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+--------------+---------------------------+----------------------+-----------+
 ; Name     ; Pin # ; I/O Bank ; X coordinate ; Y coordinate ; Z coordinate ; Combinational Fan-Out ; Registered Fan-Out ; Global ; Input Register ; Power Up High ; PCI I/O Enabled ; Bus Hold ; Weak Pull Up ; I/O Standard ; Termination Control Block ; Location assigned by ; Slew Rate ;
 +----------+-------+----------+--------------+--------------+--------------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+--------------+---------------------------+----------------------+-----------+
-; CLOCK_50 ; Y2    ; 2        ; 0            ; 36           ; 14           ; 368                   ; 0                  ; yes    ; no             ; no            ; yes             ; no       ; Off          ; 3.3-V LVTTL  ; --                        ; User                 ; no        ;
+; CLOCK_50 ; Y2    ; 2        ; 0            ; 36           ; 14           ; 377                   ; 0                  ; yes    ; no             ; no            ; yes             ; no       ; Off          ; 3.3-V LVTTL  ; --                        ; User                 ; no        ;
 ; KEY[0]   ; M23   ; 6        ; 115          ; 40           ; 7            ; 0                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; --                        ; User                 ; no        ;
 ; KEY[1]   ; M21   ; 6        ; 115          ; 53           ; 14           ; 0                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; --                        ; User                 ; no        ;
 ; KEY[2]   ; N21   ; 6        ; 115          ; 42           ; 14           ; 0                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; --                        ; User                 ; no        ;
@@ -1302,14 +1302,14 @@ The pin-out file can be found in /home/shay/a/du347/CALC-Intro-2 (another copy)/
 ; GPIO[16] ; AF25  ; 4        ; 83           ; 0            ; 0            ; 0                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; 2         ; yes             ; yes        ; no       ; Off          ; 3.3-V LVTTL  ; 8mA              ; Off                ; --                        ; no                         ; User                 ; 0 pF                 ; -                   ;
 ; GPIO[17] ; AC22  ; 4        ; 109          ; 0            ; 0            ; 0                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; 2         ; yes             ; no         ; no       ; Off          ; 3.3-V LVTTL  ; 8mA              ; Off                ; --                        ; no                         ; User                 ; 0 pF                 ; -                   ;
 ; GPIO[18] ; AE22  ; 4        ; 96           ; 0            ; 7            ; 0                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; 2         ; yes             ; yes        ; no       ; Off          ; 3.3-V LVTTL  ; 8mA              ; Off                ; --                        ; no                         ; User                 ; 0 pF                 ; -                   ;
-; GPIO[19] ; AF21  ; 4        ; 87           ; 0            ; 21           ; 3                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; 2         ; yes             ; yes        ; no       ; Off          ; 3.3-V LVTTL  ; 8mA              ; Off                ; --                        ; no                         ; User                 ; 0 pF                 ; -                   ;
+; GPIO[19] ; AF21  ; 4        ; 87           ; 0            ; 21           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; 2         ; yes             ; yes        ; no       ; Off          ; 3.3-V LVTTL  ; 8mA              ; Off                ; --                        ; no                         ; User                 ; 0 pF                 ; -                   ;
 ; GPIO[1]  ; AC15  ; 4        ; 60           ; 0            ; 21           ; 0                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; 2         ; yes             ; yes        ; no       ; Off          ; 3.3-V LVTTL  ; 8mA              ; Off                ; --                        ; no                         ; User                 ; 0 pF                 ; -                   ;
 ; GPIO[20] ; AF22  ; 4        ; 96           ; 0            ; 0            ; 0                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; 2         ; yes             ; yes        ; no       ; Off          ; 3.3-V LVTTL  ; 8mA              ; Off                ; --                        ; no                         ; User                 ; 0 pF                 ; -                   ;
-; GPIO[21] ; AD22  ; 4        ; 111          ; 0            ; 7            ; 3                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; 2         ; yes             ; yes        ; no       ; Off          ; 3.3-V LVTTL  ; 8mA              ; Off                ; --                        ; no                         ; User                 ; 0 pF                 ; -                   ;
+; GPIO[21] ; AD22  ; 4        ; 111          ; 0            ; 7            ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; 2         ; yes             ; yes        ; no       ; Off          ; 3.3-V LVTTL  ; 8mA              ; Off                ; --                        ; no                         ; User                 ; 0 pF                 ; -                   ;
 ; GPIO[22] ; AG25  ; 4        ; 91           ; 0            ; 21           ; 0                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; 2         ; yes             ; yes        ; no       ; Off          ; 3.3-V LVTTL  ; 8mA              ; Off                ; --                        ; no                         ; User                 ; 0 pF                 ; -                   ;
-; GPIO[23] ; AD25  ; 4        ; 100          ; 0            ; 21           ; 5                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; 2         ; yes             ; yes        ; no       ; Off          ; 3.3-V LVTTL  ; 8mA              ; Off                ; --                        ; no                         ; User                 ; 0 pF                 ; -                   ;
+; GPIO[23] ; AD25  ; 4        ; 100          ; 0            ; 21           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; 2         ; yes             ; yes        ; no       ; Off          ; 3.3-V LVTTL  ; 8mA              ; Off                ; --                        ; no                         ; User                 ; 0 pF                 ; -                   ;
 ; GPIO[24] ; AH25  ; 4        ; 91           ; 0            ; 14           ; 0                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; 2         ; yes             ; yes        ; no       ; Off          ; 3.3-V LVTTL  ; 8mA              ; Off                ; --                        ; no                         ; User                 ; 0 pF                 ; -                   ;
-; GPIO[25] ; AE25  ; 4        ; 89           ; 0            ; 7            ; 4                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; 2         ; yes             ; yes        ; no       ; Off          ; 3.3-V LVTTL  ; 8mA              ; Off                ; --                        ; no                         ; User                 ; 0 pF                 ; -                   ;
+; GPIO[25] ; AE25  ; 4        ; 89           ; 0            ; 7            ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; 2         ; yes             ; yes        ; no       ; Off          ; 3.3-V LVTTL  ; 8mA              ; Off                ; --                        ; no                         ; User                 ; 0 pF                 ; -                   ;
 ; GPIO[26] ; AG22  ; 4        ; 79           ; 0            ; 7            ; 0                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; 2         ; yes             ; yes        ; no       ; Off          ; 3.3-V LVTTL  ; 8mA              ; Off                ; --                        ; no                         ; User                 ; 0 pF                 ; -                   ;
 ; GPIO[27] ; AE24  ; 4        ; 100          ; 0            ; 14           ; 0                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; 2         ; yes             ; yes        ; no       ; Off          ; 3.3-V LVTTL  ; 8mA              ; Off                ; --                        ; no                         ; User                 ; 0 pF                 ; -                   ;
 ; GPIO[28] ; AH22  ; 4        ; 79           ; 0            ; 0            ; 0                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; 2         ; yes             ; yes        ; no       ; Off          ; 3.3-V LVTTL  ; 8mA              ; Off                ; --                        ; no                         ; User                 ; 0 pF                 ; -                   ;
@@ -2230,27 +2230,26 @@ Note: Pin directions (input, output or bidir) are based on device operating in u
 +--------------------------------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+---------------------------------------------------------------------------------------------------------------------+----------------+--------------+
 ; Compilation Hierarchy Node                       ; Logic Cells ; Dedicated Logic Registers ; I/O Registers ; Memory Bits ; M9Ks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Full Hierarchy Name                                                                                                 ; Entity Name    ; Library Name ;
 +--------------------------------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+---------------------------------------------------------------------------------------------------------------------+----------------+--------------+
-; |wrapper                                         ; 529 (7)     ; 368 (6)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 84   ; 0            ; 161 (1)      ; 40 (0)            ; 328 (6)          ; |wrapper                                                                                                            ; wrapper        ; work         ;
-;    |calculator_top:DUT|                          ; 522 (0)     ; 362 (0)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 160 (0)      ; 40 (0)            ; 322 (0)          ; |wrapper|calculator_top:DUT                                                                                         ; calculator_top ; work         ;
-;       |gencon:gencon_inst|                       ; 415 (196)   ; 300 (134)                 ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 115 (54)     ; 39 (26)           ; 261 (113)        ; |wrapper|calculator_top:DUT|gencon:gencon_inst                                                                      ; gencon         ; work         ;
-;          |addition:add_calc|                     ; 92 (64)     ; 53 (53)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 32 (4)       ; 2 (2)             ; 58 (48)          ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc                                                    ; addition       ; work         ;
-;             |adder15:complement|                 ; 8 (0)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 7 (0)        ; 0 (0)             ; 1 (0)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement                                 ; adder15        ; work         ;
-;                |adder:GENERATE_ADDER[11].thingy| ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement|adder:GENERATE_ADDER[11].thingy ; adder          ; work         ;
-;                |adder:GENERATE_ADDER[12].thingy| ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement|adder:GENERATE_ADDER[12].thingy ; adder          ; work         ;
-;                |adder:GENERATE_ADDER[2].thingy|  ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement|adder:GENERATE_ADDER[2].thingy  ; adder          ; work         ;
+; |wrapper                                         ; 543 (7)     ; 377 (6)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 84   ; 0            ; 166 (1)      ; 42 (0)            ; 335 (6)          ; |wrapper                                                                                                            ; wrapper        ; work         ;
+;    |calculator_top:DUT|                          ; 536 (0)     ; 371 (0)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 165 (0)      ; 42 (0)            ; 329 (0)          ; |wrapper|calculator_top:DUT                                                                                         ; calculator_top ; work         ;
+;       |gencon:gencon_inst|                       ; 416 (196)   ; 300 (134)                 ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 116 (62)     ; 39 (21)           ; 261 (105)        ; |wrapper|calculator_top:DUT|gencon:gencon_inst                                                                      ; gencon         ; work         ;
+;          |addition:add_calc|                     ; 92 (68)     ; 53 (53)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 30 (6)       ; 1 (1)             ; 61 (48)          ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc                                                    ; addition       ; work         ;
+;             |adder15:complement|                 ; 8 (0)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 6 (0)        ; 0 (0)             ; 2 (0)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement                                 ; adder15        ; work         ;
+;                |adder:GENERATE_ADDER[12].thingy| ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement|adder:GENERATE_ADDER[12].thingy ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[2].thingy|  ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement|adder:GENERATE_ADDER[2].thingy  ; adder          ; work         ;
 ;                |adder:GENERATE_ADDER[3].thingy|  ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement|adder:GENERATE_ADDER[3].thingy  ; adder          ; work         ;
 ;                |adder:GENERATE_ADDER[5].thingy|  ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement|adder:GENERATE_ADDER[5].thingy  ; adder          ; work         ;
 ;                |adder:GENERATE_ADDER[6].thingy|  ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement|adder:GENERATE_ADDER[6].thingy  ; adder          ; work         ;
 ;                |adder:GENERATE_ADDER[8].thingy|  ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement|adder:GENERATE_ADDER[8].thingy  ; adder          ; work         ;
 ;                |adder:GENERATE_ADDER[9].thingy|  ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement|adder:GENERATE_ADDER[9].thingy  ; adder          ; work         ;
-;             |adder15:main|                       ; 30 (0)      ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 21 (0)       ; 0 (0)             ; 9 (0)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main                                       ; adder15        ; work         ;
+;             |adder15:main|                       ; 29 (0)      ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 18 (0)       ; 0 (0)             ; 11 (0)           ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main                                       ; adder15        ; work         ;
 ;                |adder:GENERATE_ADDER[10].thingy| ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[10].thingy       ; adder          ; work         ;
 ;                |adder:GENERATE_ADDER[11].thingy| ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[11].thingy       ; adder          ; work         ;
-;                |adder:GENERATE_ADDER[12].thingy| ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[12].thingy       ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[12].thingy| ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[12].thingy       ; adder          ; work         ;
 ;                |adder:GENERATE_ADDER[13].thingy| ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[13].thingy       ; adder          ; work         ;
 ;                |adder:GENERATE_ADDER[14].thingy| ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[14].thingy       ; adder          ; work         ;
 ;                |adder:GENERATE_ADDER[1].thingy|  ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 2 (2)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[1].thingy        ; adder          ; work         ;
-;                |adder:GENERATE_ADDER[2].thingy|  ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 1 (1)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[2].thingy        ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[2].thingy|  ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 2 (2)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[2].thingy        ; adder          ; work         ;
 ;                |adder:GENERATE_ADDER[3].thingy|  ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 2 (2)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[3].thingy        ; adder          ; work         ;
 ;                |adder:GENERATE_ADDER[4].thingy|  ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 1 (1)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[4].thingy        ; adder          ; work         ;
 ;                |adder:GENERATE_ADDER[5].thingy|  ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 1 (1)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[5].thingy        ; adder          ; work         ;
@@ -2258,37 +2257,37 @@ Note: Pin directions (input, output or bidir) are based on device operating in u
 ;                |adder:GENERATE_ADDER[7].thingy|  ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[7].thingy        ; adder          ; work         ;
 ;                |adder:GENERATE_ADDER[8].thingy|  ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[8].thingy        ; adder          ; work         ;
 ;                |adder:GENERATE_ADDER[9].thingy|  ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[9].thingy        ; adder          ; work         ;
-;                |adder:a0|                        ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 1 (1)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:a0                              ; adder          ; work         ;
-;          |multiply:mult_calc|                    ; 142 (119)   ; 113 (113)                 ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 29 (8)       ; 11 (11)           ; 102 (64)         ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc                                                   ; multiply       ; work         ;
-;             |adder15:compCount|                  ; 18 (0)      ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 5 (0)        ; 0 (0)             ; 13 (0)           ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:compCount                                 ; adder15        ; work         ;
+;                |adder:a0|                        ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 2 (2)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:a0                              ; adder          ; work         ;
+;          |multiply:mult_calc|                    ; 137 (122)   ; 113 (113)                 ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 24 (12)      ; 17 (17)           ; 96 (49)          ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc                                                   ; multiply       ; work         ;
+;             |adder15:compCount|                  ; 18 (0)      ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 4 (0)        ; 0 (0)             ; 14 (0)           ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:compCount                                 ; adder15        ; work         ;
 ;                |adder:GENERATE_ADDER[11].thingy| ; 4 (4)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 3 (3)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:compCount|adder:GENERATE_ADDER[11].thingy ; adder          ; work         ;
 ;                |adder:GENERATE_ADDER[14].thingy| ; 4 (4)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 3 (3)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:compCount|adder:GENERATE_ADDER[14].thingy ; adder          ; work         ;
 ;                |adder:GENERATE_ADDER[1].thingy|  ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:compCount|adder:GENERATE_ADDER[1].thingy  ; adder          ; work         ;
 ;                |adder:GENERATE_ADDER[5].thingy|  ; 5 (5)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 4 (4)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:compCount|adder:GENERATE_ADDER[5].thingy  ; adder          ; work         ;
-;                |adder:GENERATE_ADDER[8].thingy|  ; 4 (4)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 2 (2)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:compCount|adder:GENERATE_ADDER[8].thingy  ; adder          ; work         ;
-;             |adder15:count|                      ; 9 (0)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 9 (0)        ; 0 (0)             ; 0 (0)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:count                                     ; adder15        ; work         ;
+;                |adder:GENERATE_ADDER[8].thingy|  ; 4 (4)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 3 (3)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:compCount|adder:GENERATE_ADDER[8].thingy  ; adder          ; work         ;
+;             |adder15:count|                      ; 9 (0)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 5 (0)        ; 0 (0)             ; 4 (0)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:count                                     ; adder15        ; work         ;
 ;                |adder:GENERATE_ADDER[12].thingy| ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:count|adder:GENERATE_ADDER[12].thingy     ; adder          ; work         ;
-;                |adder:GENERATE_ADDER[2].thingy|  ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:count|adder:GENERATE_ADDER[2].thingy      ; adder          ; work         ;
-;                |adder:GENERATE_ADDER[3].thingy|  ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:count|adder:GENERATE_ADDER[3].thingy      ; adder          ; work         ;
-;                |adder:GENERATE_ADDER[6].thingy|  ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:count|adder:GENERATE_ADDER[6].thingy      ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[2].thingy|  ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:count|adder:GENERATE_ADDER[2].thingy      ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[3].thingy|  ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 2 (2)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:count|adder:GENERATE_ADDER[3].thingy      ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[6].thingy|  ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 1 (1)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:count|adder:GENERATE_ADDER[6].thingy      ; adder          ; work         ;
 ;                |adder:GENERATE_ADDER[9].thingy|  ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:count|adder:GENERATE_ADDER[9].thingy      ; adder          ; work         ;
-;             |adder15:main|                       ; 32 (0)      ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 7 (0)        ; 0 (0)             ; 25 (0)           ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main                                      ; adder15        ; work         ;
+;             |adder15:main|                       ; 32 (0)      ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 3 (0)        ; 0 (0)             ; 29 (0)           ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main                                      ; adder15        ; work         ;
 ;                |adder:GENERATE_ADDER[10].thingy| ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 2 (2)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main|adder:GENERATE_ADDER[10].thingy      ; adder          ; work         ;
 ;                |adder:GENERATE_ADDER[11].thingy| ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 2 (2)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main|adder:GENERATE_ADDER[11].thingy      ; adder          ; work         ;
 ;                |adder:GENERATE_ADDER[12].thingy| ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 2 (2)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main|adder:GENERATE_ADDER[12].thingy      ; adder          ; work         ;
 ;                |adder:GENERATE_ADDER[13].thingy| ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main|adder:GENERATE_ADDER[13].thingy      ; adder          ; work         ;
 ;                |adder:GENERATE_ADDER[14].thingy| ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 2 (2)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main|adder:GENERATE_ADDER[14].thingy      ; adder          ; work         ;
 ;                |adder:GENERATE_ADDER[1].thingy|  ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 2 (2)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main|adder:GENERATE_ADDER[1].thingy       ; adder          ; work         ;
-;                |adder:GENERATE_ADDER[2].thingy|  ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 1 (1)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main|adder:GENERATE_ADDER[2].thingy       ; adder          ; work         ;
-;                |adder:GENERATE_ADDER[3].thingy|  ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 1 (1)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main|adder:GENERATE_ADDER[3].thingy       ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[2].thingy|  ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 2 (2)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main|adder:GENERATE_ADDER[2].thingy       ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[3].thingy|  ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 2 (2)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main|adder:GENERATE_ADDER[3].thingy       ; adder          ; work         ;
 ;                |adder:GENERATE_ADDER[4].thingy|  ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main|adder:GENERATE_ADDER[4].thingy       ; adder          ; work         ;
 ;                |adder:GENERATE_ADDER[5].thingy|  ; 5 (5)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 5 (5)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main|adder:GENERATE_ADDER[5].thingy       ; adder          ; work         ;
-;                |adder:GENERATE_ADDER[6].thingy|  ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 1 (1)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main|adder:GENERATE_ADDER[6].thingy       ; adder          ; work         ;
-;                |adder:GENERATE_ADDER[7].thingy|  ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 2 (2)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main|adder:GENERATE_ADDER[7].thingy       ; adder          ; work         ;
-;                |adder:GENERATE_ADDER[8].thingy|  ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main|adder:GENERATE_ADDER[8].thingy       ; adder          ; work         ;
-;                |adder:GENERATE_ADDER[9].thingy|  ; 5 (5)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 4 (4)        ; 0 (0)             ; 1 (1)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main|adder:GENERATE_ADDER[9].thingy       ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[6].thingy|  ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 2 (2)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main|adder:GENERATE_ADDER[6].thingy       ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[7].thingy|  ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main|adder:GENERATE_ADDER[7].thingy       ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[8].thingy|  ; 5 (5)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 3 (3)        ; 0 (0)             ; 2 (2)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main|adder:GENERATE_ADDER[8].thingy       ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[9].thingy|  ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 2 (2)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main|adder:GENERATE_ADDER[9].thingy       ; adder          ; work         ;
 ;                |adder:a0|                        ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 1 (1)            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main|adder:a0                             ; adder          ; work         ;
-;       |input_control:input_ctrl_inst|            ; 107 (107)   ; 62 (62)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 45 (45)      ; 1 (1)             ; 61 (61)          ; |wrapper|calculator_top:DUT|input_control:input_ctrl_inst                                                           ; input_control  ; work         ;
+;       |input_control:input_ctrl_inst|            ; 120 (120)   ; 71 (71)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 49 (49)      ; 3 (3)             ; 68 (68)          ; |wrapper|calculator_top:DUT|input_control:input_ctrl_inst                                                           ; input_control  ; work         ;
 +--------------------------------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+---------------------------------------------------------------------------------------------------------------------+----------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -2377,96 +2376,85 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; GPIO[15] ; Bidir    ; --            ; --            ; --                    ; --  ; --   ;
 ; GPIO[17] ; Bidir    ; --            ; --            ; --                    ; --  ; --   ;
 ; GPIO[19] ; Bidir    ; (6) 1314 ps   ; --            ; --                    ; --  ; --   ;
-; GPIO[21] ; Bidir    ; --            ; (6) 1314 ps   ; --                    ; --  ; --   ;
+; GPIO[21] ; Bidir    ; (6) 1314 ps   ; --            ; --                    ; --  ; --   ;
 ; GPIO[23] ; Bidir    ; (6) 1314 ps   ; --            ; --                    ; --  ; --   ;
 ; GPIO[25] ; Bidir    ; (6) 1314 ps   ; --            ; --                    ; --  ; --   ;
 ; CLOCK_50 ; Input    ; (0) 0 ps      ; --            ; --                    ; --  ; --   ;
-; KEY[3]   ; Input    ; --            ; (6) 1314 ps   ; --                    ; --  ; --   ;
+; KEY[3]   ; Input    ; (6) 1314 ps   ; --            ; --                    ; --  ; --   ;
 +----------+----------+---------------+---------------+-----------------------+-----+------+
 
 
-+---------------------------------------------------------------------------------------------------------+
-; Pad To Core Delay Chain Fanout                                                                          ;
-+---------------------------------------------------------------------------+-------------------+---------+
-; Source Pin / Fanout                                                       ; Pad To Core Index ; Setting ;
-+---------------------------------------------------------------------------+-------------------+---------+
-; KEY[0]                                                                    ;                   ;         ;
-; KEY[1]                                                                    ;                   ;         ;
-; KEY[2]                                                                    ;                   ;         ;
-; SW[0]                                                                     ;                   ;         ;
-; SW[1]                                                                     ;                   ;         ;
-; SW[2]                                                                     ;                   ;         ;
-; SW[3]                                                                     ;                   ;         ;
-; SW[4]                                                                     ;                   ;         ;
-; SW[5]                                                                     ;                   ;         ;
-; SW[6]                                                                     ;                   ;         ;
-; SW[7]                                                                     ;                   ;         ;
-; SW[8]                                                                     ;                   ;         ;
-; SW[9]                                                                     ;                   ;         ;
-; SW[10]                                                                    ;                   ;         ;
-; SW[11]                                                                    ;                   ;         ;
-; SW[12]                                                                    ;                   ;         ;
-; SW[13]                                                                    ;                   ;         ;
-; SW[14]                                                                    ;                   ;         ;
-; SW[15]                                                                    ;                   ;         ;
-; SW[16]                                                                    ;                   ;         ;
-; SW[17]                                                                    ;                   ;         ;
-; GPIO[0]                                                                   ;                   ;         ;
-; GPIO[1]                                                                   ;                   ;         ;
-; GPIO[2]                                                                   ;                   ;         ;
-; GPIO[3]                                                                   ;                   ;         ;
-; GPIO[4]                                                                   ;                   ;         ;
-; GPIO[5]                                                                   ;                   ;         ;
-; GPIO[6]                                                                   ;                   ;         ;
-; GPIO[7]                                                                   ;                   ;         ;
-; GPIO[8]                                                                   ;                   ;         ;
-; GPIO[9]                                                                   ;                   ;         ;
-; GPIO[10]                                                                  ;                   ;         ;
-; GPIO[12]                                                                  ;                   ;         ;
-; GPIO[14]                                                                  ;                   ;         ;
-; GPIO[16]                                                                  ;                   ;         ;
-; GPIO[18]                                                                  ;                   ;         ;
-; GPIO[20]                                                                  ;                   ;         ;
-; GPIO[22]                                                                  ;                   ;         ;
-; GPIO[24]                                                                  ;                   ;         ;
-; GPIO[26]                                                                  ;                   ;         ;
-; GPIO[27]                                                                  ;                   ;         ;
-; GPIO[28]                                                                  ;                   ;         ;
-; GPIO[29]                                                                  ;                   ;         ;
-; GPIO[30]                                                                  ;                   ;         ;
-; GPIO[31]                                                                  ;                   ;         ;
-; GPIO[32]                                                                  ;                   ;         ;
-; GPIO[33]                                                                  ;                   ;         ;
-; GPIO[34]                                                                  ;                   ;         ;
-; GPIO[11]                                                                  ;                   ;         ;
-; GPIO[13]                                                                  ;                   ;         ;
-; GPIO[15]                                                                  ;                   ;         ;
-; GPIO[17]                                                                  ;                   ;         ;
-; GPIO[19]                                                                  ;                   ;         ;
-;      - calculator_top:DUT|input_control:input_ctrl_inst|key_pressed~0     ; 0                 ; 6       ;
-;      - calculator_top:DUT|input_control:input_ctrl_inst|encode_key~0      ; 0                 ; 6       ;
-;      - calculator_top:DUT|input_control:input_ctrl_inst|encode_key~3      ; 0                 ; 6       ;
-; GPIO[21]                                                                  ;                   ;         ;
-;      - calculator_top:DUT|input_control:input_ctrl_inst|key_pressed~0     ; 1                 ; 6       ;
-;      - calculator_top:DUT|input_control:input_ctrl_inst|encode_key~0      ; 1                 ; 6       ;
-;      - calculator_top:DUT|input_control:input_ctrl_inst|encode_key~3      ; 1                 ; 6       ;
-; GPIO[23]                                                                  ;                   ;         ;
-;      - calculator_top:DUT|input_control:input_ctrl_inst|key_pressed~0     ; 0                 ; 6       ;
-;      - calculator_top:DUT|input_control:input_ctrl_inst|next_state.IDLE~0 ; 0                 ; 6       ;
-;      - calculator_top:DUT|input_control:input_ctrl_inst|encode_key~1      ; 0                 ; 6       ;
-;      - calculator_top:DUT|input_control:input_ctrl_inst|encode_key~2      ; 0                 ; 6       ;
-;      - calculator_top:DUT|input_control:input_ctrl_inst|encode_key~3      ; 0                 ; 6       ;
-; GPIO[25]                                                                  ;                   ;         ;
-;      - calculator_top:DUT|input_control:input_ctrl_inst|key_pressed~0     ; 0                 ; 6       ;
-;      - calculator_top:DUT|input_control:input_ctrl_inst|next_state.IDLE~0 ; 0                 ; 6       ;
-;      - calculator_top:DUT|input_control:input_ctrl_inst|encode_key~1      ; 0                 ; 6       ;
-;      - calculator_top:DUT|input_control:input_ctrl_inst|encode_key~2      ; 0                 ; 6       ;
-; CLOCK_50                                                                  ;                   ;         ;
-; KEY[3]                                                                    ;                   ;         ;
-;      - nRST                                                               ; 1                 ; 6       ;
-;      - calculator_top:DUT|input_control:input_ctrl_inst|equal_input~0     ; 1                 ; 6       ;
-;      - calculator_top:DUT|input_control:input_ctrl_inst|scan_timer[19]~3  ; 1                 ; 6       ;
-+---------------------------------------------------------------------------+-------------------+---------+
++--------------------------------------------------------------------------------------------------------+
+; Pad To Core Delay Chain Fanout                                                                         ;
++--------------------------------------------------------------------------+-------------------+---------+
+; Source Pin / Fanout                                                      ; Pad To Core Index ; Setting ;
++--------------------------------------------------------------------------+-------------------+---------+
+; KEY[0]                                                                   ;                   ;         ;
+; KEY[1]                                                                   ;                   ;         ;
+; KEY[2]                                                                   ;                   ;         ;
+; SW[0]                                                                    ;                   ;         ;
+; SW[1]                                                                    ;                   ;         ;
+; SW[2]                                                                    ;                   ;         ;
+; SW[3]                                                                    ;                   ;         ;
+; SW[4]                                                                    ;                   ;         ;
+; SW[5]                                                                    ;                   ;         ;
+; SW[6]                                                                    ;                   ;         ;
+; SW[7]                                                                    ;                   ;         ;
+; SW[8]                                                                    ;                   ;         ;
+; SW[9]                                                                    ;                   ;         ;
+; SW[10]                                                                   ;                   ;         ;
+; SW[11]                                                                   ;                   ;         ;
+; SW[12]                                                                   ;                   ;         ;
+; SW[13]                                                                   ;                   ;         ;
+; SW[14]                                                                   ;                   ;         ;
+; SW[15]                                                                   ;                   ;         ;
+; SW[16]                                                                   ;                   ;         ;
+; SW[17]                                                                   ;                   ;         ;
+; GPIO[0]                                                                  ;                   ;         ;
+; GPIO[1]                                                                  ;                   ;         ;
+; GPIO[2]                                                                  ;                   ;         ;
+; GPIO[3]                                                                  ;                   ;         ;
+; GPIO[4]                                                                  ;                   ;         ;
+; GPIO[5]                                                                  ;                   ;         ;
+; GPIO[6]                                                                  ;                   ;         ;
+; GPIO[7]                                                                  ;                   ;         ;
+; GPIO[8]                                                                  ;                   ;         ;
+; GPIO[9]                                                                  ;                   ;         ;
+; GPIO[10]                                                                 ;                   ;         ;
+; GPIO[12]                                                                 ;                   ;         ;
+; GPIO[14]                                                                 ;                   ;         ;
+; GPIO[16]                                                                 ;                   ;         ;
+; GPIO[18]                                                                 ;                   ;         ;
+; GPIO[20]                                                                 ;                   ;         ;
+; GPIO[22]                                                                 ;                   ;         ;
+; GPIO[24]                                                                 ;                   ;         ;
+; GPIO[26]                                                                 ;                   ;         ;
+; GPIO[27]                                                                 ;                   ;         ;
+; GPIO[28]                                                                 ;                   ;         ;
+; GPIO[29]                                                                 ;                   ;         ;
+; GPIO[30]                                                                 ;                   ;         ;
+; GPIO[31]                                                                 ;                   ;         ;
+; GPIO[32]                                                                 ;                   ;         ;
+; GPIO[33]                                                                 ;                   ;         ;
+; GPIO[34]                                                                 ;                   ;         ;
+; GPIO[11]                                                                 ;                   ;         ;
+; GPIO[13]                                                                 ;                   ;         ;
+; GPIO[15]                                                                 ;                   ;         ;
+; GPIO[17]                                                                 ;                   ;         ;
+; GPIO[19]                                                                 ;                   ;         ;
+;      - calculator_top:DUT|input_control:input_ctrl_inst|RowMid[0]~1      ; 0                 ; 6       ;
+; GPIO[21]                                                                 ;                   ;         ;
+;      - calculator_top:DUT|input_control:input_ctrl_inst|RowMid[1]~0      ; 0                 ; 6       ;
+; GPIO[23]                                                                 ;                   ;         ;
+;      - calculator_top:DUT|input_control:input_ctrl_inst|RowMid[2]~3      ; 0                 ; 6       ;
+; GPIO[25]                                                                 ;                   ;         ;
+;      - calculator_top:DUT|input_control:input_ctrl_inst|RowMid[3]~2      ; 0                 ; 6       ;
+; CLOCK_50                                                                 ;                   ;         ;
+; KEY[3]                                                                   ;                   ;         ;
+;      - nRST                                                              ; 0                 ; 6       ;
+;      - calculator_top:DUT|input_control:input_ctrl_inst|equal_input~0    ; 0                 ; 6       ;
+;      - calculator_top:DUT|input_control:input_ctrl_inst|scan_timer[19]~9 ; 0                 ; 6       ;
++--------------------------------------------------------------------------+-------------------+---------+
 
 
 +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -2474,27 +2462,27 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-------------------------------------------------------------------------+---------------------+---------+--------------+--------+----------------------+------------------+---------------------------+
 ; Name                                                                    ; Location            ; Fan-Out ; Usage        ; Global ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
 +-------------------------------------------------------------------------+---------------------+---------+--------------+--------+----------------------+------------------+---------------------------+
-; CLOCK_50                                                                ; PIN_Y2              ; 368     ; Clock        ; yes    ; Global Clock         ; GCLK4            ; --                        ;
-; calculator_top:DUT|gencon:gencon_inst|ALU_in2[0]~0                      ; LCCOMB_X98_Y43_N20  ; 34      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; calculator_top:DUT|gencon:gencon_inst|Selector2~2                       ; LCCOMB_X98_Y43_N2   ; 3       ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; calculator_top:DUT|gencon:gencon_inst|Selector75~0                      ; LCCOMB_X96_Y43_N6   ; 4       ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; calculator_top:DUT|gencon:gencon_inst|Selector75~2                      ; LCCOMB_X98_Y43_N14  ; 33      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; calculator_top:DUT|gencon:gencon_inst|WideOr6~0                         ; LCCOMB_X92_Y43_N22  ; 16      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; calculator_top:DUT|gencon:gencon_inst|addition:add_calc|state.ADD       ; FF_X97_Y42_N1       ; 18      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; calculator_top:DUT|gencon:gencon_inst|addition:add_calc|state.SET       ; FF_X97_Y42_N9       ; 35      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; calculator_top:DUT|gencon:gencon_inst|current_state.SHOW_RESULT_ADDSUB  ; FF_X97_Y43_N1       ; 21      ; Sync. load   ; no     ; --                   ; --               ; --                        ;
-; calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|Selector20~0   ; LCCOMB_X97_Y44_N4   ; 30      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|Selector5~0    ; LCCOMB_X100_Y41_N12 ; 30      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|state.CHECKADD ; FF_X97_Y42_N31      ; 33      ; Sync. clear  ; no     ; --                   ; --               ; --                        ;
-; calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|state.FIN      ; FF_X96_Y41_N13      ; 19      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|state.SET      ; FF_X97_Y42_N29      ; 35      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; calculator_top:DUT|gencon:gencon_inst|operand1[14]~0                    ; LCCOMB_X96_Y43_N26  ; 15      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; calculator_top:DUT|gencon:gencon_inst|operand2[13]~3                    ; LCCOMB_X96_Y43_N2   ; 15      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; calculator_top:DUT|input_control:input_ctrl_inst|debounce_cnt[18]~18    ; LCCOMB_X112_Y38_N22 ; 4       ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; calculator_top:DUT|input_control:input_ctrl_inst|equal_input~0          ; LCCOMB_X112_Y38_N10 ; 5       ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; calculator_top:DUT|input_control:input_ctrl_inst|scan_timer[19]~3       ; LCCOMB_X112_Y38_N30 ; 20      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; calculator_top:DUT|input_control:input_ctrl_inst|state.CONFIRM          ; FF_X112_Y38_N29     ; 10      ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; nRST                                                                    ; LCCOMB_X114_Y37_N10 ; 334     ; Async. clear ; yes    ; Global Clock         ; GCLK7            ; --                        ;
+; CLOCK_50                                                                ; PIN_Y2              ; 377     ; Clock        ; yes    ; Global Clock         ; GCLK4            ; --                        ;
+; calculator_top:DUT|gencon:gencon_inst|ALU_in2[0]~0                      ; LCCOMB_X91_Y51_N10  ; 34      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; calculator_top:DUT|gencon:gencon_inst|Selector2~2                       ; LCCOMB_X92_Y51_N22  ; 3       ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; calculator_top:DUT|gencon:gencon_inst|Selector75~0                      ; LCCOMB_X91_Y52_N28  ; 4       ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; calculator_top:DUT|gencon:gencon_inst|Selector75~2                      ; LCCOMB_X92_Y51_N0   ; 33      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; calculator_top:DUT|gencon:gencon_inst|WideOr6~0                         ; LCCOMB_X91_Y52_N2   ; 16      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; calculator_top:DUT|gencon:gencon_inst|addition:add_calc|state.ADD       ; FF_X90_Y53_N21      ; 18      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; calculator_top:DUT|gencon:gencon_inst|addition:add_calc|state.SET       ; FF_X91_Y51_N27      ; 35      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; calculator_top:DUT|gencon:gencon_inst|current_state.SHOW_RESULT_ADDSUB  ; FF_X91_Y51_N31      ; 20      ; Sync. load   ; no     ; --                   ; --               ; --                        ;
+; calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|Selector20~0   ; LCCOMB_X91_Y50_N6   ; 30      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|Selector5~0    ; LCCOMB_X90_Y49_N28  ; 30      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|state.CHECKADD ; FF_X90_Y50_N31      ; 33      ; Sync. clear  ; no     ; --                   ; --               ; --                        ;
+; calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|state.FIN      ; FF_X90_Y50_N5       ; 19      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|state.SET      ; FF_X91_Y51_N19      ; 35      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; calculator_top:DUT|gencon:gencon_inst|operand1[14]~0                    ; LCCOMB_X90_Y54_N12  ; 15      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; calculator_top:DUT|gencon:gencon_inst|operand2[11]~3                    ; LCCOMB_X91_Y52_N10  ; 15      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; calculator_top:DUT|input_control:input_ctrl_inst|debounce_cnt[12]~1     ; LCCOMB_X100_Y51_N22 ; 19      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; calculator_top:DUT|input_control:input_ctrl_inst|equal_input~0          ; LCCOMB_X110_Y37_N0  ; 5       ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; calculator_top:DUT|input_control:input_ctrl_inst|scan_timer[19]~9       ; LCCOMB_X110_Y37_N22 ; 20      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; calculator_top:DUT|input_control:input_ctrl_inst|state.CONFIRM          ; FF_X100_Y51_N17     ; 9       ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; nRST                                                                    ; LCCOMB_X114_Y37_N10 ; 343     ; Async. clear ; yes    ; Global Clock         ; GCLK7            ; --                        ;
 ; nRST                                                                    ; LCCOMB_X114_Y37_N10 ; 5       ; Clock enable ; no     ; --                   ; --               ; --                        ;
 +-------------------------------------------------------------------------+---------------------+---------+--------------+--------+----------------------+------------------+---------------------------+
 
@@ -2504,8 +2492,8 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------+---------------------+---------+--------------------------------------+----------------------+------------------+---------------------------+
 ; Name     ; Location            ; Fan-Out ; Fan-Out Using Intentional Clock Skew ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
 +----------+---------------------+---------+--------------------------------------+----------------------+------------------+---------------------------+
-; CLOCK_50 ; PIN_Y2              ; 368     ; 171                                  ; Global Clock         ; GCLK4            ; --                        ;
-; nRST     ; LCCOMB_X114_Y37_N10 ; 334     ; 0                                    ; Global Clock         ; GCLK7            ; --                        ;
+; CLOCK_50 ; PIN_Y2              ; 377     ; 167                                  ; Global Clock         ; GCLK4            ; --                        ;
+; nRST     ; LCCOMB_X114_Y37_N10 ; 343     ; 0                                    ; Global Clock         ; GCLK7            ; --                        ;
 +----------+---------------------+---------+--------------------------------------+----------------------+------------------+---------------------------+
 
 
@@ -2514,37 +2502,37 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------------------+-------------------------+
 ; Routing Resource Type ; Usage                   ;
 +-----------------------+-------------------------+
-; Block interconnects   ; 786 / 342,891 ( < 1 % ) ;
+; Block interconnects   ; 767 / 342,891 ( < 1 % ) ;
 ; C16 interconnects     ; 50 / 10,120 ( < 1 % )   ;
 ; C4 interconnects      ; 330 / 209,544 ( < 1 % ) ;
-; Direct links          ; 238 / 342,891 ( < 1 % ) ;
+; Direct links          ; 223 / 342,891 ( < 1 % ) ;
 ; Global clocks         ; 2 / 20 ( 10 % )         ;
-; Local interconnects   ; 260 / 119,088 ( < 1 % ) ;
-; R24 interconnects     ; 30 / 9,963 ( < 1 % )    ;
-; R4 interconnects      ; 489 / 289,782 ( < 1 % ) ;
+; Local interconnects   ; 279 / 119,088 ( < 1 % ) ;
+; R24 interconnects     ; 37 / 9,963 ( < 1 % )    ;
+; R4 interconnects      ; 388 / 289,782 ( < 1 % ) ;
 +-----------------------+-------------------------+
 
 
 +----------------------------------------------------------------------------+
 ; LAB Logic Elements                                                         ;
 +---------------------------------------------+------------------------------+
-; Number of Logic Elements  (Average = 12.60) ; Number of LABs  (Total = 42) ;
+; Number of Logic Elements  (Average = 13.24) ; Number of LABs  (Total = 41) ;
 +---------------------------------------------+------------------------------+
-; 1                                           ; 4                            ;
+; 1                                           ; 2                            ;
 ; 2                                           ; 1                            ;
-; 3                                           ; 2                            ;
+; 3                                           ; 1                            ;
 ; 4                                           ; 0                            ;
 ; 5                                           ; 0                            ;
 ; 6                                           ; 0                            ;
-; 7                                           ; 0                            ;
-; 8                                           ; 1                            ;
-; 9                                           ; 0                            ;
-; 10                                          ; 1                            ;
+; 7                                           ; 1                            ;
+; 8                                           ; 0                            ;
+; 9                                           ; 1                            ;
+; 10                                          ; 3                            ;
 ; 11                                          ; 1                            ;
-; 12                                          ; 2                            ;
+; 12                                          ; 0                            ;
 ; 13                                          ; 2                            ;
 ; 14                                          ; 4                            ;
-; 15                                          ; 2                            ;
+; 15                                          ; 3                            ;
 ; 16                                          ; 22                           ;
 +---------------------------------------------+------------------------------+
 
@@ -2552,26 +2540,26 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-------------------------------------------------------------------+
 ; LAB-wide Signals                                                  ;
 +------------------------------------+------------------------------+
-; LAB-wide Signals  (Average = 2.76) ; Number of LABs  (Total = 42) ;
+; LAB-wide Signals  (Average = 2.71) ; Number of LABs  (Total = 41) ;
 +------------------------------------+------------------------------+
-; 1 Async. clear                     ; 38                           ;
-; 1 Clock                            ; 41                           ;
-; 1 Clock enable                     ; 17                           ;
-; 1 Sync. clear                      ; 2                            ;
-; 1 Sync. load                       ; 2                            ;
-; 2 Clock enables                    ; 16                           ;
+; 1 Async. clear                     ; 36                           ;
+; 1 Clock                            ; 39                           ;
+; 1 Clock enable                     ; 15                           ;
+; 1 Sync. clear                      ; 1                            ;
+; 1 Sync. load                       ; 3                            ;
+; 2 Clock enables                    ; 17                           ;
 +------------------------------------+------------------------------+
 
 
 +-----------------------------------------------------------------------------+
 ; LAB Signals Sourced                                                         ;
 +----------------------------------------------+------------------------------+
-; Number of Signals Sourced  (Average = 21.21) ; Number of LABs  (Total = 42) ;
+; Number of Signals Sourced  (Average = 22.39) ; Number of LABs  (Total = 41) ;
 +----------------------------------------------+------------------------------+
 ; 0                                            ; 0                            ;
 ; 1                                            ; 0                            ;
-; 2                                            ; 4                            ;
-; 3                                            ; 2                            ;
+; 2                                            ; 3                            ;
+; 3                                            ; 0                            ;
 ; 4                                            ; 0                            ;
 ; 5                                            ; 0                            ;
 ; 6                                            ; 1                            ;
@@ -2582,105 +2570,100 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; 11                                           ; 0                            ;
 ; 12                                           ; 0                            ;
 ; 13                                           ; 0                            ;
-; 14                                           ; 0                            ;
+; 14                                           ; 1                            ;
 ; 15                                           ; 0                            ;
 ; 16                                           ; 1                            ;
 ; 17                                           ; 2                            ;
 ; 18                                           ; 1                            ;
-; 19                                           ; 1                            ;
-; 20                                           ; 0                            ;
-; 21                                           ; 2                            ;
-; 22                                           ; 1                            ;
-; 23                                           ; 1                            ;
-; 24                                           ; 6                            ;
-; 25                                           ; 2                            ;
-; 26                                           ; 5                            ;
-; 27                                           ; 2                            ;
-; 28                                           ; 5                            ;
+; 19                                           ; 0                            ;
+; 20                                           ; 1                            ;
+; 21                                           ; 5                            ;
+; 22                                           ; 3                            ;
+; 23                                           ; 2                            ;
+; 24                                           ; 2                            ;
+; 25                                           ; 4                            ;
+; 26                                           ; 3                            ;
+; 27                                           ; 1                            ;
+; 28                                           ; 2                            ;
 ; 29                                           ; 2                            ;
-; 30                                           ; 3                            ;
-; 31                                           ; 1                            ;
+; 30                                           ; 0                            ;
+; 31                                           ; 4                            ;
+; 32                                           ; 3                            ;
 +----------------------------------------------+------------------------------+
 
 
 +---------------------------------------------------------------------------------+
 ; LAB Signals Sourced Out                                                         ;
 +--------------------------------------------------+------------------------------+
-; Number of Signals Sourced Out  (Average = 10.76) ; Number of LABs  (Total = 42) ;
+; Number of Signals Sourced Out  (Average = 10.71) ; Number of LABs  (Total = 41) ;
 +--------------------------------------------------+------------------------------+
 ; 0                                                ; 0                            ;
-; 1                                                ; 6                            ;
-; 2                                                ; 0                            ;
-; 3                                                ; 2                            ;
+; 1                                                ; 2                            ;
+; 2                                                ; 2                            ;
+; 3                                                ; 1                            ;
 ; 4                                                ; 1                            ;
-; 5                                                ; 0                            ;
-; 6                                                ; 1                            ;
-; 7                                                ; 2                            ;
-; 8                                                ; 4                            ;
+; 5                                                ; 1                            ;
+; 6                                                ; 0                            ;
+; 7                                                ; 5                            ;
+; 8                                                ; 5                            ;
 ; 9                                                ; 3                            ;
-; 10                                               ; 2                            ;
-; 11                                               ; 1                            ;
-; 12                                               ; 3                            ;
-; 13                                               ; 2                            ;
-; 14                                               ; 1                            ;
-; 15                                               ; 4                            ;
-; 16                                               ; 3                            ;
-; 17                                               ; 2                            ;
-; 18                                               ; 1                            ;
-; 19                                               ; 1                            ;
-; 20                                               ; 1                            ;
-; 21                                               ; 0                            ;
-; 22                                               ; 0                            ;
+; 10                                               ; 1                            ;
+; 11                                               ; 4                            ;
+; 12                                               ; 1                            ;
+; 13                                               ; 1                            ;
+; 14                                               ; 3                            ;
+; 15                                               ; 2                            ;
+; 16                                               ; 4                            ;
+; 17                                               ; 1                            ;
+; 18                                               ; 0                            ;
+; 19                                               ; 0                            ;
+; 20                                               ; 0                            ;
+; 21                                               ; 2                            ;
+; 22                                               ; 1                            ;
 ; 23                                               ; 1                            ;
-; 24                                               ; 0                            ;
-; 25                                               ; 0                            ;
-; 26                                               ; 0                            ;
-; 27                                               ; 0                            ;
-; 28                                               ; 1                            ;
 +--------------------------------------------------+------------------------------+
 
 
 +-----------------------------------------------------------------------------+
 ; LAB Distinct Inputs                                                         ;
 +----------------------------------------------+------------------------------+
-; Number of Distinct Inputs  (Average = 17.79) ; Number of LABs  (Total = 42) ;
+; Number of Distinct Inputs  (Average = 17.44) ; Number of LABs  (Total = 41) ;
 +----------------------------------------------+------------------------------+
 ; 0                                            ; 0                            ;
 ; 1                                            ; 0                            ;
-; 2                                            ; 2                            ;
+; 2                                            ; 1                            ;
 ; 3                                            ; 0                            ;
-; 4                                            ; 2                            ;
+; 4                                            ; 1                            ;
 ; 5                                            ; 2                            ;
-; 6                                            ; 1                            ;
-; 7                                            ; 2                            ;
-; 8                                            ; 0                            ;
-; 9                                            ; 1                            ;
-; 10                                           ; 2                            ;
-; 11                                           ; 2                            ;
-; 12                                           ; 1                            ;
+; 6                                            ; 0                            ;
+; 7                                            ; 3                            ;
+; 8                                            ; 2                            ;
+; 9                                            ; 0                            ;
+; 10                                           ; 1                            ;
+; 11                                           ; 3                            ;
+; 12                                           ; 0                            ;
 ; 13                                           ; 1                            ;
-; 14                                           ; 0                            ;
+; 14                                           ; 2                            ;
 ; 15                                           ; 2                            ;
-; 16                                           ; 1                            ;
-; 17                                           ; 1                            ;
-; 18                                           ; 2                            ;
-; 19                                           ; 2                            ;
+; 16                                           ; 2                            ;
+; 17                                           ; 3                            ;
+; 18                                           ; 0                            ;
+; 19                                           ; 1                            ;
 ; 20                                           ; 2                            ;
-; 21                                           ; 1                            ;
-; 22                                           ; 1                            ;
-; 23                                           ; 3                            ;
-; 24                                           ; 0                            ;
-; 25                                           ; 1                            ;
+; 21                                           ; 3                            ;
+; 22                                           ; 0                            ;
+; 23                                           ; 0                            ;
+; 24                                           ; 2                            ;
+; 25                                           ; 2                            ;
 ; 26                                           ; 0                            ;
-; 27                                           ; 2                            ;
-; 28                                           ; 1                            ;
-; 29                                           ; 0                            ;
-; 30                                           ; 0                            ;
+; 27                                           ; 1                            ;
+; 28                                           ; 0                            ;
+; 29                                           ; 2                            ;
+; 30                                           ; 1                            ;
 ; 31                                           ; 1                            ;
-; 32                                           ; 2                            ;
-; 33                                           ; 0                            ;
-; 34                                           ; 2                            ;
-; 35                                           ; 2                            ;
+; 32                                           ; 1                            ;
+; 33                                           ; 1                            ;
+; 34                                           ; 1                            ;
 +----------------------------------------------+------------------------------+
 
 
@@ -3353,7 +3336,7 @@ Warning (15705): Ignored locations or region assignments to the following nodes
     Warning (15706): Node "VGA_R[7]" is assigned to location or region, but does not exist in design
     Warning (15706): Node "VGA_SYNC_N" is assigned to location or region, but does not exist in design
     Warning (15706): Node "VGA_VS" is assigned to location or region, but does not exist in design
-Info (171121): Fitter preparation operations ending: elapsed time is 00:00:01
+Info (171121): Fitter preparation operations ending: elapsed time is 00:00:02
 Info (14896): Fitter has disabled Advanced Physical Optimization because it is not supported for the current family.
 Info (170189): Fitter placement preparation operations beginning
 Info (170190): Fitter placement preparation operations ending: elapsed time is 00:00:00
@@ -3362,11 +3345,11 @@ Info (170137): Fitter placement was successful
 Info (170192): Fitter placement operations ending: elapsed time is 00:00:03
 Info (170193): Fitter routing operations beginning
 Info (170195): Router estimated average interconnect usage is 0% of the available device resources
-    Info (170196): Router estimated peak interconnect usage is 3% of the available device resources in the region that extends from location X92_Y37 to location X103_Y48
+    Info (170196): Router estimated peak interconnect usage is 4% of the available device resources in the region that extends from location X81_Y49 to location X91_Y60
 Info (170199): The Fitter performed an Auto Fit compilation.  Optimizations were skipped to reduce compilation time.
     Info (170201): Optimizations that may affect the design's routability were skipped
 Info (170194): Fitter routing operations ending: elapsed time is 00:00:01
-Info (11888): Total time spent on timing analysis during the Fitter is 0.34 seconds.
+Info (11888): Total time spent on timing analysis during the Fitter is 0.32 seconds.
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
 Info (334003): Started post-fitting delay annotation
@@ -3448,9 +3431,9 @@ Warning (169064): Following 35 pins have no output enable or a GND or VCC output
     Info (169065): Pin GPIO[25] has a permanently disabled output enable File: /home/shay/a/du347/CALC-Intro-2 (another copy)/source/wrapper.sv Line: 6
 Info (144001): Generated suppressed messages file /home/shay/a/du347/CALC-Intro-2 (another copy)/source/output_files/wrapper.fit.smsg
 Info: Quartus Prime Fitter was successful. 0 errors, 448 warnings
-    Info: Peak virtual memory: 1350 megabytes
-    Info: Processing ended: Mon May  5 18:46:46 2025
-    Info: Elapsed time: 00:00:13
+    Info: Peak virtual memory: 1340 megabytes
+    Info: Processing ended: Mon May  5 19:35:12 2025
+    Info: Elapsed time: 00:00:12
     Info: Total CPU time (on all processors): 00:00:20
 
 
