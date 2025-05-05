@@ -20,6 +20,17 @@ module calculator_top_tb();
   // Clock generation
   always #5 clk = ~clk;
 
+	task reset_dut();
+		nRST = 0;
+    @(negedge clk);
+    @(negedge clk);
+
+    @(negedge clk);  // reset pulse
+    nRST = 1;
+    @(posedge clk);
+		
+	endtask
+
   // Helper: simulate a key press
   task automatic press_key(input int key_index);
     int row = key_index / 4;
@@ -70,12 +81,8 @@ module calculator_top_tb();
     nRST = 1;
     RowIn = 4'b1111;
     #(1);
-    nRST = 0;
-    @(negedge clk);
-    @(negedge clk);
-
-    @(negedge clk);  // reset pulse
-    nRST = 1;
+		
+		reset_dut();
 
     // Sequence: -3 * -4 = 12
     press_key(KEY_NEG); // negative
@@ -91,13 +98,9 @@ module calculator_top_tb();
     $display("✅ Result: %0d", display_output);
 
     #20;
-    nRST = 0;
-    @(negedge clk);
-    @(negedge clk);
-
-    @(negedge clk);  // reset pulse
-    nRST = 1;
-    @(posedge clk);
+		
+		reset_dut();
+		
     // Sequence: 3 * 4 = 12
     press_key(KEY_3);
     press_key(KEY_MULT);
@@ -110,12 +113,7 @@ module calculator_top_tb();
 
     #20;
 
-    nRST = 0;
-    @(negedge clk);
-    @(negedge clk);
-
-    @(negedge clk);  // reset pulse
-    nRST = 1;
+    reset_dut();
 
     // Sequence: 3 + 4 = 7
     press_key(KEY_3);
@@ -129,13 +127,7 @@ module calculator_top_tb();
 
     #20;
 
-	      nRST = 0;
-    @(negedge clk);
-    @(negedge clk);
-
-    @(negedge clk);  // reset pulse
-    nRST = 1;
-	  @(posedge clk);
+	  reset_dut();
 
     // Sequence: 5 - 4 = 1
     press_key(KEY_5);
@@ -148,15 +140,9 @@ module calculator_top_tb();
     $display("✅ Result: %0d", display_output);
 
     #20;
-	      nRST = 0;
-    @(negedge clk);
-    @(negedge clk);
-
-    @(negedge clk);  // reset pulse
-    nRST = 1;
-	  @(posedge clk);
-
-	  @(posedge clk);
+	   		
+		reset_dut();
+		
     // Sequence: -5 - 4 = -9
     press_key(KEY_NEG);
     press_key(KEY_5);
@@ -169,14 +155,9 @@ module calculator_top_tb();
     $display("✅ Result: %0d", display_output);
 
     #20;
-	      nRST = 0;
-    @(negedge clk);
-    @(negedge clk);
-
-    @(negedge clk);  // reset pulse
-    nRST = 1;
-	  @(posedge clk);
-	@(posedge clk);
+		
+	  reset_dut();
+		
     // Sequence: 35 * 45 = 1575
     press_key(KEY_3);
     press_key(KEY_5);
