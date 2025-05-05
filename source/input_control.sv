@@ -27,7 +27,7 @@ module input_control (
     logic [1:0] col_index;
     logic [18:0] debounce_cnt;
     logic [3:0] key_code;
-    logic key_valid;
+    logic key_pressed;
 
     // to handle read_input states
     logic [3:0] decoded_key;
@@ -78,7 +78,7 @@ module input_control (
 	    end
 
             if (state == WAIT_STABLE) begin
-		    if (key_valid && debounce_cnt < DEBOUNCE_SIZE)
+		    if (key_pressed && debounce_cnt < DEBOUNCE_SIZE)
                     debounce_cnt <= debounce_cnt + 1;
 		    else if (debounce_cnt == DEBOUNCE_SIZE)
                     debounce_cnt <= 0;
@@ -99,7 +99,7 @@ module input_control (
 	        end
 	    end
 
-            if (state == WAIT_RELEASE && !key_valid)
+            if (state == WAIT_RELEASE && !key_pressed)
                 read_input <= 0;
         end
     end
@@ -110,10 +110,10 @@ module input_control (
 
         case (state)
             IDLE:        next_state = SCAN_COL;
-            SCAN_COL:    next_state = key_valid ? WAIT_STABLE : SCAN_COL;
+            SCAN_COL:    next_state = key_pressed ? WAIT_STABLE : SCAN_COL;
 		WAIT_STABLE: next_state = (debounce_cnt >= DEBOUNCE_SIZE) ? CONFIRM : WAIT_STABLE;
             CONFIRM:     next_state = key_read ? WAIT_RELEASE : CONFIRM;
-            WAIT_RELEASE:next_state = !key_valid ? IDLE : WAIT_RELEASE;
+            WAIT_RELEASE:next_state = !key_pressed ? IDLE : WAIT_RELEASE;
 	    default: next_state = IDLE;
         endcase
     end
@@ -126,10 +126,10 @@ module input_control (
 
     // Detect active-low key press
     always_comb begin
-        key_valid = 0;
+        key_pressed = 0;
         for (int i = 0; i < 4; i++)
 		if (RowIn[i] == 0)
-                	key_valid = 1;
+                	key_pressed = 1;
     end
 
     // Translate row and column index to keypad index 0–15
