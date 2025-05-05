@@ -42,16 +42,11 @@ module calculator_top_tb();
     // Pull the correct row low (active low press)
     RowIn = ~(4'b0001 << row);
 
-    //@(posedge clk);  // debounce or FSM transition delay
-
     wait(dut.input_ctrl_inst.state == 3);
     
-    //@(posedge clk);
-    //@(posedge clk);
-
     // Let gencon acknowledge
     wait (dut.gencon_inst.key_read == 1);
-    @(posedge clk);
+    //@(posedge clk);
 
     // Release the key
     RowIn = 4'b1111;
