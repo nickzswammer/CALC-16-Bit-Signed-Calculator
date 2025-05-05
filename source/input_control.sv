@@ -15,31 +15,33 @@ module input_control (
     output logic equal_input             // 1-bit equal flag (*)
 );
 
-	localparam DEBOUNCE_SIZE = 500000;
-	localparam SCAN_DURATION = 50000;
-		
+    localparam DEBOUNCE_SIZE = 500_000; // Debounce Length (for 50 MHz clock this is 10ms)
+    localparam SCAN_DURATION = 50_000;  // scan length (50mHz clock this is 1 ms)
+	
     typedef enum logic [2:0] {
-        IDLE, SCAN_COL, WAIT_STABLE, CONFIRM, WAIT_RELEASE
+        IDLE,                           // IDLE, but just pre state for SCAN_COL
+		SCAN_COL,                       // drives columns low 1 by 1 every 10ms, transitions when detects key_pressed high
+		WAIT_STABLE,                    // debounce state, waits until input is stable before processing in the confirm state
+		CONFIRM,                        // encodes key, sets the output variables to respective outputs, waits until gencon confirms key_read
+		WAIT_RELEASE                    // waits for button to be released IE when RowIn = 4'b1111
     } state_t;
 
     state_t state, next_state;
 
-    logic [1:0] col_index;
-    logic [18:0] debounce_cnt;
-    logic [3:0] key_code;
-    logic key_pressed;
+	logic [1:0] col_index;           // current column being scanned, gets incremented every 1 ms (50,000 clock cycles)
+	logic [18:0] debounce_cnt;       // how many clock cycles have elapsed, only reads when key_pressed asserted for 500,000 clock cycles
+	logic key_pressed;               // key pressed, turns high when there is a 0 detected in RowIn (always_comb)
 
     // to handle read_input states
-    logic [3:0] decoded_key;
-    logic [3:0] next_keypad_input;
-    logic [2:0] next_operator_input;
-    logic next_equal_input;
+	// logic [3:0] key_code;         // kind of useless
+	logic [3:0] decoded_key;         // (0-15) key_code to be decoded by the encoder always_comb case statement, represents positions on keypad
+	logic [3:0] next_keypad_input;   // Set within combinational decoder block 
+	logic [2:0] next_operator_input; // Set within combinational decoder block 
+    logic next_equal_input;          // Set within combinational decoder block 
 
-    logic [19:0] scan_timer = 0;
+	logic [19:0] scan_timer = 0;     // Scan Timer, goes up to 50,000
 
-    logic [3:0] temp_key;
-
-    int idx;
+	int idx;                         // output of encoder function, (0-15) then gets trimmed down
 
 	//logic [3:0] RowMid, RowSync;
 
@@ -56,6 +58,7 @@ module input_control (
 		end
 	end
 	*/
+	
     // Sequential logic with active-low reset
     always_ff @(posedge clk or negedge nRST) begin
         if (!nRST) begin
@@ -85,8 +88,13 @@ module input_control (
             end
 
 	    if (state == CONFIRM) begin
-		key_code = encode_key(RowIn, col_index);
-		decoded_key <= key_code;
+			/* key_code kinda useless here
+			key_code = encode_key(RowIn, col_index);
+			decoded_key <= key_code;
+	  		*/
+
+			decoded_key = encode_key(RowIn, col_index);
+			
 	        // Decode in-place
 	        keypad_input <= next_keypad_input;
 	        //operator_input <= next_operator_input;
