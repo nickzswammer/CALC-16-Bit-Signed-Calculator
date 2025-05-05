@@ -64,12 +64,14 @@ module addition
     } state_t;
 
     state_t state, next;
+	 logic next_finish;
+	 logic [15:0] next_out;
 
-    logic [14 : 0] n1;
-    logic [14 : 0] n2;
+    logic [14 : 0] n1, next_n1;
+    logic [14 : 0] n2, next_n2;
 
-    logic diffSign;
-	logic sameSignVal;	
+    logic diffSign, next_diffSign;
+	logic sameSignVal, next_sameSignVal;	
 
     logic [14 : 0] tempVal;
     logic writeTemp;
@@ -83,8 +85,20 @@ module addition
     always_ff @(posedge clk, negedge nRST) begin
         if(!nRST) begin
             state <= IDLE;
+				finish <= 1'b0;
+				diffSign <= 0;
+				n2 <= 0;
+				n1 <= 0;
+				sameSignVal <= 0;
+				out <= 0;
         end else begin
             state <= next;
+				finish <= next_finish;
+				diffSign <= next_diffSign;
+				n2 <= next_n2;
+				n1 <= next_n1;
+				sameSignVal <= next_sameSignVal;
+				out <= next_out;
         end
     end
 
@@ -119,52 +133,52 @@ module addition
         
     always_comb begin
         
-	finish = 1'b0;
-	diffSign = 0;
-	n2 = 0;
-	n1 = 0;
-	sameSignVal = 0;
-	out = 0;
+		next_finish = finish;
+		next_diffSign = diffSign;
+		next_n2 = n2;
+		next_n1 = n1;
+		next_sameSignVal = sameSignVal;
+		next_out = out;
 
         casez(state)
             
             SET:
                 if(INn1[15] ^ (INn2[15] ^ sub)) begin
-                    diffSign = 1;
+                    next_diffSign = 1;
 
                     if(INn1[15] == 1) begin
-                        n2 [14 : 0] = INn1 [14 : 0];
-                        n1 [14 : 0] = INn2 [14 : 0];
+                        next_n2 [14 : 0] = INn1 [14 : 0];
+                        next_n1 [14 : 0] = INn2 [14 : 0];
                     end else begin
-                        n2 [14 : 0] = INn2 [14 : 0];
-                        n1 [14 : 0] = INn1 [14 : 0];
+                        next_n2 [14 : 0] = INn2 [14 : 0];
+                        next_n1 [14 : 0] = INn1 [14 : 0];
                     end	
                 end else begin
-                    diffSign = 0;
+                    next_diffSign = 0;
 
-					sameSignVal = INn1[15];
+					next_sameSignVal = INn1[15];
 
-                    n2 [14 : 0] = INn2 [14 : 0];
-                    n1 [14 : 0] = INn1 [14 : 0];
+                    next_n2 [14 : 0] = INn2 [14 : 0];
+                    next_n1 [14 : 0] = INn1 [14 : 0];
                 end
 
             ADD:
                 if(!adderCOut && diffSign) begin
-                    out [14 : 0] = comp [14 : 0];
-                    out [15] = 1'b1;
+                    next_out [14 : 0] = comp [14 : 0];
+                    next_out [15] = 1'b1;
                 end else begin
-                    out [14 : 0] = adderOut [14 : 0];
+                    next_out [14 : 0] = adderOut [14 : 0];
                     if(diffSign) begin
-                        out [15] = 1'b0;
+                        next_out [15] = 1'b0;
                     end else begin 
-                        out [15] = sameSignVal;
+                        next_out [15] = sameSignVal;
                     end
                 end
             
             FIN:
-                finish = 1'b1;
+                next_finish = 1'b1;
 			default:
-				finish = 1'b0;
+				next_finish = 1'b0;
 				
         endcase
     end

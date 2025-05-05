@@ -1,5 +1,5 @@
 Analysis & Synthesis report for wrapper
-Mon May  5 17:48:20 2025
+Mon May  5 18:14:42 2025
 Quartus Prime Version 21.1.1 Build 850 06/23/2022 SJ Standard Edition
 
 
@@ -25,10 +25,9 @@ Quartus Prime Version 21.1.1 Build 850 06/23/2022 SJ Standard Edition
  17. Port Connectivity Checks: "calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:count"
  18. Port Connectivity Checks: "calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:main"
  19. Port Connectivity Checks: "calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement"
- 20. Port Connectivity Checks: "calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main"
- 21. Post-Synthesis Netlist Statistics for Top Partition
- 22. Elapsed Time Per Partition
- 23. Analysis & Synthesis Messages
+ 20. Post-Synthesis Netlist Statistics for Top Partition
+ 21. Elapsed Time Per Partition
+ 22. Analysis & Synthesis Messages
 
 
 
@@ -55,15 +54,15 @@ https://fpgasoftware.intel.com/eula.
 +--------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Mon May  5 17:48:20 2025           ;
+; Analysis & Synthesis Status        ; Successful - Mon May  5 18:14:42 2025           ;
 ; Quartus Prime Version              ; 21.1.1 Build 850 06/23/2022 SJ Standard Edition ;
 ; Revision Name                      ; wrapper                                         ;
 ; Top-level Entity Name              ; wrapper                                         ;
 ; Family                             ; Cyclone IV E                                    ;
-; Total logic elements               ; 267                                             ;
-;     Total combinational functions  ; 257                                             ;
-;     Dedicated logic registers      ; 160                                             ;
-; Total registers                    ; 160                                             ;
+; Total logic elements               ; 474                                             ;
+;     Total combinational functions  ; 417                                             ;
+;     Dedicated logic registers      ; 293                                             ;
+; Total registers                    ; 293                                             ;
 ; Total pins                         ; 84                                              ;
 ; Total virtual pins                 ; 0                                               ;
 ; Total memory bits                  ; 0                                               ;
@@ -195,20 +194,20 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+----------------+
 ; Resource                                    ; Usage          ;
 +---------------------------------------------+----------------+
-; Estimated Total logic elements              ; 267            ;
+; Estimated Total logic elements              ; 474            ;
 ;                                             ;                ;
-; Total combinational functions               ; 257            ;
+; Total combinational functions               ; 417            ;
 ; Logic element usage by number of LUT inputs ;                ;
-;     -- 4 input functions                    ; 102            ;
-;     -- 3 input functions                    ; 59             ;
-;     -- <=2 input functions                  ; 96             ;
+;     -- 4 input functions                    ; 214            ;
+;     -- 3 input functions                    ; 79             ;
+;     -- <=2 input functions                  ; 124            ;
 ;                                             ;                ;
 ; Logic elements by mode                      ;                ;
-;     -- normal mode                          ; 190            ;
+;     -- normal mode                          ; 350            ;
 ;     -- arithmetic mode                      ; 67             ;
 ;                                             ;                ;
-; Total registers                             ; 160            ;
-;     -- Dedicated logic registers            ; 160            ;
+; Total registers                             ; 293            ;
+;     -- Dedicated logic registers            ; 293            ;
 ;     -- I/O registers                        ; 0              ;
 ;                                             ;                ;
 ; I/O pins                                    ; 84             ;
@@ -216,24 +215,61 @@ https://fpgasoftware.intel.com/eula.
 ; Embedded Multiplier 9-bit elements          ; 0              ;
 ;                                             ;                ;
 ; Maximum fan-out node                        ; CLOCK_50~input ;
-; Maximum fan-out                             ; 160            ;
-; Total fan-out                               ; 1465           ;
-; Average fan-out                             ; 2.36           ;
+; Maximum fan-out                             ; 293            ;
+; Total fan-out                               ; 2598           ;
+; Average fan-out                             ; 2.85           ;
 +---------------------------------------------+----------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                  ;
-+---------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------+----------------+--------------+
-; Compilation Hierarchy Node            ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                               ; Entity Name    ; Library Name ;
-+---------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------+----------------+--------------+
-; |wrapper                              ; 257 (6)             ; 160 (6)                   ; 0           ; 0            ; 0       ; 0         ; 84   ; 0            ; |wrapper                                                          ; wrapper        ; work         ;
-;    |calculator_top:DUT|               ; 251 (0)             ; 154 (0)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT                                       ; calculator_top ; work         ;
-;       |gencon:gencon_inst|            ; 144 (131)           ; 92 (84)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst                    ; gencon         ; work         ;
-;          |addition:add_calc|          ; 3 (3)               ; 4 (4)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc  ; addition       ; work         ;
-;          |multiply:mult_calc|         ; 10 (10)             ; 4 (4)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc ; multiply       ; work         ;
-;       |input_control:input_ctrl_inst| ; 107 (107)           ; 62 (62)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|input_control:input_ctrl_inst         ; input_control  ; work         ;
-+---------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------+----------------+--------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                               ;
++--------------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------+----------------+--------------+
+; Compilation Hierarchy Node                       ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                 ; Entity Name    ; Library Name ;
++--------------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------+----------------+--------------+
+; |wrapper                                         ; 417 (6)             ; 293 (6)                   ; 0           ; 0            ; 0       ; 0         ; 84   ; 0            ; |wrapper                                                                                                            ; wrapper        ; work         ;
+;    |calculator_top:DUT|                          ; 411 (0)             ; 287 (0)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT                                                                                         ; calculator_top ; work         ;
+;       |gencon:gencon_inst|                       ; 305 (142)           ; 225 (119)                 ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst                                                                      ; gencon         ; work         ;
+;          |addition:add_calc|                     ; 90 (52)             ; 53 (53)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc                                                    ; addition       ; work         ;
+;             |adder15:complement|                 ; 8 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement                                 ; adder15        ; work         ;
+;                |adder:GENERATE_ADDER[11].thingy| ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement|adder:GENERATE_ADDER[11].thingy ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[12].thingy| ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement|adder:GENERATE_ADDER[12].thingy ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[2].thingy|  ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement|adder:GENERATE_ADDER[2].thingy  ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[3].thingy|  ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement|adder:GENERATE_ADDER[3].thingy  ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[5].thingy|  ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement|adder:GENERATE_ADDER[5].thingy  ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[6].thingy|  ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement|adder:GENERATE_ADDER[6].thingy  ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[8].thingy|  ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement|adder:GENERATE_ADDER[8].thingy  ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[9].thingy|  ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement|adder:GENERATE_ADDER[9].thingy  ; adder          ; work         ;
+;             |adder15:main|                       ; 30 (0)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main                                       ; adder15        ; work         ;
+;                |adder:GENERATE_ADDER[10].thingy| ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[10].thingy       ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[11].thingy| ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[11].thingy       ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[12].thingy| ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[12].thingy       ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[13].thingy| ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[13].thingy       ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[14].thingy| ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[14].thingy       ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[1].thingy|  ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[1].thingy        ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[2].thingy|  ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[2].thingy        ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[3].thingy|  ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[3].thingy        ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[4].thingy|  ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[4].thingy        ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[5].thingy|  ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[5].thingy        ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[6].thingy|  ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[6].thingy        ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[7].thingy|  ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[7].thingy        ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[8].thingy|  ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[8].thingy        ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[9].thingy|  ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:GENERATE_ADDER[9].thingy        ; adder          ; work         ;
+;                |adder:a0|                        ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:a0                              ; adder          ; work         ;
+;          |multiply:mult_calc|                    ; 73 (46)             ; 53 (53)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc                                                   ; multiply       ; work         ;
+;             |adder15:compCount|                  ; 18 (0)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:compCount                                 ; adder15        ; work         ;
+;                |adder:GENERATE_ADDER[11].thingy| ; 4 (4)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:compCount|adder:GENERATE_ADDER[11].thingy ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[14].thingy| ; 4 (4)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:compCount|adder:GENERATE_ADDER[14].thingy ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[1].thingy|  ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:compCount|adder:GENERATE_ADDER[1].thingy  ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[5].thingy|  ; 5 (5)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:compCount|adder:GENERATE_ADDER[5].thingy  ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[8].thingy|  ; 4 (4)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:compCount|adder:GENERATE_ADDER[8].thingy  ; adder          ; work         ;
+;             |adder15:count|                      ; 9 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:count                                     ; adder15        ; work         ;
+;                |adder:GENERATE_ADDER[12].thingy| ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:count|adder:GENERATE_ADDER[12].thingy     ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[2].thingy|  ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:count|adder:GENERATE_ADDER[2].thingy      ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[3].thingy|  ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:count|adder:GENERATE_ADDER[3].thingy      ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[6].thingy|  ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:count|adder:GENERATE_ADDER[6].thingy      ; adder          ; work         ;
+;                |adder:GENERATE_ADDER[9].thingy|  ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|adder15:count|adder:GENERATE_ADDER[9].thingy      ; adder          ; work         ;
+;       |input_control:input_ctrl_inst|            ; 106 (106)           ; 62 (62)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |wrapper|calculator_top:DUT|input_control:input_ctrl_inst                                                           ; input_control  ; work         ;
++--------------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------+----------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
@@ -297,57 +333,26 @@ Encoding Type:  One-Hot
 +--------------------+---------------+-------------------+----------------+------------+--------------------+
 
 
-+-------------------------------------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                                                          ;
-+--------------------------------------------------------------------+----------------------------------------+
-; Register name                                                      ; Reason for Removal                     ;
-+--------------------------------------------------------------------+----------------------------------------+
-; calculator_top:DUT|gencon:gencon_inst|ALU_in2[14]                  ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|ALU_in1[14]                  ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|current_state~4              ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|current_state~5              ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|current_state~6              ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|current_state~7              ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|state~4   ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|state~5   ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|state~7   ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|addition:add_calc|state~4    ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|addition:add_calc|state~5    ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|addition:add_calc|state~6    ; Lost fanout                            ;
-; calculator_top:DUT|input_control:input_ctrl_inst|state~4           ; Lost fanout                            ;
-; calculator_top:DUT|input_control:input_ctrl_inst|state~5           ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|state.ADD ; Stuck at GND due to stuck port data_in ;
-; calculator_top:DUT|gencon:gencon_inst|ALU_in1[13]                  ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|ALU_in2[13]                  ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|ALU_in1[12]                  ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|ALU_in2[12]                  ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|ALU_in1[11]                  ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|ALU_in2[11]                  ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|ALU_in1[10]                  ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|ALU_in2[10]                  ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|ALU_in1[9]                   ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|ALU_in2[9]                   ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|ALU_in1[8]                   ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|ALU_in2[8]                   ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|ALU_in1[7]                   ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|ALU_in2[7]                   ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|ALU_in1[6]                   ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|ALU_in2[6]                   ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|ALU_in1[5]                   ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|ALU_in2[5]                   ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|ALU_in1[4]                   ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|ALU_in2[4]                   ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|ALU_in1[3]                   ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|ALU_in2[3]                   ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|ALU_in1[2]                   ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|ALU_in2[2]                   ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|ALU_in1[1]                   ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|ALU_in2[0,1]                 ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|ALU_in1[0,15]                ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|ALU_in2[15]                  ; Lost fanout                            ;
-; calculator_top:DUT|gencon:gencon_inst|addOrSub                     ; Lost fanout                            ;
-; Total Number of Removed Registers = 46                             ;                                        ;
-+--------------------------------------------------------------------+----------------------------------------+
++--------------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                           ;
++---------------------------------------------------------------------+----------------------------------------+
+; Register name                                                       ; Reason for Removal                     ;
++---------------------------------------------------------------------+----------------------------------------+
+; calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|out[0..14] ; Stuck at GND due to stuck port data_in ;
+; calculator_top:DUT|gencon:gencon_inst|current_state~4               ; Lost fanout                            ;
+; calculator_top:DUT|gencon:gencon_inst|current_state~5               ; Lost fanout                            ;
+; calculator_top:DUT|gencon:gencon_inst|current_state~6               ; Lost fanout                            ;
+; calculator_top:DUT|gencon:gencon_inst|current_state~7               ; Lost fanout                            ;
+; calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|state~4    ; Lost fanout                            ;
+; calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|state~5    ; Lost fanout                            ;
+; calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|state~7    ; Lost fanout                            ;
+; calculator_top:DUT|gencon:gencon_inst|addition:add_calc|state~4     ; Lost fanout                            ;
+; calculator_top:DUT|gencon:gencon_inst|addition:add_calc|state~5     ; Lost fanout                            ;
+; calculator_top:DUT|gencon:gencon_inst|addition:add_calc|state~6     ; Lost fanout                            ;
+; calculator_top:DUT|input_control:input_ctrl_inst|state~4            ; Lost fanout                            ;
+; calculator_top:DUT|input_control:input_ctrl_inst|state~5            ; Lost fanout                            ;
+; Total Number of Removed Registers = 27                              ;                                        ;
++---------------------------------------------------------------------+----------------------------------------+
 
 
 +------------------------------------------------------+
@@ -355,12 +360,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 160   ;
-; Number of registers using Synchronous Clear  ; 0     ;
-; Number of registers using Synchronous Load   ; 0     ;
-; Number of registers using Asynchronous Clear ; 127   ;
+; Total registers                              ; 293   ;
+; Number of registers using Synchronous Clear  ; 15    ;
+; Number of registers using Synchronous Load   ; 15    ;
+; Number of registers using Asynchronous Clear ; 259   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 102   ;
+; Number of registers using Clock Enable       ; 228   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -370,8 +375,8 @@ Encoding Type:  One-Hot
 +-----------------------------------------------------------------+---------+
 ; Inverted Register                                               ; Fan out ;
 +-----------------------------------------------------------------+---------+
-; calculator_top:DUT|input_control:input_ctrl_inst|decoded_key[1] ; 9       ;
 ; calculator_top:DUT|input_control:input_ctrl_inst|decoded_key[2] ; 8       ;
+; calculator_top:DUT|input_control:input_ctrl_inst|decoded_key[1] ; 9       ;
 ; calculator_top:DUT|input_control:input_ctrl_inst|decoded_key[3] ; 8       ;
 ; Total number of inverted registers = 3                          ;         ;
 +-----------------------------------------------------------------+---------+
@@ -382,14 +387,13 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                 ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------+
-; 3:1                ; 4 bits    ; 8 LEs         ; 0 LEs                ; 8 LEs                  ; Yes        ; |wrapper|calculator_top:DUT|gencon:gencon_inst|latched_keypad_input[1]     ;
-; 3:1                ; 19 bits   ; 38 LEs        ; 19 LEs               ; 19 LEs                 ; Yes        ; |wrapper|calculator_top:DUT|input_control:input_ctrl_inst|debounce_cnt[0]  ;
-; 5:1                ; 15 bits   ; 45 LEs        ; 30 LEs               ; 15 LEs                 ; Yes        ; |wrapper|calculator_top:DUT|gencon:gencon_inst|display_output[3]           ;
-; 5:1                ; 15 bits   ; 45 LEs        ; 15 LEs               ; 30 LEs                 ; Yes        ; |wrapper|calculator_top:DUT|gencon:gencon_inst|operand2[3]                 ;
-; 6:1                ; 15 bits   ; 60 LEs        ; 30 LEs               ; 30 LEs                 ; Yes        ; |wrapper|calculator_top:DUT|gencon:gencon_inst|operand1[0]                 ;
-; 5:1                ; 15 bits   ; 45 LEs        ; 15 LEs               ; 30 LEs                 ; Yes        ; |wrapper|calculator_top:DUT|gencon:gencon_inst|mult_in2[12]                ;
-; 3:1                ; 30 bits   ; 60 LEs        ; 60 LEs               ; 0 LEs                  ; No         ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|n1[10]    ;
-; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; No         ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|Selector3 ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 0 LEs                ; 8 LEs                  ; Yes        ; |wrapper|calculator_top:DUT|gencon:gencon_inst|latched_keypad_input[3]     ;
+; 3:1                ; 19 bits   ; 38 LEs        ; 19 LEs               ; 19 LEs                 ; Yes        ; |wrapper|calculator_top:DUT|input_control:input_ctrl_inst|debounce_cnt[12] ;
+; 5:1                ; 15 bits   ; 45 LEs        ; 30 LEs               ; 15 LEs                 ; Yes        ; |wrapper|calculator_top:DUT|gencon:gencon_inst|display_output[14]          ;
+; 5:1                ; 15 bits   ; 45 LEs        ; 15 LEs               ; 30 LEs                 ; Yes        ; |wrapper|calculator_top:DUT|gencon:gencon_inst|operand2[13]                ;
+; 6:1                ; 15 bits   ; 60 LEs        ; 30 LEs               ; 30 LEs                 ; Yes        ; |wrapper|calculator_top:DUT|gencon:gencon_inst|operand1[6]                 ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |wrapper|calculator_top:DUT|gencon:gencon_inst|mult_in2[5]                 ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; No         ; |wrapper|calculator_top:DUT|gencon:gencon_inst|addition:add_calc|Selector2 ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------+
 
 
@@ -409,7 +413,6 @@ Encoding Type:  One-Hot
 ; Port       ; Type   ; Severity ; Details                                                           ;
 +------------+--------+----------+-------------------------------------------------------------------+
 ; cOut       ; Output ; Info     ; Explicitly unconnected                                            ;
-; in1        ; Input  ; Info     ; Stuck at GND                                                      ;
 ; in2[14..1] ; Input  ; Info     ; Stuck at GND                                                      ;
 ; in2[0]     ; Input  ; Info     ; Stuck at VCC                                                      ;
 ; sub        ; Input  ; Info     ; Stuck at GND                                                      ;
@@ -423,30 +426,19 @@ Encoding Type:  One-Hot
 +------+--------+----------+-------------------------------------------------------------------------------------+
 ; sum  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
 ; cOut ; Output ; Info     ; Explicitly unconnected                                                              ;
-; in2  ; Input  ; Info     ; Stuck at GND                                                                        ;
 ; sub  ; Input  ; Info     ; Stuck at GND                                                                        ;
 +------+--------+----------+-------------------------------------------------------------------------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement"         ;
-+------+--------+----------+-------------------------------------------------------------------------------------+
-; Port ; Type   ; Severity ; Details                                                                             ;
-+------+--------+----------+-------------------------------------------------------------------------------------+
-; sum  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; cOut ; Output ; Info     ; Explicitly unconnected                                                              ;
-; in1  ; Input  ; Info     ; Stuck at GND                                                                        ;
-; sub  ; Input  ; Info     ; Stuck at VCC                                                                        ;
-+------+--------+----------+-------------------------------------------------------------------------------------+
-
-
-+----------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main"               ;
-+------+--------+----------+-------------------------------------------------------------------------------------+
-; Port ; Type   ; Severity ; Details                                                                             ;
-+------+--------+----------+-------------------------------------------------------------------------------------+
-; cOut ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+------+--------+----------+-------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:complement" ;
++------+--------+----------+-----------------------------------------------------------------------------+
+; Port ; Type   ; Severity ; Details                                                                     ;
++------+--------+----------+-----------------------------------------------------------------------------+
+; cOut ; Output ; Info     ; Explicitly unconnected                                                      ;
+; in1  ; Input  ; Info     ; Stuck at GND                                                                ;
+; sub  ; Input  ; Info     ; Stuck at VCC                                                                ;
++------+--------+----------+-----------------------------------------------------------------------------+
 
 
 +-----------------------------------------------------+
@@ -455,25 +447,26 @@ Encoding Type:  One-Hot
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
 ; boundary_port         ; 84                          ;
-; cycloneiii_ff         ; 160                         ;
-;     CLR               ; 53                          ;
+; cycloneiii_ff         ; 293                         ;
+;     CLR               ; 59                          ;
 ;     ENA               ; 28                          ;
-;     ENA CLR           ; 74                          ;
-;     plain             ; 5                           ;
+;     ENA CLR           ; 185                         ;
+;     ENA CLR SCLR SLD  ; 15                          ;
+;     plain             ; 6                           ;
 ; cycloneiii_io_obuf    ; 35                          ;
-; cycloneiii_lcell_comb ; 258                         ;
+; cycloneiii_lcell_comb ; 418                         ;
 ;     arith             ; 67                          ;
 ;         2 data inputs ; 59                          ;
 ;         3 data inputs ; 8                           ;
-;     normal            ; 191                         ;
+;     normal            ; 351                         ;
 ;         0 data inputs ; 1                           ;
 ;         1 data inputs ; 4                           ;
-;         2 data inputs ; 33                          ;
-;         3 data inputs ; 51                          ;
-;         4 data inputs ; 102                         ;
+;         2 data inputs ; 61                          ;
+;         3 data inputs ; 71                          ;
+;         4 data inputs ; 214                         ;
 ;                       ;                             ;
-; Max LUT depth         ; 5.00                        ;
-; Average LUT depth     ; 2.52                        ;
+; Max LUT depth         ; 16.00                       ;
+; Average LUT depth     ; 3.95                        ;
 +-----------------------+-----------------------------+
 
 
@@ -492,7 +485,7 @@ Encoding Type:  One-Hot
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 21.1.1 Build 850 06/23/2022 SJ Standard Edition
-    Info: Processing started: Mon May  5 17:48:13 2025
+    Info: Processing started: Mon May  5 18:14:34 2025
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off CALCTEST4 -c wrapper
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 6 of the 6 processors detected
@@ -524,11 +517,28 @@ Info (12128): Elaborating entity "gencon" for hierarchy "calculator_top:DUT|genc
 Warning (10036): Verilog HDL or VHDL warning at gencon.sv(35): object "getting_op1" assigned a value but never read File: /home/shay/a/du347/CALC-Intro-2 (another copy)/source/gencon.sv Line: 35
 Warning (10036): Verilog HDL or VHDL warning at gencon.sv(35): object "getting_op2" assigned a value but never read File: /home/shay/a/du347/CALC-Intro-2 (another copy)/source/gencon.sv Line: 35
 Info (12128): Elaborating entity "addition" for hierarchy "calculator_top:DUT|gencon:gencon_inst|addition:add_calc" File: /home/shay/a/du347/CALC-Intro-2 (another copy)/source/gencon.sv Line: 51
-Info (10264): Verilog HDL Case Statement information at addition.sv(129): all case item expressions in this case statement are onehot File: /home/shay/a/du347/CALC-Intro-2 (another copy)/source/addition.sv Line: 129
-Info (12128): Elaborating entity "adder15" for hierarchy "calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main" File: /home/shay/a/du347/CALC-Intro-2 (another copy)/source/addition.sv Line: 117
+Info (10264): Verilog HDL Case Statement information at addition.sv(143): all case item expressions in this case statement are onehot File: /home/shay/a/du347/CALC-Intro-2 (another copy)/source/addition.sv Line: 143
+Info (12128): Elaborating entity "adder15" for hierarchy "calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main" File: /home/shay/a/du347/CALC-Intro-2 (another copy)/source/addition.sv Line: 131
 Info (12128): Elaborating entity "adder" for hierarchy "calculator_top:DUT|gencon:gencon_inst|addition:add_calc|adder15:main|adder:a0" File: /home/shay/a/du347/CALC-Intro-2 (another copy)/source/addition.sv Line: 33
 Info (12128): Elaborating entity "multiply" for hierarchy "calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc" File: /home/shay/a/du347/CALC-Intro-2 (another copy)/source/gencon.sv Line: 58
-Info (10264): Verilog HDL Case Statement information at multiply.sv(113): all case item expressions in this case statement are onehot File: /home/shay/a/du347/CALC-Intro-2 (another copy)/source/multiply.sv Line: 113
+Warning (10036): Verilog HDL or VHDL warning at multiply.sv(38): object "next_adderSave" assigned a value but never read File: /home/shay/a/du347/CALC-Intro-2 (another copy)/source/multiply.sv Line: 38
+Warning (10240): Verilog HDL Always Construct warning at multiply.sv(49): inferring latch(es) for variable "adderSave", which holds its previous value in one or more paths through the always construct File: /home/shay/a/du347/CALC-Intro-2 (another copy)/source/multiply.sv Line: 49
+Info (10264): Verilog HDL Case Statement information at multiply.sv(132): all case item expressions in this case statement are onehot File: /home/shay/a/du347/CALC-Intro-2 (another copy)/source/multiply.sv Line: 132
+Info (10041): Inferred latch for "adderSave[0]" at multiply.sv(49) File: /home/shay/a/du347/CALC-Intro-2 (another copy)/source/multiply.sv Line: 49
+Info (10041): Inferred latch for "adderSave[1]" at multiply.sv(49) File: /home/shay/a/du347/CALC-Intro-2 (another copy)/source/multiply.sv Line: 49
+Info (10041): Inferred latch for "adderSave[2]" at multiply.sv(49) File: /home/shay/a/du347/CALC-Intro-2 (another copy)/source/multiply.sv Line: 49
+Info (10041): Inferred latch for "adderSave[3]" at multiply.sv(49) File: /home/shay/a/du347/CALC-Intro-2 (another copy)/source/multiply.sv Line: 49
+Info (10041): Inferred latch for "adderSave[4]" at multiply.sv(49) File: /home/shay/a/du347/CALC-Intro-2 (another copy)/source/multiply.sv Line: 49
+Info (10041): Inferred latch for "adderSave[5]" at multiply.sv(49) File: /home/shay/a/du347/CALC-Intro-2 (another copy)/source/multiply.sv Line: 49
+Info (10041): Inferred latch for "adderSave[6]" at multiply.sv(49) File: /home/shay/a/du347/CALC-Intro-2 (another copy)/source/multiply.sv Line: 49
+Info (10041): Inferred latch for "adderSave[7]" at multiply.sv(49) File: /home/shay/a/du347/CALC-Intro-2 (another copy)/source/multiply.sv Line: 49
+Info (10041): Inferred latch for "adderSave[8]" at multiply.sv(49) File: /home/shay/a/du347/CALC-Intro-2 (another copy)/source/multiply.sv Line: 49
+Info (10041): Inferred latch for "adderSave[9]" at multiply.sv(49) File: /home/shay/a/du347/CALC-Intro-2 (another copy)/source/multiply.sv Line: 49
+Info (10041): Inferred latch for "adderSave[10]" at multiply.sv(49) File: /home/shay/a/du347/CALC-Intro-2 (another copy)/source/multiply.sv Line: 49
+Info (10041): Inferred latch for "adderSave[11]" at multiply.sv(49) File: /home/shay/a/du347/CALC-Intro-2 (another copy)/source/multiply.sv Line: 49
+Info (10041): Inferred latch for "adderSave[12]" at multiply.sv(49) File: /home/shay/a/du347/CALC-Intro-2 (another copy)/source/multiply.sv Line: 49
+Info (10041): Inferred latch for "adderSave[13]" at multiply.sv(49) File: /home/shay/a/du347/CALC-Intro-2 (another copy)/source/multiply.sv Line: 49
+Info (10041): Inferred latch for "adderSave[14]" at multiply.sv(49) File: /home/shay/a/du347/CALC-Intro-2 (another copy)/source/multiply.sv Line: 49
 Warning (13034): The following nodes have both tri-state and non-tri-state drivers
     Warning (13035): Inserted always-enabled tri-state buffer between "GPIO[11]" and its non-tri-state driver. File: /home/shay/a/du347/CALC-Intro-2 (another copy)/source/wrapper.sv Line: 6
     Warning (13035): Inserted always-enabled tri-state buffer between "GPIO[13]" and its non-tri-state driver. File: /home/shay/a/du347/CALC-Intro-2 (another copy)/source/wrapper.sv Line: 6
@@ -580,7 +590,7 @@ Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "LEDG[2]" is stuck at GND File: /home/shay/a/du347/CALC-Intro-2 (another copy)/source/wrapper.sv Line: 9
     Warning (13410): Pin "LEDG[3]" is stuck at GND File: /home/shay/a/du347/CALC-Intro-2 (another copy)/source/wrapper.sv Line: 9
 Info (286030): Timing-Driven Synthesis is running
-Info (17049): 45 registers lost all their fanouts during netlist optimizations.
+Info (17049): 12 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
 Warning (21074): Design contains 21 input pin(s) that do not drive logic
@@ -605,15 +615,15 @@ Warning (21074): Design contains 21 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "SW[15]" File: /home/shay/a/du347/CALC-Intro-2 (another copy)/source/wrapper.sv Line: 5
     Warning (15610): No output dependent on input pin "SW[16]" File: /home/shay/a/du347/CALC-Intro-2 (another copy)/source/wrapper.sv Line: 5
     Warning (15610): No output dependent on input pin "SW[17]" File: /home/shay/a/du347/CALC-Intro-2 (another copy)/source/wrapper.sv Line: 5
-Info (21057): Implemented 354 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 565 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 23 input pins
     Info (21059): Implemented 26 output pins
     Info (21060): Implemented 35 bidirectional pins
-    Info (21061): Implemented 270 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 79 warnings
-    Info: Peak virtual memory: 438 megabytes
-    Info: Processing ended: Mon May  5 17:48:20 2025
-    Info: Elapsed time: 00:00:07
-    Info: Total CPU time (on all processors): 00:00:13
+    Info (21061): Implemented 481 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 81 warnings
+    Info: Peak virtual memory: 446 megabytes
+    Info: Processing ended: Mon May  5 18:14:42 2025
+    Info: Elapsed time: 00:00:08
+    Info: Total CPU time (on all processors): 00:00:14
 
 

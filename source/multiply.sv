@@ -25,21 +25,23 @@ module multiply
     } state_t;
 
     state_t state, next;
+	 logic next_finish;
+	 logic [15:0] next_out;
 
-    logic [14 : 0] n1;
-    logic [14 : 0] n2;
+    logic [14 : 0] n1, next_n1;
+    logic [14 : 0] n2, next_n2;
 
-    logic diffSign;	
+    logic diffSign, next_diffSign;	
 
     //main adder
     wire [14 : 0] adderOut;
-    logic [14 : 0] adderSave;
-    logic [14 : 0] adderIn;
+    logic [14 : 0] adderSave, next_adderSave;
+    logic [14 : 0] adderIn, next_adderIn;
     
     //counter
     wire [14 : 0] countOut;
-    logic [14 : 0] countSave;
-    logic [14 : 0] countIn;
+    logic [14 : 0] countSave, next_countSave;
+    logic [14 : 0] countIn, next_countIn;
 
     //complement counter
     wire stopCount;
@@ -47,8 +49,25 @@ module multiply
     always_ff @(posedge clk, negedge nRST) begin
         if(!nRST) begin
             state <= IDLE;
+				finish <= 1'b0;
+				diffSign <= 0;
+				n1 <= 0;
+				n2 <= 0;
+				countSave <= 0;
+				countIn <= 0;
+				adderSave <= 0;
+				adderIn <= 0;
+				out <= 0;
         end else begin
             state <= next;
+				finish <= next_finish;
+				diffSign <= next_diffSign;
+				n1 <= next_n1;
+				n2 <= next_n2;
+				countSave <= next_countSave;
+				countIn <= next_countIn;
+				adderIn <= next_adderIn;
+				out <= next_out;
         end
     end
 
@@ -100,55 +119,55 @@ module multiply
 	
     always_comb begin
         
-	finish = 1'b0;
-	diffSign = 0;
-	n1 = 0;
-	n2 = 0;
-	countSave = 0;
-	countIn = 0;
-	adderSave = 0;
-	adderIn = 0;
-	out = 0;
+	next_finish = finish;
+	next_diffSign = diffSign;
+	next_n1 = n1;
+	next_n2 = n2;
+	next_countSave = countSave;
+	next_countIn = countIn;
+	next_adderSave = adderSave;
+	next_adderIn = adderIn;
+	next_out = out;
 
         casez(state)
             
             SET: begin
                 	if(INn1[15] ^ INn2[15]) begin
-                    	diffSign = 1;
+                    	next_diffSign = 1;
                 	end else begin
-                    	diffSign = 0;
+                    	next_diffSign = 0;
                 	end
 
-                	n2 [14 : 0] = INn2 [14 : 0];
-                	n1 [14 : 0] = INn1 [14 : 0];
+                	next_n2 [14 : 0] = INn2 [14 : 0];
+                	next_n1 [14 : 0] = INn1 [14 : 0];
 
-                	countSave = 15'b0;
-                	countIn = 15'b0;
+                	next_countSave = 15'b0;
+                	next_countIn = 15'b0;
 
-                	adderSave = 15'b0;
-                	adderIn = 15'b0;
+                	next_adderSave = 15'b0;
+                	next_adderIn = 15'b0;
 				end
 
             CHECKADD: begin
 					//$display("cOut: %d, adderOut: %d", countOut, adderOut);
 					
-                	countSave = countOut; 
-                	adderSave = adderOut;
+                	next_countSave = countOut; 
+                	next_adderSave = adderOut;
 				end
 
             ADD: begin
-                	countIn = countSave;
-                	adderIn = adderSave;
+                	next_countIn = countSave;
+                	next_adderIn = adderSave;
 				end
 
             FIN: begin
-               		out [14 : 0] =  adderSave [14 : 0];
-                	out [15] = diffSign;
-                	finish = 1'b1;
+               		next_out [14 : 0] =  adderSave [14 : 0];
+                	next_out [15] = diffSign;
+                	next_finish = 1'b1;
 				end
 
 			default:
-				finish = 1'b0;
+				next_finish = 1'b0;
 
         endcase
     end
