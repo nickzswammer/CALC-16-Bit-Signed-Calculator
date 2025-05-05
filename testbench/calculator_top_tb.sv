@@ -46,7 +46,7 @@ module calculator_top_tb();
     
     // Let gencon acknowledge
     wait (dut.gencon_inst.key_read == 1);
-    //@(posedge clk);
+    @(posedge clk);
 
     // Release the key
     RowIn = 4'b1111;
