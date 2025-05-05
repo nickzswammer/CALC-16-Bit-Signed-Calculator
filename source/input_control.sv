@@ -16,6 +16,7 @@ module input_control (
 );
 
 	localparam DEBOUNCE_SIZE = 500000;
+	localparam SCAN_DURATION = 50000;
 		
     typedef enum logic [2:0] {
         IDLE, SCAN_COL, WAIT_STABLE, CONFIRM, WAIT_RELEASE
@@ -24,9 +25,6 @@ module input_control (
     state_t state, next_state;
 
     logic [1:0] col_index;
-	/// logic [18:0] debounce_cnt; for final
-	//logic [18:0] debounce_cnt;
-
     logic [18:0] debounce_cnt;
     logic [3:0] key_code;
     logic key_valid;
@@ -71,7 +69,7 @@ module input_control (
 	    operator_input <= next_operator_input;
 		
 	    if (state == SCAN_COL && next_state == SCAN_COL) begin
-		    if(scan_timer == 99_999) begin
+		    if(scan_timer == SCAN_DURATION) begin
 			scan_timer <= 0;
 	        	col_index <= (col_index == 3) ? 0 : col_index + 1;
 		    end
