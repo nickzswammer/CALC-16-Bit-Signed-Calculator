@@ -122,8 +122,6 @@ module gencon (
     // Output + operand logic
     always_ff @(posedge clk or negedge nRST) begin
         if (!nRST) begin
-            start_ALU <= 0;
-            start_mult <= 0;
             key_read <= 0;
             display_output <= 0;
             complete <= 0;
@@ -134,10 +132,6 @@ module gencon (
             getting_op2 <= 0;
             latched_operator_input <= 0;
             latched_keypad_input <= 0;
-            mult_in1 <= 0;
-            mult_in2 <= 0;
-            ALU_in1 <= 0;
-            ALU_in2 <= 0;
             
         end else begin
             start_ALU <= 0;
