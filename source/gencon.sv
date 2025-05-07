@@ -72,7 +72,6 @@ module gencon (
                     operator_to_latch = operator_input;
                     next_state = WAIT_OP2;
                 end
-               //amogh messed something up here, need to keep checking if it works
                 else begin
                     next_state = (read_input) ? WAIT_MULT_OP1 : WAIT_OP1;
                 end
