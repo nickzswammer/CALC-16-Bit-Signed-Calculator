@@ -1,15 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.111 (w)1999-2020 BSI
-[*] Sat May  3 01:51:50 2025
+[*] Tue May  6 00:30:29 2025
 [*]
 [dumpfile] "/home/asicfab/a/nzhang21/CALC-Intro-2/calculator_top.vcd"
-[dumpfile_mtime] "Sat May  3 01:51:29 2025"
-[dumpfile_size] 41338
+[dumpfile_mtime] "Tue May  6 00:09:32 2025"
+[dumpfile_size] 200350
 [savefile] "/home/asicfab/a/nzhang21/CALC-Intro-2/calculator_top.gtkw"
-[timestart] 0
+[timestart] 2243
 [size] 1440 704
 [pos] -1 -1
-*-6.000000 199 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-9.876369 3619 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] TOP.
 [treeopen] TOP.calculator_top_tb.
 [treeopen] TOP.calculator_top_tb.dut.
@@ -22,7 +22,6 @@
 TOP.calculator_top_tb.dut.clk
 @24
 TOP.calculator_top_tb.dut.input_ctrl_inst.decoded_key[3:0]
-TOP.calculator_top_tb.dut.input_ctrl_inst.debounce_cnt[3:0]
 @28
 TOP.calculator_top_tb.dut.nRST
 TOP.calculator_top_tb.dut.ColOut[3:0]
@@ -31,14 +30,13 @@ TOP.calculator_top_tb.dut.input_ctrl_inst.col_index[1:0]
 @24
 TOP.calculator_top_tb.dut.input_ctrl_inst.state[2:0]
 @28
-TOP.calculator_top_tb.dut.input_ctrl_inst.key_valid
 TOP.calculator_top_tb.dut.complete
 @24
 TOP.calculator_top_tb.dut.display_output[15:0]
 @28
 TOP.calculator_top_tb.dut.equal_input
 TOP.calculator_top_tb.dut.key_read
-@22
+@23
 TOP.calculator_top_tb.dut.keypad_input[3:0]
 @28
 TOP.calculator_top_tb.dut.read_input
@@ -46,8 +44,9 @@ TOP.calculator_top_tb.dut.input_ctrl_inst.operator_input[2:0]
 TOP.calculator_top_tb.dut.input_ctrl_inst.next_operator_input[2:0]
 @22
 TOP.calculator_top_tb.dut.gencon_inst.current_state[3:0]
-@23
+@24
 TOP.calculator_top_tb.dut.gencon_inst.operand1[15:0]
+@22
 TOP.calculator_top_tb.dut.gencon_inst.operand2[15:0]
 [pattern_trace] 1
 [pattern_trace] 0

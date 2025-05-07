@@ -14,7 +14,9 @@ module calculator_top_tb();
     .RowIn(RowIn),
     .ColOut(ColOut),
     .display_output(display_output),
-    .complete(complete)
+	.input_state(),
+    .complete(complete),
+	.key_pressed()
   );
 
   // Clock generation
@@ -50,7 +52,8 @@ module calculator_top_tb();
 
     // Release the key
     RowIn = 4'b1111;
-    @(posedge clk);
+
+    wait(dut.input_ctrl_inst.state == 0);
     @(posedge clk);
     
   endtask
@@ -167,6 +170,12 @@ module calculator_top_tb();
     #20;
     
     $finish;
+  end
+
+  initial begin
+	repeat (10000) @(posedge clk);
+	$display("TIMEOUT!!");
+	$finish;
   end
 
 endmodule
