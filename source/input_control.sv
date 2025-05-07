@@ -13,7 +13,7 @@ module input_control (
     output logic [3:0] keypad_input,     // 0–9 digits only
     output logic [2:0] operator_input,   // 3-bit operator code
 	output logic key_pressed,
-	output logic [2:0] input_state,
+	output logic [2:0] input_state_FPGA,
     output logic equal_input             // 1-bit equal flag (*)
 );
 
@@ -31,7 +31,7 @@ module input_control (
 		WAIT_RELEASE_STABLE
     } state_t;
 
-    state_t state, next_state;
+    state_t input_control_state, next_state;
 
 	logic [1:0] col_index;           // current column being scanned, gets incremented every 1 ms (50,000 clock cycles)
 	logic [18:0] debounce_cnt;       // how many clock cycles have elapsed, only reads when key_pressed asserted for 500,000 clock cycles
@@ -66,19 +66,19 @@ module input_control (
     // Sequential logic with active-low reset
     always_ff @(posedge clk or negedge nRST) begin
         if (!nRST) begin
-            state <= IDLE;
+            input_control_state <= IDLE;
             col_index <= 0;
             debounce_cnt <= 0;
             read_input <= 0;
 	    	decoded_key <= 4'd14;
-			input_state <= 0;
+			input_state_FPGA <= 0;
 
         end else begin
-            state <= next_state;
-			input_state <= state;
+            input_control_state <= next_state;
+			input_state_FPGA <= input_control_state;
 	    	operator_input <= next_operator_input;
 		
-			if (state == SCAN_COL && next_state == SCAN_COL) begin
+			if (input_control_state == SCAN_COL && next_state == SCAN_COL) begin
 				if(scan_timer == SCAN_DURATION) begin
 					scan_timer <= 0;
 					col_index <= (col_index == 3) ? 0 : col_index + 1;
@@ -87,14 +87,14 @@ module input_control (
 					scan_timer <= scan_timer + 1;
 			end
 
-			if (state == WAIT_STABLE) begin
+			if (input_control_state == WAIT_STABLE) begin
 				if (key_pressed && debounce_cnt < DEBOUNCE_SIZE)
 						debounce_cnt <= debounce_cnt + 1;
 				else if (debounce_cnt >= DEBOUNCE_SIZE)
 						debounce_cnt <= 0;
 			end
 
-			if (state == CONFIRM) begin
+			if (input_control_state == CONFIRM) begin
 				/* key_code kinda useless here
 				key_code = encode_key(RowIn, col_index);
 				decoded_key <= key_code;
@@ -114,12 +114,12 @@ module input_control (
 				end
 			end
 
-			if (state == WAIT_RELEASE && !key_pressed) begin
+			if (input_control_state == WAIT_RELEASE && !key_pressed) begin
 				keypad_input <= 0;
 				read_input <= 0;
 			end
 				
-			if (state == WAIT_RELEASE_STABLE) begin
+			if (input_control_state == WAIT_RELEASE_STABLE) begin
 				if (!key_pressed && debounce_cnt < DEBOUNCE_SIZE)
 					debounce_cnt <= debounce_cnt + 1;
 				else if (debounce_cnt >= DEBOUNCE_SIZE)
@@ -130,9 +130,9 @@ module input_control (
 
     // Combinational next state logic
     always_comb begin
-        next_state = state; //         IDLE, SCAN_COL, WAIT_STABLE, CONFIRM, WAIT_RELEASE
+        next_state = input_control_state; //         IDLE, SCAN_COL, WAIT_STABLE, CONFIRM, WAIT_RELEASE
 
-        case (state)
+        case (input_control_state)
             IDLE:        next_state = SCAN_COL;
             SCAN_COL:    next_state = key_pressed ? WAIT_STABLE : SCAN_COL;
 			WAIT_STABLE: next_state = (debounce_cnt >= DEBOUNCE_SIZE) ? CONFIRM : WAIT_STABLE;

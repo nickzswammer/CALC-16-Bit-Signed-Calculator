@@ -38,7 +38,7 @@ module gencon (
     logic latch_operator;
     logic [2:0] operator_to_latch;
 
-    state_t current_state, next_state;
+    state_t gencon_state, next_state;
 
     // operands to send to ALU/ Multiplier
     logic [15:0] operand1, operand2;
@@ -61,11 +61,11 @@ module gencon (
 
     // FSM logic
     always_comb begin
-        next_state = current_state;
+        next_state = gencon_state;
         latch_operator = 0;
         operator_to_latch = latched_operator_input;
         
-        case (current_state)
+        case (gencon_state)
             WAIT_OP1: begin
                 if (operator_input != 3'b000 && operator_input != 3'b001) begin
                     latch_operator = 1;
@@ -123,7 +123,7 @@ module gencon (
             key_read <= 0;
             display_output <= 0;
             complete <= 0;
-            current_state <= WAIT_OP1;
+            gencon_state <= WAIT_OP1;
             operand1 <= 0;
             operand2 <= 0;
             getting_op1 <= 0;
@@ -139,13 +139,13 @@ module gencon (
             start_ALU <= 0;
             start_mult <= 0;
             
-            current_state <= next_state;
+            gencon_state <= next_state;
             if (latch_operator) begin
                 latched_operator_input <= operator_to_latch;
                 key_read <= 0;
             end
 
-            case (current_state)
+            case (gencon_state)
                 WAIT_OP1: begin
                     display_output <= operand1;
                     complete <= 0;

@@ -14,9 +14,9 @@ module calculator_top_tb();
     .RowIn(RowIn),
     .ColOut(ColOut),
     .display_output(display_output),
-	.input_state(),
+	  .input_state_FPGA(),
     .complete(complete),
-	.key_pressed()
+	  .key_pressed()
   );
 
   // Clock generation
@@ -44,7 +44,7 @@ module calculator_top_tb();
     // Pull the correct row low (active low press)
     RowIn = ~(4'b0001 << row);
 
-    wait(dut.input_ctrl_inst.state == 3);
+    wait(dut.input_ctrl_inst.input_control_state == 3);
     
     // Let gencon acknowledge
     wait (dut.gencon_inst.key_read == 1);
@@ -53,7 +53,7 @@ module calculator_top_tb();
     // Release the key
     RowIn = 4'b1111;
 
-    wait(dut.input_ctrl_inst.state == 0);
+    wait(dut.input_ctrl_inst.input_control_state == 0);
     @(posedge clk);
     
   endtask
