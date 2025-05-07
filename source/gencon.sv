@@ -38,6 +38,10 @@ module gencon (
     logic latch_operator;
     logic [2:0] operator_to_latch;
 
+    // flag to assert key_read for one clock cycle
+    logic prev_read_input;
+    logic [2:0] prev_operator_input;
+
     state_t gencon_state, next_state;
 
     // operands to send to ALU/ Multiplier
@@ -150,25 +154,25 @@ module gencon (
                     display_output <= operand1;
                     complete <= 0;
                     
-                    if (operator_input != 0 || read_input)
-                        key_read <= 1;
-                    else
-                        key_read <= 0;
-                    
-                    if (operator_input == 1) begin
-                        if (key_read == 1)
-                            operand1[15] <= 1'b1;
+                    key_read <= (read_input && !prev_read_input) || 
+                                ((operator_input != 0) && (prev_operator_input == 3'b000));
+
+                    prev_read_input <= read_input;
+
+                    if (operator_input == 1 && key_read) begin
+                        operand1[15] <= 1'b1;
                     end
                     
                     if (read_input) begin
+                        prev_operator_input <= 0;
                         latched_keypad_input <= keypad_input;
-
-                        key_read <= 1;
-                        
                         mult_in1 <= operand1;
                         mult_in2 <= 16'd10;
                         start_mult <= 1;
                         getting_op1 <= 1;
+                    end
+                    else begin
+                        prev_operator_input <= operator_input;
                     end
                 end
 
@@ -186,19 +190,20 @@ module gencon (
 
                 WAIT_OP2: begin
                     display_output <= operand2;
-                    if (operator_input != 0 || read_input)
-                        key_read <= 1;
-                    else
-                        key_read <= 0;
+
+                    key_read <= (read_input && !prev_read_input) || 
+                                ((operator_input != 0) && (prev_operator_input == 0));
+
+                    prev_read_input <= read_input;
+                    prev_operator_input <= operator_input;
                     
-                    if (operator_input == 1) begin
-                        if (key_read == 1)
+                    if (operator_input == 1 && key_read) begin
                             operand2[15] <=  1'b1;
                     end
                     
                     if (read_input) begin
                         latched_keypad_input <= keypad_input;
-
+                        prev_operator_input <= 0;
                         mult_in1 <= operand2;
                         mult_in2 <= 16'd10;
                         start_mult <= 1;
@@ -219,14 +224,13 @@ module gencon (
                 end
 
                 SEND_TO_COMPUTE: begin
+                    key_read <= 1;
                     if (latched_operator_input == 2 || latched_operator_input == 3) begin
-                        key_read <= 1;
                         ALU_in1 <= operand1;
                         ALU_in2 <= operand2;
                         addOrSub <= (latched_operator_input == 3);
                         start_ALU <= 1;
                     end else if (latched_operator_input == 4) begin
-                        key_read <= 1;
                         mult_in1 <= operand1;
                         mult_in2 <= operand2;
                         start_mult <= 1;

@@ -27,7 +27,7 @@ module input_control (
 		SCAN_COL,     // 1                 // drives columns low 1 by 1 every 10ms, transitions when detects key_pressed high
 		WAIT_STABLE,  // 2                 // debounce state, waits until input is stable before processing in the confirm state
 		CONFIRM,      // 3                 // encodes key, sets the output variables to respective outputs, waits until gencon confirms key_read
-		WAIT_RELEASE,  // 4                  // waits for button to be released IE when RowIn = 4'b1111
+		WAIT_RELEASE, // 4                  // waits for button to be released IE when RowIn = 4'b1111
 		WAIT_RELEASE_STABLE
     } state_t;
 
@@ -38,11 +38,12 @@ module input_control (
 	// logic key_pressed;               // key pressed, turns high when there is a 0 detected in RowIn (always_comb)
 
     // to handle read_input states
-	// logic [3:0] key_code;         // kind of useless
 	logic [3:0] decoded_key;         // (0-15) key_code to be decoded by the encoder always_comb case statement, represents positions on keypad
 	logic [3:0] next_keypad_input;   // Set within combinational decoder block 
 	logic [2:0] next_operator_input; // Set within combinational decoder block 
     logic next_equal_input;          // Set within combinational decoder block 
+
+	logic read_input_flag;
 
 	logic [19:0] scan_timer = 0;     // Scan Timer, goes up to 50,000
 
@@ -70,6 +71,7 @@ module input_control (
             col_index <= 0;
             debounce_cnt <= 0;
             read_input <= 0;
+            read_input_flag <= 0;
 	    	decoded_key <= 4'd14;
 			input_state_FPGA <= 0;
 
@@ -95,10 +97,6 @@ module input_control (
 			end
 
 			if (input_control_state == CONFIRM) begin
-				/* key_code kinda useless here
-				key_code = encode_key(RowIn, col_index);
-				decoded_key <= key_code;
-				*/
 
 				decoded_key <= encode_key(RowSync, col_index);
 				
@@ -107,23 +105,31 @@ module input_control (
 				//operator_input <= next_operator_input;
 				equal_input <= next_equal_input;
 		
-				// Only raise read_input if it’s a digit
+				// Only raise read_input if it’s a digit and if flag is 1
 				if ((decoded_key == 0 || decoded_key == 1 || decoded_key == 2 || decoded_key == 4 || decoded_key == 5 || decoded_key == 6 || 
-				decoded_key == 8 || decoded_key == 9 || decoded_key == 10 || decoded_key == 13) && (next_operator_input == '0) && (next_equal_input == '0)) begin
+				decoded_key == 8 || decoded_key == 9 || decoded_key == 10 || decoded_key == 13) && (next_operator_input == '0) && (next_equal_input == '0) && (!read_input_flag)) begin
 					read_input <= 1;
+					read_input_flag <= 1;
 				end
+				else
+					read_input <= 0;
 			end
 
 			if (input_control_state == WAIT_RELEASE && !key_pressed) begin
 				keypad_input <= 0;
-				read_input <= 0;
 			end
 				
 			if (input_control_state == WAIT_RELEASE_STABLE) begin
 				if (!key_pressed && debounce_cnt < DEBOUNCE_SIZE)
 					debounce_cnt <= debounce_cnt + 1;
-				else if (debounce_cnt >= DEBOUNCE_SIZE)
+				else if (debounce_cnt >= DEBOUNCE_SIZE) begin
 					debounce_cnt <= 0;
+					keypad_input <= 0;
+					operator_input <= 0;
+					equal_input <= 0;
+					decoded_key <= 4'hE;  // invalid / null key to suppress re-decoding
+					read_input_flag <= 0;
+				end
 			end
         end
     end
@@ -190,6 +196,7 @@ module input_control (
 			4'hB: next_operator_input = 3'b100; // multiplication
 			4'hC: next_equal_input = 1;         // equals
 			4'hD: next_keypad_input = 4'd0;
+			4'hE: ;                             // pound symbol, nothing
 			4'hF: next_operator_input = 3'b001; // minus symbol
 			
 			default: ;
