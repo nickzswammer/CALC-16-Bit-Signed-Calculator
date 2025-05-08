@@ -172,11 +172,17 @@ endtask
     */
 
     run_calc_sequence(1, 3, KEY_MULT, 1, 4, 12); // -3 * -4 = 12
-    run_calc_sequence(0, 3, KEY_MULT, 0, 4, 12); // 3 * 4 = 12
+    run_calc_sequence(0, 63, KEY_MULT, 0, 41, 2583); // 63 * 41 = 2583
+    run_calc_sequence(0, 456, KEY_MULT, 0, 0, 0); // 456 * 0 = 0
+    run_calc_sequence(0, 13107, KEY_MULT, 1, 5, -65535); // 13107 * -5 = -65535
+    run_calc_sequence(0, 32767, KEY_MULT, 0, 2, 65534); // 32767 * 2 = 65534
+
     run_calc_sequence(0, 123, KEY_ADD, 0, 45, 168); // 123 + 45 = 168
-    run_calc_sequence(0, 123, KEY_SUB, 0, 45, 78); // 123 - 45 = 78
-    run_calc_sequence(0, 0, KEY_SUB, 0, 0, 0); // 0 - 0 = 0
     
+    run_calc_sequence(0, 123, KEY_SUB, 0, 45, 78); // 123 - 45 = 78
+
+    run_calc_sequence(0, 0, KEY_SUB, 0, 0, 0); // 0 - 0 = 0
+
     $finish;
   end
 
