@@ -93,7 +93,8 @@ endtask
 
       reset_dut();
 
-      $display("\nStarting Calc: %0s%0d %0s %0s%0d",
+      $display("\n=========================================");
+      $display("Starting Calc: %0s%0d %0s %0s%0d",
           (neg_op1 ? "-" : ""), op1_val,
           (operator_key == KEY_ADD)  ? "+" :
           (operator_key == KEY_SUB)  ? "-" :
@@ -112,7 +113,8 @@ endtask
       press_key(KEY_EQ);
 
       wait (saw_complete == 1);
-      $display("\n✅ Completed. DUT Output: %0d (Expected: %0d)\n", display_output, expected_result);
+      $display("\n✅ Completed. DUT Output: %0d (Expected: %0d)", display_output, expected_result);
+      $display("=========================================\n");
       #20;
   endtask
 

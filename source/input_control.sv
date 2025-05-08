@@ -75,11 +75,14 @@ module input_control (
 	    	decoded_key <= 4'd14;
 			input_state_FPGA <= 0;
 
+		// state logic
         end else begin
             input_control_state <= next_state;
 			input_state_FPGA <= input_control_state;
 	    	operator_input <= next_operator_input;
 		
+
+			// Scan Columns
 			if (input_control_state == SCAN_COL && next_state == SCAN_COL) begin
 				if(scan_timer == SCAN_DURATION) begin
 					scan_timer <= 0;
@@ -89,6 +92,7 @@ module input_control (
 					scan_timer <= scan_timer + 1;
 			end
 
+			// Debounce
 			if (input_control_state == WAIT_STABLE) begin
 				if (key_pressed && debounce_cnt < DEBOUNCE_SIZE)
 						debounce_cnt <= debounce_cnt + 1;
@@ -96,6 +100,7 @@ module input_control (
 						debounce_cnt <= 0;
 			end
 
+			// Encode key and send to Gencon
 			if (input_control_state == CONFIRM) begin
 
 				decoded_key <= encode_key(RowSync, col_index);
@@ -115,10 +120,12 @@ module input_control (
 					read_input <= 0;
 			end
 
+			// Wait for key release
 			if (input_control_state == WAIT_RELEASE && !key_pressed) begin
 				keypad_input <= 0;
 			end
-				
+
+			// debounce release	
 			if (input_control_state == WAIT_RELEASE_STABLE) begin
 				if (!key_pressed && debounce_cnt < DEBOUNCE_SIZE)
 					debounce_cnt <= debounce_cnt + 1;

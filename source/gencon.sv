@@ -17,22 +17,17 @@ module gencon (
     output logic [15:0] display_output
 );
 
+    // latch keypad_input and operator_input to use in updating number and sending operands to compute
     logic [3:0] latched_keypad_input;
     logic [2:0] latched_operator_input;
+
     // ALU control
-    logic [15:0] ALU_in1, ALU_in2;
-    logic addOrSub, start_ALU;
-    logic ALU_finish;
-    logic [15:0] ALU_out;
+    logic [15:0] ALU_in1, ALU_in2, ALU_out;
+    logic addOrSub, start_ALU, ALU_finish;
 
     // Multiplier control
-    logic [15:0] mult_in1, mult_in2;
-    logic start_mult;
-    logic [15:0] mult_out;
-    logic mult_finish;
-
-    // Internal state flags
-    logic getting_op1, getting_op2;
+    logic [15:0] mult_in1, mult_in2, mult_out;
+    logic start_mult, mult_finish;
 
     // Temporary Operator Input Variables
     logic latch_operator;
@@ -42,10 +37,11 @@ module gencon (
     logic prev_read_input;
     logic [2:0] prev_operator_input;
 
-    state_t gencon_state, next_state;
-
     // operands to send to ALU/ Multiplier
     logic [15:0] operand1, operand2;
+
+    // state variables
+    state_t gencon_state, next_state;
     
     // ALU instantiation
     addition add_calc(
@@ -122,22 +118,14 @@ module gencon (
     // Output + operand logic
     always_ff @(posedge clk or negedge nRST) begin
         if (!nRST) begin
-            start_ALU <= 0;
-            start_mult <= 0;
             key_read <= 0;
             display_output <= 0;
             complete <= 0;
             gencon_state <= WAIT_OP1;
             operand1 <= 0;
             operand2 <= 0;
-            getting_op1 <= 0;
-            getting_op2 <= 0;
             latched_operator_input <= 0;
             latched_keypad_input <= 0;
-            mult_in1 <= 0;
-            mult_in2 <= 0;
-            ALU_in1 <= 0;
-            ALU_in2 <= 0;
             
         end else begin
             start_ALU <= 0;
@@ -169,7 +157,6 @@ module gencon (
                         mult_in1 <= operand1;
                         mult_in2 <= 16'd10;
                         start_mult <= 1;
-                        getting_op1 <= 1;
                     end
                     else begin
                         prev_operator_input <= operator_input;
@@ -180,7 +167,6 @@ module gencon (
                     key_read <= 0;
                     if (mult_finish) begin
                         operand1 <= mult_out;
-                        getting_op1 <= 0;
                     end
                 end
 
@@ -207,7 +193,6 @@ module gencon (
                         mult_in1 <= operand2;
                         mult_in2 <= 16'd10;
                         start_mult <= 1;
-                        getting_op2 <= 1;
                     end
                 end
 
@@ -215,7 +200,6 @@ module gencon (
                     key_read <= 0;
                     if (mult_finish) begin
                         operand2 <= mult_out;
-                        getting_op2 <= 0;
                     end
                 end
 
@@ -242,7 +226,6 @@ module gencon (
 
                 SHOW_RESULT_ADDSUB: begin
                     operand1 <= ALU_out;
-                    //operand1 <= 0;
                     operand2 <= 0;
                     complete <= 1;
                     
@@ -251,9 +234,9 @@ module gencon (
 
                 SHOW_RESULT_MULT: begin
                     operand1 <= mult_out;
-                    //operand1 <= 0;
                     operand2 <= 0;
                     complete <= 1;
+                    
                     display_output <= mult_out;
                 end
 

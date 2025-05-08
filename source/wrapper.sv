@@ -46,7 +46,6 @@ module wrapper(
 				test <= 1;
 	 end
 	   
-		
     calculator_top DUT(
         .clk(CLOCK_50),
         .nRST(nRST),
@@ -57,7 +56,6 @@ module wrapper(
         .display_output(LEDR[15:0]),
         .complete(complete)
     );
-	 
 	 
 	 assign LEDG[0] = test;
 	 
