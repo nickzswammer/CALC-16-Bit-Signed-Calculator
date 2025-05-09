@@ -64,11 +64,7 @@ module addition
     logic diffSign, next_diffSign;
 	logic sameSignVal, next_sameSignVal;	
 
-    logic [14 : 0] tempVal;
-    logic writeTemp;
-
     wire [14 : 0] comp;
-    logic [14 : 0] Num;
 
     wire [14 : 0] adderOut;
     wire adderCOut;

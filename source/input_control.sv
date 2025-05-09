@@ -43,7 +43,7 @@ module input_control (
 
 	logic [19:0] scan_timer = 0;     // Scan Timer, goes up to 50,000
 
-	int idx;                         // output of encoder function, (0-15) then gets trimmed down
+	logic [3:0] idx;                         // output of encoder function, (0-15) then gets trimmed down
 
 	logic [3:0] RowMid, RowSync;
 
