@@ -104,13 +104,13 @@ module multiply
         endcase
     end
 
-    adder15 main(.sum(adderOut), .cOut(), .in1(n1), .in2(adderIn), .sub(1'b0));
+    adder15 main(.sum(adderOut), .cOut(/* open */), .in1(n1), .in2(adderIn), .sub(1'b0));
 
     //counter
-    adder15 count(.sum(countOut), .cOut(), .in1(countIn), .in2(15'b1), .sub(1'b0));
+    adder15 count(.sum(countOut), .cOut(/* open */), .in1(countIn), .in2(15'b1), .sub(1'b0));
 	
 	//coutner for multiply
-    adder15 compCount(.sum(), .cOut(stopCount), .in1(countOut), .in2(n2), .sub(1'b1)); 
+    adder15 compCount(.sum(/* open */), .cOut(stopCount), .in1(countOut), .in2(n2), .sub(1'b1)); 
 
 	
     always_comb begin
