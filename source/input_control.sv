@@ -15,7 +15,9 @@ module input_control (
     output logic equal_input             // 1-bit equal flag (*)
 );
 
-    localparam DEBOUNCE_SIZE = 500_000; // Debounce Length (for 50 MHz clock this is 10ms)
+    //localparam DEBOUNCE_SIZE = 500_000; // Debounce Length (for 50 MHz clock this is 10ms)
+    //localparam SCAN_DURATION = 50_000;  // scan length (50mHz clock this is 1 ms)
+	localparam DEBOUNCE_SIZE = 500_000; // Debounce Length (for 50 MHz clock this is 10ms)
     localparam SCAN_DURATION = 50_000;  // scan length (50mHz clock this is 1 ms)
 	
     typedef enum logic [2:0] {
@@ -42,8 +44,6 @@ module input_control (
 	logic read_input_flag;
 
 	logic [19:0] scan_timer = 0;     // Scan Timer, goes up to 50,000
-
-	logic [3:0] idx;                         // output of encoder function, (0-15) then gets trimmed down
 
 	logic [3:0] RowMid, RowSync;
 
@@ -167,16 +167,18 @@ module input_control (
             key_pressed = 1;
     end
 
-    // Translate row and column index to keypad index 0–15
-    function logic [3:0] encode_key(input logic [3:0] row, input logic [1:0] col);
-        for (int r = 0; r < 4; r++) begin
+	// Translate row and column index to keypad index 0–15
+	function logic [3:0] encode_key(input logic [3:0] row, input logic [1:0] col);
+		logic [3:0] idx;
+		for (int r = 0; r < 4; r++) begin
 			if (row[r] == 0) begin
-				idx = r * 4 + {30'd0, col};
-				return idx[3:0];
+				idx = (4'(r) << 2) | 4'(col); // explicitly cast to 4 bits
+				return idx;
 			end
-        end
-        return 4'hE;  // fallback if no row matched, return the empty key (14)
-    endfunction
+		end
+		return 4'hE;  // fallback if no row matched, return empty key (14)
+	endfunction
+
 
     // Decode key_code into outputs
     always_comb begin
