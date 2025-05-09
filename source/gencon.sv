@@ -1,6 +1,5 @@
 // Refactored gencon module with proper multiplier operand handling via FSM state split
 `include "gencon_defs.sv"
-`timescale 1ns / 1ns
 
 module gencon (
     input logic clk,

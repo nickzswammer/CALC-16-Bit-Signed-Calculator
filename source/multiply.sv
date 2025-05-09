@@ -1,6 +1,3 @@
-`timescale 1ns / 1ns
-
-
 module multiply
 (
 	input wire clk,
