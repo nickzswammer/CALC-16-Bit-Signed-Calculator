@@ -1,7 +1,6 @@
 `timescale 1ns / 1ns
 
 module adder(
-	/* verilator lint_off UNOPTFLAT */	
 	output sum,
 	output cOut,
 	
@@ -9,24 +8,18 @@ module adder(
 	input in1,
 	input in2,
 	input cIn
-	/* verilator lint_on UNOPTFLAT */
-
 );
 	assign sum = in1 ^ in2 ^ cIn;
 	assign cOut = (in1 & in2) | (in2 & cIn) | (cIn & in1);	
 endmodule
 
 module adder15(
-	
-	/* verilator lint_off UNOPTFLAT */
 	output [14:0] sum,
 	output cOut,
 
 	input [14:0] in1,
 	input [14:0] in2,
 	input sub
-	/* verilator lint_on UNOPTFLAT */
-	
 );
 	wire carry[14:0];
 

@@ -57,7 +57,6 @@ module gencon (
         .start(start_mult), .out(mult_out), .finish(mult_finish)
     );
 
-    /* verilator lint_off CASEINCOMPLETE */
 
     // FSM logic
     always_comb begin
@@ -110,9 +109,10 @@ module gencon (
 
             SHOW_RESULT_ADDSUB, SHOW_RESULT_MULT:
                 next_state = WAIT_OP1;
-        endcase
-        /* verilator lint_on CASEINCOMPLETE */
 
+            default:
+                next_state = WAIT_OP1;
+        endcase
     end
 
     // Output + operand logic

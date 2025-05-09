@@ -53,6 +53,7 @@ module wrapper(
         .ColOut(ColOut),
 		.input_state_FPGA(LEDG[7:5]),
 		.key_pressed(LEDG[1]),
+        .input_state_FPGA(LEDG[7:5]),
         .display_output(LEDR[15:0]),
         .complete(complete)
     );
