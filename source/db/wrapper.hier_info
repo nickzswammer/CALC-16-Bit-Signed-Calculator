@@ -76,9 +76,9 @@ LEDG[1] << calculator_top:DUT.key_pressed
 LEDG[2] << <GND>
 LEDG[3] << <GND>
 LEDG[4] << calculator_top:DUT.complete
-LEDG[5] << calculator_top:DUT.input_state
-LEDG[6] << calculator_top:DUT.input_state
-LEDG[7] << calculator_top:DUT.input_state
+LEDG[5] << calculator_top:DUT.input_state_FPGA
+LEDG[6] << calculator_top:DUT.input_state_FPGA
+LEDG[7] << calculator_top:DUT.input_state_FPGA
 
 
 |wrapper|calculator_top:DUT
@@ -108,9 +108,9 @@ display_output[12] <= gencon:gencon_inst.display_output
 display_output[13] <= gencon:gencon_inst.display_output
 display_output[14] <= gencon:gencon_inst.display_output
 display_output[15] <= gencon:gencon_inst.display_output
-input_state[0] <= input_control:input_ctrl_inst.input_state
-input_state[1] <= input_control:input_ctrl_inst.input_state
-input_state[2] <= input_control:input_ctrl_inst.input_state
+input_state_FPGA[0] <= input_control:input_ctrl_inst.input_state_FPGA
+input_state_FPGA[1] <= input_control:input_ctrl_inst.input_state_FPGA
+input_state_FPGA[2] <= input_control:input_ctrl_inst.input_state_FPGA
 key_pressed <= input_control:input_ctrl_inst.key_pressed
 complete <= gencon:gencon_inst.complete
 
@@ -144,13 +144,14 @@ clk => scan_timer[19].CLK
 clk => operator_input[0]~reg0.CLK
 clk => operator_input[1]~reg0.CLK
 clk => operator_input[2]~reg0.CLK
-clk => input_state[0]~reg0.CLK
-clk => input_state[1]~reg0.CLK
-clk => input_state[2]~reg0.CLK
+clk => input_state_FPGA[0]~reg0.CLK
+clk => input_state_FPGA[1]~reg0.CLK
+clk => input_state_FPGA[2]~reg0.CLK
 clk => decoded_key[0].CLK
 clk => decoded_key[1].CLK
 clk => decoded_key[2].CLK
 clk => decoded_key[3].CLK
+clk => read_input_flag.CLK
 clk => read_input~reg0.CLK
 clk => debounce_cnt[0].CLK
 clk => debounce_cnt[1].CLK
@@ -181,14 +182,15 @@ clk => RowMid[0].CLK
 clk => RowMid[1].CLK
 clk => RowMid[2].CLK
 clk => RowMid[3].CLK
-clk => state~1.DATAIN
-nRST => input_state[0]~reg0.ACLR
-nRST => input_state[1]~reg0.ACLR
-nRST => input_state[2]~reg0.ACLR
+clk => input_control_state~1.DATAIN
+nRST => input_state_FPGA[0]~reg0.ACLR
+nRST => input_state_FPGA[1]~reg0.ACLR
+nRST => input_state_FPGA[2]~reg0.ACLR
 nRST => decoded_key[0].ACLR
 nRST => decoded_key[1].PRESET
 nRST => decoded_key[2].PRESET
 nRST => decoded_key[3].PRESET
+nRST => read_input_flag.ACLR
 nRST => read_input~reg0.ACLR
 nRST => debounce_cnt[0].ACLR
 nRST => debounce_cnt[1].ACLR
@@ -219,7 +221,7 @@ nRST => RowMid[0].PRESET
 nRST => RowMid[1].PRESET
 nRST => RowMid[2].PRESET
 nRST => RowMid[3].PRESET
-nRST => state~3.DATAIN
+nRST => input_control_state~3.DATAIN
 nRST => operator_input[2]~reg0.ENA
 nRST => operator_input[1]~reg0.ENA
 nRST => operator_input[0]~reg0.ENA
@@ -267,9 +269,9 @@ operator_input[0] <= operator_input[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 operator_input[1] <= operator_input[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 operator_input[2] <= operator_input[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 key_pressed <= key_pressed.DB_MAX_OUTPUT_PORT_TYPE
-input_state[0] <= input_state[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
-input_state[1] <= input_state[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
-input_state[2] <= input_state[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+input_state_FPGA[0] <= input_state_FPGA[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+input_state_FPGA[1] <= input_state_FPGA[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+input_state_FPGA[2] <= input_state_FPGA[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 equal_input <= equal_input~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
@@ -280,12 +282,14 @@ keypad_input[0] => latched_keypad_input.DATAB
 keypad_input[1] => latched_keypad_input.DATAB
 keypad_input[2] => latched_keypad_input.DATAB
 keypad_input[3] => latched_keypad_input.DATAB
-read_input => always1.IN1
+read_input => key_read.IN1
+read_input => prev_operator_input.OUTPUTSELECT
+read_input => prev_operator_input.OUTPUTSELECT
+read_input => prev_operator_input.OUTPUTSELECT
 read_input => latched_keypad_input.OUTPUTSELECT
 read_input => latched_keypad_input.OUTPUTSELECT
 read_input => latched_keypad_input.OUTPUTSELECT
 read_input => latched_keypad_input.OUTPUTSELECT
-read_input => key_read.OUTPUTSELECT
 read_input => mult_in1.OUTPUTSELECT
 read_input => mult_in1.OUTPUTSELECT
 read_input => mult_in1.OUTPUTSELECT
@@ -334,27 +338,31 @@ read_input => mult_in1.OUTPUTSELECT
 read_input => mult_in1.OUTPUTSELECT
 read_input => mult_in1.OUTPUTSELECT
 read_input => mult_in1.OUTPUTSELECT
+read_input => prev_read_input.DATAB
 read_input => next_state.DATAA
 read_input => next_state.DATAA
-read_input => Selector75.IN3
-read_input => Selector75.IN4
+read_input => Selector78.IN3
+read_input => Selector78.IN4
 read_input => next_state.DATAA
 read_input => next_state.DATAA
 operator_input[0] => operator_to_latch.DATAB
+operator_input[0] => prev_operator_input.DATAA
 operator_input[0] => Equal0.IN2
 operator_input[0] => Equal1.IN0
 operator_input[0] => Equal2.IN31
-operator_input[0] => Equal3.IN0
+operator_input[0] => Equal4.IN0
 operator_input[1] => operator_to_latch.DATAB
+operator_input[1] => prev_operator_input.DATAA
 operator_input[1] => Equal0.IN1
 operator_input[1] => Equal1.IN2
 operator_input[1] => Equal2.IN30
-operator_input[1] => Equal3.IN31
+operator_input[1] => Equal4.IN31
 operator_input[2] => operator_to_latch.DATAB
+operator_input[2] => prev_operator_input.DATAA
 operator_input[2] => Equal0.IN0
 operator_input[2] => Equal1.IN1
 operator_input[2] => Equal2.IN29
-operator_input[2] => Equal3.IN30
+operator_input[2] => Equal4.IN30
 equal_input => next_state.OUTPUTSELECT
 equal_input => next_state.OUTPUTSELECT
 equal_input => next_state.SEND_TO_COMPUTE.DATAB

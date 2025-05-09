@@ -1,16 +1,16 @@
 
-State Machine - |wrapper|calculator_top:DUT|gencon:gencon_inst|current_state
-Name current_state.SHOW_RESULT_MULT current_state.SHOW_RESULT_ADDSUB current_state.WAIT_COMPUTE current_state.SEND_TO_COMPUTE current_state.ADD_KEY_INPUT_OP2 current_state.WAIT_MULT_OP2 current_state.WAIT_OP2 current_state.ADD_KEY_INPUT_OP1 current_state.WAIT_MULT_OP1 current_state.WAIT_OP1 
-current_state.WAIT_OP1 0 0 0 0 0 0 0 0 0 0 
-current_state.WAIT_MULT_OP1 0 0 0 0 0 0 0 0 1 1 
-current_state.ADD_KEY_INPUT_OP1 0 0 0 0 0 0 0 1 0 1 
-current_state.WAIT_OP2 0 0 0 0 0 0 1 0 0 1 
-current_state.WAIT_MULT_OP2 0 0 0 0 0 1 0 0 0 1 
-current_state.ADD_KEY_INPUT_OP2 0 0 0 0 1 0 0 0 0 1 
-current_state.SEND_TO_COMPUTE 0 0 0 1 0 0 0 0 0 1 
-current_state.WAIT_COMPUTE 0 0 1 0 0 0 0 0 0 1 
-current_state.SHOW_RESULT_ADDSUB 0 1 0 0 0 0 0 0 0 1 
-current_state.SHOW_RESULT_MULT 1 0 0 0 0 0 0 0 0 1 
+State Machine - |wrapper|calculator_top:DUT|gencon:gencon_inst|gencon_state
+Name gencon_state.SHOW_RESULT_MULT gencon_state.SHOW_RESULT_ADDSUB gencon_state.WAIT_COMPUTE gencon_state.SEND_TO_COMPUTE gencon_state.ADD_KEY_INPUT_OP2 gencon_state.WAIT_MULT_OP2 gencon_state.WAIT_OP2 gencon_state.ADD_KEY_INPUT_OP1 gencon_state.WAIT_MULT_OP1 gencon_state.WAIT_OP1 
+gencon_state.WAIT_OP1 0 0 0 0 0 0 0 0 0 0 
+gencon_state.WAIT_MULT_OP1 0 0 0 0 0 0 0 0 1 1 
+gencon_state.ADD_KEY_INPUT_OP1 0 0 0 0 0 0 0 1 0 1 
+gencon_state.WAIT_OP2 0 0 0 0 0 0 1 0 0 1 
+gencon_state.WAIT_MULT_OP2 0 0 0 0 0 1 0 0 0 1 
+gencon_state.ADD_KEY_INPUT_OP2 0 0 0 0 1 0 0 0 0 1 
+gencon_state.SEND_TO_COMPUTE 0 0 0 1 0 0 0 0 0 1 
+gencon_state.WAIT_COMPUTE 0 0 1 0 0 0 0 0 0 1 
+gencon_state.SHOW_RESULT_ADDSUB 0 1 0 0 0 0 0 0 0 1 
+gencon_state.SHOW_RESULT_MULT 1 0 0 0 0 0 0 0 0 1 
 
 State Machine - |wrapper|calculator_top:DUT|gencon:gencon_inst|multiply:mult_calc|state
 Name state.ADD state.CHECKADD state.SET state.IDLE state.FIN 
@@ -27,11 +27,11 @@ state.SET 0 0 1 1
 state.ADD 0 1 0 1 
 state.FIN 1 0 0 1 
 
-State Machine - |wrapper|calculator_top:DUT|input_control:input_ctrl_inst|state
-Name state.WAIT_RELEASE_STABLE state.WAIT_RELEASE state.CONFIRM state.WAIT_STABLE state.SCAN_COL state.IDLE 
-state.IDLE 0 0 0 0 0 0 
-state.SCAN_COL 0 0 0 0 1 1 
-state.WAIT_STABLE 0 0 0 1 0 1 
-state.CONFIRM 0 0 1 0 0 1 
-state.WAIT_RELEASE 0 1 0 0 0 1 
-state.WAIT_RELEASE_STABLE 1 0 0 0 0 1 
+State Machine - |wrapper|calculator_top:DUT|input_control:input_ctrl_inst|input_control_state
+Name input_control_state.WAIT_RELEASE_STABLE input_control_state.WAIT_RELEASE input_control_state.CONFIRM input_control_state.WAIT_STABLE input_control_state.SCAN_COL input_control_state.IDLE 
+input_control_state.IDLE 0 0 0 0 0 0 
+input_control_state.SCAN_COL 0 0 0 0 1 1 
+input_control_state.WAIT_STABLE 0 0 0 1 0 1 
+input_control_state.CONFIRM 0 0 1 0 0 1 
+input_control_state.WAIT_RELEASE 0 1 0 0 0 1 
+input_control_state.WAIT_RELEASE_STABLE 1 0 0 0 0 1 

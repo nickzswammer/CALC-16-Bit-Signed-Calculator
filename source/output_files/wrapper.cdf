@@ -4,7 +4,7 @@ JedecChain;
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(EP4CE115F29) Path("/home/shay/a/du347/CALC-Intro-2 (another copy)/source/output_files/") File("wrapper.sof") MfrSpec(OpMask(1));
+		Device PartName(EP4CE115F29) Path("/home/shay/a/nzhang21/CALC-Intro-2/source/output_files/") File("wrapper.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 
