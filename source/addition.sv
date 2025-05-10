@@ -115,10 +115,10 @@ module addition
         endcase
     end
 
-	logic empty;
-
+/* verilator lint_off PINCONNECTEMPTY */
     adder15 main(.sum(adderOut), .cOut(adderCOut), .in1(n1), .in2(n2), .sub(diffSign)); 
-	adder15 complement(.sum(comp), .cOut(empty), .in1(15'b0), .in2(adderOut), .sub(1'b1));
+	adder15 complement(.sum(comp), .cOut(), .in1(15'b0), .in2(adderOut), .sub(1'b1));
+	/* verilator lint_on PINCONNECTEMPTY */
         
     always_comb begin
         
