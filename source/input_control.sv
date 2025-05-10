@@ -169,13 +169,14 @@ module input_control (
 
 	// Translate row and column index to keypad index 0–15
 	function logic [3:0] encode_key(input logic [3:0] row, input logic [1:0] col);
-		for (int r = 0; r < 4; r++) begin
-			if (row[r] == 0) begin
-				return (4'(r) << 2) | 4'(col); // directly return, no intermediate signal
-			end
-		end
-		return 4'hE;  // fallback if no row matched, return empty key (14)
+	    for (int r = 0; r < 4; r++) begin
+	        if (row[r] == 0) begin
+	            return (r << 2) | col; // this works fine for 4-bit result
+	        end
+	    end
+	    return 4'hE;  // fallback if no row matched, return empty key (14)
 	endfunction
+
 
 
 
