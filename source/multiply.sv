@@ -103,19 +103,15 @@ module multiply
 
         endcase
     end
-
-	logic empty;
-
-	
-	adder15 main(.sum(adderOut), .cOut(empty), .in1(n1), .in2(adderIn), .sub(1'b0));
+/* verilator lint_off PINCONNECTEMPTY */
+	adder15 main(.sum(adderOut), .cOut(), .in1(n1), .in2(adderIn), .sub(1'b0));
 
     //counter
-	adder15 count(.sum(countOut), .cOut(empty), .in1(countIn), .in2(15'b1), .sub(1'b0));
+	adder15 count(.sum(countOut), .cOut(), .in1(countIn), .in2(15'b1), .sub(1'b0));
 	
 	//coutner for multiply
-	adder15 compCount(.sum(empty), .cOut(stopCount), .in1(countOut), .in2(n2), .sub(1'b1)); 
-
-	
+	adder15 compCount(.sum(), .cOut(stopCount), .in1(countOut), .in2(n2), .sub(1'b1)); 
+/* verilator lint_on PINCONNECTEMPTY */
     always_comb begin
         
 	next_finish = finish;
