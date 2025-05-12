@@ -10,7 +10,6 @@ module multiply
 	output logic finish 
 );
 
-<<<<<<< HEAD
     typedef enum logic [3:0]
     {
     IDLE,
@@ -113,7 +112,6 @@ module multiply
 	//coutner for multiply
     adder15 compCount(.sum(/* open */), .cOut(stopCount), .in1(countOut), .in2(n2), .sub(1'b1)); 
 
-=======
 	typedef enum logic [3:0]
 	{
 		IDLE,
@@ -126,7 +124,6 @@ module multiply
 	state_t state, next;
 	logic next_finish;
 	logic [15:0] next_out;
->>>>>>> d1f1e38548b0f24c41fb3376736fa5ecee515f95
 	
 	logic [14 : 0] n1, next_n1;
 	logic [14 : 0] n2, next_n2;
