@@ -105,7 +105,7 @@ module input_control (
             decoded_key <= 4'hE;
 			for (int r = 0; r < 4; r++) begin
 				if (RowSync[r] == 0) begin
-					decoded_key <= 4'((r * 4) + col_index});
+					decoded_key <= 4'((r * 4) + col_index);
 				end
 			end
 
