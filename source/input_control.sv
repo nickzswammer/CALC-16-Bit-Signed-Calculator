@@ -31,7 +31,7 @@ module input_control (
 
     state_t input_control_state, next_state;
 
-	logic [1:0] col_index;           // current column being scanned, gets incremented every 1 ms (50,000 clock cycles)
+	int col_index;           // current column being scanned, gets incremented every 1 ms (50,000 clock cycles)
 	logic [18:0] debounce_cnt;       // how many clock cycles have elapsed, only reads when key_pressed asserted for 500,000 clock cycles
 	// logic key_pressed;               // key pressed, turns high when there is a 0 detected in RowIn (always_comb)
 
@@ -105,7 +105,7 @@ module input_control (
             decoded_key <= 4'hE;
 			for (int r = 0; r < 4; r++) begin
 				if (RowSync[r] == 0) begin
-					decoded_key <= 4'((r * 4) + col_index);
+					decoded_key <= 4'((r * 4) + col_index});
 				end
 			end
 
