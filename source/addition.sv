@@ -48,10 +48,10 @@ module addition
 
     typedef enum logic [2:0]
     {
-    IDLE,
-    SET,
-    ADD,
-    FIN
+        IDLE,
+        SET,
+        ADD,
+        FIN
     } state_t;
 
     state_t state, next;
@@ -116,7 +116,7 @@ module addition
     end
 
     adder15 main(.sum(adderOut), .cOut(adderCOut), .in1(n1), .in2(n2), .sub(diffSign)); 
-    adder15 complement(.sum(comp), .cOut(), .in1(15'b0), .in2(adderOut), .sub(1'b1));
+    adder15 complement(.sum(comp), .cOut(/* open */), .in1(15'b0), .in2(adderOut), .sub(1'b1));
         
     always_comb begin
         

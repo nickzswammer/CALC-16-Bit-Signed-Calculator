@@ -15,10 +15,10 @@ module input_control (
     output logic equal_input             // 1-bit equal flag (*)
 );
 
-    //localparam DEBOUNCE_SIZE = 500_000; // Debounce Length (for 50 MHz clock this is 10ms)
-    //localparam SCAN_DURATION = 50_000;  // scan length (50mHz clock this is 1 ms)
-	localparam DEBOUNCE_SIZE = 500_000; // Debounce Length (for 50 MHz clock this is 10ms)
+    localparam DEBOUNCE_SIZE = 500_000; // Debounce Length (for 50 MHz clock this is 10ms)
     localparam SCAN_DURATION = 50_000;  // scan length (50mHz clock this is 1 ms)
+    //localparam DEBOUNCE_SIZE = 15; // Debounce Length for testing
+    //localparam SCAN_DURATION = 5;  // scan length for testing
 	
     typedef enum logic [2:0] {
       IDLE,         // 0                  // IDLE, but just pre state for SCAN_COL
