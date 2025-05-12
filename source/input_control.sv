@@ -21,7 +21,7 @@ module input_control (
     //localparam SCAN_DURATION = 5;  // scan length for testing
 	
     typedef enum logic [2:0] {
-      IDLE,         // 0                  // IDLE, but just pre state for SCAN_COL
+      	IDLE,         // 0                  // IDLE, but just pre state for SCAN_COL
 		SCAN_COL,     // 1                 // drives columns low 1 by 1 every 10ms, transitions when detects key_pressed high
 		WAIT_STABLE,  // 2                 // debounce state, waits until input is stable before processing in the confirm state
 		CONFIRM,      // 3                 // encodes key, sets the output variables to respective outputs, waits until gencon confirms key_read
@@ -72,7 +72,9 @@ module input_control (
 			input_state_FPGA <= 0;
 
 		// state logic
-        end else begin
+        end 
+        
+        else begin
             input_control_state <= next_state;
 			input_state_FPGA <= input_control_state;
 	    	operator_input <= next_operator_input;
@@ -84,56 +86,56 @@ module input_control (
 					scan_timer <= 0;
 					col_index <= (col_index == 3) ? 0 : col_index + 1;
 				end
-				else
+			else
 					scan_timer <= scan_timer + 1;
-			end
+		end
 
-			// Debounce
-			if (input_control_state == WAIT_STABLE) begin
-				if (key_pressed && debounce_cnt < DEBOUNCE_SIZE)
-						debounce_cnt <= debounce_cnt + 1;
-				else if (debounce_cnt >= DEBOUNCE_SIZE)
-						debounce_cnt <= 0;
-			end
+        // Debounce
+        if (input_control_state == WAIT_STABLE) begin
+            if (key_pressed && debounce_cnt < DEBOUNCE_SIZE)
+                    debounce_cnt <= debounce_cnt + 1;
+            else if (debounce_cnt >= DEBOUNCE_SIZE)
+                    debounce_cnt <= 0;
+        end
 
-			// Encode key and send to Gencon
-			if (input_control_state == CONFIRM) begin
+        // Encode key and send to Gencon
+        if (input_control_state == CONFIRM) begin
 
-				decoded_key <= encode_key(RowSync, col_index);
-				
-				// Decode in-place
-				keypad_input <= next_keypad_input;
-				//operator_input <= next_operator_input;
-				equal_input <= next_equal_input;
-		
-				// Only raise read_input if it’s a digit and if flag is 1
-				if ((decoded_key == 0 || decoded_key == 1 || decoded_key == 2 || decoded_key == 4 || decoded_key == 5 || decoded_key == 6 || 
-				decoded_key == 8 || decoded_key == 9 || decoded_key == 10 || decoded_key == 13) && (next_operator_input == '0) && (next_equal_input == '0) && (!read_input_flag)) begin
-					read_input <= 1;
-					read_input_flag <= 1;
-				end
-				else
-					read_input <= 0;
-			end
+            decoded_key <= encode_key(RowSync, col_index);
 
-			// Wait for key release
-			if (input_control_state == WAIT_RELEASE && !key_pressed) begin
-				keypad_input <= 0;
-			end
+            // Decode in-place
+            keypad_input <= next_keypad_input;
+            //operator_input <= next_operator_input;
+            equal_input <= next_equal_input;
 
-			// debounce release	
-			if (input_control_state == WAIT_RELEASE_STABLE) begin
-				if (!key_pressed && debounce_cnt < DEBOUNCE_SIZE)
-					debounce_cnt <= debounce_cnt + 1;
-				else if (debounce_cnt >= DEBOUNCE_SIZE) begin
-					debounce_cnt <= 0;
-					keypad_input <= 0;
-					operator_input <= 0;
-					equal_input <= 0;
-					decoded_key <= 4'hE;  // invalid / null key to suppress re-decoding
-					read_input_flag <= 0;
-				end
-			end
+            // Only raise read_input if it’s a digit and if flag is 1
+            if ((decoded_key == 0 || decoded_key == 1 || decoded_key == 2 || decoded_key == 4 || decoded_key == 5 || decoded_key == 6 || 
+            decoded_key == 8 || decoded_key == 9 || decoded_key == 10 || decoded_key == 13) && (next_operator_input == '0) && (next_equal_input == '0) && (!read_input_flag)) begin
+                read_input <= 1;
+                read_input_flag <= 1;
+            end
+            else
+                read_input <= 0;
+        end
+
+        // Wait for key release
+        if (input_control_state == WAIT_RELEASE && !key_pressed) begin
+            keypad_input <= 0;
+        end
+
+        // debounce release	
+        if (input_control_state == WAIT_RELEASE_STABLE) begin
+            if (!key_pressed && debounce_cnt < DEBOUNCE_SIZE)
+                debounce_cnt <= debounce_cnt + 1;
+            else if (debounce_cnt >= DEBOUNCE_SIZE) begin
+                debounce_cnt <= 0;
+                keypad_input <= 0;
+                operator_input <= 0;
+                equal_input <= 0;
+                decoded_key <= 4'hE;  // invalid / null key to suppress re-decoding
+                read_input_flag <= 0;
+            end
+        end
         end
     end
 
@@ -163,19 +165,20 @@ module input_control (
     always_comb begin
         key_pressed = 0;
         for (int i = 0; i < 4; i++)
-		if (RowSync[i] == 0)
-            key_pressed = 1;
+            if (RowSync[i] == 0)
+                key_pressed = 1;
     end
 
 	// Translate row and column index to keypad index 0–15
 	function logic [3:0] encode_key(input logic [3:0] row, input logic [1:0] col);
-		for (int r = 0; r < 4; r++) begin
-			if (row[r] == 0) begin
-				return (4'(r) << 2) | 4'(col); // directly return, no intermediate signal
-			end
-		end
-		return 4'hE;  // fallback if no row matched, return empty key (14)
+	    for (int r = 0; r < 4; r++) begin
+	        if (row[r] == 0) begin
+	            return ((r[3:0] << 2) | col[3:0]);
+	        end
+	    end
+	    return 4'hE;  // fallback if no row matched, return empty key (14)
 	endfunction
+
 
 
 

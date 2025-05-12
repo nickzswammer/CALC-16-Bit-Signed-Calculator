@@ -3,3 +3,87 @@ sim_build/*
 mapped/*
 *.vcd
 *.log
+
+# ---------------------
+# System junk
+# ---------------------
+.DS_Store
+*.swp
+*~
+
+# ---------------------
+# IDE/editor folders
+# ---------------------
+.vscode/
+
+# ---------------------
+# Quartus/FPGA artifacts
+# ---------------------
+*.qpf
+*.qsf
+*.qws
+*.sdc
+*.sof
+*.pof
+*.jdi
+*.rpt
+*.chg
+*.smsg
+db/
+
+# ---------------------
+# Verilator build outputs
+# ---------------------
+obj_dir/
+*.vcd
+*.vpd
+*.d
+*.o
+*.exe
+
+# ---------------------
+# GTKWave
+# ---------------------
+*.gtkw
+*.sav
+
+# ---------------------
+# Ignore local tools/experiments
+# ---------------------
+chat.rapidgpt
+fpga-tutorial/
+
+# ---------------------
+# Keep essentials
+# ---------------------
+!Makefile
+!README*
+!docs/**
+!source/**
+!testbench/**
+
+# ---------------------
+# Ignore build and synthesis folders
+# ---------------------
+source/db/
+source/obj_dir/
+source/incremental_db/
+source/output_files/
+source/backup/
+
+# ---------------------
+# Ignore Quartus files
+# ---------------------
+source/*.qpf
+source/*.qsf
+
+# ---------------------
+# Ignore temporary and backup files
+# ---------------------
+source/.DS_Store
+source/*.bak
+
+# ---------------------
+# Keep source code
+# ---------------------
+!source/*.sv

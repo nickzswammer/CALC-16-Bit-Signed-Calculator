@@ -1,8 +1,6 @@
 module adder(
 	output sum,
 	output cOut,
-	
-
 	input in1,
 	input in2,
 	input cIn
@@ -14,7 +12,6 @@ endmodule
 module adder15(
 	output [14:0] sum,
 	output cOut,
-
 	input [14:0] in1,
 	input [14:0] in2,
 	input sub
@@ -48,15 +45,22 @@ module addition
 
     typedef enum logic [2:0]
     {
+<<<<<<< HEAD
         IDLE,
         SET,
         ADD,
         FIN
+=======
+    	IDLE,
+    	SET,
+    	ADD,
+    	FIN
+>>>>>>> d1f1e38548b0f24c41fb3376736fa5ecee515f95
     } state_t;
 
     state_t state, next;
-	 logic next_finish;
-	 logic [15:0] next_out;
+	logic next_finish;
+	logic [15:0] next_out;
 
     logic [14 : 0] n1, next_n1;
     logic [14 : 0] n2, next_n2;
@@ -115,11 +119,16 @@ module addition
         endcase
     end
 
+	/* verilator lint_off PINCONNECTEMPTY */
     adder15 main(.sum(adderOut), .cOut(adderCOut), .in1(n1), .in2(n2), .sub(diffSign)); 
+<<<<<<< HEAD
     adder15 complement(.sum(comp), .cOut(/* open */), .in1(15'b0), .in2(adderOut), .sub(1'b1));
+=======
+	adder15 complement(.sum(comp), .cOut(), .in1(15'b0), .in2(adderOut), .sub(1'b1));
+	/* verilator lint_on PINCONNECTEMPTY */
+>>>>>>> d1f1e38548b0f24c41fb3376736fa5ecee515f95
         
     always_comb begin
-        
 		next_finish = finish;
 		next_diffSign = diffSign;
 		next_n2 = n2;
