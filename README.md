@@ -1,6 +1,6 @@
 # The Computational Arithmetic Logic CALC (CALC)
 
-This is a 15-bit signed calculator implemented in SystemVerilog during the Spring 2025 semester for Intro to SoCET 2. This project includes synthesizable source code, testbenches for simulation, and has been hardened through OpenLane 2 to be taped out.
+This is a 15-bit signed calculator implemented in SystemVerilog during the Spring 2025 semester for Intro to SoCET 2. Our project includes synthesizable source code, testbenches for simulation, and has been hardened through OpenLane 2 to be taped out.
 
 ## Features
 1. 15-bit signed integer capability
