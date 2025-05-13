@@ -92,4 +92,4 @@ Hardening the chip was done thanks to the [socet_openlane_flow](https://github.c
 
 ## Conclusion
 
-A big thanks needs to be given to Miguel and Malcolm for guiding us through this project and helping us during those long crucial hours at the end of the semester. We learned so much from this project and are extremely thankful for the opportunities our TAs and SoCET have given us to learn in such an amazing environment.
+A big thanks needs to be given to Miguel and Malcolm for guiding us through this project and helping us during those long crucial hours at the end of the semester. We learned so much from this project and are extremely thankful for the opportunities our TAs and SoCET have given us to excel in such an amazing environment.
