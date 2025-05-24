@@ -1,6 +1,6 @@
 # The Computational Arithmetic Logic CALC (CALC)
 
-This is a 15-bit signed calculator implemented in SystemVerilog during the Spring 2025 semester for Intro to SoCET 2. It features our very own adder modules, up to 16 bit signed addition and multiplication. Our project includes synthesizable source code, testbenches for simulation, and has been hardened through OpenLane 2 to be taped out.
+This is a 15-bit signed calculator implemented in SystemVerilog during the Spring 2025 semester for Intro to SoCET 2. It features our very own adder modules, up to 16 bit signed addition and multiplication. Our project includes synthesizable source code, testbenches for simulation, and the GDS file to be sent to Tiny Tapeout.
 
 ## Features
 1. 15-bit signed integer capability
